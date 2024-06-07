@@ -12,7 +12,7 @@ export default function Text({text, size, depth, position}) {
     return (
         <mesh position={position}>
             <textGeometry args={[text, { font, size, depth }]} />
-            <meshStandardMaterial color={'#ff0000'} />
+            <meshStandardMaterial color={0xffffff} />
         </mesh>
     )
 }

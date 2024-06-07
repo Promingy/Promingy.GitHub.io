@@ -56,7 +56,10 @@ const App = () => {
       <LoadModel url={url + 'second_pile_of_books'} scale={[.15, .15, .15]} position={[48, 51.75, -8]} rotation={[-1.6, -1.5, 0]}/>
       <LoadModel url={url + 'medieval_book_stack'} scale={[.33, .33, .33]} position={[22, 23.6, 70]} rotation={[0, -2.5, 0]}/>
       
-      <Text url={url}  text='Resume' size={1} depth={2}/>
+      <Text url={url} position={[-178, 59, -72]} text='Résumé' size={15} depth={5}/>
+      <Text url={url} position={[-183, 37, -72]} text='Skills' size={15} depth={5}/>
+      <Text url={url} position={[-183, 15, -72]} text='Experience' size={15} depth={5}/>
+      <Text url={url} position={[-190, -7, -72]} text='About Me' size={15} depth={5}/>
 
       <Flame url={url + 'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
 
