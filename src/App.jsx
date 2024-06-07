@@ -7,20 +7,31 @@ import LoadModel from './components/LoadModel'
 import Lights from './components/Lights'
 import Flame from './components/Flame/Flame'
 import Text from './components/Text/Text'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import LoadImage from './components/LoadImage/LoadImage'
 
 const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/'
 
 export function CameraRotation () {
   const ref = useRef()
+  let timeout;
 
   useFrame(() => {
     if(ref.current){
-      const rotationSpeed = 0.001
+      const rotationSpeed = timeout ? 0 : 0.001
   
       ref.current.rotate(rotationSpeed, 0)
-    }
+
+      if(ref.current._isDragging){
+        console.log(ref.current)
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+          clearTimeout(timeout)
+          timeout = null
+        }, 5000)
+      
+      }
+      }
   })
 
   return (
