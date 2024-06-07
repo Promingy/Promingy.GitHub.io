@@ -23,7 +23,9 @@ export default function Text({text, size, depth, position, cameraRef}) {
             position={position}
             onPointerOver={() => setHovered(true)}
             onPointerOut={() => setHovered(false)}
-            onClick={(() => cameraRef.current.setLookAt(41, 16, 139, 52, 16, 139, true))}
+            onClick={() => {
+                cameraRef.current.setLookAt(41, 16, 139, 52, 16, 139, true)
+            }}
           >
             <textGeometry args={[text, { font, size, depth }]} />
             <meshStandardMaterial color={color} />

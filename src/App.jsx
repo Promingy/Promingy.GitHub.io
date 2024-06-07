@@ -11,10 +11,10 @@ import { useRef, useState } from 'react'
 import LoadImage from './components/LoadImage/LoadImage'
 
 const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/'
+let timeout;
 
 export function CameraRotation ({cameraRef, x=-200, y=175, z=200, tx=0, ty=0, tz=0}) {
-  // const ref = useRef()
-  let timeout;
+  // const cameraRef = useRef()
 
   useFrame(() => {
     if(cameraRef.current){
@@ -22,12 +22,13 @@ export function CameraRotation ({cameraRef, x=-200, y=175, z=200, tx=0, ty=0, tz
   
       cameraRef.current.rotate(rotationSpeed, 0)
 
-      if(cameraRef.current._isDragging){
+      if(cameraRef.current.active){
         clearTimeout(timeout)
         timeout = setTimeout(() => {
-          cameraRef.current.setLookAt(x, y, z, tx, ty, tz, true)
-          clearTimeout(timeout)
+          // cameraRef.current.setTarget(tx, ty, tz, true);
+          // cameraRef.current.setPosition(x, y, z, true)
           timeout = null
+          cameraRef.current.setLookAt(x, y, z, tx, ty, tz, true, 1)
           }, 1000)
         }
       }
@@ -40,7 +41,7 @@ export function CameraRotation ({cameraRef, x=-200, y=175, z=200, tx=0, ty=0, tz
       minDistance={170}
       maxPolarAngle={Math.PI / 2}
       truckSpeed={0}
-      smoothTime={.5}
+      smoothTime={1}
       ref={cameraRef}
     />
   )
@@ -119,7 +120,7 @@ const App = () => {
         position={[22, 23.6, 70]} 
         rotation={[0, -2.5, 0]}/>
       
-      <Text cameraRef={ref} url={url} position={[-178, 59, -72]} text='Résumé' size={15} depth={5} />
+      <Text cameraRef={ref} timeout={timeout} url={url} position={[-178, 59, -72]} text='Résumé' size={15} depth={5} />
       <Text url={url} position={[-183, 37, -72]} text='Skills' size={15} depth={5}/>
       <Text url={url} position={[-183, 15, -72]} text='Experience' size={15} depth={5}/>
       <Text url={url} position={[-190, -7, -72]} text='About Me' size={15} depth={5}/>
