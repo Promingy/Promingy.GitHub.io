@@ -1,11 +1,12 @@
 import { useLoader } from '@react-three/fiber'
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import * as Three from 'three'
 
-export default function LoadModel(props) {
-    const gltf = useLoader(GLTFLoader, props.url  + '.glb');
+export default function LoadModel({ url, position, rotation, scale, canHover}) {
+    const gltf = useLoader(GLTFLoader, url  + '.glb');
     const modelRef = useRef();
+    const [hovered, setHovered] = useState(false)
 
     useEffect(() => {
         if (modelRef.current) {
@@ -28,15 +29,35 @@ export default function LoadModel(props) {
         }
     }, [gltf])
 
+    useEffect(() => {
+        document.body.style.cursor = hovered ? 'pointer' : 'auto'
+    },[hovered])
+
     return (
-            <primitive 
+        <>
+          {canHover ? <primitive 
                 object={gltf.scene}
                 ref={modelRef}
-                position={props.position || [0, 0, 0]}
-                rotation={props.rotation || [0, 0, 0]}
-                scale={props.scale || [1, 1, 1]}
+                position={position || [0, 0, 0]}
+                rotation={rotation || [0, 0, 0]}
+                scale={scale || [1, 1, 1]}
                 castShadow
                 receiveShadow
+                onPointerOver={() => setHovered(true)}
+                onPointerOut={() => setHovered(false)}
                  />
+                 :
+                 <primitive 
+                       object={gltf.scene}
+                       ref={modelRef}
+                       position={position || [0, 0, 0]}
+                       rotation={rotation || [0, 0, 0]}
+                       scale={scale || [1, 1, 1]}
+                       castShadow
+                       receiveShadow
+                        />
+
+                 }
+        </>
     )
 }
