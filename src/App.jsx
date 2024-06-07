@@ -12,25 +12,24 @@ import LoadImage from './components/LoadImage/LoadImage'
 
 const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/'
 
-export function CameraRotation () {
-  const ref = useRef()
+export function CameraRotation ({cameraRef, x=-200, y=175, z=200, tx=0, ty=0, tz=0}) {
+  // const ref = useRef()
   let timeout;
 
   useFrame(() => {
-    if(ref.current){
+    if(cameraRef.current){
       const rotationSpeed = timeout ? 0 : 0.001
   
-      ref.current.rotate(rotationSpeed, 0)
+      cameraRef.current.rotate(rotationSpeed, 0)
 
-      if(ref.current._isDragging){
-        console.log(ref.current)
+      if(cameraRef.current._isDragging){
         clearTimeout(timeout)
         timeout = setTimeout(() => {
+          cameraRef.current.setLookAt(x, y, z, tx, ty, tz, true)
           clearTimeout(timeout)
           timeout = null
-        }, 5000)
-      
-      }
+          }, 1000)
+        }
       }
   })
 
@@ -42,7 +41,7 @@ export function CameraRotation () {
       maxPolarAngle={Math.PI / 2}
       truckSpeed={0}
       smoothTime={.5}
-      ref={ref}
+      ref={cameraRef}
     />
   )
 
@@ -50,9 +49,11 @@ export function CameraRotation () {
 
 
 const App = () => {
+  const ref = useRef()
+
    return (
     <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: '#272727' }}>
-      <CameraRotation />
+      <CameraRotation cameraRef={ref} />
       <Reflector
         mixStrength={.1} // Strength of the reflections
         resolution={1024} // Off-buffer resolution, lower=faster, higher=better quality
@@ -118,7 +119,7 @@ const App = () => {
         position={[22, 23.6, 70]} 
         rotation={[0, -2.5, 0]}/>
       
-      <Text url={url} position={[-178, 59, -72]} text='Résumé' size={15} depth={5} />
+      <Text cameraRef={ref} url={url} position={[-178, 59, -72]} text='Résumé' size={15} depth={5} />
       <Text url={url} position={[-183, 37, -72]} text='Skills' size={15} depth={5}/>
       <Text url={url} position={[-183, 15, -72]} text='Experience' size={15} depth={5}/>
       <Text url={url} position={[-190, -7, -72]} text='About Me' size={15} depth={5}/>
