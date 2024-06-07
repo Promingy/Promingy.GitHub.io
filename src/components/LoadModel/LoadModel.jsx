@@ -35,7 +35,8 @@ export default function LoadModel({ url, position, rotation, scale, canHover}) {
 
     return (
         <>
-          {canHover ? <primitive 
+          {canHover ? 
+            <primitive 
                 object={gltf.scene}
                 ref={modelRef}
                 position={position || [0, 0, 0]}
@@ -45,17 +46,17 @@ export default function LoadModel({ url, position, rotation, scale, canHover}) {
                 receiveShadow
                 onPointerOver={() => setHovered(true)}
                 onPointerOut={() => setHovered(false)}
-                 />
+            />
                  :
-                 <primitive 
-                       object={gltf.scene}
-                       ref={modelRef}
-                       position={position || [0, 0, 0]}
-                       rotation={rotation || [0, 0, 0]}
-                       scale={scale || [1, 1, 1]}
-                       castShadow
-                       receiveShadow
-                        />
+            <primitive 
+                object={gltf.scene}
+                ref={modelRef}
+                position={position || [0, 0, 0]}
+                rotation={rotation || [0, 0, 0]}
+                scale={scale || [1, 1, 1]}
+                castShadow
+                receiveShadow
+                />
 
                  }
         </>
