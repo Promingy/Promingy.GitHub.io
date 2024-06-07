@@ -33,7 +33,7 @@ const App = () => {
       </group>
 
       <LoadModel url={url + 'updated_tavern'} scale={[25, 25, 25]}/>
-      <group>
+      {/* <group> */}
         <Flame url={url + 'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
 
         <Flame url={url + 'animated_torch_flame1'} position={[49, 53, 79]} scale={[4.5, 1.5, 4.5]}/>
@@ -45,9 +45,8 @@ const App = () => {
         <Flame url={url + 'animated_torch_flame1'} position={[53, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
         <Flame url={url + 'animated_torch_flame1'} position={[-90, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
 
-        {/* <Flame url={url + 'animated_torch_flame1'} position={[-34, 7, -70]} scale={[10, 10, 10]}/> */}
-        {/* <Flame url={url + 'animated_torch_flame1'} position={[-34, 7, 70]} scale={[10, 10, 10]}/> */}
-      </group>
+        <Flame url={url + 'animated_torch_flame1'} position={[-34, 7, -70]} scale={[10, 10, 10]}/>
+      {/* </group> */}
 
     </Canvas>
   )
