@@ -1,5 +1,6 @@
 import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { CameraControls, Reflector } from '@react-three/drei'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 
@@ -8,36 +9,66 @@ import LoadModel from './components/LoadModel'
 import Lights from './components/Lights'
 import Flame from './components/Flame/Flame'
 import Text from './components/Text/Text'
-import { useRef } from 'react'
+
+import { FontLoader } from 'three/examples/jsm/Addons.js'
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
+import { extend } from '@react-three/fiber'
+import Playball from './Playball_Regular.json'
+extend({ TextGeometry })
 
 const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/'
-let timeout;
+let timeout, timeout2;
 
 export function CameraRotation () {
   const cameraRef = useRef();
   const { controls } = useThree();
+  const [pan, setPan] = useState(true)
+
+  // useEffect(() => {
+    function onDragStart() {
+      setPan(false)
+      clearTimeout(timeout)
+      clearTimeout(timeout2)
+    }
+
+    function onDragEnd() {
+      timeout = setTimeout(() => {
+        timeout = null
+        controls.setLookAt(-200, 175, 200, 0, 0, 0, true)
+      }, 2000)
+    
+      timeout2 = setTimeout(() => {
+        setPan(true)
+        timeout2 = null
+      }
+      , 7000)
+    }
+
+    if (controls) {
+      controls.addEventListener('controlstart', onDragStart)
+      controls.addEventListener('controlend', onDragEnd)
+    }
+
+  //   return () => {
+  //     if (controls) {
+  //       controls.removeEventListener('controlstart', onDragStart)
+  //       controls.removeEventListener('controlend', onDragEnd)
+  //     }
+  //   }
+    
+  // }, [])
+
+
+  useFrame(() => { 
+    if(cameraRef.current && pan){
+      const rotationSpeed = !pan ? 0 : 0.001
   
-  function reset() {
-    timeout = null;
-    controls?.setLookAt(-200, 175, 200, 0, 0, 0, true)
-  }
+      cameraRef.current.rotate(rotationSpeed, 0)
+    }
+  }, [cameraRef])
 
-  // useFrame(() => { 
-    // if(cameraRef.current){
-    //   const rotationSpeed = timeout ? 0 : 0.001
   
-    //   cameraRef.current.rotate(rotationSpeed, 0)
-
-    //   if(cameraRef.current.active){
-    //     clearTimeout(timeout)
-    //     timeout = setTimeout(reset, 1000)
-    //     }
-
-    //   }
-  // }, [cameraRef])
-
    return <CameraControls 
-      enabled={true}
       maxDistance={333}
       minDistance={170}
       maxPolarAngle={Math.PI / 2}
@@ -45,15 +76,52 @@ export function CameraRotation () {
       smoothTime={1}
       ref={cameraRef}
       makeDefault
+      enabled={true}
     />
 }
 
+// function Text({text, size, depth, position, moveTo, lookAt}) {
+//   const font = new FontLoader().parse(Playball)
+//   const [hovered, setHovered] = useState(false)
+//   const [color, setColor] = useState(0xffffff)
+//   const {controls} = useThree()
+
+//   useEffect(() => {
+//       document.body.style.cursor = hovered ? 'pointer' : 'auto'
+//       setColor(hovered ? 0xff0000 : 0xffffff)
+//   },[hovered])
+
+//   return (
+//       <mesh
+//           castShadow 
+//           receiveShadow 
+//           position={position}
+//           onPointerOver={(e) => {
+//               e.stopPropagation()
+//               setHovered(true)
+//           }}
+//           onPointerOut={(e) => {
+//               e.stopPropagation()
+//               setHovered(false)
+//           }}
+//           onClick={() => {
+//               clearTimeout(timeout)
+//               clearTimeout(timeout2)
+//               controls?.setLookAt(...moveTo, ...lookAt, true)
+//           }}
+//         >
+//           <textGeometry args={[text, { font, size, depth }]} />
+//           <meshStandardMaterial color={color} />
+//       </mesh>
+//   )
+// }
 
 const App = () => {
 
    return (
     <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: '#272727' }}>
       <CameraRotation />
+
       <Reflector
         mixStrength={.1} // Strength of the reflections
         resolution={1024} // Off-buffer resolution, lower=faster, higher=better quality
@@ -122,36 +190,38 @@ const App = () => {
       
       <Text 
         url={url} 
+        text='Résumé' 
         position={[-178, 59, -72]} 
         moveTo={[41, 16, 139]} 
         lookAt={[52, 16, 139]} 
-        text='Résumé' 
         size={15} 
-        depth={5} 
+        depth={5}
+        timeout={timeout}
+        timeout2={timeout2}
         />
       <Text 
         url={url} 
+        text='Skills' 
         position={[-183, 37, -72]} 
         moveTo={[44, 47, -15]} 
         lookAt={[48, 47, -15]}  
-        text='Skills' 
         size={15} 
         depth={5}/>
       <Text 
         url={url} 
+        text='Experience' 
         position={[-183, 15, -72]} 
         moveTo={[]} 
         lookAt={[]} 
-        text='Experience' 
         size={15} 
         depth={5}
         />
       <Text 
         url={url} 
+        text='About Me' 
         position={[-190, -7, -72]} 
         moveTo={[-4, 36.5, -64.5]} 
         lookAt={[-4, 36.5, -75.5]}  
-        text='About Me' 
         size={15} 
         depth={5}
       />
