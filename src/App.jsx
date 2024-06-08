@@ -35,12 +35,12 @@ export function CameraRotation () {
     function onDragEnd() {
       timeout = setTimeout(() => {
         controls.setLookAt(-200, 175, 200, 0, 0, 0, true)
-      }, 2000)
+      }, 10000)
     
       timeout2 = setTimeout(() => {
         setPan(true)
       }
-      , 7000)
+      , 15000)
     }
 
     if (controls) {
@@ -123,6 +123,8 @@ const App = () => {
         rotation={[0, -1.575, 0]} 
         position={[52, -5, 150]} 
         canHover={true}
+        lookAt={[52, 16, 139]}
+        moveTo={[41, 16, 139]}
         />
       <LoadModel 
         url={url + 'lightpost'} 
@@ -136,19 +138,24 @@ const App = () => {
         position={[48, 51.75, -14.4]} 
         rotation={[-1.6, -1.5, 0]} 
         canHover={true}
+        moveTo={[44, 47, -15]} 
+        lookAt={[48, 47, -15]}  
         />
       <LoadModel 
         url={url + 'second_pile_of_books'} 
         scale={[.15, .15, .15]} 
         position={[48, 51.75, -8]} 
         rotation={[-1.6, -1.5, 0]} 
-        canHover={true}
+        // canHover={true}
+        moveTo={[44, 47, -15]} 
+        lookAt={[48, 47, -15]}  
         />
       <LoadModel 
         url={url + 'medieval_book_stack'} 
         scale={[.33, .33, .33]} 
         position={[22, 23.6, 70]} 
-        rotation={[0, -2.5, 0]}/>
+        rotation={[0, -2.5, 0]}
+        />
       
       <Text 
         url={url} 
@@ -157,9 +164,7 @@ const App = () => {
         moveTo={[41, 16, 139]} 
         lookAt={[52, 16, 139]} 
         size={15} 
-        depth={5}
-        timeout={timeout}
-        
+        depth={5}        
         />
       <Text 
         url={url} 
