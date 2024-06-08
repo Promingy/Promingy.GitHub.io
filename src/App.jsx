@@ -1,6 +1,7 @@
 import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { CameraControls, Reflector } from '@react-three/drei'
-import { useEffect, useRef, useState } from 'react'
+import {useEffect, useRef, useState } from 'react'
+import { usePan } from './main'
 import './App.css'
 
 
@@ -10,21 +11,21 @@ import Lights from './components/Lights'
 import Flame from './components/Flame/Flame'
 import Text from './components/Text/Text'
 
-import { FontLoader } from 'three/examples/jsm/Addons.js'
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
-import { extend } from '@react-three/fiber'
-import Playball from './Playball_Regular.json'
-extend({ TextGeometry })
 
 const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/'
 let timeout, timeout2;
 
+export function clearTimeouts() {
+  clearTimeout(timeout)
+  clearTimeout(timeout2)
+}
+
 export function CameraRotation () {
   const cameraRef = useRef();
   const { controls } = useThree();
-  const [pan, setPan] = useState(true)
+  const { pan, setPan } = usePan()
 
-  // useEffect(() => {
+  useEffect(() => {
     function onDragStart() {
       setPan(false)
       clearTimeout(timeout)
@@ -33,13 +34,11 @@ export function CameraRotation () {
 
     function onDragEnd() {
       timeout = setTimeout(() => {
-        timeout = null
         controls.setLookAt(-200, 175, 200, 0, 0, 0, true)
       }, 2000)
     
       timeout2 = setTimeout(() => {
         setPan(true)
-        timeout2 = null
       }
       , 7000)
     }
@@ -49,19 +48,19 @@ export function CameraRotation () {
       controls.addEventListener('controlend', onDragEnd)
     }
 
-  //   return () => {
-  //     if (controls) {
-  //       controls.removeEventListener('controlstart', onDragStart)
-  //       controls.removeEventListener('controlend', onDragEnd)
-  //     }
-  //   }
+    return () => {
+      if (controls) {
+        controls.removeEventListener('controlstart', onDragStart)
+        controls.removeEventListener('controlend', onDragEnd)
+      }
+    }
     
-  // }, [])
+  }, [controls])
 
 
   useFrame(() => { 
     if(cameraRef.current && pan){
-      const rotationSpeed = !pan ? 0 : 0.001
+      const rotationSpeed = 0.001
   
       cameraRef.current.rotate(rotationSpeed, 0)
     }
@@ -76,45 +75,8 @@ export function CameraRotation () {
       smoothTime={1}
       ref={cameraRef}
       makeDefault
-      enabled={true}
     />
 }
-
-// function Text({text, size, depth, position, moveTo, lookAt}) {
-//   const font = new FontLoader().parse(Playball)
-//   const [hovered, setHovered] = useState(false)
-//   const [color, setColor] = useState(0xffffff)
-//   const {controls} = useThree()
-
-//   useEffect(() => {
-//       document.body.style.cursor = hovered ? 'pointer' : 'auto'
-//       setColor(hovered ? 0xff0000 : 0xffffff)
-//   },[hovered])
-
-//   return (
-//       <mesh
-//           castShadow 
-//           receiveShadow 
-//           position={position}
-//           onPointerOver={(e) => {
-//               e.stopPropagation()
-//               setHovered(true)
-//           }}
-//           onPointerOut={(e) => {
-//               e.stopPropagation()
-//               setHovered(false)
-//           }}
-//           onClick={() => {
-//               clearTimeout(timeout)
-//               clearTimeout(timeout2)
-//               controls?.setLookAt(...moveTo, ...lookAt, true)
-//           }}
-//         >
-//           <textGeometry args={[text, { font, size, depth }]} />
-//           <meshStandardMaterial color={color} />
-//       </mesh>
-//   )
-// }
 
 const App = () => {
 
@@ -197,7 +159,7 @@ const App = () => {
         size={15} 
         depth={5}
         timeout={timeout}
-        timeout2={timeout2}
+        
         />
       <Text 
         url={url} 
