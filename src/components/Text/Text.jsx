@@ -1,15 +1,16 @@
 import { FontLoader } from 'three/examples/jsm/Addons.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
-import { extend } from '@react-three/fiber'
+import { extend, useThree } from '@react-three/fiber'
 import Playball from '../../Playball_Regular.json'
 import { useEffect, useState } from 'react'
 extend({ TextGeometry })
 
 
-export default function Text({text, size, depth, position, cameraRef}) {
+export default function Text({text, size, depth, position, moveTo, lookAt}) {
     const font = new FontLoader().parse(Playball)
     const [hovered, setHovered] = useState(false)
     const [color, setColor] = useState(0xffffff)
+    const {controls} = useThree()
 
     useEffect(() => {
         document.body.style.cursor = hovered ? 'pointer' : 'auto'
@@ -21,10 +22,16 @@ export default function Text({text, size, depth, position, cameraRef}) {
             castShadow 
             receiveShadow 
             position={position}
-            onPointerOver={() => setHovered(true)}
-            onPointerOut={() => setHovered(false)}
+            onPointerOver={(e) => {
+                e.stopPropagation()
+                setHovered(true)
+            }}
+            onPointerOut={(e) => {
+                e.stopPropagation()
+                setHovered(false)
+            }}
             onClick={() => {
-                cameraRef.current.setLookAt(41, 16, 139, 52, 16, 139, true)
+                controls.setLookAt(...moveTo, ...lookAt, true)
             }}
           >
             <textGeometry args={[text, { font, size, depth }]} />

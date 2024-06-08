@@ -1,60 +1,59 @@
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { CameraControls, Reflector } from '@react-three/drei'
 import './App.css'
+
 
 
 import LoadModel from './components/LoadModel'
 import Lights from './components/Lights'
 import Flame from './components/Flame/Flame'
 import Text from './components/Text/Text'
-import { useRef, useState } from 'react'
-import LoadImage from './components/LoadImage/LoadImage'
+import { useRef } from 'react'
 
 const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/'
 let timeout;
 
-export function CameraRotation ({cameraRef, x=-200, y=175, z=200, tx=0, ty=0, tz=0}) {
-  // const cameraRef = useRef()
-
-  useFrame(() => {
-    if(cameraRef.current){
-      const rotationSpeed = timeout ? 0 : 0.001
+export function CameraRotation () {
+  const cameraRef = useRef();
+  const { controls } = useThree();
   
-      cameraRef.current.rotate(rotationSpeed, 0)
+  function reset() {
+    timeout = null;
+    controls?.setLookAt(-200, 175, 200, 0, 0, 0, true)
+  }
 
-      if(cameraRef.current.active){
-        clearTimeout(timeout)
-        timeout = setTimeout(() => {
-          // cameraRef.current.setTarget(tx, ty, tz, true);
-          // cameraRef.current.setPosition(x, y, z, true)
-          timeout = null
-          cameraRef.current.setLookAt(x, y, z, tx, ty, tz, true, 1)
-          }, 1000)
-        }
-      }
-  })
+  // useFrame(() => { 
+    // if(cameraRef.current){
+    //   const rotationSpeed = timeout ? 0 : 0.001
+  
+    //   cameraRef.current.rotate(rotationSpeed, 0)
 
-  return (
-    <CameraControls 
-      enabled={true}
+    //   if(cameraRef.current.active){
+    //     clearTimeout(timeout)
+    //     timeout = setTimeout(reset, 1000)
+    //     }
+
+    //   }
+  // }, [cameraRef])
+
+   return <CameraControls 
+      enabled={false}
       maxDistance={333}
       minDistance={170}
       maxPolarAngle={Math.PI / 2}
       truckSpeed={0}
       smoothTime={1}
       ref={cameraRef}
+      makeDefault
     />
-  )
-
 }
 
 
 const App = () => {
-  const ref = useRef()
 
    return (
     <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: '#272727' }}>
-      <CameraRotation cameraRef={ref} />
+      <CameraRotation />
       <Reflector
         mixStrength={.1} // Strength of the reflections
         resolution={1024} // Off-buffer resolution, lower=faster, higher=better quality
@@ -113,17 +112,49 @@ const App = () => {
         scale={[.15, .15, .15]} 
         position={[48, 51.75, -8]} 
         rotation={[-1.6, -1.5, 0]} 
-        canHover={true}/>
+        canHover={true}
+        />
       <LoadModel 
         url={url + 'medieval_book_stack'} 
         scale={[.33, .33, .33]} 
         position={[22, 23.6, 70]} 
         rotation={[0, -2.5, 0]}/>
       
-      <Text cameraRef={ref} timeout={timeout} url={url} position={[-178, 59, -72]} text='Résumé' size={15} depth={5} />
-      <Text url={url} position={[-183, 37, -72]} text='Skills' size={15} depth={5}/>
-      <Text url={url} position={[-183, 15, -72]} text='Experience' size={15} depth={5}/>
-      <Text url={url} position={[-190, -7, -72]} text='About Me' size={15} depth={5}/>
+      <Text 
+        url={url} 
+        position={[-178, 59, -72]} 
+        moveTo={[41, 16, 139]} 
+        lookAt={[52, 16, 139]} 
+        text='Résumé' 
+        size={15} 
+        depth={5} 
+        />
+      <Text 
+        url={url} 
+        position={[-183, 37, -72]} 
+        moveTo={[44, 47, -15]} 
+        lookAt={[48, 47, -15]}  
+        text='Skills' 
+        size={15} 
+        depth={5}/>
+      <Text 
+        url={url} 
+        position={[-183, 15, -72]} 
+        moveTo={[]} 
+        lookAt={[]} 
+        text='Experience' 
+        size={15} 
+        depth={5}
+        />
+      <Text 
+        url={url} 
+        position={[-190, -7, -72]} 
+        moveTo={[-4, 36.5, -64.5]} 
+        lookAt={[-4, 36.5, -75.5]}  
+        text='About Me' 
+        size={15} 
+        depth={5}
+      />
 
       <Flame url={url + 'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
 
