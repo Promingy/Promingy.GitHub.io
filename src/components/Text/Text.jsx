@@ -31,7 +31,8 @@ export default function Text({text, size, depth, position, moveTo, lookAt}) {
                 setHovered(false)
             }}
             onClick={() => {
-                controls.setLookAt(...moveTo, ...lookAt, true)
+                // console.log(controls)
+                controls.setLookAt(...moveTo, ...lookAt, true).then(() => controls.enabled = false)
             }}
           >
             <textGeometry args={[text, { font, size, depth }]} />

@@ -37,7 +37,7 @@ export function CameraRotation () {
   // }, [cameraRef])
 
    return <CameraControls 
-      enabled={false}
+      enabled={true}
       maxDistance={333}
       minDistance={170}
       maxPolarAngle={Math.PI / 2}
