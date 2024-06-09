@@ -46,8 +46,8 @@ export function CameraRotation () {
     }
 
     if (controls) {
-      // controls.addEventListener('controlstart', onDragStart)
-      // controls.addEventListener('controlend', onDragEnd)
+      controls.addEventListener('controlstart', onDragStart)
+      controls.addEventListener('controlend', onDragEnd)
     }
 
     return () => {
@@ -81,6 +81,8 @@ export function CameraRotation () {
 }
 
 const App = () => {
+  const tavernRef = useRef();
+  const arcadeRef = useRef();
 
    return (
     <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
@@ -119,6 +121,7 @@ const App = () => {
       <LoadModel 
         file={'updated_tavern.glb'} 
         scale={[25, 25, 25]} 
+        refToUse={tavernRef}
         />
       <LoadModel 
         file={'bounty_board_w_resume.glb'} 
@@ -156,6 +159,7 @@ const App = () => {
         scale={[25, 25, 25]}
         position={[80, -8, 0]}
         rotation={[0, 1.575, 0]}
+        refToUse={arcadeRef}
       />
 
       <LoadImage
@@ -264,6 +268,7 @@ const App = () => {
         rotation={[0, 1.575, 0]}
         position={[80, 0, 0]}
         scale={[.5, 1, 1]}
+        occludeRef={[arcadeRef]}
       />
 
       {/* <ambientLight /> */}

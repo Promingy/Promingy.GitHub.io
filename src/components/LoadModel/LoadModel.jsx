@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import * as Three from 'three'
 
-export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo}) {
+export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo, refToUse}) {
     const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/' + file
     const gltf = useLoader(GLTFLoader, url);
     const [hovered, setHovered] = useState(false)
     const { controls } = useThree()
-    const modelRef = useRef();
+    const modelRef = refToUse || useRef();
 
     useEffect(() => {
         if (modelRef.current) {

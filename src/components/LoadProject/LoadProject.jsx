@@ -4,7 +4,7 @@ import './LoadProject.css';
 import { useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 
-export default function LoadProject({ url, position, rotation, scale }) {
+export default function LoadProject({ url, position, rotation, scale, occludeRef }) {
     const ref = useRef();
     const tref = useRef();
 
@@ -30,7 +30,7 @@ export default function LoadProject({ url, position, rotation, scale }) {
                 as='div'
                 wrapperClass="project"
                 transform
-                occlude
+                occlude={occludeRef}
                 >
                 <object data={url} />
             </Html>
