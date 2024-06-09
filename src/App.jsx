@@ -71,7 +71,7 @@ export function CameraRotation () {
   
    return <CameraControls 
       maxDistance={700}
-      minDistance={220}
+      // minDistance={220}
       maxPolarAngle={Math.PI / 2}
       truckSpeed={0}
       smoothTime={1}
@@ -83,10 +83,10 @@ export function CameraRotation () {
 const App = () => {
 
    return (
-    <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: '#272727' }}>
+    <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
       <fog attach="fog" args={[0x000000, 100, 1500]} />
       <CameraRotation />
-      <ambientLight intensity={1} />
+
       <Reflector
         mixStrength={.1} // Strength of the reflections
         resolution={1024} // Off-buffer resolution, lower=faster, higher=better quality
@@ -149,6 +149,11 @@ const App = () => {
         scale={[.33, .33, .33]} 
         position={[22, 23.6, 70]} 
         rotation={[0, -2.5, 0]}
+      />
+
+      <LoadModel
+        file={'arcade_machine.glb'}
+        rotation={[0, 0, 0]}
       />
 
       <LoadImage
@@ -254,7 +259,6 @@ const App = () => {
 
       <LoadProject
         url={'https://project1.corbinainsworth.com'}
-        model={'arcade_machine.glb'}
       />
 
 

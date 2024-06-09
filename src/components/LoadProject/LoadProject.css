@@ -1,8 +1,6 @@
-.arcade-machine{
-    background-color: transparent;
-}
-
 .arcade-machine object {
-    border-radius: 75px;
+    width: 1200px;
+    height: 1050px;
+    border-radius: 20px;
     background-color: white;
 }
