@@ -9,7 +9,9 @@ import LoadModel from './components/LoadModel'
 import Lights from './components/Lights'
 import Flame from './components/Flame/Flame'
 import Text from './components/Text/Text'
-import LoadImage from './components/LoadImage/LoadImage'
+import LoadImage from './components/LoadImage'
+import LoadProject from './components/LoadProject'
+import { AmbientLight } from 'three'
 
 
 const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/'
@@ -44,8 +46,8 @@ export function CameraRotation () {
     }
 
     if (controls) {
-      controls.addEventListener('controlstart', onDragStart)
-      controls.addEventListener('controlend', onDragEnd)
+      // controls.addEventListener('controlstart', onDragStart)
+      // controls.addEventListener('controlend', onDragEnd)
     }
 
     return () => {
@@ -62,7 +64,7 @@ export function CameraRotation () {
     if(cameraRef.current && pan){
       const rotationSpeed = 0.001
   
-      cameraRef.current.rotate(rotationSpeed, 0)
+      // cameraRef.current.rotate(rotationSpeed, 0)
     }
   }, [cameraRef])
 
@@ -84,7 +86,7 @@ const App = () => {
     <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: '#272727' }}>
       <fog attach="fog" args={[0x000000, 100, 1500]} />
       <CameraRotation />
-
+      <ambientLight intensity={1} />
       <Reflector
         mixStrength={.1} // Strength of the reflections
         resolution={1024} // Off-buffer resolution, lower=faster, higher=better quality
@@ -249,6 +251,11 @@ const App = () => {
       <Flame file={'animated_torch_flame1'} position={[65, 63, -70]} scale={[4.5, 1.5, 4.5]}/>
       <Flame file={'animated_torch_flame1'} position={[53, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
       <Flame file={'animated_torch_flame1'} position={[-90, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
+
+      <LoadProject
+        url={'https://project1.corbinainsworth.com'}
+        model={'arcade_machine.glb'}
+      />
 
 
     </Canvas>
