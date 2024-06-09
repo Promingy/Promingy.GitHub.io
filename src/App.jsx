@@ -1,15 +1,15 @@
-import { Canvas, useThree, useFrame } from '@react-three/fiber'
+import { Canvas, useThree, useFrame, extend } from '@react-three/fiber'
 import { CameraControls, Reflector } from '@react-three/drei'
-import {useEffect, useRef, useState } from 'react'
+import {useEffect, useRef } from 'react'
 import { usePan } from './main'
 import './App.css'
-
 
 
 import LoadModel from './components/LoadModel'
 import Lights from './components/Lights'
 import Flame from './components/Flame/Flame'
 import Text from './components/Text/Text'
+import LoadImage from './components/LoadImage/LoadImage'
 
 
 const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/'
@@ -68,8 +68,8 @@ export function CameraRotation () {
 
   
    return <CameraControls 
-      maxDistance={333}
-      minDistance={170}
+      maxDistance={700}
+      minDistance={220}
       maxPolarAngle={Math.PI / 2}
       truckSpeed={0}
       smoothTime={1}
@@ -82,6 +82,7 @@ const App = () => {
 
    return (
     <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: '#272727' }}>
+      <fog attach="fog" args={[0x000000, 100, 1500]} />
       <CameraRotation />
 
       <Reflector
@@ -133,20 +134,11 @@ const App = () => {
         rotation={[0, 2.5, 0]}
         />
       <LoadModel 
-        url={url + 'pile_of_books'} 
-        scale={[.15, .15, .15]} 
-        position={[48, 51.75, -14.4]} 
-        rotation={[-1.6, -1.5, 0]} 
-        canHover={true}
-        moveTo={[44, 47, -15]} 
-        lookAt={[48, 47, -15]}  
-        />
-      <LoadModel 
-        url={url + 'second_pile_of_books'} 
+        url={url + 'updated_pile_of_books'} 
         scale={[.15, .15, .15]} 
         position={[48, 51.75, -8]} 
         rotation={[-1.6, -1.5, 0]} 
-        // canHover={true}
+        canHover={true}
         moveTo={[44, 47, -15]} 
         lookAt={[48, 47, -15]}  
         />
@@ -156,7 +148,12 @@ const App = () => {
         position={[22, 23.6, 70]} 
         rotation={[0, -2.5, 0]}
         />
+
+        <LoadImage
+          url={url + 'about_me'}
+          />
       
+
       <Text 
         url={url} 
         text='Résumé' 

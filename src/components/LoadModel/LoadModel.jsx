@@ -31,12 +31,10 @@ export default function LoadModel({ url, position, rotation, scale, canHover, lo
     }, [gltf])
 
     useEffect(() => {
-        document.body.style.cursor = hovered ? 'pointer' : 'auto'
+        document.body.style.cursor = hovered ? 'pointer' : 'default'
     },[hovered])
 
     return (
-        <>
-          {canHover ? 
             <primitive 
                 object={gltf.scene}
                 ref={modelRef}
@@ -45,30 +43,24 @@ export default function LoadModel({ url, position, rotation, scale, canHover, lo
                 scale={scale || [1, 1, 1]}
                 castShadow
                 receiveShadow
-                onPointerOver={() => setHovered(true)}
-                onPointerOut={() => setHovered(false)}
-                onClick={() => {
+                onPointerOver={canHover ? () => setHovered(true) : null}
+                onPointerOut={canHover ? () => setHovered(false) : null}
+                onClick={canHover ? () => {
                     const cTarget = controls._target;
+                    console.log(cTarget)
                     const x = cTarget.x != 0;
                     const y = cTarget.y != 0;
                     const z = cTarget.z != 0;
-
-                    if (x && y && z) controls.setLookAt(-200, 175, 200, 0, 0, 0, true).then(() => controls.enabled = true)
-                    else controls.setLookAt(...moveTo, ...lookAt, true).then(() => controls.enabled = false)
-                }}
+                    if (x && y && z) {
+                        controls.enabled = true
+                        controls.setLookAt(-200, 175, 200, 0, 0, 0, true)
+                    }
+                    else controls.setLookAt(...moveTo, ...lookAt, true).then(() => {
+                        if (controls.target.x != 0 && controls.target.y != 0 && controls.target.z != 0){
+                            controls.enabled = false
+                        }
+                    })
+                } : null}
             />
-                 :
-            <primitive 
-                object={gltf.scene}
-                ref={modelRef}
-                position={position || [0, 0, 0]}
-                rotation={rotation || [0, 0, 0]}
-                scale={scale || [1, 1, 1]}
-                castShadow
-                receiveShadow
-                />
-
-                 }
-        </>
     )
 }
