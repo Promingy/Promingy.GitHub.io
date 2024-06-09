@@ -15,7 +15,7 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
     const font = new FontLoader().parse(Playball)
     const [color, setColor] = useState(baseColor || 0xffffff)
     const {controls} = useThree()
-    const { setPan } = usePan() 
+    const { pan, setPan } = usePan() 
 
 
 
@@ -29,6 +29,7 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
                 e.stopPropagation()
 
                 setColor(hoverColor)
+                document.style.body.cursor = 'default'
                 document.body.style.cursor = 'pointer'
             }}
             onPointerOut={(e) => {
@@ -43,9 +44,11 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
                 if (setControls) controls.enabled = setControls
 
                 clearTimeouts()
-                setPan(false)
                 
-                controls?.setLookAt(...moveTo, ...lookAt, true).then(() => controls.enabled = setControls)
+                controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {
+                    controls.enabled = setControls
+                    setPan(!pan)
+                })
             }}
           >
             <textGeometry args={[text, { font, size, depth}]} />
