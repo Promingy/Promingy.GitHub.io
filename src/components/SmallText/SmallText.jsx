@@ -11,7 +11,7 @@ extend({ TextGeometry })
 
 
 
-export default function Text({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor=0xff0000, baseColor=0xffffff}) {
+export default function SmallText({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor=0xff0000, baseColor=0xffffff}) {
     const font = new FontLoader().parse(Playball)
     const [color, setColor] = useState(baseColor || 0xffffff)
     const {controls} = useThree()
@@ -49,7 +49,7 @@ export default function Text({text, size, depth, position, rotation, moveTo, loo
             }}
           >
             <textGeometry args={[text, { font, size, depth}]} />
-            <meshStandardMaterial color={color} />
+            <meshBasicMaterial color={color} />
         </mesh>
     )
 }

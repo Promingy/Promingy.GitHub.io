@@ -22,8 +22,8 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                     }
                     
                     if (!child.material.name.startsWith('lambert1')){
-                        // child.castShadow = true;
-                        // child.receiveShadow = true;
+                        child.castShadow = true;
+                        child.receiveShadow = true;
                     }
                 }
 

@@ -9,6 +9,7 @@ import LoadModel from './components/LoadModel'
 import Lights from './components/Lights'
 import Flame from './components/Flame/Flame'
 import Text from './components/Text/Text'
+import SmallText from './components/SmallText/SmallText'
 import LoadImage from './components/LoadImage'
 import LoadProject from './components/LoadProject'
 import { AmbientLight } from 'three'
@@ -128,7 +129,7 @@ const App = () => {
         scale={[10, 10, 10]} 
         rotation={[0, -1.575, 0]} 
         position={[52, -5, 150]} 
-        canHover={true}
+        canHover
         lookAt={[52, 16, 139]}
         moveTo={[41, 16, 139]}
         />
@@ -143,7 +144,7 @@ const App = () => {
         scale={[.15, .15, .15]} 
         position={[48, 51.75, -8]} 
         rotation={[-1.6, -1.5, 0]} 
-        canHover={true}
+        canHover
         moveTo={[44, 47, -15]} 
         lookAt={[48, 47, -15]}  
         />
@@ -160,6 +161,7 @@ const App = () => {
         position={[80, -8, 0]}
         rotation={[0, 1.575, 0]}
         refToUse={arcadeRef}
+        canHover
       />
 
       <LoadImage
@@ -212,44 +214,68 @@ const App = () => {
         setControls={false}
       />
       <Text
+        text='Project1'
+        position={[-185, 0, -20]}
+        rotation={[-1.575, 0, 0]}
+        moveTo={[95, 28, 1]}
+        lookAt={[85.2, 27, 1]}
+        size={15}
+        depth={1}
+        setControls={false}
+      />
+
+
+
+      <SmallText
         text='Back'
-        position={[-2.5, 32.5, -69.94]}
+        position={[-2.5, 33, -69.94]}
         moveTo={[-200, 175, 200]}
         lookAt={[0, 0, 0]}
         size={.25}
         depth={0}
-        setControls={true}
+        setControls
         hoverColor={0x00ff00}
       />
-      <Text
+      <SmallText
         text='Experience'
-        position={[-6, 32.5, -69.94]}
+        position={[-6, 33, -69.94]}
         moveTo={[-11, 38.95, -64.5]}
         lookAt={[-11, 38.95, -75.5]}
         size={.25}
         depth={0}
-        setControls={true}
+        setControls
         hoverColor={0x00ff00}
       />
-      <Text
+      <SmallText
         text='About Me'
         position={[-12.5, 35.125, -69.94]}
         moveTo={[-4, 36.5, -64.5]}
         lookAt={[-4, 36.5, -75.5]}
         size={.25}
         depth={0}
-        setControls={true}
+        setControls
         hoverColor={0x00ff00}
         />
-      <Text
+      <SmallText
         text='Back'
         position={[-9, 35.125, -69.94]}
         moveTo={[-200, 175, 200]}
         lookAt={[0, 0, 0]}
         size={.25}
         depth={0}
-        setControls={true}
+        setControls
         hoverColor={0x00ff00}
+      />
+      <SmallText
+        text='Back'
+        position={[87, 21.5, 5]}
+        rotation={[0, 1.575, 0]}
+        moveTo={[-200, 175, 200]}
+        lookAt={[0, 0, 0]}
+        size={.5}
+        depth={0}
+        setControls
+        hoverColor={0xF07F13}
       />
 
       <Flame file={'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
@@ -265,13 +291,12 @@ const App = () => {
 
       <LoadProject
         url={'https://project1.corbinainsworth.com'}
-        rotation={[0, 1.575, 0]}
-        position={[80, 0, 0]}
-        scale={[.5, 1, 1]}
+        rotation={[-1.418, 1.368, 1.414]}
+        position={[85.147, 28, 0]}
+        scale={[.41, .7, .1]}
         occludeRef={[arcadeRef]}
       />
 
-      {/* <ambientLight /> */}
 
 
     </Canvas>
