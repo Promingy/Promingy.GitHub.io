@@ -183,8 +183,8 @@ const App = () => {
       <Text 
         text='Experience'
         position={[-183, 15, -72]}
-        moveTo={[]}
-        lookAt={[]}
+        moveTo={[-11, 38.95, -64.5]}
+        lookAt={[-11, 38.95, -75.5]}
         size={15}
         depth={5}
         setControls={false}
@@ -201,6 +201,36 @@ const App = () => {
       <Text
         text='Back'
         position={[-2.5, 32.5, -69.94]}
+        moveTo={[-200, 175, 200]}
+        lookAt={[0, 0, 0]}
+        size={.25}
+        depth={0}
+        setControls={true}
+        hoverColor={0x00ff00}
+      />
+      <Text
+        text='Experience'
+        position={[-6, 32.5, -69.94]}
+        moveTo={[-11, 38.95, -64.5]}
+        lookAt={[-11, 38.95, -75.5]}
+        size={.25}
+        depth={0}
+        setControls={true}
+        hoverColor={0x00ff00}
+      />
+      <Text
+        text='About Me'
+        position={[-12.5, 35.125, -69.94]}
+        moveTo={[-4, 36.5, -64.5]}
+        lookAt={[-4, 36.5, -75.5]}
+        size={.25}
+        depth={0}
+        setControls={true}
+        hoverColor={0x00ff00}
+        />
+      <Text
+        text='Back'
+        position={[-9, 35.125, -69.94]}
         moveTo={[-200, 175, 200]}
         lookAt={[0, 0, 0]}
         size={.25}

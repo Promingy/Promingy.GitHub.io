@@ -22,7 +22,7 @@ export default function Text({text, size, depth, position, moveTo, lookAt, setCo
     return (
         <mesh
             castShadow 
-            receiveShadow 
+            // receiveShadow 
             position={position}
             onPointerOver={(e) => {
                 e.stopPropagation()
