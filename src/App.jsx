@@ -64,14 +64,14 @@ export function CameraRotation () {
     if(cameraRef.current && pan){
       const rotationSpeed = 0.001
   
-      // cameraRef.current.rotate(rotationSpeed, 0)
+      cameraRef.current.rotate(rotationSpeed, 0)
     }
   }, [cameraRef])
 
   
    return <CameraControls 
       maxDistance={700}
-      // minDistance={220}
+      minDistance={220}
       maxPolarAngle={Math.PI / 2}
       truckSpeed={0}
       smoothTime={1}
@@ -153,7 +153,9 @@ const App = () => {
 
       <LoadModel
         file={'arcade_machine.glb'}
-        rotation={[0, 0, 0]}
+        scale={[25, 25, 25]}
+        position={[80, -8, 0]}
+        rotation={[0, 1.575, 0]}
       />
 
       <LoadImage
@@ -259,7 +261,12 @@ const App = () => {
 
       <LoadProject
         url={'https://project1.corbinainsworth.com'}
+        rotation={[0, 1.575, 0]}
+        position={[80, 0, 0]}
+        scale={[.5, 1, 1]}
       />
+
+      {/* <ambientLight /> */}
 
 
     </Canvas>
