@@ -3,8 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import * as Three from 'three'
 
-export default function LoadModel({ url, position, rotation, scale, canHover, lookAt, moveTo}) {
-    const gltf = useLoader(GLTFLoader, url  + '.glb');
+export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo}) {
+    const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/' + file
+    const gltf = useLoader(GLTFLoader, url);
     const [hovered, setHovered] = useState(false)
     const { controls } = useThree()
     const modelRef = useRef();
@@ -47,15 +48,18 @@ export default function LoadModel({ url, position, rotation, scale, canHover, lo
                 onPointerOut={canHover ? () => setHovered(false) : null}
                 onClick={canHover ? () => {
                     const cTarget = controls._target;
-                    console.log(cTarget)
                     const x = cTarget.x != 0;
                     const y = cTarget.y != 0;
                     const z = cTarget.z != 0;
+                    
                     if (x && y && z) {
                         controls.enabled = true
                         controls.setLookAt(-200, 175, 200, 0, 0, 0, true)
                     }
                     else controls.setLookAt(...moveTo, ...lookAt, true).then(() => {
+                        // check the updated camera controls - if the target is not 0,0,0 then disable the controls
+                        // this if statement prevents a user from stopping the camera from zooming into
+                        // a model, then stopping the zoom and still having the camera controls disabled
                         if (controls.target.x != 0 && controls.target.y != 0 && controls.target.z != 0){
                             controls.enabled = false
                         }

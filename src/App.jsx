@@ -1,4 +1,4 @@
-import { Canvas, useThree, useFrame, extend } from '@react-three/fiber'
+import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { CameraControls, Reflector } from '@react-three/drei'
 import {useEffect, useRef } from 'react'
 import { usePan } from './main'
@@ -115,11 +115,11 @@ const App = () => {
       </group>
 
       <LoadModel 
-        url={url + 'updated_tavern'} 
+        file={'updated_tavern.glb'} 
         scale={[25, 25, 25]} 
         />
       <LoadModel 
-        url={url + 'bounty_board_w_resume'} 
+        file={'bounty_board_w_resume.glb'} 
         scale={[10, 10, 10]} 
         rotation={[0, -1.575, 0]} 
         position={[52, -5, 150]} 
@@ -128,13 +128,13 @@ const App = () => {
         moveTo={[41, 16, 139]}
         />
       <LoadModel 
-        url={url + 'lightpost'} 
+        file={'lightpost.glb'} 
         scale={[4.5, 4.5, 4.5]} 
         position={[-90, -5, 120]} 
         rotation={[0, 2.5, 0]}
         />
       <LoadModel 
-        url={url + 'updated_pile_of_books'} 
+        file={'updated_pile_of_books.glb'} 
         scale={[.15, .15, .15]} 
         position={[48, 51.75, -8]} 
         rotation={[-1.6, -1.5, 0]} 
@@ -143,63 +143,82 @@ const App = () => {
         lookAt={[48, 47, -15]}  
         />
       <LoadModel 
-        url={url + 'medieval_book_stack'} 
+        file={'medieval_book_stack.glb'} 
         scale={[.33, .33, .33]} 
         position={[22, 23.6, 70]} 
         rotation={[0, -2.5, 0]}
-        />
-
-        <LoadImage
-          url={url + 'about_me'}
-          />
-      
-
-      <Text 
-        url={url} 
-        text='Résumé' 
-        position={[-178, 59, -72]} 
-        moveTo={[41, 16, 139]} 
-        lookAt={[52, 16, 139]} 
-        size={15} 
-        depth={5}        
-        />
-      <Text 
-        url={url} 
-        text='Skills' 
-        position={[-183, 37, -72]} 
-        moveTo={[44, 47, -15]} 
-        lookAt={[48, 47, -15]}  
-        size={15} 
-        depth={5}/>
-      <Text 
-        url={url} 
-        text='Experience' 
-        position={[-183, 15, -72]} 
-        moveTo={[]} 
-        lookAt={[]} 
-        size={15} 
-        depth={5}
-        />
-      <Text 
-        url={url} 
-        text='About Me' 
-        position={[-190, -7, -72]} 
-        moveTo={[-4, 36.5, -64.5]} 
-        lookAt={[-4, 36.5, -75.5]}  
-        size={15} 
-        depth={5}
       />
 
-      <Flame url={url + 'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
+      <LoadImage
+        file={'ainsworth_corbin_resume.png'}
+        position={[50.4, 15.75, 140.9]}
+        scale={[.113, .14, .1]}
+        rotation={[.075, -1.575, 0]}
+      />
 
-      <Flame url={url + 'animated_torch_flame1'} position={[49, 53, 79]} scale={[4.5, 1.5, 4.5]}/>
-      <Flame url={url + 'animated_torch_flame1'} position={[49, 53, -30]} scale={[4.5, 1.5, 4.5]}/>
-      <Flame url={url + 'animated_torch_flame1'} position={[-26, 53, -66]} scale={[4.5, 1.5, 4.5]}/>
+      <LoadImage
+        file={"about_me.png"}
+        position={[-3.91, 36.5, -69.95]}
+        scale={[.0475, .085, .1]}
+      />
 
-      <Flame url={url + 'animated_torch_flame1'} position={[65, 63, 120]} scale={[4.5, 1.5, 4.5]}/>
-      <Flame url={url + 'animated_torch_flame1'} position={[65, 63, -70]} scale={[4.5, 1.5, 4.5]}/>
-      <Flame url={url + 'animated_torch_flame1'} position={[53, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
-      <Flame url={url + 'animated_torch_flame1'} position={[-90, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
+      <Text 
+        text='Résumé' 
+        position={[-178, 59, -72]}
+        moveTo={[41, 16, 139]}
+        lookAt={[52, 16, 139]}
+        size={15}
+        depth={5}
+        setControls={false}
+        />
+      <Text 
+        text='Skills' 
+        position={[-183, 37, -72]}
+        moveTo={[44, 47, -15]}
+        lookAt={[48, 47, -15]}
+        size={15}
+        depth={5}
+        setControls={false}
+        />
+      <Text 
+        text='Experience'
+        position={[-183, 15, -72]}
+        moveTo={[]}
+        lookAt={[]}
+        size={15}
+        depth={5}
+        setControls={false}
+        />
+      <Text 
+        text='About Me' 
+        position={[-190, -7, -72]}
+        moveTo={[-4, 36.5, -64.5]}
+        lookAt={[-4, 36.5, -75.5]}
+        size={15}
+        depth={5}
+        setControls={false}
+      />
+      <Text
+        text='Back'
+        position={[-2.5, 32.5, -69.94]}
+        moveTo={[-200, 175, 200]}
+        lookAt={[0, 0, 0]}
+        size={.25}
+        depth={0}
+        setControls={true}
+        hoverColor={0x00ff00}
+      />
+
+      <Flame file={'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
+
+      <Flame file={'animated_torch_flame1'} position={[49, 53, 79]} scale={[4.5, 1.5, 4.5]}/>
+      <Flame file={'animated_torch_flame1'} position={[49, 53, -30]} scale={[4.5, 1.5, 4.5]}/>
+      <Flame file={'animated_torch_flame1'} position={[-26, 53, -66]} scale={[4.5, 1.5, 4.5]}/>
+
+      <Flame file={'animated_torch_flame1'} position={[65, 63, 120]} scale={[4.5, 1.5, 4.5]}/>
+      <Flame file={'animated_torch_flame1'} position={[65, 63, -70]} scale={[4.5, 1.5, 4.5]}/>
+      <Flame file={'animated_torch_flame1'} position={[53, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
+      <Flame file={'animated_torch_flame1'} position={[-90, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
 
 
     </Canvas>

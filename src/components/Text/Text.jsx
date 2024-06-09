@@ -11,17 +11,13 @@ extend({ TextGeometry })
 
 
 
-export default function Text({text, size, depth, position, moveTo, lookAt}) {
+export default function Text({text, size, depth, position, moveTo, lookAt, setControls, hoverColor=0xff0000}) {
     const font = new FontLoader().parse(Playball)
-    const [hovered, setHovered] = useState(false)
     const [color, setColor] = useState(0xffffff)
     const {controls} = useThree()
-    const { pan, setPan } = usePan() 
+    const { setPan } = usePan() 
 
-    useEffect(() => {
-        document.body.style.cursor = hovered ? 'pointer' : 'auto'
-        setColor(hovered ? 0xff0000 : 0xffffff)
-    },[hovered])
+
 
     return (
         <mesh
@@ -30,16 +26,25 @@ export default function Text({text, size, depth, position, moveTo, lookAt}) {
             position={position}
             onPointerOver={(e) => {
                 e.stopPropagation()
-                setHovered(true)
+
+                setColor(hoverColor)
+                document.body.style.cursor = 'pointer'
             }}
             onPointerOut={(e) => {
                 e.stopPropagation()
-                setHovered(false)
+
+                setColor(0xffffff)
+                document.body.style.cursor = 'default'
             }}
-            onClick={() => {
+            onClick={(e) => {
+                e.stopPropagation()
+
+                if (setControls) controls.enabled = setControls
+
                 clearTimeouts()
                 setPan(false)
-                controls?.setLookAt(...moveTo, ...lookAt, true).then(() => controls.enabled = false)
+                
+                controls?.setLookAt(...moveTo, ...lookAt, true).then(() => controls.enabled = setControls)
             }}
           >
             <textGeometry args={[text, { font, size, depth }]} />
