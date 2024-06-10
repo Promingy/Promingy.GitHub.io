@@ -12,75 +12,7 @@ import Text from './components/Text/Text'
 import SmallText from './components/SmallText/SmallText'
 import LoadImage from './components/LoadImage'
 import LoadProject from './components/LoadProject'
-import { AmbientLight } from 'three'
-
-
-const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/'
-let timeout, timeout2;
-
-export function clearTimeouts() {
-  clearTimeout(timeout)
-  clearTimeout(timeout2)
-}
-
-export function CameraRotation () {
-  const cameraRef = useRef();
-  const { controls } = useThree();
-  const { pan, setPan } = usePan()
-
-  useEffect(() => {
-    function onDragStart() {
-      setPan(false)
-      clearTimeout(timeout)
-      clearTimeout(timeout2)
-    }
-
-    function onDragEnd() {
-      timeout = setTimeout(() => {
-        controls.setLookAt(-200, 175, 200, 0, 0, 0, true)
-      }, 10000)
-    
-      timeout2 = setTimeout(() => {
-        setPan(true)
-      }
-      , 15000)
-    }
-
-    if (controls) {
-      controls.addEventListener('controlstart', onDragStart)
-      controls.addEventListener('controlend', onDragEnd)
-    }
-
-    return () => {
-      if (controls) {
-        controls.removeEventListener('controlstart', onDragStart)
-        controls.removeEventListener('controlend', onDragEnd)
-      }
-    }
-    
-  }, [controls])
-
-
-  useFrame(() => { 
-    if(cameraRef.current && pan){
-      const rotationSpeed = 0.001
-  
-      cameraRef.current.rotate(rotationSpeed, 0)
-    }
-  }, [cameraRef])
-
-  
-   return <CameraControls 
-      maxDistance={500}
-      minDistance={220}
-      maxPolarAngle={Math.PI / 2}
-      truckSpeed={0}
-      smoothTime={1}
-      ref={cameraRef}
-      makeDefault
-    />
-}
-
+import Camera from './components/Camera'
 const App = () => {
   const tavernRef = useRef();
   const arcadeRef = useRef();
@@ -89,7 +21,7 @@ const App = () => {
    return (
     <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
       <fog attach="fog" args={[0x000000, 100, 1500]} />
-      <CameraRotation />
+      <Camera />
 
       <Reflector
         mixStrength={.1} // Strength of the reflections
@@ -226,8 +158,8 @@ const App = () => {
         text='Project1'
         position={[-185, 0, -20]}
         rotation={[-1.575, 0, 0]}
-        moveTo={[95, 28, 1]}
-        lookAt={[85.2, 27, 1]}
+        moveTo={[95, 28, -0.5]}
+        lookAt={[85.2, 27, -0.75]}
         size={15}
         depth={1}
         setControls={false}
@@ -237,7 +169,7 @@ const App = () => {
         position={[-185, 0, 0]}
         rotation={[-1.575, 0, 0]}
         moveTo={[95, 29, 50]}
-        lookAt={[85, 28, 50]}
+        lookAt={[85, 28, 49.5]}
         size={15}
         depth={1}
         setControls={false}

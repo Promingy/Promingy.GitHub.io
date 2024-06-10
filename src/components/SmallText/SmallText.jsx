@@ -3,7 +3,7 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 import { extend, useThree } from '@react-three/fiber'
 import Playball from '../../Playball_Regular.json'
 import { useState } from 'react'
-import { clearTimeouts } from '../../App'
+import { clearTimeouts } from '../Camera/Camera'
 import { usePan } from '../../main'
 
 extend({ TextGeometry })

@@ -34,6 +34,7 @@ export default function LoadProject({ url, position, rotation, scale, occludeRef
                 transform
                 occlude={occludeRef}
                 >
+                <p/>
                 <object data={url} />
             </Html>
         </mesh>

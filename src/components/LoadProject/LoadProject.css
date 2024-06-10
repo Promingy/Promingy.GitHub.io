@@ -4,3 +4,14 @@
     border-radius: 20px;
     background-color: white;
 }
+
+.project p {
+    height: 721px;
+    width: 1280px;
+    border-radius: 20px;
+    position: absolute;
+    top: -16px;
+    opacity: 8%;
+    pointer-events: none;
+    background-image: url('https://glb-bucket-portfolio.s3.us-east-2.amazonaws.com/static.gif')
+}
