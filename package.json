@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@react-three/drei": "^9.106.0",
@@ -29,5 +29,5 @@
     "gh-pages": "^6.1.1",
     "vite": "^5.2.0"
   },
-  "homepage": "https://Promingy.github.io/promingy.github.io"
+  "homepage": "https://Promingy.github.io"
 }
