@@ -53,16 +53,18 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                     const y = cTarget.y != 0;
                     const z = cTarget.z != 0;
 
-                    whoosh.play();
-
-                    controls._removeAllEventListeners();
                     setPan(false);
+                    
+                    whoosh.play();
+                    
+                    controls._removeAllEventListeners();
 
                     if (x && y && z) {
                         controls.enabled = true;
                         controls.setLookAt(-200, 175, 200, 0, 0, 0, true).then(() => {
                             controls.enabled = true;
                             controls._addAllEventListeners(controls._domElement);
+                            setPan(true);
                         });
                     }
                     else controls.setLookAt(...moveTo, ...lookAt, true).then(() => {

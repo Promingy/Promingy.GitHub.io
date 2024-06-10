@@ -38,11 +38,13 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
                 e.stopPropagation()
 
                 if (setControls) controls.enabled = setControls
-
-                clearTimeouts()
+                
+                clearTimeouts();
                 
                 click.play();
                 whoosh.play();
+
+                setPan(false);
 
                 controls._removeAllEventListeners();
                 controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {

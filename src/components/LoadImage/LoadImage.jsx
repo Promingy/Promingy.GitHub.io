@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useRef } from "react";
-import * as Three from 'three';
+import { useLoader } from "@react-three/fiber";
+import { useEffect, useRef } from "react";
+import * as Three from "three";
 
 
 export default function LoadImage({ file, position, scale, rotation }) {
   const url = import.meta.env.VITE_AWS_URL + file
-
-  const texture = useMemo(() => new Three.TextureLoader().load(url), [url])
+  const texture = useLoader(Three.TextureLoader, url)
   const ref = useRef();
 
   useEffect(() => {
