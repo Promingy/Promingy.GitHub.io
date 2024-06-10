@@ -84,6 +84,7 @@ export function CameraRotation () {
 const App = () => {
   const tavernRef = useRef();
   const arcadeRef = useRef();
+  const arcadeRef2 = useRef();
 
    return (
     <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
@@ -163,6 +164,14 @@ const App = () => {
         refToUse={arcadeRef}
         canHover
       />
+      <LoadModel
+        file={'arcade_machine.glb'}
+        scale={[25, 25, 25]}
+        position={[80, -8, 50]}
+        rotation={[0, 1.575, 0]}
+        refToUse={arcadeRef2}
+        canHover
+      />
 
       <LoadImage
         file={'ainsworth_corbin_resume.png'}
@@ -219,6 +228,16 @@ const App = () => {
         rotation={[-1.575, 0, 0]}
         moveTo={[95, 28, 1]}
         lookAt={[85.2, 27, 1]}
+        size={15}
+        depth={1}
+        setControls={false}
+      />
+      <Text
+        text='Project2'
+        position={[-185, 0, 0]}
+        rotation={[-1.575, 0, 0]}
+        moveTo={[95, 29, 50]}
+        lookAt={[85, 28, 50]}
         size={15}
         depth={1}
         setControls={false}
@@ -295,6 +314,13 @@ const App = () => {
         position={[85.147, 28, 0]}
         scale={[.41, .7, .1]}
         occludeRef={[arcadeRef]}
+      />
+      <LoadProject
+        url={'https://project2.corbinainsworth.com'}
+        rotation={[-1.418, 1.368, 1.414]}
+        position={[85.147, 28, 50]}
+        scale={[.41, .7, .1]}
+        occludeRef={[arcadeRef2]}
       />
 
 

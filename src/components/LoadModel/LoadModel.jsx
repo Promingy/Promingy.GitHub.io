@@ -2,10 +2,12 @@ import { useLoader, useThree } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import * as Three from 'three'
+import { useGLTF } from '@react-three/drei';
 
 export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo, refToUse}) {
     const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/' + file
-    const gltf = useLoader(GLTFLoader, url);
+    // const gltf = useLoader(GLTFLoader, url);
+    const { scene } = useGLTF(url);
     const [hovered, setHovered] = useState(false)
     const { controls } = useThree()
     const modelRef = refToUse || useRef();
@@ -29,7 +31,7 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
 
             })
         }
-    }, [gltf])
+    }, [scene])
 
     useEffect(() => {
         document.body.style.cursor = hovered ? 'pointer' : 'default'
@@ -37,7 +39,7 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
 
     return (
             <primitive 
-                object={gltf.scene}
+                object={scene.clone()}
                 ref={modelRef}
                 position={position || [0, 0, 0]}
                 rotation={rotation || [0, 0, 0]}
