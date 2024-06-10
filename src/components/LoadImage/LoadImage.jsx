@@ -3,7 +3,7 @@ import * as Three from 'three';
 
 
 export default function LoadImage({ file, position, scale, rotation }) {
-  const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/' + file
+  const url = import.meta.env.VITE_AWS_URL + file
 
   const texture = useMemo(() => new Three.TextureLoader().load(url), [url])
   const ref = useRef();

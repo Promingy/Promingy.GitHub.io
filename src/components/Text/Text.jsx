@@ -40,14 +40,14 @@ export default function Text({text, size, depth, position, rotation, moveTo, loo
                 setHovered(false)
             }}
             onClick={(e) => {
-                e.stopPropagation()
+                e.stopPropagation();
 
-                if (setControls) controls.enabled = setControls
+                if (setControls) controls.enabled = setControls;
 
-                clearTimeouts()
-                setPan(false)
+                clearTimeouts();
+                setPan(false);
                 
-                controls?.setLookAt(...moveTo, ...lookAt, true).then(() => controls.enabled = setControls)
+                controls?.setLookAt(...moveTo, ...lookAt, true).then(() => controls.enabled = setControls);
             }}
           >
             <textGeometry args={[text, { font, size, depth}]} />

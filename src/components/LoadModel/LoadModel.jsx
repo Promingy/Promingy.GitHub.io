@@ -1,11 +1,10 @@
 import { useThree } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react';
 import * as Three from 'three'
-import { Clone, useCursor, useGLTF } from '@react-three/drei';
+import { useCursor, useGLTF } from '@react-three/drei';
 
-export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo, refToUse, isClone}) {
-    const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/' + file
-    // const gltf = useLoader(GLTFLoader, url);
+export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo, refToUse}) {
+    const url = import.meta.env.VITE_AWS_URL + file
     const { scene } = useGLTF(url);
     const [hovered, setHovered] = useState(false);
     const { controls } = useThree()

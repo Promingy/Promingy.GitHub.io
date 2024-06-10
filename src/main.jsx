@@ -10,10 +10,13 @@ export const usePan = () => {
 
 export const PanProvider = ({children}) => {
   const [pan, setPan] = useState(true)
+  const soundUrl = import.meta.env.VITE_AWS_URL + 'whoosh.mp3'
+  const whoosh = new Audio(soundUrl)
 
   const value = {
     pan, 
-    setPan
+    setPan,
+    whoosh
   }
 
   return (
