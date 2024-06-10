@@ -186,6 +186,17 @@ const App = () => {
 
 
           <SmallText
+            text='Experience'
+            position={[-5, 33, -69.94]}
+            // position={[-6, 33, -69.94]}
+            moveTo={[-11, 38.95, -64.5]}
+            lookAt={[-11, 38.95, -75.5]}
+            size={.25}
+            depth={0}
+            setControls
+            hoverColor={0x00ff00}
+          />
+          <SmallText
             text='Back'
             position={[-2.5, 33, -69.94]}
             moveTo={[-200, 175, 200]}
@@ -195,19 +206,12 @@ const App = () => {
             setControls
             hoverColor={0x00ff00}
           />
-          <SmallText
-            text='Experience'
-            position={[-6, 33, -69.94]}
-            moveTo={[-11, 38.95, -64.5]}
-            lookAt={[-11, 38.95, -75.5]}
-            size={.25}
-            depth={0}
-            setControls
-            hoverColor={0x00ff00}
-          />
+
+
           <SmallText
             text='About Me'
-            position={[-12.5, 35.125, -69.94]}
+            position={[-11.5, 35.5, -69.94]}
+            // position={[-12.5, 35.125, -69.94]}
             moveTo={[-4, 36.5, -64.5]}
             lookAt={[-4, 36.5, -75.5]}
             size={.25}
@@ -217,7 +221,7 @@ const App = () => {
             />
           <SmallText
             text='Back'
-            position={[-9, 35.125, -69.94]}
+            position={[-9, 35.5, -69.94]}
             moveTo={[-200, 175, 200]}
             lookAt={[0, 0, 0]}
             size={.25}
@@ -225,31 +229,12 @@ const App = () => {
             setControls
             hoverColor={0x00ff00}
           />
-          <SmallText
-            text='Back'
-            position={[86.5, 21, -6]}
-            rotation={[0, 1.575, 0]}
-            moveTo={[-200, 175, 200]}
-            lookAt={[0, 0, 0]}
-            size={.5}
-            depth={0}
-            setControls
-            hoverColor={0xF07F13}
-          />
-          <SmallText
-            text='Back'
-            position={[86.5, 21, 57]}
-            rotation={[0, 1.575, 0]}
-            moveTo={[-200, 175, 200]}
-            lookAt={[0, 0, 0]}
-            size={.5}
-            depth={0}
-            setControls
-            hoverColor={0xF07F13}
-          />
+
+
           <SmallText
             text='Previous Project'
-            position={[86.5, 21, 7]}
+            position={[86.5, 21.5, 5]}
+            // position={[86.5, 21, 7]}
             rotation={[0, 1.575, 0]}
             moveTo={[95, 28, 50]}
             lookAt={[85, 27, 49.5]}
@@ -259,11 +244,37 @@ const App = () => {
             hoverColor={0xF07F13}
           />
           <SmallText
+            text='Back'
+            position={[86.5, 21.25, -6]}
+            rotation={[0, 1.575, 0]}
+            moveTo={[-200, 175, 200]}
+            lookAt={[0, 0, 0]}
+            size={.5}
+            depth={0}
+            setControls
+            hoverColor={0xF07F13}
+          />
+
+
+          <SmallText
             text='Next Project'
-            position={[86.5, 21, 46]}
+            position={[86.5, 21.5, 44]}
+            // position={[86.5, 21, 46]}
             rotation={[0, 1.575, 0]}
             moveTo={[95, 28, -0.5]}
             lookAt={[85.2, 27, -0.75]}
+            size={.5}
+            depth={0}
+            setControls
+            hoverColor={0xF07F13}
+          />
+          <SmallText
+            text='Back'
+            position={[86.5, 21.75, 55.5]}
+            // position={[86.5, 21, 57]}
+            rotation={[0, 1.575, 0]}
+            moveTo={[-200, 175, 200]}
+            lookAt={[0, 0, 0]}
             size={.5}
             depth={0}
             setControls

@@ -5,7 +5,8 @@ import Playball from '../../Playball_Regular.json'
 import { useState } from 'react'
 import { clearTimeouts } from '../Camera/Camera'
 import { usePan } from '../../main'
-import { useCursor } from '@react-three/drei'
+import { Html, useCursor } from '@react-three/drei'
+import './SmallText.css'
 
 extend({ TextGeometry })
 
@@ -34,7 +35,37 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
                 setColor(0xffffff)
                 setHovered(false)
             }}
-            onClick={(e) => {
+            // onClick={(e) => {
+            //     e.stopPropagation()
+
+            //     if (setControls) controls.enabled = setControls
+                
+            //     clearTimeouts();
+                
+            //     click.play();
+            //     whoosh.play();
+
+            //     setPan(false);
+
+            //     controls._removeAllEventListeners();
+            //     controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {
+            //         controls.enabled = setControls
+            //         controls._addAllEventListeners(controls._domElement);
+
+            //         const x = Math.floor(Math.abs(controls._target.x))
+            //         const y = Math.floor(Math.abs(controls._target.y))
+            //         const z = Math.floor(Math.abs(controls._target.z))
+                    
+            //         // check if the camera is looking at 0, 0, 0
+            //         if (x === 0 && y === 0 && z === 0)
+            //             setPan(true)
+            //     })
+            // }}
+          >
+            {/* <textGeometry args={[text, { font, size, depth}]} />
+            <meshBasicMaterial color={color} /> */}
+            <Html wrapperClass={"test"} transform occlude>
+                <p onClick={(e) => {
                 e.stopPropagation()
 
                 if (setControls) controls.enabled = setControls
@@ -59,10 +90,8 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
                     if (x === 0 && y === 0 && z === 0)
                         setPan(true)
                 })
-            }}
-          >
-            <textGeometry args={[text, { font, size, depth}]} />
-            <meshBasicMaterial color={color} />
+            }}>{text}</p>
+            </Html>
         </mesh>
     )
 }
