@@ -2,6 +2,7 @@ import { useThree } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react';
 import * as Three from 'three'
 import { useCursor, useGLTF } from '@react-three/drei';
+import { usePan } from '../../main.jsx';
 
 export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo, refToUse}) {
     const url = import.meta.env.VITE_AWS_URL + file
@@ -9,10 +10,10 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
     const [hovered, setHovered] = useState(false);
     const { controls } = useThree()
     const modelRef = refToUse || useRef();
+    const { whoosh } = usePan();
 
     useEffect(() => {
         if (modelRef.current) {
-            console.log(modelRef.current)
             modelRef.current.traverse(child => {
                 if (child.isMesh) {
                     child.material.side = Three.FrontSide;
@@ -51,7 +52,10 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                     const x = cTarget.x != 0;
                     const y = cTarget.y != 0;
                     const z = cTarget.z != 0;
-                    
+
+
+                    whoosh.play()
+
                     if (x && y && z) {
                         controls.enabled = true
                         controls.setLookAt(-200, 175, 200, 0, 0, 0, true)

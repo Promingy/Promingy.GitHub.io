@@ -162,6 +162,7 @@ const App = () => {
         size={15}
         depth={1}
         setControls={false}
+        sounds
       />
       <Text
         text='Project2'

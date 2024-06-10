@@ -18,6 +18,7 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
     const {controls} = useThree()
     const { setPan } = usePan() 
     const [hovered, setHovered] = useState(false)
+    const { whoosh } = usePan()
 
     useCursor(hovered, 'pointer', 'default')
 
@@ -44,6 +45,7 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
 
                 clearTimeouts()
                 
+                whoosh.play()
                 controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {
                     controls.enabled = setControls
 
@@ -52,7 +54,6 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
                     const z = Math.floor(Math.abs(controls._target.z))
                     
                     // check if the camera is looking at 0, 0, 0
-                    console.log(controls._target, Math.floor(controls._target.x), Math.floor(controls._target.y), Math.floor(controls._target.z))
                     if (x === 0 && y === 0 && z === 0)
                         setPan(true)
                 })

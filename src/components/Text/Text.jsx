@@ -12,11 +12,11 @@ extend({ TextGeometry })
 
 
 
-export default function Text({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor=0xff0000, baseColor=0xffffff}) {
+export default function Text({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor=0xff0000, baseColor=0xffffff, ...props}) {
     const font = new FontLoader().parse(Playball)
-    const [color, setColor] = useState(baseColor || 0xffffff)
+    const { setPan, whoosh, click } = usePan() 
     const {controls} = useThree()
-    const { setPan } = usePan() 
+    const [color, setColor] = useState(baseColor || 0xffffff)
     const [hovered, setHovered] = useState(false)
 
     useCursor(hovered, 'pointer', 'default')
@@ -44,9 +44,15 @@ export default function Text({text, size, depth, position, rotation, moveTo, loo
 
                 if (setControls) controls.enabled = setControls;
 
+                click.play();
+                
                 clearTimeouts();
                 setPan(false);
+                setHovered(false);
                 
+                whoosh.play();
+
+
                 controls?.setLookAt(...moveTo, ...lookAt, true).then(() => controls.enabled = setControls);
             }}
           >
