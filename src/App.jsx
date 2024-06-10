@@ -17,6 +17,9 @@ import Camera from './components/Camera'
 const App = () => {
   const arcadeRef = useRef();
   const arcadeRef2 = useRef();
+  const {fire} = usePan()
+
+  fire.play();
 
    return (
     <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
