@@ -56,9 +56,11 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
 
                     whoosh.play()
 
+                    controls._removeAllEventListeners();
+
                     if (x && y && z) {
                         controls.enabled = true
-                        controls.setLookAt(-200, 175, 200, 0, 0, 0, true)
+                        controls.setLookAt(-200, 175, 200, 0, 0, 0, true).then(() => controls._addAllEventListeners(controls._domElement));
                     }
                     else controls.setLookAt(...moveTo, ...lookAt, true).then(() => {
                         // check the updated camera controls - if the target is not 0,0,0 then disable the controls
@@ -67,6 +69,7 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                         if (controls.target.x != 0 && controls.target.y != 0 && controls.target.z != 0){
                             controls.enabled = false
                         }
+                        controls._addAllEventListeners(controls._domElement);
                     })
                 } : null}
             />

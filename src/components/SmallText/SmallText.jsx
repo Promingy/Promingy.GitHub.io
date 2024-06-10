@@ -43,8 +43,11 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
                 
                 click.play();
                 whoosh.play();
+
+                controls._removeAllEventListeners();
                 controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {
                     controls.enabled = setControls
+                    controls._addAllEventListeners(controls._domElement);
 
                     const x = Math.floor(Math.abs(controls._target.x))
                     const y = Math.floor(Math.abs(controls._target.y))

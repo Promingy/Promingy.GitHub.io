@@ -10,12 +10,10 @@ import { useCursor } from '@react-three/drei'
 extend({ TextGeometry })
 
 
-
-
 export default function Text({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor=0xff0000, baseColor=0xffffff, ...props}) {
     const font = new FontLoader().parse(Playball)
     const { setPan, whoosh, click } = usePan() 
-    const {controls} = useThree()
+    const { controls } = useThree()
     const [color, setColor] = useState(baseColor || 0xffffff)
     const [hovered, setHovered] = useState(false)
 
@@ -42,8 +40,6 @@ export default function Text({text, size, depth, position, rotation, moveTo, loo
             onClick={(e) => {
                 e.stopPropagation();
 
-                if (setControls) controls.enabled = setControls;
-
                 click.play();
                 
                 clearTimeouts();
@@ -51,9 +47,14 @@ export default function Text({text, size, depth, position, rotation, moveTo, loo
                 setHovered(false);
                 
                 whoosh.play();
+                
 
+                controls._removeAllEventListeners();
 
-                controls?.setLookAt(...moveTo, ...lookAt, true).then(() => controls.enabled = setControls);
+                controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {
+                    controls.enabled = setControls
+                    controls._addAllEventListeners(controls._domElement);
+                });
             }}
           >
             <textGeometry args={[text, { font, size, depth}]} />

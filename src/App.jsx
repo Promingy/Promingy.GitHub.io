@@ -1,8 +1,8 @@
 import { Canvas} from '@react-three/fiber'
 import { Reflector } from '@react-three/drei'
 import { useRef } from 'react'
+import { usePan } from './main'
 import './App.css'
-
 
 import LoadModel from './components/LoadModel'
 import Lights from './components/Lights'
@@ -20,7 +20,7 @@ const App = () => {
   const {fire} = usePan()
 
   fire.pause();
-  fire.play();
+  // fire.play);
 
    return (
     <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
