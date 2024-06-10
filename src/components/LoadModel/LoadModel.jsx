@@ -66,7 +66,10 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                         // check the updated camera controls - if the target is not 0,0,0 then disable the controls
                         // this if statement prevents a user from stopping the camera from zooming into
                         // a model, then stopping the zoom and still having the camera controls disabled
-                        if (controls.target.x != 0 && controls.target.y != 0 && controls.target.z != 0){
+                        const x = Math.floor(Math.abs(controls.target.x));
+                        const y = Math.floor(Math.abs(controls.target.y));
+                        const z = Math.floor(Math.abs(controls.target.z));
+                        if (x != 0 && y != 0 && z != 0){
                             controls.enabled = false
                         }
                         controls._addAllEventListeners(controls._domElement);
