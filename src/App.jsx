@@ -1,7 +1,6 @@
-import { Canvas, useThree, useFrame } from '@react-three/fiber'
-import { CameraControls, Reflector } from '@react-three/drei'
-import {useEffect, useRef } from 'react'
-import { usePan } from './main'
+import { Canvas} from '@react-three/fiber'
+import { Reflector } from '@react-three/drei'
+import { useRef } from 'react'
 import './App.css'
 
 
@@ -13,6 +12,8 @@ import SmallText from './components/SmallText/SmallText'
 import LoadImage from './components/LoadImage'
 import LoadProject from './components/LoadProject'
 import Camera from './components/Camera'
+
+
 const App = () => {
   const tavernRef = useRef();
   const arcadeRef = useRef();
@@ -168,8 +169,8 @@ const App = () => {
         text='Project2'
         position={[-185, 0, 0]}
         rotation={[-1.575, 0, 0]}
-        moveTo={[95, 29, 50]}
-        lookAt={[85, 28, 49.5]}
+        moveTo={[95, 28, 50]}
+        lookAt={[85, 27, 49.5]}
         size={15}
         depth={1}
         setControls={false}
@@ -219,10 +220,43 @@ const App = () => {
       />
       <SmallText
         text='Back'
-        position={[87, 21.5, 5]}
+        position={[86.5, 21, -6]}
         rotation={[0, 1.575, 0]}
         moveTo={[-200, 175, 200]}
         lookAt={[0, 0, 0]}
+        size={.5}
+        depth={0}
+        setControls
+        hoverColor={0xF07F13}
+      />
+      <SmallText
+        text='Back'
+        position={[86.5, 21, 57]}
+        rotation={[0, 1.575, 0]}
+        moveTo={[-200, 175, 200]}
+        lookAt={[0, 0, 0]}
+        size={.5}
+        depth={0}
+        setControls
+        hoverColor={0xF07F13}
+      />
+      <SmallText
+        text='Previous Project'
+        position={[86.5, 21, 7]}
+        rotation={[0, 1.575, 0]}
+        moveTo={[95, 28, 50]}
+        lookAt={[85, 27, 49.5]}
+        size={.5}
+        depth={0}
+        setControls
+        hoverColor={0xF07F13}
+      />
+      <SmallText
+        text='Next Project'
+        position={[86.5, 21, 46]}
+        rotation={[0, 1.575, 0]}
+        moveTo={[95, 28, -0.5]}
+        lookAt={[85.2, 27, -0.75]}
         size={.5}
         depth={0}
         setControls
@@ -250,7 +284,7 @@ const App = () => {
       <LoadProject
         url={'https://project2.corbinainsworth.com'}
         rotation={[-1.418, 1.368, 1.414]}
-        position={[85.147, 28, 50]}
+        position={[85.147, 28, 49.5]}
         scale={[.41, .7, .1]}
         occludeRef={[arcadeRef2]}
       />
