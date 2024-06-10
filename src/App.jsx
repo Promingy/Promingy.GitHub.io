@@ -19,6 +19,7 @@ const App = () => {
   const arcadeRef2 = useRef();
   const {fire} = usePan()
 
+
   fire.pause();
   // fire.play);
 

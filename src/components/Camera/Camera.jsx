@@ -53,7 +53,7 @@ export default function Camera() {
         const rotationSpeed = 0.001
     
         cameraRef.current.rotate(rotationSpeed, 0)
-    }
+        }
     }, [cameraRef])
 
     

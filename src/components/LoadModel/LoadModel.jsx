@@ -10,7 +10,7 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
     const [hovered, setHovered] = useState(false);
     const { controls } = useThree()
     const modelRef = refToUse || useRef();
-    const { whoosh } = usePan();
+    const { setPan, whoosh } = usePan();
 
     useEffect(() => {
         if (modelRef.current) {
@@ -53,14 +53,17 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                     const y = cTarget.y != 0;
                     const z = cTarget.z != 0;
 
-
-                    whoosh.play()
+                    whoosh.play();
 
                     controls._removeAllEventListeners();
+                    setPan(false);
 
                     if (x && y && z) {
-                        controls.enabled = true
-                        controls.setLookAt(-200, 175, 200, 0, 0, 0, true).then(() => controls._addAllEventListeners(controls._domElement));
+                        controls.enabled = true;
+                        controls.setLookAt(-200, 175, 200, 0, 0, 0, true).then(() => {
+                            controls.enabled = true;
+                            controls._addAllEventListeners(controls._domElement);
+                        });
                     }
                     else controls.setLookAt(...moveTo, ...lookAt, true).then(() => {
                         // check the updated camera controls - if the target is not 0,0,0 then disable the controls
