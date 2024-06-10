@@ -93,7 +93,7 @@ const App = () => {
         position={[80, -8, 0]}
         rotation={[0, 1.575, 0]}
         refToUse={arcadeRef}
-        canHover
+        // canHover
       />
       <LoadModel
         file={'arcade_machine2.glb'}
@@ -101,7 +101,7 @@ const App = () => {
         position={[80, -8, 50]}
         rotation={[0, 1.575, 0]}
         refToUse={arcadeRef2}
-        canHover
+        // canHover
       />
 
       <LoadImage

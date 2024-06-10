@@ -9,16 +9,12 @@ import { useCursor } from '@react-three/drei'
 
 extend({ TextGeometry })
 
-
-
-
 export default function SmallText({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor=0xff0000, baseColor=0xffffff}) {
     const font = new FontLoader().parse(Playball)
     const [color, setColor] = useState(baseColor || 0xffffff)
     const {controls} = useThree()
-    const { setPan } = usePan() 
+    const { setPan, click, whoosh } = usePan() 
     const [hovered, setHovered] = useState(false)
-    const { whoosh } = usePan()
 
     useCursor(hovered, 'pointer', 'default')
 
@@ -45,7 +41,8 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
 
                 clearTimeouts()
                 
-                whoosh.play()
+                click.play();
+                whoosh.play();
                 controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {
                     controls.enabled = setControls
 
