@@ -15,7 +15,6 @@ import Camera from './components/Camera'
 
 
 const App = () => {
-  const tavernRef = useRef();
   const arcadeRef = useRef();
   const arcadeRef2 = useRef();
 
@@ -56,7 +55,6 @@ const App = () => {
       <LoadModel 
         file={'updated_tavern.glb'} 
         scale={[25, 25, 25]} 
-        refToUse={tavernRef}
         />
       <LoadModel 
         file={'bounty_board_w_resume.glb'} 
@@ -98,7 +96,7 @@ const App = () => {
         canHover
       />
       <LoadModel
-        file={'arcade_machine.glb'}
+        file={'arcade_machine2.glb'}
         scale={[25, 25, 25]}
         position={[80, -8, 50]}
         rotation={[0, 1.575, 0]}
@@ -288,8 +286,6 @@ const App = () => {
         scale={[.41, .7, .1]}
         occludeRef={[arcadeRef2]}
       />
-
-
 
     </Canvas>
   )

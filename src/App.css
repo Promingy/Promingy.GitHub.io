@@ -5,3 +5,7 @@ html, body, canvas{
   padding: 0;
   overflow: hidden;
 }
+
+body {
+  pointer-events: none;
+}

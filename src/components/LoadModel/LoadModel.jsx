@@ -1,19 +1,19 @@
-import { useLoader, useThree } from '@react-three/fiber'
+import { useThree } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import * as Three from 'three'
-import { useGLTF } from '@react-three/drei';
+import { Clone, useCursor, useGLTF } from '@react-three/drei';
 
-export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo, refToUse}) {
+export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo, refToUse, isClone}) {
     const url = 'https://glb-bucket-portfolio.s3-accelerate.amazonaws.com/' + file
     // const gltf = useLoader(GLTFLoader, url);
     const { scene } = useGLTF(url);
-    const [hovered, setHovered] = useState(false)
+    const [hovered, setHovered] = useState(false);
     const { controls } = useThree()
     const modelRef = refToUse || useRef();
 
     useEffect(() => {
         if (modelRef.current) {
+            console.log(modelRef.current)
             modelRef.current.traverse(child => {
                 if (child.isMesh) {
                     child.material.side = Three.FrontSide;
@@ -33,17 +33,16 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
         }
     }, [scene])
 
-    useEffect(() => {
-        document.body.style.cursor = hovered ? 'pointer' : 'default'
-    },[hovered])
+
+    useCursor(hovered, 'pointer', 'default');
 
     return (
             <primitive 
-                object={scene.clone()}
+                object={scene} 
                 ref={modelRef}
-                position={position || [0, 0, 0]}
-                rotation={rotation || [0, 0, 0]}
-                scale={scale || [1, 1, 1]}
+                position={position}
+                rotation={rotation}
+                scale={scale}
                 castShadow
                 receiveShadow
                 onPointerOver={canHover ? () => setHovered(true) : null}

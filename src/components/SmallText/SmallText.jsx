@@ -5,6 +5,7 @@ import Playball from '../../Playball_Regular.json'
 import { useState } from 'react'
 import { clearTimeouts } from '../Camera/Camera'
 import { usePan } from '../../main'
+import { useCursor } from '@react-three/drei'
 
 extend({ TextGeometry })
 
@@ -15,27 +16,26 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
     const font = new FontLoader().parse(Playball)
     const [color, setColor] = useState(baseColor || 0xffffff)
     const {controls} = useThree()
-    const { pan, setPan } = usePan() 
+    const { setPan } = usePan() 
+    const [hovered, setHovered] = useState(false)
 
-
+    useCursor(hovered, 'pointer', 'default')
 
     return (
         <mesh
-            // castShadow 
-            // receiveShadow 
             position={position}
             rotation={rotation}
             onPointerOver={(e) => {
                 e.stopPropagation()
 
                 setColor(hoverColor)
-                document.body.style.cursor = 'pointer'
+                setHovered(true)
             }}
             onPointerOut={(e) => {
                 e.stopPropagation()
 
                 setColor(0xffffff)
-                document.body.style.cursor = 'default'
+                setHovered(false)
             }}
             onClick={(e) => {
                 e.stopPropagation()
