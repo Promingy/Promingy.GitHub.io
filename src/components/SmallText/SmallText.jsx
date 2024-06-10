@@ -29,7 +29,6 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
                 e.stopPropagation()
 
                 setColor(hoverColor)
-                document.style.body.cursor = 'default'
                 document.body.style.cursor = 'pointer'
             }}
             onPointerOut={(e) => {
@@ -47,7 +46,15 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
                 
                 controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {
                     controls.enabled = setControls
-                    setPan(!pan)
+
+                    const x = Math.floor(Math.abs(controls._target.x))
+                    const y = Math.floor(Math.abs(controls._target.y))
+                    const z = Math.floor(Math.abs(controls._target.z))
+                    
+                    // check if the camera is looking at 0, 0, 0
+                    console.log(controls._target, Math.floor(controls._target.x), Math.floor(controls._target.y), Math.floor(controls._target.z))
+                    if (x === 0 && y === 0 && z === 0)
+                        setPan(true)
                 })
             }}
           >

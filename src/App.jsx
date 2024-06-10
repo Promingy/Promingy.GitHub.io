@@ -71,7 +71,7 @@ export function CameraRotation () {
 
   
    return <CameraControls 
-      maxDistance={700}
+      maxDistance={500}
       minDistance={220}
       maxPolarAngle={Math.PI / 2}
       truckSpeed={0}
