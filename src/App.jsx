@@ -18,11 +18,7 @@ import InitialLoad from './components/InitialLoad/InitialLoad'
 const App = () => {
   const arcadeRef = useRef();
   const arcadeRef2 = useRef();
-  const {fire} = usePan()
 
-
-  fire.pause();
-  // fire.play());
 
    return (
     <>
@@ -80,7 +76,7 @@ const App = () => {
             rotation={[0, 2.5, 0]}
             />
           <LoadModel 
-            file={'updated_pile_of_books.glb'} 
+            file={'compressed_pile_of_books.glb'} 
             scale={[.15, .15, .15]} 
             position={[48, 51.75, -8]} 
             rotation={[-1.6, -1.5, 0]} 
