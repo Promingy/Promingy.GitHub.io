@@ -12,8 +12,7 @@ export default function ArcadeMachine(props) {
     <>
       {displayProject == props.name ? 
         <LoadProject
-          // url={props.project}
-          url={'https://project1.corbinainsworth.com'}
+          url={props.project}
           rotation={[-1.418, 1.368, 1.414]}
           position={[85.147, 28, props.position[2]]}
           scale={[.41, .7, .1]}

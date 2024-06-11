@@ -9,7 +9,7 @@ import { Html, useCursor } from '@react-three/drei'
 
 extend({ TextGeometry })
 
-export default function SmallText({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor="#ff0000", baseColor='#ffffff'}) {
+export default function SmallText({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor="#ff0000", baseColor='#ffffff', switchProject}) {
     const font = new FontLoader().parse(Playball)
     const [color, setColor] = useState(baseColor || '#ffffff')
     const {controls} = useThree()
@@ -91,7 +91,7 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
                     whoosh.play();
 
                     setPan(false);
-                    setDisplayProject('none');
+                    setDisplayProject(switchProject || 'none');
 
                     controls._removeAllEventListeners();
                     controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {

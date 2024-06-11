@@ -226,6 +226,7 @@ const App = () => {
             depth={0}
             setControls
             hoverColor={'#F07F13'}
+            switchProject={'project2'}
           />
           <SmallText
             text='Back'
@@ -251,7 +252,7 @@ const App = () => {
             depth={0}
             setControls
             hoverColor={'#F07F13'}
-            
+            switchProject={'project1'}
           />
           <SmallText
             text='Back'
