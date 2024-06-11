@@ -4,7 +4,7 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import * as Three from 'three'
 
 export default function  Flame({file, position, rotation, scale}) {
-    const url = import.meta.env.VITE_AWS_URL + file
+    const url = 'models/' + file
     const { scene, animations } = useGLTF(url + '.glb');
     const clone = useMemo(() => scene.clone(true), [scene])
     const flameRef = useRef();

@@ -16,8 +16,6 @@ import InitialLoad from './components/InitialLoad/InitialLoad'
 
 
 const App = () => {
-  const arcadeRef = useRef();
-  const arcadeRef2 = useRef();
 
 
    return (
@@ -96,7 +94,6 @@ const App = () => {
             scale={[25, 25, 25]}
             position={[80, -8, 0]}
             rotation={[0, 1.575, 0]}
-            refToUse={arcadeRef}
             // canHover
           />
           {/* <LoadModel
@@ -294,7 +291,6 @@ const App = () => {
             rotation={[-1.418, 1.368, 1.414]}
             position={[85.147, 28, 0]}
             scale={[.41, .7, .1]}
-            occludeRef={[arcadeRef]}
           />
           {/* <LoadProject
             url={'https://project2.corbinainsworth.com'}

@@ -4,7 +4,7 @@ import * as Three from "three";
 
 
 export default function LoadImage({ file, position, scale, rotation }) {
-  const url = import.meta.env.VITE_AWS_URL + file
+  const url = 'images/' + file
   const texture = useLoader(Three.TextureLoader, url)
   const ref = useRef();
 
