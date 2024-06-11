@@ -10,9 +10,11 @@ import Flame from './components/Flame/Flame'
 import Text from './components/Text/Text'
 import SmallText from './components/SmallText/SmallText'
 import LoadImage from './components/LoadImage'
-import LoadProject from './components/LoadProject'
+// import LoadProject from './components/LoadProject'
 import Camera from './components/Camera'
 import InitialLoad from './components/InitialLoad/InitialLoad'
+
+import ArcadeMachine from './components/AracdeMachine'
 
 
 const App = () => {
@@ -89,13 +91,16 @@ const App = () => {
             rotation={[0, -2.5, 0]}
           />
 
-          <LoadModel
+          <ArcadeMachine scale={[25, 25, 25]} position={[80, -8, 0]} rotation={[0, Math.PI / 2, 0]} project={'https://project1.corbinainsworth.com'}/>
+          <ArcadeMachine scale={[25, 25, 25]} position={[80, -8, 50]} rotation={[0, Math.PI / 2, 0]} project={'https://project2.corbinainsworth.com'}/>
+
+          {/* <LoadModel
             file={'arcade_machine.glb'}
             scale={[25, 25, 25]}
             position={[80, -8, 0]}
             rotation={[0, 1.575, 0]}
             // canHover
-          />
+          /> */}
           {/* <LoadModel
             file={'arcade_machine2.glb'}
             scale={[25, 25, 25]}
@@ -286,12 +291,12 @@ const App = () => {
           <Flame file={'animated_torch_flame1'} position={[53, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
           <Flame file={'animated_torch_flame1'} position={[-90, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
 
-          <LoadProject
+          {/* <LoadProject
             url={'https://project1.corbinainsworth.com'}
             rotation={[-1.418, 1.368, 1.414]}
             position={[85.147, 28, 0]}
             scale={[.41, .7, .1]}
-          />
+          /> */}
           {/* <LoadProject
             url={'https://project2.corbinainsworth.com'}
             rotation={[-1.418, 1.368, 1.414]}

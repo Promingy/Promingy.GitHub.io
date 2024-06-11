@@ -29,6 +29,5 @@ export default function  Flame({file, position, rotation, scale}) {
         castShadow
         receiveShadow
         />
-
     )
 }

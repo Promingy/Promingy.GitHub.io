@@ -48,7 +48,6 @@ export default function Text({text, size, depth, position, rotation, moveTo, loo
                 
                 whoosh.play();
                 
-
                 controls._removeAllEventListeners();
 
                 controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {
