@@ -1,7 +1,6 @@
 import { Canvas} from '@react-three/fiber'
-import { Loader, Reflector } from '@react-three/drei'
-import { Suspense, useRef } from 'react'
-import { usePan } from './main'
+import { MeshReflectorMaterial } from '@react-three/drei'
+import { Suspense } from 'react'
 import './App.css'
 
 import LoadModel from './components/LoadModel'
@@ -17,10 +16,7 @@ import InitialLoad from './components/InitialLoad/InitialLoad'
 import ArcadeMachine from './components/AracdeMachine'
 import Tavern, { TavernInstances } from './components/Tavern'
 
-
 const App = () => {
-
-
    return (
     <>
       <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
@@ -28,17 +24,20 @@ const App = () => {
           <fog attach="fog" args={[0x000000, 100, 1500]} />
           <Camera />
 
-          <Reflector
-            mixStrength={.1} // Strength of the reflections
-            resolution={1024} // Off-buffer resolution, lower=faster, higher=better quality
-            args={[1000, 1000]} // PlaneBufferGeometry arguments
-            rotation={[-Math.PI * 0.5, 0, 0]}
-            mirror={.97} // Mirror environment, 0 = texture colors, 1 = pick up env colors
-            minDepthThreshold={1}
-            maxDepthThreshold={.5}
-            depthScale={50}
-            position={[0, -7, 0]}
-            />
+          <mesh rotation={[-Math.PI * 0.5, 0, 0]} position={[0, -7, 0]}>
+              <planeGeometry args={[750, 750]} />
+              <MeshReflectorMaterial
+                mixStrength={.1} // Strength of the reflections
+                resolution={1024} // Off-buffer resolution, lower=faster, higher=better quality
+                args={[1000, 1000]} // PlaneBufferGeometry arguments
+                rotation={[-Math.PI * 0.5, 0, 0]}
+                mirror={.97} // Mirror environment, 0 = texture colors, 1 = pick up env colors
+                minDepthThreshold={1}
+                maxDepthThreshold={.5}
+                depthScale={50}
+                position={[0, -7, 0]}
+              />
+          </mesh>
 
           <group>
             <Lights position={[44, 50, 80]}  intensity={2000} />
