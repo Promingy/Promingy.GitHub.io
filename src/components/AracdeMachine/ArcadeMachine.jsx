@@ -1,12 +1,14 @@
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
 import LoadProject from '../LoadProject'
+import { usePan } from '../../main'
 
 export default function ArcadeMachine(props) {
   const { nodes, materials } = useGLTF('models/arcade_machine.glb')
+  const { displayProject } = usePan()
   return (
     <>
-     {props.project && <LoadProject
+     {displayProject == props.name && <LoadProject
       url={props.project}
       rotation={[-1.418, 1.368, 1.414]}
       position={[85.147, 28, props.position[2]]}

@@ -10,6 +10,11 @@ export const usePan = () => {
 
 export const PanProvider = ({children}) => {
   const [pan, setPan] = useState(true)
+  const [displayProject, setDisplayProject] = useState('none')
+
+
+  const project1URL = 'https://project1.corbinainsworth.com'
+  const project2URL = 'https://project2.corbinainsworth.com'
   const whooshURL = 'sounds/whoosh.mp3'
   const clickURL = 'sounds/click.mp3'
 
@@ -21,6 +26,10 @@ export const PanProvider = ({children}) => {
     setPan,
     whoosh,
     click,
+    displayProject,
+    setDisplayProject,
+    project1URL,
+    project2URL
   }
 
   return (

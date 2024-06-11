@@ -91,8 +91,8 @@ const App = () => {
             rotation={[0, -2.5, 0]}
           />
 
-          <ArcadeMachine scale={[25, 25, 25]} position={[80, -8, 0]} rotation={[0, Math.PI / 2, 0]} project={'https://project1.corbinainsworth.com'}/>
-          <ArcadeMachine scale={[25, 25, 25]} position={[80, -8, 50]} rotation={[0, Math.PI / 2, 0]} project={'https://project2.corbinainsworth.com'}/>
+          <ArcadeMachine scale={[25, 25, 25]} position={[80, -8, 0]} rotation={[0, Math.PI / 2, 0]} project={'https://project1.corbinainsworth.com'} name='project1'/>
+          <ArcadeMachine scale={[25, 25, 25]} position={[80, -8, 50]} rotation={[0, Math.PI / 2, 0]} project={'https://project2.corbinainsworth.com'} name='project2'/>
 
           {/* <LoadModel
             file={'arcade_machine.glb'}
@@ -168,9 +168,10 @@ const App = () => {
             size={15}
             depth={1}
             setControls={false}
+            displayProject={'project1'}
             sounds
           />
-          {/* <Text
+          <Text
             text='Project2'
             position={[-185, 0, 0]}
             rotation={[-1.575, 0, 0]}
@@ -178,8 +179,9 @@ const App = () => {
             lookAt={[85, 27, 49.5]}
             size={15}
             depth={1}
+            displayProject={'project2'}
             setControls={false}
-          /> */}
+          />
 
 
 
