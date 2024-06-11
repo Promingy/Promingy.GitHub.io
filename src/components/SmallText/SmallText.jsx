@@ -1,40 +1,40 @@
 import { FontLoader } from 'three/examples/jsm/Addons.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
-import { extend, useThree } from '@react-three/fiber'
+import { extend, useFrame, useThree } from '@react-three/fiber'
 import Playball from '../../Playball_Regular.json'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { clearTimeouts } from '../Camera/Camera'
 import { usePan } from '../../main'
-import { Html, useCursor } from '@react-three/drei'
-import './SmallText.css'
+import { Html, TransformControls, useCursor } from '@react-three/drei'
 
 extend({ TextGeometry })
 
-export default function SmallText({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor=0xff0000, baseColor=0xffffff}) {
+export default function SmallText({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor="#ff0000", baseColor='#ffffff'}) {
     const font = new FontLoader().parse(Playball)
-    const [color, setColor] = useState(baseColor || 0xffffff)
+    const [color, setColor] = useState(baseColor || '#ffffff')
     const {controls} = useThree()
     const { setPan, click, whoosh } = usePan() 
     const [hovered, setHovered] = useState(false)
 
     useCursor(hovered, 'pointer', 'default')
 
+
     return (
         <mesh
             position={position}
             rotation={rotation}
-            onPointerOver={(e) => {
-                e.stopPropagation()
+            // onPointerOver={(e) => {
+            //     e.stopPropagation()
 
-                setColor(hoverColor)
-                setHovered(true)
-            }}
-            onPointerOut={(e) => {
-                e.stopPropagation()
+            //     setColor(hoverColor)
+            //     setHovered(true)
+            // }}
+            // onPointerOut={(e) => {
+            //     e.stopPropagation()
 
-                setColor(0xffffff)
-                setHovered(false)
-            }}
+            //     setColor(0xffffff)
+            //     setHovered(false)
+            // }}
             // onClick={(e) => {
             //     e.stopPropagation()
 
@@ -65,31 +65,47 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
             {/* <textGeometry args={[text, { font, size, depth}]} />
             <meshBasicMaterial color={color} /> */}
             <Html wrapperClass={"test"} transform occlude>
-                <p onClick={(e) => {
-                e.stopPropagation()
-
-                if (setControls) controls.enabled = setControls
+                <p 
+                style={{color}}
+                onPointerOver={(e) => {
+                    e.stopPropagation()
+    
+                    setColor(hoverColor)
+                    setHovered(true)
+                }}
+                onPointerOut={(e) => {
+                    e.stopPropagation()
+    
+                    setColor('#ffffff')
+                    setHovered(false)
+                }}
                 
-                clearTimeouts();
-                
-                click.play();
-                whoosh.play();
+                onClick={(e) => {
+                    e.stopPropagation()
 
-                setPan(false);
-
-                controls._removeAllEventListeners();
-                controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {
-                    controls.enabled = setControls
-                    controls._addAllEventListeners(controls._domElement);
-
-                    const x = Math.floor(Math.abs(controls._target.x))
-                    const y = Math.floor(Math.abs(controls._target.y))
-                    const z = Math.floor(Math.abs(controls._target.z))
+                    if (setControls) controls.enabled = setControls
                     
-                    // check if the camera is looking at 0, 0, 0
-                    if (x === 0 && y === 0 && z === 0)
-                        setPan(true)
-                })
+                    clearTimeouts();
+                    
+                    click.play();
+                    whoosh.play();
+
+                    setPan(false);
+
+                    controls._removeAllEventListeners();
+                    controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {
+                        controls.enabled = setControls
+                        controls._addAllEventListeners(controls._domElement);
+
+                        const x = Math.floor(Math.abs(controls._target.x))
+                        const y = Math.floor(Math.abs(controls._target.y))
+                        const z = Math.floor(Math.abs(controls._target.z))
+                        
+                        // check if the camera is looking at 0, 0, 0
+                        if (x === 0 && y === 0 && z === 0)
+                            setPan(true)
+                        }
+                    )
             }}>{text}</p>
             </Html>
         </mesh>

@@ -194,7 +194,7 @@ const App = () => {
             size={.25}
             depth={0}
             setControls
-            hoverColor={0x00ff00}
+            hoverColor={'#ff0000'}
           />
           <SmallText
             text='Back'
@@ -204,7 +204,7 @@ const App = () => {
             size={.25}
             depth={0}
             setControls
-            hoverColor={0x00ff00}
+            hoverColor={'#ff0000'}
           />
 
 
@@ -217,7 +217,7 @@ const App = () => {
             size={.25}
             depth={0}
             setControls
-            hoverColor={0x00ff00}
+            hoverColor={'#ff0000'}
             />
           <SmallText
             text='Back'
@@ -227,32 +227,32 @@ const App = () => {
             size={.25}
             depth={0}
             setControls
-            hoverColor={0x00ff00}
+            hoverColor={'#ff0000'}
           />
 
 
           <SmallText
             text='Previous Project'
-            position={[86.5, 21.5, 5]}
+            position={[86.5, 21.75, 5]}
             // position={[86.5, 21, 7]}
-            rotation={[0, 1.575, 0]}
+            rotation={[-1.509, 1.425, 1.488]}
             moveTo={[95, 28, 50]}
             lookAt={[85, 27, 49.5]}
             size={.5}
             depth={0}
             setControls
-            hoverColor={0xF07F13}
+            hoverColor={'#F07F13'}
           />
           <SmallText
             text='Back'
-            position={[86.5, 21.25, -6]}
-            rotation={[0, 1.575, 0]}
+            position={[86.5, 21.5, -6]}
+            rotation={[-1.426, 1.400, 1.423]}
             moveTo={[-200, 175, 200]}
             lookAt={[0, 0, 0]}
             size={.5}
             depth={0}
             setControls
-            hoverColor={0xF07F13}
+            hoverColor={'#F07F13'}
           />
 
 
@@ -260,25 +260,26 @@ const App = () => {
             text='Next Project'
             position={[86.5, 21.5, 44]}
             // position={[86.5, 21, 46]}
-            rotation={[0, 1.575, 0]}
+            rotation={[-1.456, 1.388, 1.453]}
             moveTo={[95, 28, -0.5]}
             lookAt={[85.2, 27, -0.75]}
             size={.5}
             depth={0}
             setControls
-            hoverColor={0xF07F13}
+            hoverColor={'#F07F13'}
+            
           />
           <SmallText
             text='Back'
             position={[86.5, 21.75, 55.5]}
             // position={[86.5, 21, 57]}
-            rotation={[0, 1.575, 0]}
+            rotation={[-1.518, 1.426, 1.497]}
             moveTo={[-200, 175, 200]}
             lookAt={[0, 0, 0]}
             size={.5}
             depth={0}
             setControls
-            hoverColor={0xF07F13}
+            hoverColor={'#F07F13'}
           />
 
           <Flame file={'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>

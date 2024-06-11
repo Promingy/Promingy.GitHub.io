@@ -1,8 +1,0 @@
-.test p {
-    color: white;
-}
-
-.test p:hover {
-    color: red;
-    cursor: pointer;
-}
