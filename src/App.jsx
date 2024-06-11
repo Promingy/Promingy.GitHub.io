@@ -94,22 +94,6 @@ const App = () => {
           <ArcadeMachine scale={[25, 25, 25]} position={[80, -8, 0]} rotation={[0, Math.PI / 2, 0]} project={'https://project1.corbinainsworth.com'} name='project1'/>
           <ArcadeMachine scale={[25, 25, 25]} position={[80, -8, 50]} rotation={[0, Math.PI / 2, 0]} project={'https://project2.corbinainsworth.com'} name='project2'/>
 
-          {/* <LoadModel
-            file={'arcade_machine.glb'}
-            scale={[25, 25, 25]}
-            position={[80, -8, 0]}
-            rotation={[0, 1.575, 0]}
-            // canHover
-          /> */}
-          {/* <LoadModel
-            file={'arcade_machine2.glb'}
-            scale={[25, 25, 25]}
-            position={[80, -8, 50]}
-            rotation={[0, 1.575, 0]}
-            refToUse={arcadeRef2}
-            // canHover
-          /> */}
-
           <LoadImage
             file={'ainsworth_corbin_resume.png'}
             position={[50.4, 15.75, 140.9]}
@@ -256,7 +240,7 @@ const App = () => {
           />
 
 
-          {/* <SmallText
+          <SmallText
             text='Next Project'
             position={[86.5, 21.5, 44]}
             // position={[86.5, 21, 46]}
@@ -280,7 +264,7 @@ const App = () => {
             depth={0}
             setControls
             hoverColor={'#F07F13'}
-          /> */}
+          />
 
           <Flame file={'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
 

@@ -26,7 +26,7 @@ export default function LoadImage({ file, position, scale, rotation }) {
   return (
     <mesh position={position} rotation={rotation} scale={scale} ref={ref}>
       <planeGeometry attach="geometry" args={[100, 100]} />
-      <meshStandardMaterial attach="material" map={texture} />
+      <meshBasicMaterial attach="material" map={texture} />
     </mesh>
   )
 }

@@ -2,7 +2,6 @@ import { Html } from "@react-three/drei";
 import { TransformControls } from "@react-three/drei";
 import './LoadProject.css';
 import { useEffect, useRef } from "react";
-import * as Three from 'three';
 import { useFrame } from "@react-three/fiber";
 
 export default function LoadProject({ url, position, rotation, scale }) {
