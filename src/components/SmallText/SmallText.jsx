@@ -1,11 +1,11 @@
 import { FontLoader } from 'three/examples/jsm/Addons.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
-import { extend, useFrame, useThree } from '@react-three/fiber'
+import { extend, useThree } from '@react-three/fiber'
 import Playball from '../../Playball_Regular.json'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { clearTimeouts } from '../Camera/Camera'
 import { usePan } from '../../main'
-import { Html, TransformControls, useCursor } from '@react-three/drei'
+import { Html, useCursor } from '@react-three/drei'
 
 extend({ TextGeometry })
 

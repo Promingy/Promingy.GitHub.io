@@ -48,10 +48,14 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                 onPointerOver={canHover ? () => setHovered(true) : null}
                 onPointerOut={canHover ? () => setHovered(false) : null}
                 onClick={canHover ? () => {
-                    const cTarget = controls._target;
-                    const x = cTarget.x != 0;
-                    const y = cTarget.y != 0;
-                    const z = cTarget.z != 0;
+                    const cTarget = controls._targetEnd;
+                    // const x = cTarget.x != 0;
+                    // const y = cTarget.y != 0;
+                    // const z = cTarget.z != 0;
+                    
+                    const x = cTarget.x;
+                    const y = cTarget.y;
+                    const z = cTarget.z;
 
                     setPan(false);
                     
@@ -59,7 +63,7 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                     
                     controls._removeAllEventListeners();
 
-                    if (x && y && z) {
+                    if (x == lookAt[0] && y == lookAt[1] && z == lookAt[2]) {
                         controls.enabled = true;
                         controls.setLookAt(-200, 175, 200, 0, 0, 0, true).then(() => {
                             controls.enabled = true;
@@ -71,9 +75,9 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                         // check the updated camera controls - if the target is not 0,0,0 then disable the controls
                         // this if statement prevents a user from stopping the camera from zooming into
                         // a model, then stopping the zoom and still having the camera controls disabled
-                        const x = Math.floor(Math.abs(controls.target.x));
-                        const y = Math.floor(Math.abs(controls.target.y));
-                        const z = Math.floor(Math.abs(controls.target.z));
+                        const x = controls._targetEnd.x;
+                        const y = controls._targetEnd.y;
+                        const z = controls._targetEnd.z;
                         if (x != 0 && y != 0 && z != 0){
                             controls.enabled = false
                         }
