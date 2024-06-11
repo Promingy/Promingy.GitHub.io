@@ -23,6 +23,7 @@ export default function ArcadeMachine(props) {
           rotation={[-1.516, 1.383, 1.514]}
           position={[85.25, 28, props.position[2]]}
           scale={[.13, .125, .1]}
+          basic
         />
       }
       <group {...props} dispose={null}>

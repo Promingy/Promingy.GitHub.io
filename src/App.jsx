@@ -15,6 +15,7 @@ import Camera from './components/Camera'
 import InitialLoad from './components/InitialLoad/InitialLoad'
 
 import ArcadeMachine from './components/AracdeMachine'
+import Tavern, { TavernInstances } from './components/Tavern'
 
 
 const App = () => {
@@ -56,10 +57,14 @@ const App = () => {
             <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
           </group>
 
-          <LoadModel 
+          {/* <LoadModel 
             file={'tavern.glb'} 
             scale={[25, 25, 25]} 
-            />
+            /> */}
+          <TavernInstances>
+            <Tavern scale={[25, 25, 25]} />
+          </TavernInstances>
+          
           <LoadModel 
             file={'medieval_notice_board.glb'} 
             scale={[10, 10, 10]} 
