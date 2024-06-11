@@ -5,7 +5,7 @@ import { useCursor, useGLTF } from '@react-three/drei';
 import { usePan } from '../../main.jsx';
 
 export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo, refToUse}) {
-    const url = import.meta.env.VITE_AWS_URL + file
+    const url = '/src/models/' + file
     const { scene } = useGLTF(url);
     const [hovered, setHovered] = useState(false);
     const { controls } = useThree()

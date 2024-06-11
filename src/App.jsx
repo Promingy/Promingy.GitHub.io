@@ -61,11 +61,11 @@ const App = () => {
           </group>
 
           <LoadModel 
-            file={'updated_tavern.glb'} 
+            file={'tavern.glb'} 
             scale={[25, 25, 25]} 
             />
           <LoadModel 
-            file={'bounty_board_w_resume.glb'} 
+            file={'medieval_notice_board.glb'} 
             scale={[10, 10, 10]} 
             rotation={[0, -1.575, 0]} 
             position={[52, -5, 150]} 
@@ -103,14 +103,14 @@ const App = () => {
             refToUse={arcadeRef}
             // canHover
           />
-          <LoadModel
+          {/* <LoadModel
             file={'arcade_machine2.glb'}
             scale={[25, 25, 25]}
             position={[80, -8, 50]}
             rotation={[0, 1.575, 0]}
             refToUse={arcadeRef2}
             // canHover
-          />
+          /> */}
 
           <LoadImage
             file={'ainsworth_corbin_resume.png'}
@@ -172,7 +172,7 @@ const App = () => {
             setControls={false}
             sounds
           />
-          <Text
+          {/* <Text
             text='Project2'
             position={[-185, 0, 0]}
             rotation={[-1.575, 0, 0]}
@@ -181,7 +181,7 @@ const App = () => {
             size={15}
             depth={1}
             setControls={false}
-          />
+          /> */}
 
 
 
@@ -256,7 +256,7 @@ const App = () => {
           />
 
 
-          <SmallText
+          {/* <SmallText
             text='Next Project'
             position={[86.5, 21.5, 44]}
             // position={[86.5, 21, 46]}
@@ -280,7 +280,7 @@ const App = () => {
             depth={0}
             setControls
             hoverColor={'#F07F13'}
-          />
+          /> */}
 
           <Flame file={'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
 
@@ -300,13 +300,13 @@ const App = () => {
             scale={[.41, .7, .1]}
             occludeRef={[arcadeRef]}
           />
-          <LoadProject
+          {/* <LoadProject
             url={'https://project2.corbinainsworth.com'}
             rotation={[-1.418, 1.368, 1.414]}
             position={[85.147, 28, 49.5]}
             scale={[.41, .7, .1]}
             occludeRef={[arcadeRef2]}
-          />
+          /> */}
         </Suspense>
       </Canvas>    
     </>
