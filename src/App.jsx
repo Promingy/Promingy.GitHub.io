@@ -13,6 +13,8 @@ import LoadImage from './components/LoadImage'
 import Camera from './components/Camera'
 import InitialLoad from './components/InitialLoad/InitialLoad'
 
+
+import Sconce from './components/Sconce'
 import ArcadeMachine from './components/AracdeMachine'
 import Tavern, { TavernInstances } from './components/Tavern'
 import { usePan } from './main'
@@ -47,7 +49,7 @@ const App = () => {
             <Lights position={[-25, 50, -60]}  intensity={2000} />
             <Lights position={[-33.3, 10, -65]} rotateX={3.14} color={'orange'} intensity={2500} decay={1.8} />
 
-            <Lights position={[65, 63, 120]}  intensity={2000} decay={1.5}/>
+            <Lights position={[70, 60, 120]}  intensity={2000} decay={1.5}/>
             <Lights position={[65, 63, -70]}  intensity={2000} decay={1.5}/>
             <Lights position={[53, 63, -83]}  intensity={2000} decay={1.5}/>
             <Lights position={[-90, 63, -83]} intensity={2000} decay={1.5}/>
@@ -58,10 +60,8 @@ const App = () => {
             <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
           </group>
 
-          {/* <LoadModel 
-            file={'tavern.glb'} 
-            scale={[25, 25, 25]} 
-            /> */}
+          <Sconce position={[75, 60, 105]} rotation={[0, Math.PI, 0]} scale={[5, 5, 5]}/>
+
           <TavernInstances>
             <Tavern scale={[25, 25, 25]} />
           </TavernInstances>
@@ -283,7 +283,7 @@ const App = () => {
           <Flame file={'animated_torch_flame1'} position={[49, 53, -30]} scale={[4.5, 1.5, 4.5]}/>
           <Flame file={'animated_torch_flame1'} position={[-26, 53, -66]} scale={[4.5, 1.5, 4.5]}/>
 
-          <Flame file={'animated_torch_flame1'} position={[65, 63, 120]} scale={[4.5, 1.5, 4.5]}/>
+          <Flame file={'animated_torch_flame1'} position={[70, 58, 120]} scale={[4.5, 1.5, 4.5]}/>
           <Flame file={'animated_torch_flame1'} position={[65, 63, -70]} scale={[4.5, 1.5, 4.5]}/>
           <Flame file={'animated_torch_flame1'} position={[53, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
           <Flame file={'animated_torch_flame1'} position={[-90, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
