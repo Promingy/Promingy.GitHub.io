@@ -19,7 +19,7 @@ import Tavern, { TavernInstances } from './components/Tavern'
 import { usePan } from './main'
 
 const App = () => {
-  const { smallText } = usePan()
+  const { smallText, bigText } = usePan()
    return (
     <>
       <Canvas shadows dpr={1} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
@@ -114,67 +114,71 @@ const App = () => {
             position={[-3.91, 36.5, -69.95]}
             scale={[.0475, .085, .1]}
           />
-          <Text 
-            text='Résumé' 
-            position={[-178, 59, -72]}
-            moveTo={[41, 16, 139]}
-            lookAt={[52, 16, 139]}
-            size={15}
-            depth={5}
-            setControls={false}
+          
+          {bigText && 
+          <>
+            <Text 
+              text='Résumé' 
+              position={[-178, 59, -72]}
+              moveTo={[41, 16, 139]}
+              lookAt={[52, 16, 139]}
+              size={15}
+              depth={5}
+              setControls={false}
+              />
+            <Text 
+              text='Skills' 
+              position={[-183, 37, -72]}
+              moveTo={[44, 47, -15]}
+              lookAt={[48, 47, -15]}
+              size={15}
+              depth={5}
+              setControls={false}
+              />
+            <Text 
+              text='Experience'
+              position={[-183, 15, -72]}
+              moveTo={[-11, 38.95, -64.5]}
+              lookAt={[-11, 38.95, -75.5]}
+              size={15}
+              depth={5}
+              setControls={false}
+              enableButtons
+              />
+            <Text 
+              text='About Me' 
+              position={[-190, -7, -72]}
+              moveTo={[-4, 36.5, -64.5]}
+              lookAt={[-4, 36.5, -75.5]}
+              size={15}
+              depth={5}
+              setControls={false}
+              enableButtons
             />
-          <Text 
-            text='Skills' 
-            position={[-183, 37, -72]}
-            moveTo={[44, 47, -15]}
-            lookAt={[48, 47, -15]}
-            size={15}
-            depth={5}
-            setControls={false}
+            <Text
+              text='Project1'
+              position={[-185, 0, -20]}
+              rotation={[-1.575, 0, 0]}
+              moveTo={[95, 28, -0.5]}
+              lookAt={[85.2, 27, -0.75]}
+              size={15}
+              depth={1}
+              setControls={false}
+              displayProject={'project1'}
+              sounds
             />
-          <Text 
-            text='Experience'
-            position={[-183, 15, -72]}
-            moveTo={[-11, 38.95, -64.5]}
-            lookAt={[-11, 38.95, -75.5]}
-            size={15}
-            depth={5}
-            setControls={false}
-            enableButtons
+            <Text
+              text='Project2'
+              position={[-185, 0, 0]}
+              rotation={[-1.575, 0, 0]}
+              moveTo={[95, 28, 50]}
+              lookAt={[85, 27, 49.5]}
+              size={15}
+              depth={1}
+              displayProject={'project2'}
+              setControls={false}
             />
-          <Text 
-            text='About Me' 
-            position={[-190, -7, -72]}
-            moveTo={[-4, 36.5, -64.5]}
-            lookAt={[-4, 36.5, -75.5]}
-            size={15}
-            depth={5}
-            setControls={false}
-            enableButtons
-          />
-          <Text
-            text='Project1'
-            position={[-185, 0, -20]}
-            rotation={[-1.575, 0, 0]}
-            moveTo={[95, 28, -0.5]}
-            lookAt={[85.2, 27, -0.75]}
-            size={15}
-            depth={1}
-            setControls={false}
-            displayProject={'project1'}
-            sounds
-          />
-          <Text
-            text='Project2'
-            position={[-185, 0, 0]}
-            rotation={[-1.575, 0, 0]}
-            moveTo={[95, 28, 50]}
-            lookAt={[85, 27, 49.5]}
-            size={15}
-            depth={1}
-            displayProject={'project2'}
-            setControls={false}
-          />
+          </>}
 
 
 
