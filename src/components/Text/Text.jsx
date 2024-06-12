@@ -12,7 +12,7 @@ extend({ TextGeometry })
 
 export default function Text({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor=0xff0000, baseColor=0xffffff, displayProject}) {
     const font = new FontLoader().parse(Playball)
-    const { setPan, setDisplayProject, whoosh, click } = usePan() 
+    const { setPan, setSmallText, setDisplayProject, whoosh, click } = usePan() 
     const { controls } = useThree()
     const [color, setColor] = useState(baseColor || 0xffffff)
     const [hovered, setHovered] = useState(false)
@@ -48,6 +48,7 @@ export default function Text({text, size, depth, position, rotation, moveTo, loo
 
                 setTimeout(() => {
                     setDisplayProject(displayProject || 'none');
+                    setSmallText(true);
                 }, 1500)
                 
                 whoosh.play();

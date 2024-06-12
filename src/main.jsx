@@ -11,6 +11,7 @@ export const usePan = () => {
 export const PanProvider = ({children}) => {
   const [pan, setPan] = useState(true)
   const [displayProject, setDisplayProject] = useState('none')
+  const [smallText, setSmallText] = useState(false)
 
 
   const project1URL = 'https://project1.corbinainsworth.com'
@@ -29,7 +30,9 @@ export const PanProvider = ({children}) => {
     displayProject,
     setDisplayProject,
     project1URL,
-    project2URL
+    project2URL,
+    smallText,
+    setSmallText
   }
 
   return (

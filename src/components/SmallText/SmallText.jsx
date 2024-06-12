@@ -13,7 +13,7 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
     const font = new FontLoader().parse(Playball)
     const [color, setColor] = useState(baseColor || '#ffffff')
     const {controls} = useThree()
-    const { setPan, setDisplayProject, click, whoosh } = usePan() 
+    const { setPan, setSmallText, setDisplayProject, click, whoosh } = usePan() 
     const [hovered, setHovered] = useState(false)
 
     useCursor(hovered, 'pointer', 'default')
@@ -92,6 +92,7 @@ export default function SmallText({text, size, depth, position, rotation, moveTo
 
                     setPan(false);
                     setDisplayProject(switchProject || 'none');
+                    setSmallText(switchProject ? true : false);
 
                     controls._removeAllEventListeners();
                     controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {

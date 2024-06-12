@@ -15,8 +15,10 @@ import InitialLoad from './components/InitialLoad/InitialLoad'
 
 import ArcadeMachine from './components/AracdeMachine'
 import Tavern, { TavernInstances } from './components/Tavern'
+import { usePan } from './main'
 
 const App = () => {
+  const { smallText } = usePan()
    return (
     <>
       <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
@@ -173,7 +175,9 @@ const App = () => {
 
 
 
-          <SmallText
+          { smallText &&
+            <>
+            <SmallText
             text='Experience'
             position={[-5, 33, -69.94]}
             // position={[-6, 33, -69.94]}
@@ -270,6 +274,8 @@ const App = () => {
             setControls
             hoverColor={'#F07F13'}
           />
+          </>
+          }
 
           <Flame file={'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
 
