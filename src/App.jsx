@@ -61,6 +61,9 @@ const App = () => {
           </group>
 
           <Sconce position={[75, 60, 105]} rotation={[0, Math.PI, 0]} scale={[5, 5, 5]}/>
+          <Sconce position={[75, 60, -85]} rotation={[0, Math.PI, 0]} scale={[5, 5, 5]}/>
+          <Sconce position={[40, 60, -92.75]} rotation={[0, -Math.PI / 2, 0]} scale={[5, 5, 5]}/>
+          <Sconce position={[-105, 60, -92.75]} rotation={[0, -Math.PI / 2, 0]} scale={[5, 5, 5]}/>
 
           <TavernInstances>
             <Tavern scale={[25, 25, 25]} />
@@ -284,9 +287,9 @@ const App = () => {
           <Flame file={'animated_torch_flame1'} position={[-26, 53, -66]} scale={[4.5, 1.5, 4.5]}/>
 
           <Flame file={'animated_torch_flame1'} position={[70, 58, 120]} scale={[4.5, 1.5, 4.5]}/>
-          <Flame file={'animated_torch_flame1'} position={[65, 63, -70]} scale={[4.5, 1.5, 4.5]}/>
-          <Flame file={'animated_torch_flame1'} position={[53, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
-          <Flame file={'animated_torch_flame1'} position={[-90, 63, -83]} scale={[4.5, 1.5, 4.5]}/>
+          <Flame file={'animated_torch_flame1'} position={[70, 58, -70]} scale={[4.5, 1.5, 4.5]}/>
+          <Flame file={'animated_torch_flame1'} position={[53, 58, -86]} scale={[4.5, 1.5, 4.5]}/>
+          <Flame file={'animated_torch_flame1'} position={[-90, 58, -86]} scale={[4.5, 1.5, 4.5]}/>
 
           {/* <LoadProject
             url={'https://project1.corbinainsworth.com'}
