@@ -10,7 +10,7 @@ import { useCursor } from '@react-three/drei'
 extend({ TextGeometry })
 
 
-export default function Text({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor=0xff0000, baseColor=0xffffff, displayProject}) {
+export default function Text({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor=0xff0000, baseColor=0xffffff, displayProject, ...props}) {
     const font = new FontLoader().parse(Playball)
     const { setPan, setSmallText, setDisplayProject, whoosh, click } = usePan() 
     const { controls } = useThree()
@@ -48,8 +48,11 @@ export default function Text({text, size, depth, position, rotation, moveTo, loo
 
                 setTimeout(() => {
                     setDisplayProject(displayProject || 'none');
-                    setSmallText(true);
-                }, 1500)
+                    if (props.enableButtons) {
+                        console.log('enable buttons')
+                        setSmallText(true);
+                    }
+                }, 2000)
                 
                 whoosh.play();
                 

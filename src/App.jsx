@@ -1,6 +1,6 @@
 import { Canvas} from '@react-three/fiber'
-import { MeshReflectorMaterial } from '@react-three/drei'
-import { Suspense } from 'react'
+import { MeshReflectorMaterial, PerformanceMonitor } from '@react-three/drei'
+import { Suspense, useState } from 'react'
 import './App.css'
 
 import LoadModel from './components/LoadModel'
@@ -9,7 +9,6 @@ import Flame from './components/Flame/Flame'
 import Text from './components/Text/Text'
 import SmallText from './components/SmallText/SmallText'
 import LoadImage from './components/LoadImage'
-// import LoadProject from './components/LoadProject'
 import Camera from './components/Camera'
 import InitialLoad from './components/InitialLoad/InitialLoad'
 
@@ -23,7 +22,7 @@ const App = () => {
   const { smallText } = usePan()
    return (
     <>
-      <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
+      <Canvas shadows dpr={1} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
         <Suspense fallback={<InitialLoad />}>
           <fog attach="fog" args={[0x000000, 100, 1500]} />
           <Camera />
@@ -115,7 +114,6 @@ const App = () => {
             position={[-3.91, 36.5, -69.95]}
             scale={[.0475, .085, .1]}
           />
-
           <Text 
             text='Résumé' 
             position={[-178, 59, -72]}
@@ -142,6 +140,7 @@ const App = () => {
             size={15}
             depth={5}
             setControls={false}
+            enableButtons
             />
           <Text 
             text='About Me' 
@@ -151,6 +150,7 @@ const App = () => {
             size={15}
             depth={5}
             setControls={false}
+            enableButtons
           />
           <Text
             text='Project1'
@@ -190,6 +190,7 @@ const App = () => {
             depth={0}
             setControls
             hoverColor={'#ff0000'}
+            switchProject
           />
           <SmallText
             text='Back'
@@ -213,6 +214,7 @@ const App = () => {
             depth={0}
             setControls
             hoverColor={'#ff0000'}
+            switchProject
             />
           <SmallText
             text='Back'
@@ -224,62 +226,9 @@ const App = () => {
             setControls
             hoverColor={'#ff0000'}
           />
-
-
-          <SmallText
-            text='Previous Project'
-            position={[86.5, 21.75, 5]}
-            // position={[86.5, 21, 7]}
-            rotation={[-1.509, 1.425, 1.488]}
-            moveTo={[95, 28, 50]}
-            lookAt={[85, 27, 49.5]}
-            size={.5}
-            depth={0}
-            setControls
-            hoverColor={'#F07F13'}
-            switchProject={'project2'}
-          />
-          <SmallText
-            text='Back'
-            position={[86.5, 21.5, -6]}
-            rotation={[-1.426, 1.400, 1.423]}
-            moveTo={[-200, 175, 200]}
-            lookAt={[0, 0, 0]}
-            size={.5}
-            depth={0}
-            setControls
-            hoverColor={'#F07F13'}
-          />
-
-
-          <SmallText
-            text='Next Project'
-            position={[86.5, 21.5, 44]}
-            // position={[86.5, 21, 46]}
-            rotation={[-1.456, 1.388, 1.453]}
-            moveTo={[95, 28, -0.5]}
-            lookAt={[85.2, 27, -0.75]}
-            size={.5}
-            depth={0}
-            setControls
-            hoverColor={'#F07F13'}
-            switchProject={'project1'}
-          />
-          <SmallText
-            text='Back'
-            position={[86.5, 21.75, 55.5]}
-            // position={[86.5, 21, 57]}
-            rotation={[-1.518, 1.426, 1.497]}
-            moveTo={[-200, 175, 200]}
-            lookAt={[0, 0, 0]}
-            size={.5}
-            depth={0}
-            setControls
-            hoverColor={'#F07F13'}
-          />
           </>
           }
-
+          
           <Flame file={'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
 
           <Flame file={'animated_torch_flame1'} position={[49, 53, 79]} scale={[4.5, 1.5, 4.5]}/>
@@ -290,20 +239,6 @@ const App = () => {
           <Flame file={'animated_torch_flame1'} position={[70, 58, -70]} scale={[4.5, 1.5, 4.5]}/>
           <Flame file={'animated_torch_flame1'} position={[53, 58, -86]} scale={[4.5, 1.5, 4.5]}/>
           <Flame file={'animated_torch_flame1'} position={[-90, 58, -86]} scale={[4.5, 1.5, 4.5]}/>
-
-          {/* <LoadProject
-            url={'https://project1.corbinainsworth.com'}
-            rotation={[-1.418, 1.368, 1.414]}
-            position={[85.147, 28, 0]}
-            scale={[.41, .7, .1]}
-          /> */}
-          {/* <LoadProject
-            url={'https://project2.corbinainsworth.com'}
-            rotation={[-1.418, 1.368, 1.414]}
-            position={[85.147, 28, 49.5]}
-            scale={[.41, .7, .1]}
-            occludeRef={[arcadeRef2]}
-          /> */}
         </Suspense>
       </Canvas>    
     </>
