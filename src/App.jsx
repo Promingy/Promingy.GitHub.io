@@ -28,7 +28,7 @@ const App = () => {
    return (
     <>
       <Canvas shadows dpr={1} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
-        <Perf position={'top-left'} />
+        {/* <Perf position={'top-left'} /> */}
         <Suspense fallback={<InitialLoad />}>
           {/* <fog attach="fog" args={[0x000000, 100, 1500]} /> */}
           <Camera />
@@ -153,6 +153,9 @@ const App = () => {
             <Flame file={'animated_torch_flame1'} position={[70, 58, -70]} scale={[4.5, 1.5, 4.5]}/>
             <Flame file={'animated_torch_flame1'} position={[53, 58, -86]} scale={[4.5, 1.5, 4.5]}/>
             <Flame file={'animated_torch_flame1'} position={[-90, 58, -86]} scale={[4.5, 1.5, 4.5]}/> */}
+            <Flame />
+
+            
 
             <Sconce position={[75, 60, 105]} rotation={[0, Math.PI, 0]} scale={[5, 5, 5]}/>
             <Sconce position={[75, 60, -85]} rotation={[0, Math.PI, 0]} scale={[5, 5, 5]}/>
