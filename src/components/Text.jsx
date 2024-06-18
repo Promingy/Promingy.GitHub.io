@@ -21,8 +21,8 @@ export default function Text({text, size, depth, position, rotation, moveTo, loo
 
     return (
         <mesh
-            castShadow 
-            receiveShadow 
+            // castShadow 
+            // receiveShadow 
             position={position}
             rotation={rotation}
             onPointerOver={(e) => {
@@ -51,8 +51,9 @@ export default function Text({text, size, depth, position, rotation, moveTo, loo
                     if (props.enableButtons) {
                         setSmallText(true);
                     }
-                    setBigText(false);
                 }, 2000)
+
+                setTimeout(() => setBigText(false), 1000)
                 
                 whoosh.play();
                 
@@ -65,7 +66,7 @@ export default function Text({text, size, depth, position, rotation, moveTo, loo
             }}
           >
             <textGeometry args={[text, { font, size, depth}]} />
-            <meshStandardMaterial color={color} />
+            <meshLambertMaterial color={color} />
         </mesh>
     )
 }

@@ -15,7 +15,6 @@ export default function  Flame({file, position, rotation, scale}) {
                 action.reset().play().setLoop(LoopRepeat);
             })
         }
-
     }, [animations, clone]);
 
 
@@ -26,8 +25,6 @@ export default function  Flame({file, position, rotation, scale}) {
         position={position || [0, 0, 0]}
         rotation={rotation || [0, 0, 0]}
         scale={scale || [1, 1, 1]}
-        castShadow
-        receiveShadow
         />
     )
 }

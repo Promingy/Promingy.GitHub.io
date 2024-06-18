@@ -1,3 +1,4 @@
+
 export default function Lights(props) {
     return (
         <pointLight 
@@ -10,7 +11,7 @@ export default function Lights(props) {
             shadow-camera-near={0.1}
             decay={props.decay || 2}
             rotateX={props.rotateX}
-            castShadow
+            castShadow={props.shadow}
             />
     )
 }

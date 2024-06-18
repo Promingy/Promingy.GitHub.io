@@ -1,11 +1,11 @@
 import { Canvas} from '@react-three/fiber'
 import { MeshReflectorMaterial } from '@react-three/drei'
 import { Suspense } from 'react'
+import { Perf } from 'r3f-perf'
 import './App.css'
 
 import LoadModel from './components/LoadModel'
 import Lights from './components/Lights'
-import Flame from './components/Flame'
 import Text from './components/Text'
 import SmallText from './components/SmallText'
 import LoadImage from './components/LoadImage'
@@ -13,9 +13,10 @@ import Camera from './components/Camera'
 import InitialLoad from './components/InitialLoad'
 
 
+import Flame from './components/Flame'
 import Sconce from './components/Sconce'
 import ArcadeMachine from './components/ArcadeMachine'
-import Tavern, { TavernInstances } from './components/Tavern'
+import Tavern from './components/Tavern'
 import BountyBoard from './components/BountyBoard'
 import SkillBooks from './components/SkillBooks'
 import LightPost from './components/Lightpost'
@@ -27,12 +28,13 @@ const App = () => {
    return (
     <>
       <Canvas shadows dpr={1} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
+        <Perf position={'top-left'} />
         <Suspense fallback={<InitialLoad />}>
-          <fog attach="fog" args={[0x000000, 100, 1500]} />
+          {/* <fog attach="fog" args={[0x000000, 100, 1500]} /> */}
           <Camera />
 
           <mesh receiveShadow rotation={[-Math.PI * 0.5, 0, 0]} position={[0, -7, 0]}>
-              <planeGeometry args={[750, 750]} />
+              <planeGeometry args={[1000, 1000]} />
               <MeshReflectorMaterial
                 mixStrength={.1} // Strength of the reflections
                 resolution={512} // Off-buffer resolution, lower=faster, higher=better quality
@@ -50,15 +52,16 @@ const App = () => {
             <Lights position={[44, 50, 80]}  intensity={2000} />
             <Lights position={[44, 50, -30]}  intensity={2000} />
             <Lights position={[-25, 50, -60]}  intensity={2000} />
-            <Lights position={[-33.3, 10, -65]} rotateX={3.14} color={'orange'} intensity={2500} decay={1.8} />
+            <Lights shadow position={[-33.3, 10, -65]} rotateX={3.14} color={'orange'} intensity={2500} decay={1.7} />
 
-            <Lights position={[70, 60, 120]}  intensity={2000} decay={1.5}/>
+            <Lights shadow position={[70, 60, 120]}  intensity={2000} decay={1.5}/>
             <Lights position={[65, 63, -70]}  intensity={2000} decay={1.5}/>
-            <Lights position={[53, 63, -83]}  intensity={2000} decay={1.5}/>
-            <Lights position={[-90, 63, -83]} intensity={2000} decay={1.5}/>
+            <Lights shadow position={[53, 63, -83]}  intensity={2000} decay={1.5}/>
+            <Lights shadow position={[-90, 63, -83]} intensity={2000} decay={1.5}/>
 
-            <Lights position={[-98.5, 80, 114]} color={0xffd21c}  intensity={3000}  decay={1.7}/>
-            <Lights position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3000}  decay={1.7}/>
+            {/* <Lights position={[-98.5, 80, 114]} color={0xffd21c}  intensity={3000}  decay={1.7}/> */}
+            {/* <Lights shadow position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3000}  decay={1.7}/> */}
+            <Lights shadow position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.675}/>
 
             <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
           </group>
@@ -140,7 +143,7 @@ const App = () => {
               setControls={false}
             />
 
-            <Flame file={'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
+            {/* <Flame file={'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
 
             <Flame file={'animated_torch_flame1'} position={[49, 53, 79]} scale={[4.5, 1.5, 4.5]}/>
             <Flame file={'animated_torch_flame1'} position={[49, 53, -30]} scale={[4.5, 1.5, 4.5]}/>
@@ -149,7 +152,7 @@ const App = () => {
             <Flame file={'animated_torch_flame1'} position={[70, 58, 120]} scale={[4.5, 1.5, 4.5]}/>
             <Flame file={'animated_torch_flame1'} position={[70, 58, -70]} scale={[4.5, 1.5, 4.5]}/>
             <Flame file={'animated_torch_flame1'} position={[53, 58, -86]} scale={[4.5, 1.5, 4.5]}/>
-            <Flame file={'animated_torch_flame1'} position={[-90, 58, -86]} scale={[4.5, 1.5, 4.5]}/>
+            <Flame file={'animated_torch_flame1'} position={[-90, 58, -86]} scale={[4.5, 1.5, 4.5]}/> */}
 
             <Sconce position={[75, 60, 105]} rotation={[0, Math.PI, 0]} scale={[5, 5, 5]}/>
             <Sconce position={[75, 60, -85]} rotation={[0, Math.PI, 0]} scale={[5, 5, 5]}/>
@@ -251,12 +254,10 @@ const App = () => {
           <ArcadeMachine position={[80, -8, 50]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project2.corbinainsworth.com'} name='project2'/>
           <MedievalBookStack position={[22, 23.6, 70]} scale={[.33, .33, .33]} rotation={[0, -2.5, 0]} />
           <LightPost position={[-90, -5, 120]} scale={[4.5, 4.5, 4.5]} rotation={[0, 2.5, 0]}/>
-          <SkillBooks position={[48, 51.75, -8]} scale={[.15, .15, .15]} rotation={[-1.6, -1.5, 0]} canHover moveTo={[44, 47, -15]} lookAt={[48, 47, -15]} />
+          {/* <SkillBooks position={[48, 51.75, -8]} scale={[.15, .15, .15]} rotation={[-1.6, -1.5, 0]} canHover moveTo={[44, 47, -15]} lookAt={[48, 47, -15]} /> */}
           {/* <BountyBoard position={[52, -5, 150]} scale={[10, 10, 10]} rotation={[0, -1.575, 0]} canHover moveTo={[41, 16, 139]} lookAt={[52, 16, 139]} /> */}
 
-          <TavernInstances>
-            <Tavern scale={[25, 25, 25]} />
-          </TavernInstances>
+          <Tavern scale={[25, 25, 25]} />
 
         </Suspense>
       </Canvas>    
