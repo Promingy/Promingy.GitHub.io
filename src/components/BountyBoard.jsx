@@ -9,4 +9,4 @@ export default function BountyBoard(props) {
   )
 }
 
-useGLTF.preload(`models/low-res/bounty_board.glb`)
+useGLTF.preload('models/low-res/bounty_board.glb')

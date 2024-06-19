@@ -252,13 +252,12 @@ const App = () => {
 
             <LoadModel 
               file={'bounty_board.glb'}
-              canHover
               scale={[10, 10, 10]}
               rotation={[0, -Math.PI / 2, 0]}
               position={[52, -5, 150]}
+              canHover
               lookAt={[52, 16, 139]}
               moveTo={[41, 16, 139]}
-              shadow
               />
 
           <ArcadeMachine position={[80, -8, 0]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project1.corbinainsworth.com'} name='project1'/>

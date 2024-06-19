@@ -7,7 +7,7 @@ import SkillBooks from './SkillBooks.jsx';
 import { usePan } from '../main.jsx';
 
 export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo }) {
-    const {pan, setPan, whoosh } = usePan();
+    const {setPan, whoosh } = usePan();
     const [hovered, setHovered] = useState(false);
     const { controls } = useThree()
     const eventHandled = useRef(false);
@@ -22,8 +22,7 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                 eventHandled.current = false;
             }, 1)
 
-            const cTarget = controls._targetEnd;
-            const { x, y, z } = cTarget;
+            const { x, y, z } = controls._targetEnd;
 
             setPan(false);
             whoosh.play();
@@ -54,29 +53,26 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
     })
 
     return (
-        <mesh
+        <Detailed 
+            distances={[0, 50]}
+            position={position}
+            rotation={rotation}
+            scale={scale}
             onPointerOver={canHover ? () => setHovered(true) : null}
             onPointerOut={canHover ? () => setHovered(false) : null}
             onClick={canHover ? handleClick : null}
         >
-            <Detailed 
-                distances={[0, 50]}
-                position={position}
-                rotation={rotation}
-                scale={scale}
-            >
-                { file == 'bounty_board.glb' ? 
-                    <>
-                        <BountyBoard res="high-res"/>
-                        <BountyBoard res="low-res"/>
-                    </>
-                    :
-                    <>
-                        <SkillBooks res="high-res"/>
-                        <SkillBooks res="low-res"/>
-                    </>
-                }
-            </Detailed>
-        </mesh>
+            { file == 'bounty_board.glb' ? 
+                <>
+                    <BountyBoard res="high-res"/>
+                    <BountyBoard res="low-res"/>
+                </>
+                :
+                <>
+                    <SkillBooks res="high-res"/>
+                    <SkillBooks res="low-res"/>
+                </>
+            }
+        </Detailed>
     )
 }

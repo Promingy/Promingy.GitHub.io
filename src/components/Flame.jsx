@@ -1,4 +1,3 @@
-// import { useLoader } from "@react-three/fiber";
 import { Matrix4, Vector3, Quaternion } from "three";
 import { useRef, useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
