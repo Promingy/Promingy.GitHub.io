@@ -1,6 +1,6 @@
-import { Canvas} from '@react-three/fiber'
-import { MeshReflectorMaterial } from '@react-three/drei'
-import { Suspense, useState } from 'react'
+import { Canvas, useFrame, useThree} from '@react-three/fiber'
+import { BakeShadows, Detailed, MeshReflectorMaterial, Preload, useGLTF } from '@react-three/drei'
+import { Suspense, useRef, useState } from 'react'
 import { Perf } from 'r3f-perf'
 import './App.css'
 
@@ -32,13 +32,52 @@ import LightPost from './components/Lightpost'
 import MedievalBookStack from './components/MedievalBookStack'
 import { usePan } from './main'
 
+function Test() {
+  //!-------------------- Test --------------------
+  
+  // const { scene: highDetail } = useGLTF('/models/high-res/bounty_board.glb')
+  // const { scene: lowDetail } = useGLTF('/models/low-res/bounty_board.glb')
+  const ref = useRef();
+  const { camera } = useThree();
+  
+  useFrame(() => {
+    if (ref.current) {
+      const distance = camera.position.distanceTo(ref.current.position);
+      console.log('Distance:', distance)
+    }
+  })
+  //!-------------------- End Test --------------------
+  return (
+    <Detailed distances={[0, 50]} position={[52, -5, 150]} rotation={[0, -Math.PI / 2, 0]} scale={[10, 10, 10]} ref={ref}>
+    <LoadModel 
+      file={'high-res/bounty_board.glb'} 
+      // scale={[10, 10, 10]} 
+      // rotation={[0, -1.575, 0]} 
+      // position={[52, -5, 150]} 
+      canHover
+      lookAt={[52, 16, 139]}
+      moveTo={[41, 16, 139]}
+      shadow
+      />
+    <LoadModel 
+      file={'low-res/bounty_board.glb'} 
+      // scale={[10, 10, 10]} 
+      // rotation={[0, -1.575, 0]} 
+      // position={[52, -5, 150]} 
+      canHover
+      lookAt={[52, 16, 139]}
+      moveTo={[41, 16, 139]}
+      shadow
+      />
+  </Detailed>
+  )
+}
+
 const App = () => {
   const { smallText, bigText } = usePan()
-
-  //!-------------------- Test --------------------
-  const [shadows, setShadows] = useState(false)
+  
+  const [shadows, setShadows] = useState(true)
   const [color, setColor] = useState(0xffffff)
-  //!-------------------- End Test --------------------
 
    return (
     <>
@@ -74,8 +113,6 @@ const App = () => {
             <Lights position={[53, 63, -83]}  intensity={2000} decay={1.5}/>
             <Lights shadow position={[-90, 63, -83]} intensity={2000} decay={1.5}/>
 
-            {/* <Lights position={[-98.5, 80, 114]} color={0xffd21c}  intensity={3000}  decay={1.7}/> */}
-            {/* <Lights shadow position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3000}  decay={1.7}/> */}
             <Lights shadow position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.675}/>
 
             <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
@@ -260,16 +297,29 @@ const App = () => {
             lookAt={[48, 47, -15]}  
             />
 
-          <LoadModel 
-            file={'bounty_board.glb'} 
-            scale={[10, 10, 10]} 
-            rotation={[0, -1.575, 0]} 
-            position={[52, -5, 150]} 
-            canHover
-            lookAt={[52, 16, 139]}
-            moveTo={[41, 16, 139]}
-            shadow
-          />
+          {/* <Detailed distances={[0, 160]} ref={ref}>
+            <LoadModel 
+              file={'high-res/bounty_board.glb'} 
+              scale={[10, 10, 10]} 
+              rotation={[0, -1.575, 0]} 
+              position={[52, -5, 150]} 
+              canHover
+              lookAt={[52, 16, 139]}
+              moveTo={[41, 16, 139]}
+              shadow
+            />
+            <LoadModel 
+              file={'low-res/bounty_board.glb'} 
+              scale={[10, 10, 10]} 
+              rotation={[0, -1.575, 0]} 
+              position={[52, -5, 150]} 
+              canHover
+              lookAt={[52, 16, 139]}
+              moveTo={[41, 16, 139]}
+              shadow
+            />
+          </Detailed> */}
+          <Test />
 
           <ArcadeMachine position={[80, -8, 0]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project1.corbinainsworth.com'} name='project1'/>
           <ArcadeMachine position={[80, -8, 50]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project2.corbinainsworth.com'} name='project2'/>
@@ -280,6 +330,7 @@ const App = () => {
 
           <Tavern scale={[25, 25, 25]} />
 
+          <BakeShadows />
         </Suspense>
       </Canvas>    
     </>

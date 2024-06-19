@@ -50,6 +50,7 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                     // const x = cTarget.x != 0;
                     // const y = cTarget.y != 0;
                     // const z = cTarget.z != 0;
+                    console.log(cTarget)
                     
                     const x = cTarget.x;
                     const y = cTarget.y;
