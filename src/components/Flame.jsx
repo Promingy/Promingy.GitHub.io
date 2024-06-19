@@ -79,6 +79,6 @@ export default function Flame({file, position, rotation, scale}) {
     }, [])
 
     return (
-        <instancedMesh geometry={geometry} material={material} ref={ref} args={[null, null,8]} />
+        <instancedMesh geometry={geometry} material={material} ref={ref} args={[null, null, 4]} />
     )
 }

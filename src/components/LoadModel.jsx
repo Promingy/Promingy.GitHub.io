@@ -4,7 +4,7 @@ import { NearestFilter, FrontSide } from 'three';
 import { useCursor, useGLTF } from '@react-three/drei';
 import { usePan } from '../main.jsx';
 
-export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo, refToUse}) {
+export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo, refToUse, shadow}) {
     const url = 'models/' + file
     const { scene } = useGLTF(url);
     const [hovered, setHovered] = useState(false);
@@ -24,7 +24,7 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                     }
                     
                     if (!child.material.name.startsWith('lambert1')){
-                        child.castShadow = true;
+                        child.castShadow = shadow;
                         child.receiveShadow = true;
                     }
                 }
@@ -43,8 +43,6 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                 position={position}
                 rotation={rotation}
                 scale={scale}
-                castShadow
-                receiveShadow
                 onPointerOver={canHover ? () => setHovered(true) : null}
                 onPointerOut={canHover ? () => setHovered(false) : null}
                 onClick={canHover ? () => {

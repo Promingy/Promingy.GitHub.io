@@ -1,8 +1,17 @@
 import { Canvas} from '@react-three/fiber'
 import { MeshReflectorMaterial } from '@react-three/drei'
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import { Perf } from 'r3f-perf'
 import './App.css'
+
+
+//! -------------- Test Imports --------------
+import Playball from './Playball_Regular.json'
+import { TextGeometry } from 'three/examples/jsm/Addons.js'
+import { extend } from '@react-three/fiber'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
+extend({ TextGeometry })
+//! -------------- End Test --------------
 
 import LoadModel from './components/LoadModel'
 import Lights from './components/Lights'
@@ -25,10 +34,16 @@ import { usePan } from './main'
 
 const App = () => {
   const { smallText, bigText } = usePan()
+
+  //!-------------------- Test --------------------
+  const [shadows, setShadows] = useState(false)
+  const [color, setColor] = useState(0xffffff)
+  //!-------------------- End Test --------------------
+
    return (
     <>
-      <Canvas shadows dpr={1} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
-        {/* <Perf position={'top-left'} /> */}
+      <Canvas shadows={shadows} dpr={1} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
+        <Perf position={'top-left'} />
         <Suspense fallback={<InitialLoad />}>
           {/* <fog attach="fog" args={[0x000000, 100, 1500]} /> */}
           <Camera />
@@ -56,7 +71,7 @@ const App = () => {
 
             <Lights shadow position={[70, 60, 120]}  intensity={2000} decay={1.5}/>
             <Lights position={[65, 63, -70]}  intensity={2000} decay={1.5}/>
-            <Lights shadow position={[53, 63, -83]}  intensity={2000} decay={1.5}/>
+            <Lights position={[53, 63, -83]}  intensity={2000} decay={1.5}/>
             <Lights shadow position={[-90, 63, -83]} intensity={2000} decay={1.5}/>
 
             {/* <Lights position={[-98.5, 80, 114]} color={0xffd21c}  intensity={3000}  decay={1.7}/> */}
@@ -143,19 +158,21 @@ const App = () => {
               setControls={false}
             />
 
-            {/* <Flame file={'animated_torch_flame1'} position={[-34, 7, -70]} scale={[13, 5, 10]}/>
+            {/* //!----------------- Test ----------------- */}
 
-            <Flame file={'animated_torch_flame1'} position={[49, 53, 79]} scale={[4.5, 1.5, 4.5]}/>
-            <Flame file={'animated_torch_flame1'} position={[49, 53, -30]} scale={[4.5, 1.5, 4.5]}/>
-            <Flame file={'animated_torch_flame1'} position={[-26, 53, -66]} scale={[4.5, 1.5, 4.5]}/>
+            <mesh
+              position={[-275, 59, -72]}
+              onPointerOver={() => {document.body.style.cursor = 'pointer'; setColor(0xff0000)}}
+              onPointerOut={() => {document.body.style.cursor = 'default'; setColor(0xffffff)}}
+              onClick={() => {setShadows(!shadows)}}
+              >
+              <textGeometry args={["Shadows", {font: new FontLoader().parse(Playball), size: 15, depth: 5}] } />
+              <meshLambertMaterial color={color} />
+            </mesh>
 
-            <Flame file={'animated_torch_flame1'} position={[70, 58, 120]} scale={[4.5, 1.5, 4.5]}/>
-            <Flame file={'animated_torch_flame1'} position={[70, 58, -70]} scale={[4.5, 1.5, 4.5]}/>
-            <Flame file={'animated_torch_flame1'} position={[53, 58, -86]} scale={[4.5, 1.5, 4.5]}/>
-            <Flame file={'animated_torch_flame1'} position={[-90, 58, -86]} scale={[4.5, 1.5, 4.5]}/> */}
+              {/* //!----------------- End Test ----------------- */}
+
             <Flame />
-
-            
 
             <Sconce position={[75, 60, 105]} rotation={[0, Math.PI, 0]} scale={[5, 5, 5]}/>
             <Sconce position={[75, 60, -85]} rotation={[0, Math.PI, 0]} scale={[5, 5, 5]}/>
@@ -251,7 +268,8 @@ const App = () => {
             canHover
             lookAt={[52, 16, 139]}
             moveTo={[41, 16, 139]}
-            />
+            shadow
+          />
 
           <ArcadeMachine position={[80, -8, 0]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project1.corbinainsworth.com'} name='project1'/>
           <ArcadeMachine position={[80, -8, 50]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project2.corbinainsworth.com'} name='project2'/>
