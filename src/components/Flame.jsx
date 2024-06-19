@@ -36,24 +36,24 @@ export default function Flame() {
     }, [])
 
 
-    useEffect(() => {
-
-        setRender(r => {
-            if (r >= 2000) {
-                setI(i => i >= 15 ? 0 : i + 1);
-                return 0;
-            }
-            return r + 1;
-        })
-    }, [render])
-
     // useEffect(() => {
-    //     let interval = setInterval(() => {
-    //         setI(i => i > 15 ? 0 : i + 1)
-    //     }, 100)
 
-    //     return () => clearInterval(interval)
-    // }, [])
+    //     setRender(r => {
+    //         if (r >= 2000) {
+    //             setI(i => i >= 15 ? 0 : i + 1);
+    //             return 0;
+    //         }
+    //         return r + 1;
+    //     })
+    // }, [render])
+
+    useEffect(() => {
+        let interval = setInterval(() => {
+            setI(i => i > 15 ? 0 : i + 1)
+        }, 100)
+
+        return () => clearInterval(interval)
+    }, [])
 
 
     return (

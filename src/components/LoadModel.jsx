@@ -7,7 +7,7 @@ import SkillBooks from './SkillBooks.jsx';
 import { usePan } from '../main.jsx';
 
 export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo }) {
-    const { setPan, whoosh } = usePan();
+    const {pan, setPan, whoosh } = usePan();
     const [hovered, setHovered] = useState(false);
     const { controls } = useThree()
     const eventHandled = useRef(false);
@@ -35,8 +35,9 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                     const { x, y, z } = controls._targetEnd;
 
                     if (x == 0 && y == 0 && z == 0) {
-                    controls._addAllEventListeners(controls._domElement);
-                    setPan(true);
+                        controls.enabled = true; // set it again to circumvent spam-click events overwriting the controls
+                        controls._addAllEventListeners(controls._domElement);
+                        setPan(true);
                     }
                 });
             }
