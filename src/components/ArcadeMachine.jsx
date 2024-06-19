@@ -86,8 +86,8 @@ export default function ArcadeMachine(props) {
         
       }
     <group {...props} dispose={null}>
-      <mesh castShadow receiveShadow geometry={nodes.Body_1_Body_0.geometry} material={materials.Body} position={[0.004, 1.013, 0.109]} rotation={[Math.PI, 0, -3.135]} scale={0.995} />
-      <mesh castShadow receiveShadow geometry={nodes.Null_1_Null_0.geometry} material={materials.Null} position={[0.004, 1.013, 0.109]} rotation={[Math.PI, 0, -3.135]} scale={0.998} />
+      <mesh geometry={nodes.Body_1_Body_0.geometry} material={materials.Body} position={[0.004, 1.013, 0.109]} rotation={[Math.PI, 0, -3.135]} scale={0.995} />
+      <mesh geometry={nodes.Null_1_Null_0.geometry} material={materials.Null} position={[0.004, 1.013, 0.109]} rotation={[Math.PI, 0, -3.135]} scale={0.998} />
     </group>
     </>
   )

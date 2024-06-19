@@ -1,6 +1,6 @@
 import { useLoader } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import { FrontSide, LinearFilter, TextureLoader } from "three";
+import { LinearFilter, TextureLoader } from "three";
 
 
 export default function LoadImage({ file, position, scale, rotation, basic }) {
@@ -12,7 +12,7 @@ export default function LoadImage({ file, position, scale, rotation, basic }) {
   if (ref.current) {
     ref.current.traverse(child => {
         if (child.isMesh) {
-            child.material.side = FrontSide;
+            child.material.side = 0;
             child.receiveShadow = true;
             
             if (child.material.map)
@@ -27,7 +27,7 @@ export default function LoadImage({ file, position, scale, rotation, basic }) {
     <mesh position={position} rotation={rotation} scale={scale} ref={ref}>
       <planeGeometry attach="geometry" args={[100, 100]} />
       {basic && <meshBasicMaterial attach="material" map={texture} />}
-      {!basic && <meshStandardMaterial attach="material" map={texture} />}
+      {!basic && <meshLambertMaterial attach="material" map={texture} />}
     </mesh>
   )
 }
