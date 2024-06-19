@@ -2,7 +2,7 @@ import { useGLTF } from '@react-three/drei'
 import { NearestFilter } from 'three'
 
 export default function SkillBooks(props) {
-  const { nodes, materials } = useGLTF('models/skill_books.glb')
+  const { nodes, materials } = useGLTF(`models/${props.res}/skill_books.glb`)
   for (const key in materials) {
     if (materials[key].isMaterial) {
       materials[key].side = 0;

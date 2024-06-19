@@ -1,45 +1,48 @@
-import { useThree } from '@react-three/fiber'
+import { useCursor, useGLTF, Detailed } from '@react-three/drei';
 import { useEffect, useRef, useState } from 'react';
 import { NearestFilter, FrontSide } from 'three';
-import { useCursor, useGLTF } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
+import BountyBoard from './BountyBoard.jsx';
+import SkillBooks from './SkillBooks.jsx';
 import { usePan } from '../main.jsx';
 
 export default function LoadModel({file, position, rotation, scale, canHover, lookAt, moveTo, refToUse, shadow}) {
-    const url = 'models/' + file
-    const { scene } = useGLTF(url);
+    // const url = 'models/' + file
+    // const { scene } = useGLTF(url);
     const [hovered, setHovered] = useState(false);
     const { controls } = useThree()
     const modelRef = refToUse || useRef();
     const { setPan, setBigText, whoosh } = usePan();
 
-    useEffect(() => {
-        if (modelRef.current) {
-            modelRef.current.traverse(child => {
-                if (child.isMesh) {
-                    child.material.side = FrontSide;
+    // useEffect(() => {
+    //     if (modelRef.current) {
+    //         modelRef.current.traverse(child => {
+    //             if (child.isMesh) {
+    //                 child.material.side = FrontSide;
                     
-                    if (child.material.map) {
-                        child.material.map.minFilter = NearestFilter;
-                        child.material.map.magFilter = NearestFilter;
-                    }
+    //                 if (child.material.map) {
+    //                     child.material.map.minFilter = NearestFilter;
+    //                     child.material.map.magFilter = NearestFilter;
+    //                 }
                     
-                    if (!child.material.name.startsWith('lambert1')){
-                        child.castShadow = shadow;
-                        child.receiveShadow = true;
-                    }
-                }
+    //                 if (!child.material.name.startsWith('lambert1')){
+    //                     child.castShadow = shadow;
+    //                     child.receiveShadow = true;
+    //                 }
+    //             }
 
-            })
-        }
-    }, [scene])
+    //         })
+    //     }
+    // }, [scene])
 
 
     useCursor(hovered, 'pointer', 'default');
 
     return (
-            <primitive 
-                object={scene} 
-                ref={modelRef}
+            <Detailed 
+                // object={scene} 
+                // ref={modelRef}
+                distances={[0, 50]}
                 position={position}
                 rotation={rotation}
                 scale={scale}
@@ -50,7 +53,6 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                     // const x = cTarget.x != 0;
                     // const y = cTarget.y != 0;
                     // const z = cTarget.z != 0;
-                    console.log(cTarget)
                     
                     const x = cTarget.x;
                     const y = cTarget.y;
@@ -84,6 +86,18 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                         controls._addAllEventListeners(controls._domElement);
                     })
                 } : null}
-            />
+            >
+                { file == 'bounty_board.glb' ? 
+                    <>
+                        <BountyBoard res="high-res"/>
+                        <BountyBoard res="low-res"/>
+                    </>
+                    :
+                    <>
+                        <SkillBooks res="high-res"/>
+                        <SkillBooks res="low-res"/>
+                    </>
+                }
+            </Detailed>
     )
 }
