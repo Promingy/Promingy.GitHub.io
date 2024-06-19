@@ -1,6 +1,6 @@
 import { Canvas} from '@react-three/fiber'
-import { BakeShadows, MeshReflectorMaterial, useCursor } from '@react-three/drei'
-import { Suspense, useState } from 'react'
+import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial } from '@react-three/drei'
+import { Suspense } from 'react'
 import { Perf } from 'r3f-perf'
 import './App.css'
 
@@ -22,57 +22,48 @@ import Tavern from './components/Tavern'
 import LightPost from './components/Lightpost'
 import MedievalBookStack from './components/MedievalBookStack'
 import ProjectSign from './components/ProjectSign'
+import Clock from './components/Clock'
 
 // function Test() {
-//   //!-------------------- Test --------------------
+//   const [time, setTime] = useState({
+//     seconds: new Date().getSeconds(),
+//     minutes: new Date().getMinutes(),
+//     hours: new Date().getHours() % 12,
+//   });
+
+//   useEffect(() => {
+//     const clock = setInterval(() => {
+//       setTime({
+//         seconds: new Date().getSeconds(),
+//         minutes: new Date().getMinutes(),
+//         hours: new Date().getHours() % 12,
+//       });
+//     }, 1000)
+
+//     return () => clearInterval(clock)
+//   },[])
+
+//   const { seconds, minutes, hours } = time;
+
+//   const formatTime = (unit) => unit < 10 ? `0${unit}` : unit
   
-//   // const { scene: highDetail } = useGLTF('/models/high-res/bounty_board.glb')
-//   // const { scene: lowDetail } = useGLTF('/models/low-res/bounty_board.glb')
-//   const ref = useRef();
-//   const { camera } = useThree();
-  
-//   // useFrame(() => {
-//   //   if (ref.current) {
-//   //     const distance = camera.position.distanceTo(ref.current.position);
-//   //     console.log('Distance:', distance)
-//   //   }
-//   // })
-//   //!-------------------- End Test --------------------
 //   return (
-//     <Detailed distances={[0, 80]} position={[52, -5, 150]} rotation={[0, -Math.PI / 2, 0]} scale={[10, 10, 10]} ref={ref}>
-//     <LoadModel 
-//       file={'high-res/bounty_board.glb'} 
-//       // scale={[10, 10, 10]} 
-//       // rotation={[0, -1.575, 0]} 
-//       // position={[52, -5, 150]} 
-//       canHover
-//       lookAt={[52, 16, 139]}
-//       moveTo={[41, 16, 139]}
-//       shadow
-//       />
-//     <LoadModel 
-//       file={'low-res/bounty_board.glb'} 
-//       // scale={[10, 10, 10]} 
-//       // rotation={[0, -1.575, 0]} 
-//       // position={[52, -5, 150]} 
-//       canHover
-//       lookAt={[52, 16, 139]}
-//       moveTo={[41, 16, 139]}
-//       shadow
-//       />
-//   </Detailed>
+//       <div style={{color: "white", position: "absolute", zIndex: 1, left: 20}}>
+//         <h2 style={{marginBottom: 5,}}>Corbin Ainsworth</h2>
+//         <h3 style={{marginTop: 5}}>Software Engineer</h3>
+//         <h3 style={{marginTop: 5}}>{formatTime(hours)}:{formatTime(minutes)}:{formatTime(seconds)}</h3>
+//       </div>
 //   )
 // }
 
 const App = () => {
   const { smallText } = usePan()
-  const [hovered, setHovered] = useState(false);
-
-  useCursor(hovered, 'pointer', 'default')
-  
    return (
     <>
-      <Canvas shadows dpr={1} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
+      
+      <Clock />
+
+      <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
         {/* <Perf position={'top-left'} /> */}
         <Suspense fallback={<InitialLoad />}>
           {/* <fog attach="fog" args={[0x000000, 100, 1500]} /> */}
@@ -162,24 +153,22 @@ const App = () => {
           />
           <Text
             text='Project1'
-            position={[-185, 0, -20]}
-            rotation={[-1.575, 0, 0]}
+            position={[-260, 15, -72]}
             moveTo={[95, 28, -0.5]}
             lookAt={[85.2, 27, -0.75]}
             size={15}
-            depth={1}
+            depth={5}
             setControls={false}
             displayProject={'project1'}
             sounds
           />
           <Text
             text='Project2'
-            position={[-185, 0, 0]}
-            rotation={[-1.575, 0, 0]}
+            position={[-265, -7, -72]}
             moveTo={[95, 28, 50]}
             lookAt={[85, 27, 49.5]}
             size={15}
-            depth={1}
+            depth={5}
             displayProject={'project2'}
             setControls={false}
           />
@@ -253,7 +242,7 @@ const App = () => {
               moveTo={[41, 16, 139]}
             />
 
-          <ProjectSign scale={[.25, .25, .25]} rotation={[0, Math.PI / 2, 0]} position={[75, 70, 22]} onPointerOver={(e) => {e.stopPropagation(); setHovered(true)}} onPointerOut={(e) => {e.stopPropagation(); setHovered(false)}}/>
+          <ProjectSign scale={[.25, .25, .25]} rotation={[0, Math.PI / 2, 0]} position={[75, 70, 22]}/>
           <ArcadeMachine position={[80, -8, 0]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project1.corbinainsworth.com'} name='project1'/>
           <ArcadeMachine position={[80, -8, 50]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project2.corbinainsworth.com'} name='project2'/>
           <MedievalBookStack position={[22, 23.6, 70]} scale={[.33, .33, .33]} rotation={[0, -2.5, 0]} />
@@ -261,6 +250,7 @@ const App = () => {
 
           <Tavern scale={[25, 25, 25]} onPointerOver={e => e.stopPropagation()}/>
 
+          <AdaptiveDpr pixelated />
           <BakeShadows />
         </Suspense>
       </Canvas>    
