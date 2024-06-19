@@ -32,4 +32,4 @@ export default function SkillBooks(props) {
   )
 }
 
-useGLTF.preload('models/skill_books.glb')
+useGLTF.preload('models/low-res/skill_books.glb')
