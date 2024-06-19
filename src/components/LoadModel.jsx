@@ -1,6 +1,5 @@
-import { useCursor, useGLTF, Detailed } from '@react-three/drei';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { NearestFilter, FrontSide } from 'three';
+import { useCursor, Detailed } from '@react-three/drei';
+import { useCallback, useRef, useState } from 'react';
 import { useThree } from '@react-three/fiber';
 import BountyBoard from './BountyBoard.jsx';
 import SkillBooks from './SkillBooks.jsx';

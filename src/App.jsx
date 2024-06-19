@@ -1,6 +1,6 @@
 import { Canvas} from '@react-three/fiber'
-import { BakeShadows, MeshReflectorMaterial } from '@react-three/drei'
-import { Suspense } from 'react'
+import { BakeShadows, MeshReflectorMaterial, useCursor } from '@react-three/drei'
+import { Suspense, useState } from 'react'
 import { Perf } from 'r3f-perf'
 import './App.css'
 
@@ -12,17 +12,16 @@ import SmallText from './components/SmallText'
 import LoadImage from './components/LoadImage'
 import Camera from './components/Camera'
 import InitialLoad from './components/InitialLoad'
+import { usePan } from './main'
 
 
 import Flame from './components/Flame'
 import Sconce from './components/Sconce'
 import ArcadeMachine from './components/ArcadeMachine'
 import Tavern from './components/Tavern'
-import BountyBoard from './components/BountyBoard'
-import SkillBooks from './components/SkillBooks'
 import LightPost from './components/Lightpost'
 import MedievalBookStack from './components/MedievalBookStack'
-import { usePan } from './main'
+import ProjectSign from './components/ProjectSign'
 
 // function Test() {
 //   //!-------------------- Test --------------------
@@ -67,6 +66,9 @@ import { usePan } from './main'
 
 const App = () => {
   const { smallText } = usePan()
+  const [hovered, setHovered] = useState(false);
+
+  useCursor(hovered, 'pointer', 'default')
   
    return (
     <>
@@ -197,8 +199,6 @@ const App = () => {
             // position={[-6, 33, -69.94]}
             moveTo={[-11, 38.95, -64.5]}
             lookAt={[-11, 38.95, -75.5]}
-            size={.25}
-            depth={0}
             setControls
             hoverColor={'#ff0000'}
             switchProject
@@ -208,8 +208,6 @@ const App = () => {
             position={[-2.5, 33, -69.94]}
             moveTo={[-200, 175, 200]}
             lookAt={[0, 0, 0]}
-            size={.25}
-            depth={0}
             setControls
             hoverColor={'#ff0000'}
           />
@@ -218,11 +216,8 @@ const App = () => {
           <SmallText
             text='About Me'
             position={[-11.5, 35.5, -69.94]}
-            // position={[-12.5, 35.125, -69.94]}
             moveTo={[-4, 36.5, -64.5]}
             lookAt={[-4, 36.5, -75.5]}
-            size={.25}
-            depth={0}
             setControls
             hoverColor={'#ff0000'}
             switchProject
@@ -232,8 +227,6 @@ const App = () => {
             position={[-9, 35.5, -69.94]}
             moveTo={[-200, 175, 200]}
             lookAt={[0, 0, 0]}
-            size={.25}
-            depth={0}
             setControls
             hoverColor={'#ff0000'}
           />
@@ -248,7 +241,7 @@ const App = () => {
             canHover
             moveTo={[44, 47, -15]} 
             lookAt={[48, 47, -15]}  
-            />
+          />
 
             <LoadModel 
               file={'bounty_board.glb'}
@@ -258,14 +251,15 @@ const App = () => {
               canHover
               lookAt={[52, 16, 139]}
               moveTo={[41, 16, 139]}
-              />
+            />
 
+          <ProjectSign scale={[.25, .25, .25]} rotation={[0, Math.PI / 2, 0]} position={[75, 70, 22]} onPointerOver={(e) => {e.stopPropagation(); setHovered(true)}} onPointerOut={(e) => {e.stopPropagation(); setHovered(false)}}/>
           <ArcadeMachine position={[80, -8, 0]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project1.corbinainsworth.com'} name='project1'/>
           <ArcadeMachine position={[80, -8, 50]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project2.corbinainsworth.com'} name='project2'/>
           <MedievalBookStack position={[22, 23.6, 70]} scale={[.33, .33, .33]} rotation={[0, -2.5, 0]} />
           <LightPost position={[-90, -5, 120]} scale={[4.5, 4.5, 4.5]} rotation={[0, 2.5, 0]}/>
 
-          <Tavern scale={[25, 25, 25]}/>
+          <Tavern scale={[25, 25, 25]} onPointerOver={e => e.stopPropagation()}/>
 
           <BakeShadows />
         </Suspense>
