@@ -4,7 +4,7 @@ export default function Clock() {
     const [time, setTime] = useState({
       seconds: new Date().getSeconds(),
       minutes: new Date().getMinutes(),
-      hours: new Date().getHours() % 12,
+      hours: new Date().getHours(),
     });
   
     useEffect(() => {
@@ -12,7 +12,7 @@ export default function Clock() {
         setTime({
           seconds: new Date().getSeconds(),
           minutes: new Date().getMinutes(),
-          hours: new Date().getHours() % 12,
+          hours: new Date().getHours(),
         });
       }, 1000)
   

@@ -51,11 +51,13 @@ export default function SmallText({text, position, rotation, moveTo, lookAt, set
             <Html wrapperClass={"test"} transform occlude>
                 <p 
                     style={{color}}
-                    onPointerOver={() => {        
+                    onPointerOver={(e) => { 
+                        e.stopPropagation()       
                         setColor(hoverColor)
                         setHovered(true)
                     }}
-                    onPointerOut={() => {
+                    onPointerOut={(e) => {
+                        e.stopPropagation()
                         setColor('#ffffff')
                         setHovered(false)
                     }}

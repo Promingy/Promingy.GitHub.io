@@ -18,8 +18,7 @@ export default function Camera() {
     useEffect(() => {
     function onDragStart() {
         setPan(false)
-        clearTimeout(timeout)
-        clearTimeout(timeout2)
+        clearTimeouts()
     }
 
     function onDragEnd() {
@@ -33,16 +32,12 @@ export default function Camera() {
         , 15000)
     }
 
-    if (controls) {
-        controls.addEventListener('controlstart', onDragStart)
-        controls.addEventListener('controlend', onDragEnd)
-    }
+        controls?.addEventListener('controlstart', onDragStart)
+        controls?.addEventListener('controlend', onDragEnd)
 
     return () => {
-        if (controls) {
-        controls.removeEventListener('controlstart', onDragStart)
-        controls.removeEventListener('controlend', onDragEnd)
-        }
+        controls?.removeEventListener('controlstart', onDragStart)
+        controls?.removeEventListener('controlend', onDragEnd)
     }
     
     }, [controls])

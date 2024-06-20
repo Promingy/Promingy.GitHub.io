@@ -1,6 +1,6 @@
 import { Canvas} from '@react-three/fiber'
 import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial } from '@react-three/drei'
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import { Perf } from 'r3f-perf'
 import './App.css'
 
@@ -23,6 +23,8 @@ import LightPost from './components/Lightpost'
 import MedievalBookStack from './components/MedievalBookStack'
 import ProjectSign from './components/ProjectSign'
 import Clock from './components/Clock'
+import BountyBoard from './components/BountyBoard'
+import SkillBooks from './components/SkillBooks'
 
 // function Test() {
 //   const [time, setTime] = useState({
@@ -58,15 +60,15 @@ import Clock from './components/Clock'
 
 const App = () => {
   const { smallText } = usePan()
+
    return (
     <>
-      
       <Clock />
 
-      <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
-        {/* <Perf position={'top-left'} /> */}
+      <Canvas shadows dpr={1} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
+        <BakeShadows />
+        {/* <Perf position={'top-left'}  openByDefault/> */}
         <Suspense fallback={<InitialLoad />}>
-          {/* <fog attach="fog" args={[0x000000, 100, 1500]} /> */}
           <Camera />
 
           <mesh receiveShadow rotation={[-Math.PI * 0.5, 0, 0]} position={[0, -7, 0]}>
@@ -85,9 +87,9 @@ const App = () => {
           </mesh>
 
           <group>
-            <Lights shadow position={[44, 50, 80]}  intensity={2000} />
-            <Lights shadow position={[44, 50, -30]}  intensity={2000} />
-            <Lights shadow position={[-25, 50, -60]}  intensity={2000} />
+            <Lights  position={[44, 50, 80]}  intensity={2000} />
+            <Lights  position={[44, 50, -30]}  intensity={2000} />
+            <Lights  position={[-25, 50, -60]}  intensity={2000} />
             <Lights shadow position={[-33.3, 10, -65]} rotateX={3.14} color={'orange'} intensity={2500} decay={1.7} />
 
             <Lights shadow position={[70, 60, 120]}  intensity={2000} decay={1.5}/>
@@ -112,66 +114,72 @@ const App = () => {
             position={[-3.91, 36.5, -69.95]}
             scale={[.0475, .085, .1]}
           />
-          
-          <Text 
-            text='Résumé' 
-            position={[-178, 59, -72]}
-            moveTo={[41, 16, 139]}
-            lookAt={[52, 16, 139]}
-            size={15}
-            depth={5}
-            setControls={false}
+          <group>
+            <Text 
+              text='Résumé' 
+              position={[-178, 59, -72]}
+              moveTo={[41, 16, 139]}
+              lookAt={[52, 16, 139]}
+              size={15}
+              depth={5}
+              setControls={false}
+              lookingAt="bounty"
+              />
+            <Text 
+              text='Skills' 
+              position={[-183, 37, -72]}
+              moveTo={[44, 47, -15]}
+              lookAt={[48, 47, -15]}
+              size={15}
+              depth={5}
+              setControls={false}
+              lookingAt="skills"
+              />
+            <Text 
+              text='Experience'
+              position={[-183, 15, -72]}
+              moveTo={[-11, 38.95, -64.5]}
+              lookAt={[-11, 38.95, -75.5]}
+              size={15}
+              depth={5}
+              setControls={false}
+              enableButtons
+              lookingAt="experience"
+              />
+            <Text 
+              text='About Me' 
+              position={[-190, -7, -72]}
+              moveTo={[-4, 36.5, -64.5]}
+              lookAt={[-4, 36.5, -75.5]}
+              size={15}
+              depth={5}
+              setControls={false}
+              enableButtons
+              lookingAt="about"
             />
-          <Text 
-            text='Skills' 
-            position={[-183, 37, -72]}
-            moveTo={[44, 47, -15]}
-            lookAt={[48, 47, -15]}
-            size={15}
-            depth={5}
-            setControls={false}
+            <Text
+              text='Project1'
+              position={[-260, 15, -72]}
+              moveTo={[95, 28, -0.5]}
+              lookAt={[85.2, 27, -0.75]}
+              size={15}
+              depth={5}
+              setControls={false}
+              displayProject={'project1'}
+              lookinAt="project1"
             />
-          <Text 
-            text='Experience'
-            position={[-183, 15, -72]}
-            moveTo={[-11, 38.95, -64.5]}
-            lookAt={[-11, 38.95, -75.5]}
-            size={15}
-            depth={5}
-            setControls={false}
-            enableButtons
+            <Text
+              text='Project2'
+              position={[-265, -7, -72]}
+              moveTo={[95, 28, 50]}
+              lookAt={[85, 27, 49.5]}
+              size={15}
+              depth={5}
+              displayProject={'project2'}
+              setControls={false}
+              lookingAt="project2"
             />
-          <Text 
-            text='About Me' 
-            position={[-190, -7, -72]}
-            moveTo={[-4, 36.5, -64.5]}
-            lookAt={[-4, 36.5, -75.5]}
-            size={15}
-            depth={5}
-            setControls={false}
-            enableButtons
-          />
-          <Text
-            text='Project1'
-            position={[-260, 15, -72]}
-            moveTo={[95, 28, -0.5]}
-            lookAt={[85.2, 27, -0.75]}
-            size={15}
-            depth={5}
-            setControls={false}
-            displayProject={'project1'}
-            sounds
-          />
-          <Text
-            text='Project2'
-            position={[-265, -7, -72]}
-            moveTo={[95, 28, 50]}
-            lookAt={[85, 27, 49.5]}
-            size={15}
-            depth={5}
-            displayProject={'project2'}
-            setControls={false}
-          />
+          </group>
 
           <Flame />
 
@@ -222,36 +230,15 @@ const App = () => {
           </>
           }
 
-          <LoadModel 
-            file={'skill_books.glb'} 
-            scale={[.15, .15, .15]} 
-            position={[48, 51.75, -8]} 
-            rotation={[-1.6, -1.5, 0]} 
-            canHover
-            moveTo={[44, 47, -15]} 
-            lookAt={[48, 47, -15]}  
-          />
-
-            <LoadModel 
-              file={'bounty_board.glb'}
-              scale={[10, 10, 10]}
-              rotation={[0, -Math.PI / 2, 0]}
-              position={[52, -5, 150]}
-              canHover
-              lookAt={[52, 16, 139]}
-              moveTo={[41, 16, 139]}
-            />
-
           <ProjectSign scale={[.25, .25, .25]} rotation={[0, Math.PI / 2, 0]} position={[75, 70, 22]}/>
+          <SkillBooks scale={[.15, .15, .15]} position={[48, 51.75, -8]} rotation={[-1.6, -1.5, 0]} canHover moveTo={[44, 47, -15]} lookAt={[48, 47, -15]}/>
+          <BountyBoard scale={[10, 10, 10]} rotation={[0, -Math.PI / 2, 0]} position={[52, -5, 150]} canHover lookAt={[52, 16, 139]} moveTo={[41, 16, 139]}/>
           <ArcadeMachine position={[80, -8, 0]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project1.corbinainsworth.com'} name='project1'/>
           <ArcadeMachine position={[80, -8, 50]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project2.corbinainsworth.com'} name='project2'/>
           <MedievalBookStack position={[22, 23.6, 70]} scale={[.33, .33, .33]} rotation={[0, -2.5, 0]} />
           <LightPost position={[-90, -5, 120]} scale={[4.5, 4.5, 4.5]} rotation={[0, 2.5, 0]}/>
 
           <Tavern scale={[25, 25, 25]} onPointerOver={e => e.stopPropagation()}/>
-
-          <AdaptiveDpr pixelated />
-          <BakeShadows />
         </Suspense>
       </Canvas>    
     </>

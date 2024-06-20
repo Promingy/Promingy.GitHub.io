@@ -49,7 +49,7 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                 }
             })
         }
-    })
+    }, [controls, lookAt, moveTo, setPan, whoosh])
 
     return (
         <Detailed 

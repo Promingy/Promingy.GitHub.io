@@ -1,8 +1,36 @@
-import { useGLTF } from '@react-three/drei'
+import { useGLTF, Detailed, useCursor } from '@react-three/drei'
 import { NearestFilter } from 'three'
+import { useThree } from '@react-three/fiber'
+import { useCallback, useState } from 'react'
+import { usePan } from '../main'
 
 export default function SkillBooks(props) {
-  const { nodes, materials } = useGLTF(`models/${props.res}/skill_books.glb`)
+  const { nodes, materials } = useGLTF(`models/low-res/skill_books.glb`)
+  const { materials: highMats } = useGLTF(`models/high-res/skill_books.glb`)
+  const [hovered, setHovered] = useState(false)
+  const { setPan, whoosh, lookingAt, setLookingAt, handlePointerIn, handlePointerOut } = usePan();
+  const { controls } = useThree();
+
+  
+  const handleClick = useCallback(() => {
+    setPan(false);
+    whoosh.play();
+    controls._removeAllEventListeners();
+
+    if (lookingAt == 'skills') {
+      setLookingAt('none')
+      
+      controls._addAllEventListeners(controls._domElement);
+
+      controls.reset(true)
+      setPan(lookingAt == 'none')
+    }
+    else {
+      setLookingAt('skills')
+      controls.setLookAt(44, 47, -15, 48, 47, -15, true)
+    }
+}, [controls, setPan, whoosh])
+
   for (const key in materials) {
     if (materials[key].isMaterial) {
       materials[key].side = 0;
@@ -11,7 +39,7 @@ export default function SkillBooks(props) {
     }
   }
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} onPointerOver={handlePointerIn} onPointerLeave={handlePointerOut} onClick={handleClick}>
       <mesh receiveShadow geometry={nodes.Box002_ORANGE_0.geometry} material={materials.ORANGE} position={[-30.927, 3.112, -56.585]} rotation={[-Math.PI / 2, 0, 0]} scale={[26.586, 17.029, 5.141]} />
       <mesh receiveShadow geometry={nodes.Box003_RED_0.geometry} material={materials.material} position={[-30.573, 14.017, -57.247]} rotation={[-Math.PI / 2, 0, -0.061]} scale={[26.586, 17.029, 5.141]} />
       <mesh receiveShadow geometry={nodes.Box004_blue_0.geometry} material={materials.blue} position={[-30.79, 35.178, -57.33]} rotation={[-Math.PI / 2, 0, -0.067]} scale={[26.586, 17.029, 5.141]} />
