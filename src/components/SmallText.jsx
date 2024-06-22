@@ -25,7 +25,7 @@ export default function SmallText({text, position, rotation, moveTo, lookAt, hov
         controls._removeAllEventListeners();
 
 
-        setLookingAt('none');
+        setLookingAt(switchProject ? switchProject:'none');
 
         controls?.setLookAt(...moveTo, ...lookAt, true)
         controls?._addAllEventListeners(controls._domElement);
