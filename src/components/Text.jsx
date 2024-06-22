@@ -1,13 +1,13 @@
 import { useThree } from '@react-three/fiber'
 import Playball from '../Playball_Regular.json'
-import { useState } from 'react'
-import { clearTimeouts } from './Camera'
-import { usePan } from '../main'
 import { Text3D } from '@react-three/drei'
+import { clearTimeouts } from './Camera'
+import { useState } from 'react'
+import { usePan } from '../main'
 
 
 
-export default function Text({text, size, depth, position, rotation, moveTo, lookAt, setControls, hoverColor=0xff0000, baseColor=0xffffff, displayProject, ...props}) {
+export default function Text({text, size, position, rotation, moveTo, lookAt, hoverColor=0xff0000, baseColor=0xffffff, displayProject, ...props}) {
     const { setPan, setSmallText, setDisplayProject, whoosh, click, handlePointerIn, handlePointerOut, setLookingAt } = usePan() 
     const { controls } = useThree()
     const [color, setColor] = useState(baseColor || 0xffffff)
@@ -38,9 +38,7 @@ export default function Text({text, size, depth, position, rotation, moveTo, loo
 
                 setTimeout(() => {
                     setDisplayProject(displayProject || 'none');
-                    if (props.enableButtons) {
-                        setSmallText(true);
-                    }
+                    setSmallText(props.enableButtons || false);
                 }, 2000)
                 
                 controls?.setLookAt(...moveTo, ...lookAt, true)

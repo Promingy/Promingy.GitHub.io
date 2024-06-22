@@ -1,7 +1,11 @@
 import { useGLTF } from '@react-three/drei'
+import { useEffect } from 'react'
 
 export default function Tavern(props) {
   const { nodes, materials } = useGLTF('models/baked-tavern.glb')
+
+  useEffect(() => {props.afterRender()}, [])
+  
   Object.values(materials).forEach((m) => m.metalness = 0)
   return (
     <group {...props} dispose={null}>

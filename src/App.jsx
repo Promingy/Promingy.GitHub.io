@@ -1,6 +1,6 @@
 import { Canvas} from '@react-three/fiber'
 import { BakeShadows, MeshReflectorMaterial } from '@react-three/drei'
-import { Suspense } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Perf } from 'r3f-perf'
 import './App.css'
 
@@ -30,10 +30,16 @@ import Test from './components/Test'
 
 const App = () => {
   const { smallText } = usePan()
+  const [ assetsLoaded, setAssetsLoaded ] = useState(false)
+  
+  function handleAssetsLoaded() {
+    setAssetsLoaded(true)
+  }
+
 
    return (
     <>
-      <Clock />
+      {assetsLoaded &&  <Clock /> }
 
       <Canvas shadows dpr={1} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
         <BakeShadows />
@@ -93,8 +99,6 @@ const App = () => {
               moveTo={[41, 16, 139]}
               lookAt={[52, 16, 139]}
               size={15}
-              depth={5}
-              setControls={false}
               lookingAt="bounty"
               />
             <Text 
@@ -103,8 +107,6 @@ const App = () => {
               moveTo={[44, 47, -15]}
               lookAt={[48, 47, -15]}
               size={15}
-              depth={5}
-              setControls={false}
               lookingAt="skills"
               />
             <Text 
@@ -113,8 +115,6 @@ const App = () => {
               moveTo={[-11, 38.95, -64.5]}
               lookAt={[-11, 38.95, -75.5]}
               size={15}
-              depth={5}
-              setControls={false}
               enableButtons
               lookingAt="experience"
               />
@@ -124,8 +124,6 @@ const App = () => {
               moveTo={[-4, 36.5, -64.5]}
               lookAt={[-4, 36.5, -75.5]}
               size={15}
-              depth={5}
-              setControls={false}
               enableButtons
               lookingAt="about"
             />
@@ -135,8 +133,6 @@ const App = () => {
               moveTo={[95, 28, -0.5]}
               lookAt={[85.2, 27, -0.75]}
               size={15}
-              depth={5}
-              setControls={false}
               displayProject={'project1'}
               lookinAt="project1"
             />
@@ -146,9 +142,7 @@ const App = () => {
               moveTo={[95, 28, 50]}
               lookAt={[85, 27, 49.5]}
               size={15}
-              depth={5}
               displayProject={'project2'}
-              setControls={false}
               lookingAt="project2"
             />
           </group>
@@ -165,10 +159,8 @@ const App = () => {
             <SmallText
             text='Experience'
             position={[-5, 33, -69.94]}
-            // position={[-6, 33, -69.94]}
             moveTo={[-11, 38.95, -64.5]}
             lookAt={[-11, 38.95, -75.5]}
-            setControls
             hoverColor={'#ff0000'}
             switchProject
           />
@@ -177,7 +169,6 @@ const App = () => {
             position={[-2.5, 33, -69.94]}
             moveTo={[-200, 175, 200]}
             lookAt={[0, 0, 0]}
-            setControls
             hoverColor={'#ff0000'}
           />
 
@@ -187,7 +178,6 @@ const App = () => {
             position={[-11.5, 35.5, -69.94]}
             moveTo={[-4, 36.5, -64.5]}
             lookAt={[-4, 36.5, -75.5]}
-            setControls
             hoverColor={'#ff0000'}
             switchProject
             />
@@ -196,7 +186,6 @@ const App = () => {
             position={[-9, 35.5, -69.94]}
             moveTo={[-200, 175, 200]}
             lookAt={[0, 0, 0]}
-            setControls
             hoverColor={'#ff0000'}
           />
           </>
@@ -210,7 +199,7 @@ const App = () => {
           <MedievalBookStack position={[22, 23.6, 70]} scale={[.33, .33, .33]} rotation={[0, -2.5, 0]} />
           <LightPost position={[-90, -5, 120]} scale={[4.5, 4.5, 4.5]} rotation={[0, 2.5, 0]}/>
 
-          <Tavern scale={[25, 25, 25]} onPointerOver={e => e.stopPropagation()}/>
+          <Tavern afterRender={handleAssetsLoaded} scale={[25, 25, 25]} onPointerOver={e => e.stopPropagation()}/>
           {/* <Test scale={[25, 25, 25]} onPointerOver={e => e.stopPropagation()}/> */}
         </Suspense>
       </Canvas>    

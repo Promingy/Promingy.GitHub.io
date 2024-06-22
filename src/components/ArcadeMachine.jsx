@@ -23,13 +23,9 @@ export default function ArcadeMachine(props) {
             <SmallText
             text='Previous Project'
             position={[86.5, 21.75, 5]}
-            // position={[86.5, 21, 7]}
             rotation={[-1.509, 1.425, 1.488]}
             moveTo={[95, 28, 50]}
             lookAt={[85, 27, 49.5]}
-            size={.5}
-            depth={0}
-            setControls
             hoverColor={'#F07F13'}
             switchProject={'project2'}
           />
@@ -39,9 +35,6 @@ export default function ArcadeMachine(props) {
             rotation={[-1.426, 1.400, 1.423]}
             moveTo={[-200, 175, 200]}
             lookAt={[0, 0, 0]}
-            size={.5}
-            depth={0}
-            setControls
             hoverColor={'#F07F13'}
           />
           </>
@@ -63,13 +56,9 @@ export default function ArcadeMachine(props) {
           <SmallText
             text='Back'
             position={[86.5, 21.75, 55.5]}
-            // position={[86.5, 21, 57]}
             rotation={[-1.518, 1.426, 1.497]}
             moveTo={[-200, 175, 200]}
             lookAt={[0, 0, 0]}
-            size={.5}
-            depth={0}
-            setControls
             hoverColor={'#F07F13'}
           />
           </>
