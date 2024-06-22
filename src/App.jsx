@@ -1,11 +1,11 @@
 import { Canvas} from '@react-three/fiber'
-import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial } from '@react-three/drei'
-import { Suspense, useState } from 'react'
+import { BakeShadows, MeshReflectorMaterial } from '@react-three/drei'
+import { Suspense } from 'react'
 import { Perf } from 'r3f-perf'
 import './App.css'
 
 
-import LoadModel from './components/LoadModel'
+// import LoadModel from './components/LoadModel'
 import Lights from './components/Lights'
 import Text from './components/Text'
 import SmallText from './components/SmallText'
@@ -26,37 +26,7 @@ import Clock from './components/Clock'
 import BountyBoard from './components/BountyBoard'
 import SkillBooks from './components/SkillBooks'
 
-// function Test() {
-//   const [time, setTime] = useState({
-//     seconds: new Date().getSeconds(),
-//     minutes: new Date().getMinutes(),
-//     hours: new Date().getHours() % 12,
-//   });
-
-//   useEffect(() => {
-//     const clock = setInterval(() => {
-//       setTime({
-//         seconds: new Date().getSeconds(),
-//         minutes: new Date().getMinutes(),
-//         hours: new Date().getHours() % 12,
-//       });
-//     }, 1000)
-
-//     return () => clearInterval(clock)
-//   },[])
-
-//   const { seconds, minutes, hours } = time;
-
-//   const formatTime = (unit) => unit < 10 ? `0${unit}` : unit
-  
-//   return (
-//       <div style={{color: "white", position: "absolute", zIndex: 1, left: 20}}>
-//         <h2 style={{marginBottom: 5,}}>Corbin Ainsworth</h2>
-//         <h3 style={{marginTop: 5}}>Software Engineer</h3>
-//         <h3 style={{marginTop: 5}}>{formatTime(hours)}:{formatTime(minutes)}:{formatTime(seconds)}</h3>
-//       </div>
-//   )
-// }
+import Test from './components/Test'
 
 const App = () => {
   const { smallText } = usePan()
@@ -87,10 +57,10 @@ const App = () => {
           </mesh>
 
           <group>
-            <Lights  position={[44, 50, 80]}  intensity={2000} />
-            <Lights  position={[44, 50, -30]}  intensity={2000} />
-            <Lights  position={[-25, 50, -60]}  intensity={2000} />
-            <Lights shadow position={[-33.3, 10, -65]} rotateX={3.14} color={'orange'} intensity={2500} decay={1.7} />
+            {/* <Lights  position={[44, 50, 80]}  intensity={2000} /> */}
+            {/* <Lights  position={[44, 50, -30]}  intensity={2000} /> */}
+            {/* <Lights  position={[-25, 50, -60]}  intensity={2000} /> */}
+            {/* <Lights shadow position={[-33.3, 10, -65]} rotateX={3.14} color={'orange'} intensity={2500} decay={1.7} /> */}
 
             <Lights shadow position={[70, 60, 120]}  intensity={2000} decay={1.5}/>
             <Lights position={[65, 63, -70]}  intensity={2000} decay={1.5}/>
@@ -99,8 +69,10 @@ const App = () => {
 
             <Lights shadow position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.675}/>
 
-            <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
+            {/* <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/> */}
           </group>
+
+          <ambientLight intensity={1.5}/>
 
           <LoadImage
             file={'ainsworth_corbin_resume.png'}
@@ -239,6 +211,7 @@ const App = () => {
           <LightPost position={[-90, -5, 120]} scale={[4.5, 4.5, 4.5]} rotation={[0, 2.5, 0]}/>
 
           <Tavern scale={[25, 25, 25]} onPointerOver={e => e.stopPropagation()}/>
+          {/* <Test scale={[25, 25, 25]} onPointerOver={e => e.stopPropagation()}/> */}
         </Suspense>
       </Canvas>    
     </>

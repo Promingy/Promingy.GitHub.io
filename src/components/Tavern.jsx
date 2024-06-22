@@ -1,13 +1,13 @@
 import { useGLTF } from '@react-three/drei'
 
 export default function Tavern(props) {
-  const { nodes, materials } = useGLTF('models/tavern.glb')
-  Object.values(materials).forEach((m) => m.side = 0)
+  const { nodes, materials } = useGLTF('models/baked-tavern.glb')
+  Object.values(materials).forEach((m) => m.metalness = 0)
   return (
     <group {...props} dispose={null}>
       <mesh castShadow receiveShadow geometry={nodes['Baqueta_(1)_Plastic_-_Translucent_Glossy_(Yellow)_0001'].geometry} material={materials['Plastic_-_Translucent_Glossy_Yellow.001']} position={[0.205, 0.372, 1.13]} rotation={[-Math.PI, 0, -Math.PI]} scale={1.182} />
       <mesh castShadow receiveShadow geometry={nodes['Baqueta_(2)_Banqueta_Carvalho_-_Semibrilhante_0001'].geometry} material={materials['Banqueta_Carvalho_-_Semibrilhante.001']} position={[0.15, 0.372, 0.207]} rotation={[-Math.PI, 0, -Math.PI]} scale={1.089} />
-      <mesh receiveShadow geometry={nodes['Aro_de_metal_(1)_(2)_Coating_-_Black_Oxide_0001'].geometry} material={materials['Coating_-_Black_Oxide.001']} position={[1.219, 0.302, 4.445]} rotation={[-Math.PI, 0, -Math.PI]} scale={0.244} />
+      {/* <mesh receiveShadow geometry={nodes['Aro_de_metal_(1)_(2)_Coating_-_Black_Oxide_0001'].geometry} material={materials['Coating_-_Black_Oxide.001']} position={[1.219, 0.302, 4.445]} rotation={[-Math.PI, 0, -Math.PI]} scale={0.244} /> */}
       <mesh castShadow receiveShadow geometry={nodes['Ba��_(2)_Barris_Nogueira_0001'].geometry} material={materials['Barris_Nogueira.001']} position={[1.219, 0.292, 4.445]} rotation={[-Math.PI, 0, -Math.PI]} scale={0.292} />
       <mesh receiveShadow geometry={nodes.Cartaz_1_cartaz_2_Poliestireno_0001.geometry} material={materials['cartaz_2_Poliestireno.001']} position={[-0.414, 1.558, -2.8]} rotation={[-Math.PI, 0, -Math.PI]} scale={0.166} />
       <mesh receiveShadow geometry={nodes.Cartaz_2_cartaz_Espelho_0001.geometry} material={materials['cartaz_Espelho.001']} position={[-0.156, 1.46, -2.8]} rotation={[-Math.PI, 0, -Math.PI]} scale={0.166} />
@@ -25,7 +25,7 @@ export default function Tavern(props) {
       <mesh receiveShadow geometry={nodes['Detalhe_Balc��o_(1)_Bronze_-_Patina_0001'].geometry} material={materials['Bronze_-_Patina.001']} position={[1.382, 0.456, 0.857]} rotation={[-Math.PI, 0, -Math.PI]} scale={2.336} />
       <mesh receiveShadow geometry={nodes.Escada_Pine_0001.geometry} material={materials['Pine.001']} position={[1.078, 0.851, -2.154]} rotation={[-Math.PI, 0, -Math.PI]} scale={1.043} />
       <mesh receiveShadow geometry={nodes['Fogueira_Lenha_Bambu_claro_-_Semi-brilhante_0001'].geometry} material={materials['Lenha_Bambu_claro_-_Semi-brilhante.001']} position={[-1.347, 0.158, -2.827]} rotation={[-Math.PI, 0, -Math.PI]} scale={0.428} />
-      <mesh receiveShadow geometry={nodes['Iterno_da_lareira_PA_11_-_Nylon-_HP_11-30_(with_EOS_P_396_3'].geometry} material={materials['PA_11_-_Nylon-_HP_11-30_with_EOS_P_396_3D_Printer.001']} position={[-1.358, 0.534, -2.719]} rotation={[-Math.PI, 0, -Math.PI]} scale={[0.423, 0.414, 0.419]} />
+      {/* <mesh receiveShadow geometry={nodes['Iterno_da_lareira_PA_11_-_Nylon-_HP_11-30_(with_EOS_P_396_3'].geometry} material={materials['PA_11_-_Nylon-_HP_11-30_with_EOS_P_396_3D_Printer.001']} position={[-1.358, 0.534, -2.719]} rotation={[-Math.PI, 0, -Math.PI]} scale={[0.423, 0.414, 0.419]} /> */}
       <mesh receiveShadow geometry={nodes['Janela_(1)_Gemstone_-_Ruby_0001'].geometry} material={materials['Gemstone_-_Ruby.001']} position={[-0.987, 1.811, -2.89]} rotation={[-Math.PI, 0, -Math.PI]} scale={1.734} />
       <mesh castShadow receiveShadow geometry={nodes['Lareira_Lareira_Superf��cie_-_Fosca_0001'].geometry} material={materials['Lareira_Superfcie_-_Fosca.001']} position={[-1.357, 1.722, -2.637]} rotation={[-Math.PI, 0, -Math.PI]} scale={[1.721, 1.721, 1.704]} />
       <mesh receiveShadow geometry={nodes['Lenha_Fabric_(Light_Brown)_0001'].geometry} material={materials['Fabric_Light_Brown.001']} position={[-2.609, 0.209, -2.44]} rotation={[-Math.PI, 0, -Math.PI]} scale={0.241} />
@@ -46,4 +46,4 @@ export default function Tavern(props) {
   )
 }
 
-useGLTF.preload('models/tavern.glb')
+useGLTF.preload('models/baked-tavern.glb')

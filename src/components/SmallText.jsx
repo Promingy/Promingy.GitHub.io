@@ -1,72 +1,58 @@
-import { FontLoader } from 'three/examples/jsm/Addons.js'
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
-import { extend, useThree } from '@react-three/fiber'
-import Playball from '../Playball_Regular.json'
-import { useState } from 'react'
+import { useCursor, Text } from '@react-three/drei'
+import { useThree } from '@react-three/fiber'
 import { clearTimeouts } from './Camera'
+import { useState } from 'react'
 import { usePan } from '../main'
-import { Html, useCursor } from '@react-three/drei'
 
-extend({ TextGeometry })
-
-export default function SmallText({text, position, rotation, moveTo, lookAt, setControls, hoverColor="#ff0000", baseColor='#ffffff', switchProject}) {
-    const font = new FontLoader().parse(Playball)
-    const [color, setColor] = useState(baseColor || '#ffffff')
+export default function SmallText({text, position, rotation, moveTo, lookAt, hoverColor="#ff0000", baseColor='#ffffff', switchProject}) {
+    const [color, setColor] = useState(baseColor)
     const {controls} = useThree()
-    const { setPan, setSmallText, setDisplayProject, click, whoosh } = usePan() 
+    const { setPan, setSmallText, setDisplayProject, click, whoosh, lookingAt, setLookingAt } = usePan() 
     const [hovered, setHovered] = useState(false)
 
     useCursor(hovered, 'pointer', 'default')
 
     function handleClick(e) {
         e.stopPropagation()
-
-        if (setControls) controls.enabled = setControls
         
         clearTimeouts();
         
         click.play();
         whoosh.play();
 
-        setPan(false);
         setDisplayProject(switchProject || 'none');
         setSmallText(switchProject ? true : false);
-
         controls._removeAllEventListeners();
-        controls?.setLookAt(...moveTo, ...lookAt, true).then(() => {
-            controls.enabled = setControls
-            controls._addAllEventListeners(controls._domElement);
 
-            const { x, y, z } = controls._targetEnd
 
-            // check if the camera is looking at 0, 0, 0
-            if (!x && !y && !z) setPan(true)
-            }
-        )
+        setLookingAt('none');
+
+        controls?.setLookAt(...moveTo, ...lookAt, true)
+        controls?._addAllEventListeners(controls._domElement);
+
+        setPan(lookingAt == 'none')
     }
 
-
     return (
-        <mesh position={position} rotation={rotation}>
-            <Html wrapperClass={"test"} transform occlude>
-                <p 
-                    style={{color}}
-                    onPointerOver={(e) => { 
-                        e.stopPropagation()       
-                        setColor(hoverColor)
-                        setHovered(true)
-                    }}
-                    onPointerOut={(e) => {
-                        e.stopPropagation()
-                        setColor('#ffffff')
-                        setHovered(false)
-                    }}
-                
-                    onClick={handleClick}
-                >
-                    {text}
-                </p>
-            </Html>
-        </mesh>
+        <Text
+            font='/Playball-Regular.ttf'
+            color={color}
+            position={position}
+            rotation={rotation}
+            scale={.33}
+            onClick={handleClick}
+            onPointerOver={(e) => {
+                e.stopPropagation()
+                setColor(hoverColor)
+                setHovered(true)
+            }}
+            onPointerOut={(e) => {
+                e.stopPropagation()
+                setColor(baseColor)
+                setHovered(false)
+            }}
+        >
+            {text}
+        </Text>
     )
 }
