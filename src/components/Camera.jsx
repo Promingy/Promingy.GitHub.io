@@ -6,8 +6,8 @@ import { CameraControls } from '@react-three/drei';
 let timeout, timeout2;
 
 export function clearTimeouts() {
-  clearTimeout(timeout)
-  clearTimeout(timeout2)
+    clearTimeout(timeout);
+    clearTimeout(timeout2);
 }
 export default function Camera() {
     

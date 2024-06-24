@@ -1,4 +1,4 @@
-import { useGLTF, Detailed, useCursor } from '@react-three/drei'
+import { useGLTF, Detailed, useCursor, meshBounds } from '@react-three/drei'
 import { NearestFilter } from 'three'
 import { useThree } from '@react-three/fiber'
 import { useCallback, useState } from 'react'
@@ -43,8 +43,8 @@ export default function SkillBooks(props) {
     }
   }
   return (
-    <Detailed {...props} distances={[0, 50]}>
-    <group dispose={null} onPointerOver={handlePointerIn} onPointerLeave={handlePointerOut} onClick={handleClick}>
+    <Detailed raycast={meshBounds} {...props} distances={[0, 50]} onPointerOver={handlePointerIn} onPointerOut={handlePointerOut} onClick={handleClick}>
+    <group dispose={null}>
       <mesh receiveShadow geometry={nodes.Box002_ORANGE_0.geometry} material={highMats.ORANGE} position={[-30.927, 3.112, -56.585]} rotation={[-Math.PI / 2, 0, 0]} scale={[26.586, 17.029, 5.141]} />
       <mesh receiveShadow geometry={nodes.Box003_RED_0.geometry} material={highMats.material} position={[-30.573, 14.017, -57.247]} rotation={[-Math.PI / 2, 0, -0.061]} scale={[26.586, 17.029, 5.141]} />
       <mesh receiveShadow geometry={nodes.Box004_blue_0.geometry} material={highMats.blue} position={[-30.79, 35.178, -57.33]} rotation={[-Math.PI / 2, 0, -0.067]} scale={[26.586, 17.029, 5.141]} />
@@ -62,7 +62,7 @@ export default function SkillBooks(props) {
       <mesh receiveShadow geometry={nodes.Box008_pink_0001.geometry} material={highMats['pink.001']} position={[-29.499, 61.687, -58.882]} rotation={[-Math.PI / 2, 0, -0.036]} scale={[26.586, 17.029, 5.141]} />
       <mesh receiveShadow geometry={nodes.Box009_Cyan_0001.geometry} material={highMats['Cyan.001']} position={[-29.086, 50.782, -59.329]} rotation={[-Math.PI / 2, 0, 0]} scale={[26.586, 17.029, 5.141]} />
     </group>
-    <group dispose={null} onPointerOver={handlePointerIn} onPointerLeave={handlePointerOut} onClick={handleClick}>
+    <group dispose={null}>
       <mesh receiveShadow geometry={nodes.Box002_ORANGE_0.geometry} material={materials.ORANGE} position={[-30.927, 3.112, -56.585]} rotation={[-Math.PI / 2, 0, 0]} scale={[26.586, 17.029, 5.141]} />
       <mesh receiveShadow geometry={nodes.Box003_RED_0.geometry} material={materials.material} position={[-30.573, 14.017, -57.247]} rotation={[-Math.PI / 2, 0, -0.061]} scale={[26.586, 17.029, 5.141]} />
       <mesh receiveShadow geometry={nodes.Box004_blue_0.geometry} material={materials.blue} position={[-30.79, 35.178, -57.33]} rotation={[-Math.PI / 2, 0, -0.067]} scale={[26.586, 17.029, 5.141]} />

@@ -1,4 +1,4 @@
-import { useCursor, Text, Detailed } from '@react-three/drei'
+import { useCursor, Text, Bvh, meshBounds } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { clearTimeouts } from './Camera'
 import { useCallback, useState } from 'react'
@@ -29,9 +29,13 @@ export default function SmallText({text, size, position, rotation, moveTo, lookA
 
     }, [controls, setPan, setSmallText, click, whoosh, lookingAt, setLookingAt, newLookingAt, moveTo, lookAt]);
 
+
+    /// This is what's causing the FOUC (flash of unstyled content)
     return (
+        <Bvh setBoundingBox splitStrategy="SAH">
             <Text
                 font='/Playball-Regular.ttf'
+                characters="abcdefghijklmnopqrstuvwxyz0123456789!"
                 color={color}
                 position={position}
                 rotation={rotation}
@@ -50,5 +54,6 @@ export default function SmallText({text, size, position, rotation, moveTo, lookA
                 >
                 {text}
             </Text>
+        </Bvh>
     )
 }

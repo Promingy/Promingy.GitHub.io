@@ -1,4 +1,4 @@
-import { useGLTF, Detailed } from '@react-three/drei'
+import { useGLTF, Detailed, meshBounds } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { useCallback} from 'react'
 import { usePan } from '../main'
@@ -35,7 +35,7 @@ export default function BountyBoard(props) {
 
 
   return (
-    <group {...props} dispose={null} onPointerOver={handlePointerIn} onPointerOut={handlePointerOut} onClick={handleClick}>
+    <group {...props} raycast={meshBounds} dispose={null} onPointerOver={handlePointerIn} onPointerOut={handlePointerOut} onClick={handleClick}>
       <Detailed distances={[0, 50]}>
       <mesh castShadow receiveShadow geometry={nodes.Object_4.geometry} material={highMats['default']} position={[0, 1.643, -0.056]} scale={1.919} />
       <mesh castShadow receiveShadow geometry={nodes.Object_4.geometry} material={materials['default']} position={[0, 1.643, -0.056]} scale={1.919} />
