@@ -32,6 +32,12 @@ const App = () => {
   const [ assetsLoaded, setAssetsLoaded ] = useState(false)
   let panTimeout
 
+  //! ----------------- Test -----------------
+  const [reflective, setReflective] = useState(false)
+  const [shadowsOn, setShadows] = useState(true)
+  const [lightToggle, setLightToggle] = useState(false)
+  //! ----------------- End Test -----------------
+
   useEffect(() => {
     clearTimeout(panTimeout)
     setPan(!assetsLoaded || false)
@@ -53,28 +59,58 @@ const App = () => {
       {assetsLoaded && <Clock /> }
       {displayStart && <StartButton afterRender={handleAssetsLoaded}/> }
 
-      <Canvas camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
+      <Canvas shadows={shadowsOn} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
         {/* <Perf position={'top-left'}  openByDefault/> */}
         <Suspense fallback={<InitialLoad />}>
-        {/* <BakeShadows /> */}
+          <BakeShadows />
           <Camera />
+
+          {/* //!----------------Test---------- */}
+          <mesh position={[-215, 66, -72]} onClick={(e) => {
+            e.stopPropagation()
+            setReflective(!reflective)
+          }}>
+            <boxGeometry args={[10, 10, 10]} />
+            <meshBasicMaterial color='red' />
+          </mesh>
+
+          <mesh position={[-195, 66, -72]} onClick={(e) => {
+            e.stopPropagation()
+            setShadows(!shadowsOn)
+          }}>
+            <boxGeometry args={[10, 10, 10]} />
+            <meshBasicMaterial color='green' />
+          </mesh>
+
+          <mesh position={[-175, 66, -72]} onClick={(e) => {
+            e.stopPropagation()
+            setLightToggle(!lightToggle)
+          }}>
+            <boxGeometry args={[10, 10, 10]} />
+            <meshBasicMaterial color='blue' />
+          </mesh>
 
 
         {/* //! the refletor material jumps the triangles up about 100,000 */}
+          {!reflective ? 
           <mesh receiveShadow rotation={[-Math.PI * 0.5, 0, 0]} position={[0, -7, 0]}>
               <planeGeometry args={[1000, 1000]} />
               <meshStandardMaterial color='black' />
-              {/* <MeshReflectorMaterial
+          </mesh>
+          :
+          <mesh receiveShadow rotation={[-Math.PI * 0.5, 0, 0]} position={[0, -7, 0]}>
+              <planeGeometry args={[1000, 1000]} />
+              <MeshReflectorMaterial
                 mixStrength={.1} // Strength of the reflections
                 resolution={256} // Off-buffer resolution, lower=faster, higher=better quality
                 args={[1000, 1000]} // PlaneBufferGeometry arguments
-                rotation={[-Math.PI * 0.5, 0, 0]}
                 mirror={0.97} // Mirror environment, 0 = texture colors, 1 = pick up env colors
                 position={[0, -7, 0]}
-              /> */}
+                />
           </mesh>
+          }
 
-          {/* <group>
+          {lightToggle && <group>
             <Lights  position={[44, 50, 80]} intensity={2000} />
             <Lights  position={[44, 50, -30]} intensity={2000} />
             <Lights  position={[-25, 50, -60]} intensity={2000} />
@@ -88,9 +124,11 @@ const App = () => {
             <Lights shadow position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.8}/>
 
             <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
-          </group> */}
+          </group>}
 
-          <ambientLight intensity={1.5}/>
+          {!lightToggle && <ambientLight intensity={1.5}/>}
+
+          {/* //!------------End Test------------- */}
 
           <LoadImage {...Data.images.resume}/>
           <LoadImage {...Data.images.aboutMe}/>
