@@ -11,10 +11,10 @@ export const usePan = () => {
 
 export const PanProvider = ({children}) => {
   const [pan, setPan] = useState(true)
-  const [displayProject, setDisplayProject] = useState('none')
   const [smallText, setSmallText] = useState(false)
   const [lookingAt, setLookingAt] = useState('none')
   const [hovered, setHovered] = useState(false)
+  const [panTimeout, setPanTimeout] = useState(null)
 
   const handlePointerIn = useCallback(() => setHovered(true), [hovered])
   const handlePointerOut = useCallback(() => setHovered(false), [hovered])
@@ -35,8 +35,6 @@ export const PanProvider = ({children}) => {
     setPan,
     whoosh,
     click,
-    displayProject,
-    setDisplayProject,
     project1URL,
     project2URL,
     smallText,
@@ -45,6 +43,8 @@ export const PanProvider = ({children}) => {
     setLookingAt,
     handlePointerIn,
     handlePointerOut,
+    setPanTimeout,
+    panTimeout
   }
 
   return (

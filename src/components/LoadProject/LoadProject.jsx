@@ -1,35 +1,32 @@
-import { Html } from "@react-three/drei";
-import { TransformControls } from "@react-three/drei";
+import { Html, TransformControls } from "@react-three/drei";
 import './LoadProject.css';
-import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useEffect, useRef, useState } from "react";
 
 export default function LoadProject({ url, position, rotation, scale }) {
     const ref = useRef();
     // const tref = useRef();
+    // const [occlude, setOcclude] = useState(false);
 
-    // useFrame(() => {
+    // useEffect(() => {
     //     if (ref.current)
     //         ref.current.updateMatrixWorld();
-    //         console.log(ref.current.position)
-    // })
-
+    //         console.log('position', ref.current?.position)
+    //         console.log('rotation', ref.current?.rotation)
+    //         console.log('scale', ref.current?.scale)
+    // },[ref.current])
 
     return (
-        <mesh
-            position={position}
-            rotation={rotation}
-            scale={scale}
-            ref={ref}
-            >
-        <Html 
-            wrapperClass="project"
-            transform
-            occlude
-            >
-            <p/>
-            <object data={url} />
-        </Html>
-    </mesh>
-    );
+        <group position={[84, 25.5, position[2]]} rotation={[0,Math.PI/2,0]}>
+            <mesh ref={ref} rotation={[-0.25,-0.019,-0.002]} scale={[.36, .52, .09]}>
+            <Html
+                wrapperClass="project"
+                transform
+                occlude
+                >
+                    <p/>
+                    <object data={url} />
+                </Html>
+                </mesh>
+            </group>
+    )
 }

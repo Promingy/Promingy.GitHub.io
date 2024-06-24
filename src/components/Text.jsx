@@ -7,8 +7,8 @@ import { usePan } from '../main'
 
 
 
-export default function Text({text, size, position, rotation, moveTo, lookAt, hoverColor=0xff0000, baseColor=0xffffff, displayProject, ...props}) {
-    const { setPan, setSmallText, setDisplayProject, whoosh, click, handlePointerIn, handlePointerOut, setLookingAt } = usePan() 
+export default function Text({text, size, position, rotation, moveTo, lookAt, hoverColor=0xff0000, baseColor=0xffffff, ...props}) {
+    const { setPan, setSmallText, whoosh, click, handlePointerIn, handlePointerOut, setLookingAt } = usePan() 
     const { controls } = useThree()
     const [color, setColor] = useState(baseColor || 0xffffff)
 
@@ -34,10 +34,9 @@ export default function Text({text, size, position, rotation, moveTo, lookAt, ho
                 whoosh.play();
                 clearTimeouts();
                 setPan(false);
-                setLookingAt(props.lookingAt)
-
+                
                 setTimeout(() => {
-                    setDisplayProject(displayProject || 'none');
+                    setLookingAt(props.lookingAt)
                     setSmallText(props.enableButtons || false);
                 }, 2000)
                 

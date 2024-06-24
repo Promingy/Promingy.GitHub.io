@@ -5,7 +5,6 @@ import { Perf } from 'r3f-perf'
 import './App.css'
 
 
-// import LoadModel from './components/LoadModel'
 import Lights from './components/Lights'
 import Text from './components/Text'
 import SmallText from './components/SmallText'
@@ -29,8 +28,19 @@ import SkillBooks from './components/SkillBooks'
 import Test from './components/Test'
 
 const App = () => {
-  const { smallText } = usePan()
+  const { smallText, setPan, lookingAt, panTimeout, setPanTimeout } = usePan()
   const [ assetsLoaded, setAssetsLoaded ] = useState(false)
+
+  useEffect(() => {
+    clearTimeout(panTimeout)
+    setPan(false)
+    
+    if (lookingAt == 'none') {
+      setPanTimeout(setTimeout(() => {setPan(true)}, 5000))
+    }
+
+    return () => clearTimeout(panTimeout)
+  }, [lookingAt])
   
   function handleAssetsLoaded() {
     setAssetsLoaded(true)
@@ -46,6 +56,7 @@ const App = () => {
         {/* <Perf position={'top-left'}  openByDefault/> */}
         <Suspense fallback={<InitialLoad />}>
           <Camera />
+
 
           <mesh receiveShadow rotation={[-Math.PI * 0.5, 0, 0]} position={[0, -7, 0]}>
               <planeGeometry args={[1000, 1000]} />
@@ -63,22 +74,22 @@ const App = () => {
           </mesh>
 
           <group>
-            {/* <Lights  position={[44, 50, 80]}  intensity={2000} /> */}
-            {/* <Lights  position={[44, 50, -30]}  intensity={2000} /> */}
-            {/* <Lights  position={[-25, 50, -60]}  intensity={2000} /> */}
-            {/* <Lights shadow position={[-33.3, 10, -65]} rotateX={3.14} color={'orange'} intensity={2500} decay={1.7} /> */}
+            <Lights  position={[44, 50, 80]}  intensity={2000} />
+            <Lights  position={[44, 50, -30]}  intensity={2000} />
+            <Lights  position={[-25, 50, -60]}  intensity={2000} />
+            <Lights shadow position={[-33.3, 10, -65]} rotateX={3.14} color={'orange'} intensity={2500} decay={1.7} />
 
             <Lights shadow position={[70, 60, 120]}  intensity={2000} decay={1.5}/>
             <Lights position={[65, 63, -70]}  intensity={2000} decay={1.5}/>
             <Lights position={[53, 63, -83]}  intensity={2000} decay={1.5}/>
             <Lights shadow position={[-90, 63, -83]} intensity={2000} decay={1.5}/>
 
-            <Lights shadow position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.675}/>
+            <Lights shadow position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.8}/>
 
-            {/* <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/> */}
+            <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
           </group>
 
-          <ambientLight intensity={1.5}/>
+          {/* <ambientLight intensity={1.5}/> */}
 
           <LoadImage
             file={'ainsworth_corbin_resume.png'}
@@ -130,19 +141,19 @@ const App = () => {
             <Text
               text='Project1'
               position={[-260, 15, -72]}
-              moveTo={[95, 28, -0.5]}
-              lookAt={[85.2, 27, -0.75]}
+              // moveTo={[95, 28, -0.5]}
+              moveTo={[92, 27, -0.5]}
+              lookAt={[85.2, 26, -0.75]}
               size={15}
-              displayProject={'project1'}
-              lookinAt="project1"
+              lookingAt="project1"
             />
             <Text
               text='Project2'
               position={[-265, -7, -72]}
-              moveTo={[95, 28, 50]}
-              lookAt={[85, 27, 49.5]}
+              // moveTo={[95, 28, 50]}
+              moveTo={[92, 27, 49.75]}
+              lookAt={[85, 26, 49.5]}
               size={15}
-              displayProject={'project2'}
               lookingAt="project2"
             />
           </group>
@@ -194,8 +205,10 @@ const App = () => {
           <ProjectSign scale={[.25, .25, .25]} rotation={[0, Math.PI / 2, 0]} position={[75, 70, 22]}/>
           <SkillBooks scale={[.15, .15, .15]} position={[48, 51.75, -8]} rotation={[-1.6, -1.5, 0]} canHover moveTo={[44, 47, -15]} lookAt={[48, 47, -15]}/>
           <BountyBoard scale={[10, 10, 10]} rotation={[0, -Math.PI / 2, 0]} position={[52, -5, 150]} canHover lookAt={[52, 16, 139]} moveTo={[41, 16, 139]}/>
-          <ArcadeMachine position={[80, -8, 0]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project1.corbinainsworth.com'} name='project1'/>
-          <ArcadeMachine position={[80, -8, 50]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project2.corbinainsworth.com'} name='project2'/>
+          {/* <ArcadeMachine position={[80, -8, 0]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project1.corbinainsworth.com'} name='project1'/> */}
+          {/* <ArcadeMachine position={[80, -8, 50]} scale={[25, 25, 25]} rotation={[0, Math.PI / 2, 0]} project={'https://project2.corbinainsworth.com'} name='project2'/> */}
+          <ArcadeMachine position={[80, 17, 0]} scale={[25, 25, 25]} rotation={[0, 0, 0]} project={'https://project1.corbinainsworth.com'} name='project1'/>
+          <ArcadeMachine position={[80, 17, 50]} scale={[25, 25, 25]} rotation={[0, 0, 0]} project={'https://project2.corbinainsworth.com'} name='project2'/>
           <MedievalBookStack position={[22, 23.6, 70]} scale={[.33, .33, .33]} rotation={[0, -2.5, 0]} />
           <LightPost position={[-90, -5, 120]} scale={[4.5, 4.5, 4.5]} rotation={[0, 2.5, 0]}/>
 

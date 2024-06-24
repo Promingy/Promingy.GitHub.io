@@ -2,16 +2,21 @@ import { useGLTF, Detailed } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { useCallback} from 'react'
 import { usePan } from '../main'
+import { clearTimeouts } from './Camera'
 
 export default function BountyBoard(props) {
   const { nodes, materials } = useGLTF(`models/${props.res || 'low-res'}/bounty_board.glb`)
   const { materials: highMats } = useGLTF(`models/high-res/bounty_board.glb`)
-  const { setPan, whoosh, lookingAt, setLookingAt, handlePointerIn,  handlePointerOut } = usePan();
+  const { setPan, whoosh, lookingAt, setLookingAt, handlePointerIn,  handlePointerOut, panTimeout } = usePan();
   const { controls } = useThree();
 
   
   const handleClick = useCallback(() => {
     setPan(false);
+    
+    clearTimeouts();
+    clearTimeout(panTimeout);
+
     whoosh.play();
     controls._removeAllEventListeners();
 
@@ -21,7 +26,6 @@ export default function BountyBoard(props) {
       controls._addAllEventListeners(controls._domElement);
 
       controls.reset(true)
-      setPan(lookingAt == 'none')
     }
     else {
       setLookingAt('bounty')

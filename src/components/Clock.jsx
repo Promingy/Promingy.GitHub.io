@@ -4,6 +4,7 @@ export default function Clock() {
     const [time, setTime] = useState(new Date());
     const [name, setName] = useState("")
     const [subHeader, setSubHeader] = useState("")
+    const typingSound = new Audio('sounds/typing.mp3')
 
     const hours = time.getHours().toString().padStart(2, '0')
     const minutes = time.getMinutes().toString().padStart(2, '0')
@@ -25,6 +26,8 @@ export default function Clock() {
       const name = "Corbin Ainsworth"
       const subHeader = "Software Engineer"
       let [i, j] = [0, 0]
+      typingSound.play()
+
 
       const interval = setInterval(() => {
         setName(name.slice(0, i))
@@ -34,12 +37,16 @@ export default function Clock() {
           const subHeaderInterval = setInterval(() => {
             setSubHeader(subHeader.slice(0, j))
             j++
-            if (j > subHeader.length) clearInterval(subHeaderInterval)
+            if (j > subHeader.length) {
+              typingSound.pause()
+              clearInterval(subHeaderInterval)
+            }
           }, 100)
         }
       }
       , 100)
 
+      return () => clearInterval(interval)
     },[])  
     
     return (

@@ -3,16 +3,21 @@ import { NearestFilter } from 'three'
 import { useThree } from '@react-three/fiber'
 import { useCallback, useState } from 'react'
 import { usePan } from '../main'
+import { clearTimeouts } from './Camera'
 
 export default function SkillBooks(props) {
   const { nodes, materials } = useGLTF(`models/low-res/skill_books.glb`)
   const { materials: highMats } = useGLTF(`models/high-res/skill_books.glb`)
-  const { setPan, whoosh, lookingAt, setLookingAt, handlePointerIn, handlePointerOut } = usePan();
+  const { setPan, whoosh, lookingAt, setLookingAt, handlePointerIn, handlePointerOut, panTimeout } = usePan();
   const { controls } = useThree();
 
   
   const handleClick = useCallback(() => {
     setPan(false);
+
+    clearTimeouts();
+    clearTimeout(panTimeout);
+
     whoosh.play();
     controls._removeAllEventListeners();
 
@@ -22,7 +27,7 @@ export default function SkillBooks(props) {
       controls._addAllEventListeners(controls._domElement);
 
       controls.reset(true)
-      setPan(lookingAt == 'none')
+      // setPan(lookingAt == 'none')
     }
     else {
       setLookingAt('skills')

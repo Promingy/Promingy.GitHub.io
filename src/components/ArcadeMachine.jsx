@@ -5,61 +5,58 @@ import SmallText from './SmallText'
 import { usePan } from '../main'
 
 export default function ArcadeMachine(props) {
-  const { nodes, materials } = useGLTF('models/arcade_machine.glb')
-  const { displayProject } = usePan()
-  materials.Body.side = 0
+  const { nodes, materials } = useGLTF('models/comp-arcade.glb')
+  const { lookingAt } = usePan()
+  // materials.Body.side = 0
   return (
     <>
-    {displayProject == props.name ? 
+    {lookingAt == props.name ? 
         <>
-          <LoadProject
-            url={props.project}
-            rotation={[-1.418, 1.368, 1.414]}
-            position={[85.147, 28, props.position[2]]}
-            scale={[.41, .7, .1]}
-          />
-          {displayProject == 'project1' ?
+          <LoadProject url={props.project} position={[84, 25.5, props.position[2]]}/>
+          {lookingAt == 'project1' ?
             <>
             <SmallText
             text='Previous Project'
-            position={[86.5, 21.75, 5]}
+            position={[85.3, 20.75, 4]}
+            size={.5}
+            // position={[86.5, 21.75, 5]}
             rotation={[-1.509, 1.425, 1.488]}
-            moveTo={[95, 28, 50]}
-            lookAt={[85, 27, 49.5]}
-            hoverColor={'#F07F13'}
-            switchProject={'project2'}
+            moveTo={[92, 27, 49.75]}
+            lookAt={[85, 26, 49.5]}
+            hoverColor='#F07F13'
+            newLookingAt='project2'
           />
           <SmallText
             text='Back'
-            position={[86.5, 21.5, -6]}
+            position={[85.2, 20.55, -5]}
+            size={.5}
             rotation={[-1.426, 1.400, 1.423]}
             moveTo={[-200, 175, 200]}
             lookAt={[0, 0, 0]}
-            hoverColor={'#F07F13'}
+            hoverColor='#F07F13'
           />
           </>
           :
           <>
           <SmallText
             text='Next Project'
-            position={[86.5, 21.5, 44]}
+            position={[85.2, 20.55, 45.5]}
             // position={[86.5, 21, 46]}
             rotation={[-1.456, 1.388, 1.453]}
-            moveTo={[95, 28, -0.5]}
-            lookAt={[85.2, 27, -0.75]}
+            moveTo={[92, 27, -0.5]}
+            lookAt={[85.2, 26, -0.75]}
             size={.5}
-            depth={0}
-            setControls
-            hoverColor={'#F07F13'}
-            switchProject={'project1'}
+            hoverColor='#F07F13'
+            newLookingAt='project1'
           />
           <SmallText
             text='Back'
-            position={[86.5, 21.75, 55.5]}
+            position={[85.2, 20.75, 55]}
             rotation={[-1.518, 1.426, 1.497]}
+            size={.5}
             moveTo={[-200, 175, 200]}
             lookAt={[0, 0, 0]}
-            hoverColor={'#F07F13'}
+            hoverColor='#F07F13'
           />
           </>
           }
@@ -68,18 +65,24 @@ export default function ArcadeMachine(props) {
         <LoadImage
           file={props.name + '.png'}
           rotation={[-1.516, 1.383, 1.514]}
-          position={[85.25, 28, props.position[2]]}
-          scale={[.13, .125, .1]}
+          position={[84, 25.5, props.position[2]]}
+          scale={[.115, .09, 1]}
+          // position={[85.25, 28, props.position[2]]}
+          // scale={[.13, .125, .1]}
           basic
         />
         
       }
     <group {...props} dispose={null}>
+      <mesh receiveShadow geometry={nodes.Cube001_10011_0.geometry} material={materials['10011']} position={[0, 0.015, 0]} scale={0.985} />
+      <mesh receiveShadow geometry={nodes.Cylinder001_1001_0.geometry} material={materials['1001']} position={[0.271, -0.165, 0.001]} scale={0.306} />
+    </group>
+    {/* <group {...props} dispose={null}>
       <mesh geometry={nodes.Body_1_Body_0.geometry} material={materials.Body} position={[0.004, 1.013, 0.109]} rotation={[Math.PI, 0, -3.135]} scale={0.995} />
       <mesh geometry={nodes.Null_1_Null_0.geometry} material={materials.Null} position={[0.004, 1.013, 0.109]} rotation={[Math.PI, 0, -3.135]} scale={0.998} />
-    </group>
+    </group> */}
     </>
   )
 }
 
-useGLTF.preload('models/arcade_machine.glb')
+useGLTF.preload('models/comp-arcade.glb')

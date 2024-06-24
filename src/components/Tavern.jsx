@@ -2,11 +2,11 @@ import { useGLTF } from '@react-three/drei'
 import { useEffect } from 'react'
 
 export default function Tavern(props) {
-  const { nodes, materials } = useGLTF('models/baked-tavern.glb')
+  const { nodes, materials } = useGLTF('models/comp-tavern.glb')
 
   useEffect(() => {props.afterRender()}, [])
   
-  Object.values(materials).forEach((m) => m.metalness = 0)
+  Object.values(materials).forEach((m) => {m.metalness=0; m.side=0})
   return (
     <group {...props} dispose={null}>
       <mesh castShadow receiveShadow geometry={nodes['Baqueta_(1)_Plastic_-_Translucent_Glossy_(Yellow)_0001'].geometry} material={materials['Plastic_-_Translucent_Glossy_Yellow.001']} position={[0.205, 0.372, 1.13]} rotation={[-Math.PI, 0, -Math.PI]} scale={1.182} />
@@ -50,4 +50,4 @@ export default function Tavern(props) {
   )
 }
 
-useGLTF.preload('models/baked-tavern.glb')
+useGLTF.preload('models/comp-tavern.glb')
