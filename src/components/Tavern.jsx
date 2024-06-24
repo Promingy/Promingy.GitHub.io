@@ -1,10 +1,7 @@
 import { useGLTF } from '@react-three/drei'
-import { useEffect } from 'react'
 
 export default function Tavern(props) {
   const { nodes, materials } = useGLTF('models/comp-tavern.glb')
-
-  useEffect(() => {props.afterRender()}, [])
   
   Object.values(materials).forEach((m) => {m.metalness=0; m.side=0})
   return (

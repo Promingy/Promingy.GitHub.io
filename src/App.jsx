@@ -25,9 +25,10 @@ import ProjectSign from './components/ProjectSign'
 import Clock from './components/Clock'
 import BountyBoard from './components/BountyBoard'
 import SkillBooks from './components/SkillBooks'
+import StartButton from './components/StartScreen'
 
 const App = () => {
-  const { smallText, setPan, lookingAt, pan } = usePan()
+  const { smallText, setPan, lookingAt, pan, displayStart } = usePan()
   const [ assetsLoaded, setAssetsLoaded ] = useState(false)
   let panTimeout
 
@@ -49,7 +50,8 @@ const App = () => {
 
    return (
     <>
-      {assetsLoaded &&  <Clock /> }
+      {assetsLoaded && !displayStart && <Clock /> }
+      {assetsLoaded && displayStart && <StartButton /> }
 
       <Canvas camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
         {/* <Perf position={'top-left'}  openByDefault/> */}
@@ -90,7 +92,7 @@ const App = () => {
 
           <ambientLight intensity={1.5}/>
 
-          <LoadImage {...Data.images.resume}/>
+          <LoadImage afterRender={handleAssetsLoaded} {...Data.images.resume}/>
           <LoadImage {...Data.images.aboutMe}/>
 
             {/* //! Using regular Text instead of Text 3D drops drawcalls by 80 and reduces triangles by 
@@ -131,7 +133,7 @@ const App = () => {
           <MedievalBookStack {...Data.medievalBookStack} />
           <LightPost {...Data.lightPost}/>
 
-          <Tavern {...Data.tavern} raycast={meshBounds} afterRender={handleAssetsLoaded} onPointerOver={e => e.stopPropagation()}/>
+          <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()}/>
         </Suspense>
         <AdaptiveDpr pixelated />
       </Canvas>

@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { LinearFilter, TextureLoader } from "three";
 
 
-export default function LoadImage({ file, position, scale, rotation, basic }) {
+export default function LoadImage({ file, position, scale, rotation, basic, afterRender }) {
   const texture = useLoader(TextureLoader, file)
   const ref = useRef();
 
@@ -21,6 +21,12 @@ export default function LoadImage({ file, position, scale, rotation, basic }) {
     })
 }
   }, [texture])
+
+  useEffect(() => {
+    if (afterRender) {
+      afterRender(ref.current)
+    }
+  }, [])
   
   return (
     <mesh position={position} rotation={rotation} scale={scale} ref={ref}>
