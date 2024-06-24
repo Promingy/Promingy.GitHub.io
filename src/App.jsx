@@ -1,5 +1,5 @@
 import { Canvas} from '@react-three/fiber'
-import { BakeShadows, MeshReflectorMaterial, Preload, meshBounds } from '@react-three/drei'
+import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial, meshBounds } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
 import { Perf } from 'r3f-perf'
 import Data from './data.json'
@@ -29,7 +29,6 @@ import SkillBooks from './components/SkillBooks'
 const App = () => {
   const { smallText, setPan, lookingAt, pan } = usePan()
   const [ assetsLoaded, setAssetsLoaded ] = useState(false)
-  const [ shadows, setShadows ] = useState(true)
   let panTimeout
 
   useEffect(() => {
@@ -52,10 +51,10 @@ const App = () => {
     <>
       {assetsLoaded &&  <Clock /> }
 
-      <Canvas dpr={1} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
+      <Canvas camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
         {/* <Perf position={'top-left'}  openByDefault/> */}
         <Suspense fallback={<InitialLoad />}>
-        <BakeShadows />
+        {/* <BakeShadows /> */}
           <Camera />
 
 
@@ -73,36 +72,27 @@ const App = () => {
               /> */}
           </mesh>
 
-          <group>
-            <Lights  position={[44, 50, 80]}  intensity={2000} />
-            <Lights  position={[44, 50, -30]}  intensity={2000} />
-            <Lights  position={[-25, 50, -60]}  intensity={2000} />
+          {/* <group>
+            <Lights  position={[44, 50, 80]} intensity={2000} />
+            <Lights  position={[44, 50, -30]} intensity={2000} />
+            <Lights  position={[-25, 50, -60]} intensity={2000} />
             <Lights shadow position={[-33.3, 10, -65]} rotateX={3.14} color='orange' intensity={2500} decay={1.7} />
 
-            <Lights shadow position={[70, 60, 120]}  intensity={2000} decay={1.5}/>
-            <Lights position={[65, 63, -70]}  intensity={2000} decay={1.5}/>
-            <Lights position={[53, 63, -83]}  intensity={2000} decay={1.5}/>
+            <Lights shadow position={[70, 60, 120]} intensity={2000} decay={1.5}/>
+            <Lights position={[65, 63, -70]} intensity={2000} decay={1.5}/>
+            <Lights position={[53, 63, -83]} intensity={2000} decay={1.5}/>
             <Lights shadow position={[-90, 63, -83]} intensity={2000} decay={1.5}/>
 
             <Lights shadow position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.8}/>
 
             <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
-          </group>
+          </group> */}
 
-          {/* <ambientLight intensity={1.5}/> */}
+          <ambientLight intensity={1.5}/>
 
-          <LoadImage
-            file='images/ainsworth_corbin_resume.png'
-            position={[50.4, 15.75, 140.9]}
-            scale={[.113, .14, .1]}
-            rotation={[.075, -1.575, 0]}
-          />
+          <LoadImage {...Data.images.resume}/>
+          <LoadImage {...Data.images.aboutMe}/>
 
-          <LoadImage
-            file="images/about_me.png"
-            position={[-3.91, 36.5, -69.95]}
-            scale={[.0475, .085, .1]}
-            />
             {/* //! Using regular Text instead of Text 3D drops drawcalls by 80 and reduces triangles by 
             //! 40,000 
             */}
@@ -143,7 +133,8 @@ const App = () => {
 
           <Tavern {...Data.tavern} raycast={meshBounds} afterRender={handleAssetsLoaded} onPointerOver={e => e.stopPropagation()}/>
         </Suspense>
-      </Canvas>    
+        <AdaptiveDpr pixelated />
+      </Canvas>
     </>
   )
 }
