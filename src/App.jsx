@@ -52,7 +52,7 @@ const App = () => {
     <>
       {assetsLoaded &&  <Clock /> }
 
-      <Canvas shadows dpr={1} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
+      <Canvas dpr={1} camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
         {/* <Perf position={'top-left'}  openByDefault/> */}
         <Suspense fallback={<InitialLoad />}>
         <BakeShadows />
@@ -107,101 +107,29 @@ const App = () => {
             //! 40,000 
             */}
           <group>
-            <Text1 
-              text='Résumé' 
-              position={[-178, 59, -72]}
-              moveTo={[41, 16, 139]}
-              lookAt={[52, 16, 139]}
-              size={15}
-              lookingAt="bounty"
-              />
-            <Text1 
-              text='Skills' 
-              position={[-183, 37, -72]}
-              moveTo={[44, 47, -15]}
-              lookAt={[48, 47, -15]}
-              size={15}
-              lookingAt="skills"
-              />
-            <Text1 
-              text='Experience'
-              position={[-183, 15, -72]}
-              moveTo={[-11, 38.95, -64.5]}
-              lookAt={[-11, 38.95, -75.5]}
-              size={15}
-              enableButtons
-              lookingAt="experience"
-              />
-            <Text1 
-              text='About Me' 
-              position={[-190, -7, -72]}
-              moveTo={[-4, 36.5, -64.5]}
-              lookAt={[-4, 36.5, -75.5]}
-              size={15}
-              enableButtons
-              lookingAt="about"
-            />
-            <Text1
-              text='Project1'
-              position={[-260, 15, -72]}
-              // moveTo={[95, 28, -0.5]}
-              moveTo={[92, 27, -0.5]}
-              lookAt={[85.2, 26, -0.75]}
-              size={15}
-              lookingAt="arcadeMachine1"
-            />
-            <Text1
-              text='Project2'
-              position={[-265, -7, -72]}
-              // moveTo={[95, 28, 50]}
-              moveTo={[92, 27, 49.75]}
-              lookAt={[85, 26, 49.5]}
-              size={15}
-              lookingAt="arcadeMachine2"
-            />
+            <Text1 {...Data.menuText.resume}/>
+            <Text1 {...Data.menuText.skills}/>
+            <Text1 {...Data.menuText.experience}/>
+            <Text1 {...Data.menuText.aboutMe}/>
+            <Text1 {...Data.menuText.project1}/>
+            <Text1 {...Data.menuText.project2}/>
           </group>
 
           <Flame />
 
-          <Sconce position={[75, 60, 105]} rotation={[0, Math.PI, 0]} scale={[5, 5, 5]}/>
-          <Sconce position={[75, 60, -85]} rotation={[0, Math.PI, 0]} scale={[5, 5, 5]}/>
-          <Sconce position={[40, 60, -92.75]} rotation={[0, -Math.PI / 2, 0]} scale={[5, 5, 5]}/>
-          <Sconce position={[-105, 60, -92.75]} rotation={[0, -Math.PI / 2, 0]} scale={[5, 5, 5]}/>
+          <Sconce {...Data.sconces.backLeft}/>
+          <Sconce {...Data.sconces.backRight}/>
+          <Sconce {...Data.sconces.leftBack}/>
+          <Sconce {...Data.sconces.leftFront}/>
 
           { smallText &&
             <>
-            <SmallText
-            text='Experience'
-            position={[-5, 33, -69.94]}
-            moveTo={[-11, 38.95, -64.5]}
-            lookAt={[-11, 38.95, -75.5]}
-            hoverColor='#ff0000'
-            newLookingAt='experience'
-          />
-          <SmallText
-            text='Back'
-            position={[-2.5, 33, -69.94]}
-            moveTo={[-200, 175, 200]}
-            lookAt={[0, 0, 0]}
-            hoverColor='#ff0000'
-          />
+            <SmallText {...Data.smallText.experience}/>
+            <SmallText {...Data.smallText.experience.backText}/>
 
 
-          <SmallText
-            text='About Me'
-            position={[-11.5, 35.5, -69.94]}
-            moveTo={[-4, 36.5, -64.5]}
-            lookAt={[-4, 36.5, -75.5]}
-            hoverColor='#ff0000'
-            newLookingAt='about'
-            />
-          <SmallText
-            text='Back'
-            position={[-9, 35.5, -69.94]}
-            moveTo={[-200, 175, 200]}
-            lookAt={[0, 0, 0]}
-            hoverColor='#ff0000'
-          />
+            <SmallText {...Data.smallText.aboutMe}/>
+            <SmallText {...Data.smallText.aboutMe.backText}/>
           </>
           }
 

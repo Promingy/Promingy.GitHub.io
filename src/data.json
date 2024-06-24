@@ -104,5 +104,111 @@
         "position": [75, 70, 22],
         "rotation": [0, 1.5708, 0],
         "scale": [0.25, 0.25, 0.25]
+    },
+    "menuText": {
+        "resume": {
+            "text": "Résumé",
+            "position": [-140, 66, -72],
+            "moveTo": [41, 16, 139],
+            "lookAt": [52, 16, 139],
+            "size": 15,
+            "lookingAt": "bounty"
+        },
+        "skills": {
+            "text": "Skills",
+            "position": [-148, 44, -72],
+            "moveTo": [44, 47, -15],
+            "lookAt": [48, 47, -15],
+            "size": 15,
+            "lookingAt": "skills"
+        },
+        "experience": {
+            "text": "Experience",
+            "position": [-135, 22, -72],
+            "moveTo": [-11, 38.95, -64.5],
+            "lookAt": [-11, 38.95, -75.5],
+            "size": 15,
+            "enableButtons": true,
+            "lookingAt": "experience"
+        },
+        "aboutMe": {
+            "text": "About Me",
+            "position": [-140, 0, -72],
+            "moveTo": [-4, 36.5, -64.5],
+            "lookAt": [-4, 36.5, -75.5],
+            "size": 15,
+            "enableButtons": true,
+            "lookingAt": "about"
+        },
+        "project1": {
+            "text": "Project 1",
+            "position": [-210, 21, -72],
+            "moveTo": [92, 27, -0.5],
+            "lookAt": [85.2, 26, -0.75],
+            "size": 15,
+            "lookingAt": "arcadeMachine1"
+        },
+        "project2": {
+            "text": "Project 2",
+            "position": [-210, 0, -72],
+            "moveTo": [92, 27, 49.75],
+            "lookAt": [85, 26, 49.5],
+            "size": 15,
+            "lookingAt": "arcadeMachine2"
+        }
+    },
+    "smallText": {
+        "experience": {
+            "text": "Experience",
+            "position": [-5, 33, -69.94],
+            "moveTo": [-11, 38.95, -64.5],
+            "lookAt": [-11, 38.95, -75.5],
+            "hoverColor": "#ff0000",
+            "newLookingAt": "experience",
+            "backText": {
+                "text": "Back",
+                "position": [-9, 35.5, -69.94],
+                "moveTo": [-200, 175, 200],
+                "lookAt": [0, 0, 0],
+                "color": "#ff0000"
+            }
+        },
+        "aboutMe": {
+            "text": "About Me",
+            "position": [-11.5, 35.5, -69.94],
+            "moveTo": [-4, 36.5, -64.5],
+            "lookAt": [-4, 36.5, -75.5],
+            "hoverColor": "#ff0000",
+            "newLookingAt": "about",
+            "backText": {
+                "text": "Back",
+                "position": [-2.5, 33, -69.94],
+                "moveTo": [-200, 175, 200],
+                "lookAt": [0, 0, 0],
+                "color": "#ff0000"
+            }
+        }
+    },
+    "sconces": {
+        "backLeft": {
+            "position": [75, 60, 105],
+            "rotation": [0, 3.1415, 0],
+            "scale": [5, 5, 5]
+        },
+        "backRight": {
+            "position": [75, 60, -85],
+            "rotation": [0, 3.1415, 0],
+            "scale": [5, 5, 5]
+        },
+        "leftFront": {
+            "position": [40, 60, -92.75],
+            "rotation": [0, -1.508, 0],
+            "scale": [5, 5, 5]
+        },
+        "leftBack": {
+            "position": [-105, 60, -92.75],
+            "rotation": [0, -1.508, 0],
+            "scale": [5, 5, 5]
+        }
     }
 }
