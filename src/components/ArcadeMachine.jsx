@@ -8,7 +8,6 @@ import { usePan } from '../main'
 export default function ArcadeMachine(props) {
   const { nodes, materials } = useGLTF('models/arcade_machine.glb')
   const { lookingAt } = usePan()
-  // materials.Body.side = 0
   return (
     <>
     {lookingAt != props.name ? 
@@ -16,8 +15,8 @@ export default function ArcadeMachine(props) {
         :
         <>
           <LoadProject  {...Data[props.name].loadProject}/>
-            <SmallText {...Data[props.name].switchProject}/>
-            <SmallText {...Data[props.name].backText}/>
+          <SmallText {...Data[props.name].switchProject}/>
+          <SmallText {...Data[props.name].backText}/>
         </>
       }
     <group {...props} dispose={null}>

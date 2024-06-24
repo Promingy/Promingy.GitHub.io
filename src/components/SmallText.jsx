@@ -35,7 +35,7 @@ export default function SmallText({text, size, position, rotation, moveTo, lookA
         <Bvh setBoundingBox splitStrategy="SAH">
             <Text
                 font='/Playball-Regular.ttf'
-                characters="abcdefghijklmnopqrstuvwxyz0123456789!"
+                characters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789! "
                 color={color}
                 position={position}
                 rotation={rotation}

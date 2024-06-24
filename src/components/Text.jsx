@@ -18,6 +18,7 @@ export default function Text1({text: words, size, position, rotation, moveTo, lo
                 position={position}
                 rotation={rotation}
                 // font={Playball}
+                characters='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789! '
                 font={'/Playball-Regular.ttf'}
                 scale={size}
                 onPointerEnter={(e) => {

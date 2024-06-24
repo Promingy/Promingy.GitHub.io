@@ -15,7 +15,7 @@ export const PanProvider = ({children}) => {
   const [lookingAt, setLookingAt] = useState('none')
   const [hovered, setHovered] = useState(false)
   const [panTimeout, setPanTimeout] = useState(null)
-  const [displayStart, setDisplayStart] = useState(true);
+  const [displayStart, setDisplayStart] = useState(false);
 
   const handlePointerIn = useCallback(() => setHovered(true), [hovered])
   const handlePointerOut = useCallback(() => setHovered(false), [hovered])

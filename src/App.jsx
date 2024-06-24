@@ -50,8 +50,8 @@ const App = () => {
 
    return (
     <>
-      {assetsLoaded && !displayStart && <Clock /> }
-      {assetsLoaded && displayStart && <StartButton /> }
+      {assetsLoaded && <Clock /> }
+      {displayStart && <StartButton afterRender={handleAssetsLoaded}/> }
 
       <Canvas camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
         {/* <Perf position={'top-left'}  openByDefault/> */}
@@ -92,7 +92,7 @@ const App = () => {
 
           <ambientLight intensity={1.5}/>
 
-          <LoadImage afterRender={handleAssetsLoaded} {...Data.images.resume}/>
+          <LoadImage {...Data.images.resume}/>
           <LoadImage {...Data.images.aboutMe}/>
 
             {/* //! Using regular Text instead of Text 3D drops drawcalls by 80 and reduces triangles by 
