@@ -2,7 +2,6 @@ import React, { createContext, useCallback, useContext, useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { useCursor } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
 
 const PanContext = createContext()
 

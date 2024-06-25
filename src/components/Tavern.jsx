@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei'
 
 export default function Tavern(props) {
-  const { nodes, materials } = useGLTF('models/baked-tavern.glb')
+  const { nodes, materials } = useGLTF('models/tavern.glb')
   
   Object.values(materials).forEach((m) => {m.metalness=0; m.side=0})
   return (
@@ -47,4 +47,4 @@ export default function Tavern(props) {
   )
 }
 
-useGLTF.preload('models/baked-tavern.glb')
+useGLTF.preload('models/tavern.glb')

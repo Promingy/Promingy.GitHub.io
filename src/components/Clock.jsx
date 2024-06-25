@@ -26,6 +26,8 @@ export default function Clock() {
       const name = "Corbin Ainsworth"
       const subHeader = "Software Engineer"
       let [i, j] = [0, 0]
+
+      typingSound.volume = 0.8
       typingSound.play()
 
 

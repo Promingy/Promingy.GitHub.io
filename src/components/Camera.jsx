@@ -13,7 +13,7 @@ export default function Camera() {
     
     const cameraRef = useRef();
     const { controls } = useThree();
-    const { pan, setPan, initialCamera, transition, setTransition, panTimeout } = usePan()
+    const { pan, setPan, initialCamera, transition, setTransition, whoosh } = usePan()
 
     useEffect(() => {
     function onDragStart() {
@@ -43,10 +43,16 @@ export default function Camera() {
 
     useEffect(() => {
         if (initialCamera) {
-            controls?.setLookAt(87.5, 26, 49.75, 80, 25.5, 49.75, false)
+            controls?.setLookAt(87.7, 26, 49.75, 80, 25, 49.8, false)
         } else {
             setTransition(true)
-            controls?.reset(true).then(() => setTransition(false))
+            whoosh.play()
+
+            controls?.setLookAt(250, 26, 49.75, 80, 25, 49.8, true)
+            setTimeout(() => {
+                controls?.reset(true)
+                .then(() => setTransition(false))
+            }, 450)
         }
     }, [controls, initialCamera])
 
