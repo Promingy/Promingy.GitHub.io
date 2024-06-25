@@ -5,3 +5,29 @@ html, body, canvas{
   padding: 0;
   overflow: hidden;
 }
+
+.start-button-container {
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-button{
+  height: 75px;
+  width: 200px;
+  background: none;
+  border: 2px solid white;
+  border-radius: 10px;
+  color: white;
+  font-size: 40px;
+  transition:.25s;
+}
+
+.start-button:hover{
+  border-color: olivedrab;
+  color: olivedrab;
+  cursor: pointer;
+}

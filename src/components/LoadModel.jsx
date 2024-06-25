@@ -1,6 +1,5 @@
-import { useCursor, useGLTF, Detailed } from '@react-three/drei';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { NearestFilter, FrontSide } from 'three';
+import { useCursor, Detailed } from '@react-three/drei';
+import { useCallback, useRef, useState } from 'react';
 import { useThree } from '@react-three/fiber';
 import BountyBoard from './BountyBoard.jsx';
 import SkillBooks from './SkillBooks.jsx';
@@ -50,7 +49,7 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
                 }
             })
         }
-    })
+    }, [controls, lookAt, moveTo, setPan, whoosh])
 
     return (
         <Detailed 
@@ -58,7 +57,10 @@ export default function LoadModel({file, position, rotation, scale, canHover, lo
             position={position}
             rotation={rotation}
             scale={scale}
-            onPointerOver={canHover ? () => setHovered(true) : null}
+            onPointerOver={canHover ? (e) => {
+                e.stopPropagation();
+                setHovered(true) 
+            }: null}
             onPointerOut={canHover ? () => setHovered(false) : null}
             onClick={canHover ? handleClick : null}
         >

@@ -4,8 +4,7 @@ import { LinearFilter, TextureLoader } from "three";
 
 
 export default function LoadImage({ file, position, scale, rotation, basic }) {
-  const url = 'images/' + file
-  const texture = useLoader(TextureLoader, url)
+  const texture = useLoader(TextureLoader, file)
   const ref = useRef();
 
   useEffect(() => {
