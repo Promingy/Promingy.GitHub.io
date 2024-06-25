@@ -1,11 +1,13 @@
 import { usePan } from "../main"
 
 export default function StartButton({afterRender}) {
-    const { setDisplayStart } = usePan();
+    const { setDisplayStart, setInitialCamera, setLookingAt } = usePan();
 
     function handleClick() {
         afterRender();
-        setDisplayStart(false)
+        setDisplayStart(false);
+        setInitialCamera(false);
+        setLookingAt('none');
     }
 
     return (

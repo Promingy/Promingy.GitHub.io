@@ -10,12 +10,13 @@ export const usePan = () => {
 };
 
 export const PanProvider = ({children}) => {
-  const [pan, setPan] = useState(true)
+  const [pan, setPan] = useState(false)
   const [smallText, setSmallText] = useState(false)
-  const [lookingAt, setLookingAt] = useState('none')
+  const [lookingAt, setLookingAt] = useState('')
   const [hovered, setHovered] = useState(false)
   const [panTimeout, setPanTimeout] = useState(null)
   const [displayStart, setDisplayStart] = useState(false);
+  const [initialCamera, setInitialCamera] = useState(true)
 
   const handlePointerIn = useCallback(() => setHovered(true), [hovered])
   const handlePointerOut = useCallback(() => setHovered(false), [hovered])
@@ -48,6 +49,8 @@ export const PanProvider = ({children}) => {
     panTimeout,
     displayStart,
     setDisplayStart,
+    initialCamera,
+    setInitialCamera
   }
 
   return (
