@@ -8,7 +8,7 @@ import { clearTimeouts } from './Camera'
 export default function SkillBooks(props) {
   const { nodes, materials } = useGLTF(`models/low-res/skill_books.glb`)
   const { materials: highMats } = useGLTF(`models/high-res/skill_books.glb`)
-  const { setPan, whoosh, lookingAt, setLookingAt, handlePointerIn, handlePointerOut, panTimeout } = usePan();
+  const { setPan, whoosh, lookingAt, setLookingAt, handlePointerIn, handlePointerOut, panTimeout, setTransition } = usePan();
   const { controls } = useThree();
 
   
@@ -19,15 +19,12 @@ export default function SkillBooks(props) {
     clearTimeout(panTimeout);
 
     whoosh.play();
-    controls._removeAllEventListeners();
+    setTransition(true)
 
     if (lookingAt == 'skills') {
       setLookingAt('none')
       
-      controls._addAllEventListeners(controls._domElement);
-
-      controls.reset(true)
-      // setPan(lookingAt == 'none')
+      controls.reset(true).then(() => setTransition(false))
     }
     else {
       setLookingAt('skills')

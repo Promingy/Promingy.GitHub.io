@@ -7,25 +7,26 @@ import { usePan } from '../main'
 export default function SmallText({text, size, position, rotation, moveTo, lookAt, hoverColor="#ff0000", baseColor='#ffffff', newLookingAt}) {
     const [color, setColor] = useState(baseColor)
     const {controls} = useThree()
-    const { setPan, setSmallText, click, whoosh, lookingAt, setLookingAt } = usePan() 
+    const { setPan, setSmallText, click, whoosh, lookingAt, setLookingAt, setTransition, panTimeout } = usePan() 
     const [hovered, setHovered] = useState(false)
 
     useCursor(hovered, 'pointer', 'default')
 
     const handleClick = useCallback((e) => {
         e.stopPropagation()
+        setPan(false)
+        setTransition(true)
         
         clearTimeouts();
-        
+        clearTimeout(panTimeout)
+
         click.play();
         whoosh.play();
-        controls._removeAllEventListeners();
         
         setSmallText(newLookingAt ? true : false);
         setLookingAt(newLookingAt ? newLookingAt : 'none');
 
-        !newLookingAt && controls?._addAllEventListeners(controls._domElement);
-        controls?.setLookAt(...moveTo, ...lookAt, true)
+        controls?.setLookAt(...moveTo, ...lookAt, true).then(() => setTransition(false))
 
     }, [controls, setPan, setSmallText, click, whoosh, lookingAt, setLookingAt, newLookingAt, moveTo, lookAt]);
 

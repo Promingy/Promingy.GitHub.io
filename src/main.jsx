@@ -2,6 +2,7 @@ import React, { createContext, useCallback, useContext, useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { useCursor } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
 
 const PanContext = createContext()
 
@@ -17,6 +18,7 @@ export const PanProvider = ({children}) => {
   const [panTimeout, setPanTimeout] = useState(null)
   const [displayStart, setDisplayStart] = useState(false);
   const [initialCamera, setInitialCamera] = useState(true)
+  const [transition, setTransition] = useState(false)
 
   const handlePointerIn = useCallback(() => setHovered(true), [hovered])
   const handlePointerOut = useCallback(() => setHovered(false), [hovered])
@@ -50,7 +52,9 @@ export const PanProvider = ({children}) => {
     displayStart,
     setDisplayStart,
     initialCamera,
-    setInitialCamera
+    setInitialCamera,
+    transition,
+    setTransition
   }
 
   return (
@@ -65,5 +69,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <PanProvider>
       <App />
     </PanProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

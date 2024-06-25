@@ -8,7 +8,7 @@ import { usePan } from '../main'
 
 
 export default function Text1({text: words, size, position, rotation, moveTo, lookAt, hoverColor=0xff0000, baseColor=0xffffff, ...props}) {
-    const { setPan, setSmallText, whoosh, click, handlePointerIn, handlePointerOut, setLookingAt } = usePan() 
+    const { setPan, setSmallText, whoosh, click, handlePointerIn, handlePointerOut, setLookingAt, setTransition } = usePan() 
     const { controls } = useThree()
     const [color, setColor] = useState(baseColor || 0xffffff)
 
@@ -32,19 +32,19 @@ export default function Text1({text: words, size, position, rotation, moveTo, lo
                 onClick={(e) => {
                     e.stopPropagation();
                     
+                    setTransition(true);
                     setPan(false);
                     clearTimeouts();
                     setLookingAt(props.lookingAt)
                     
                     click.play();
                     whoosh.play();
-                    controls._removeAllEventListeners();
                     
                     setTimeout(() => {
                         setSmallText(props.enableButtons || false);
                     }, 2000)
                     
-                    controls?.setLookAt(...moveTo, ...lookAt, true)
+                    controls?.setLookAt(...moveTo, ...lookAt, true).then(() => setTransition(false))
                 }}
                 >
                 {words}
