@@ -7,12 +7,13 @@ import { clearTimeouts } from './Camera'
 export default function BountyBoard(props) {
   const { nodes, materials } = useGLTF(`models/${props.res || 'low-res'}/bounty_board.glb`)
   const { materials: highMats } = useGLTF(`models/high-res/bounty_board.glb`)
-  const { setPan, whoosh, lookingAt, setLookingAt, handlePointerIn,  handlePointerOut, panTimeout, setTransition } = usePan();
+  const { setPan, whoosh, lookingAt, setLookingAt, handlePointerIn,  handlePointerOut, panTimeout, setTransition, toggleTransitionTimeout } = usePan();
   const { controls } = useThree();
 
   
   const handleClick = useCallback(() => {
     setTransition(true)
+    toggleTransitionTimeout(false)
     setPan(false);
     
     clearTimeouts();
@@ -20,10 +21,13 @@ export default function BountyBoard(props) {
 
     whoosh.play();
 
+    console.log(controls.getTarget())
+
     if (lookingAt == 'bounty') {
       setLookingAt('none')
 
-      controls.reset(true).then(() => setTransition(false))
+      controls.setLookAt(-200, 175, 200, 0, 0, 0, true)
+      toggleTransitionTimeout(true)
     }
     else {
       setLookingAt('bounty')

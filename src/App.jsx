@@ -53,15 +53,16 @@ const App = () => {
       {assetsLoaded && <Clock /> }
       {displayStart && <StartButton afterRender={handleAssetsLoaded}/> }
 
-      <Canvas shadows camera={{ position: [-200, 175, 200]}} style={{ background: "#000000" }}>
+      <Canvas camera={{ position: [87.7, 26, 49.75]}} style={{ background: "#000000" }}>
         <Suspense fallback={<InitialLoad />}>
-          <BakeShadows />
           <Camera />
+          <BakeShadows />
 
         {/* //! the refletor material jumps the triangles up about 100,000 */}
 
           <mesh receiveShadow rotation={[-Math.PI * 0.5, 0, 0]} position={[0, -7, 0]}>
               <planeGeometry args={[1000, 1000]} />
+              {/* <meshLambertMaterial receiveShadow color='grey' /> */}
               <MeshReflectorMaterial
                 mixStrength={.1} // Strength of the reflections
                 resolution={256} // Off-buffer resolution, lower=faster, higher=better quality

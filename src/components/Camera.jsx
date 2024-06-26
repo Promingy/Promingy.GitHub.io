@@ -13,23 +13,25 @@ export default function Camera() {
     
     const cameraRef = useRef();
     const { controls } = useThree();
-    const { pan, setPan, initialCamera, transition, setTransition, whoosh } = usePan()
+    const { pan, setPan, initialCamera, transition, setTransition, whoosh, setLookingAt, setDefaultImage } = usePan()
 
     useEffect(() => {
-    function onDragStart() {
-        setPan(false)
-        clearTimeouts()
-    }
-    function onDragEnd() {
-        timeout = setTimeout(() => {
-            controls.reset(true)
-        }, 10000)
-    
-        timeout2 = setTimeout(() => {
-        setPan(true)
+        if (initialCamera) controls?.setTarget(80, 25, 49.5)
+
+        function onDragStart() {
+            setPan(false)
+            clearTimeouts()
         }
-        , 15000)
-    }
+        function onDragEnd() {
+            timeout = setTimeout(() => {
+                controls.setLookAt(-200, 175, 200, 0, 0, 0,true)
+            }, 10000)
+        
+            timeout2 = setTimeout(() => {
+            setPan(true)
+            }
+            , 15000)
+        }
 
         controls?.addEventListener('controlstart', onDragStart)
         controls?.addEventListener('controlend', onDragEnd)
@@ -42,25 +44,22 @@ export default function Camera() {
     }, [controls, pan])
 
     useEffect(() => {
-        if (initialCamera) {
-            controls?.setLookAt(87.7, 26, 49.75, 80, 25, 49.8, false)
-        } else {
-            setTransition(true)
+        if (!initialCamera) {
             whoosh.play()
 
-            controls?.setLookAt(250, 26, 49.75, 80, 25, 49.8, true)
+            controls.setLookAt(250, 26, 49.75, 80, 25, 49.5, true)
+
             setTimeout(() => {
-                controls?.reset(true)
-                .then(() => setTransition(false))
+                setLookingAt('none')
+                controls?.setLookAt(-200, 175, 200, 0, 0, 0,true)
+                .then(() => {setTransition(false); setDefaultImage(true)})
             }, 450)
         }
-    }, [controls, initialCamera])
+    }, [initialCamera])
 
     useEffect(() => {
         if (controls) {
-            const x = Math.floor(Math.abs(controls._target.x))
-            const y = Math.floor(Math.abs(controls._target.y))
-            const z = Math.floor(Math.abs(controls._target.z))
+            const { x, y, z } = controls.getTarget();
 
             if (!transition && !x && !y && !z) {
                 controls._addAllEventListeners(controls._domElement)
@@ -68,7 +67,7 @@ export default function Camera() {
                 controls._removeAllEventListeners()
             }
         }
-    }, [transition, controls])
+    }, [transition])
 
     useFrame(() => { 
     if(cameraRef.current && pan){

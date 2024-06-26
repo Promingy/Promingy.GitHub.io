@@ -8,19 +8,14 @@ import Data from '../data.json'
 
 export default function ArcadeMachine(props) {
   const { nodes, materials } = useGLTF('models/arcade_machine.glb')
-  const { lookingAt, initialCamera } = usePan()
+  const { lookingAt, defaultImage } = usePan()
   const [ staticImage, setStaticImage] = useState({...Data.images.loadingImage})
 
   useEffect(() => {
-    let timeout;
-    if (!initialCamera) {
-      timeout = setTimeout(() => {
+    if(defaultImage) {
       setStaticImage({...Data[props.name].image})
-      }, 2500)
     }
-
-    return () => clearTimeout(timeout);
-  }, [initialCamera])
+  }, [defaultImage])
 
   return (
     <>
