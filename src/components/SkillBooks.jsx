@@ -96,5 +96,5 @@ export default function SkillBooks(props) {
 }
 
 useGLTF.preload('models/low-res/skill_books.glb')
-useGLTF.preload('models/high-res/skill_books.glb')
 useGLTF.preload('models/mid-res/skill_books.glb')
+useGLTF.preload('models/high-res/skill_books.glb')

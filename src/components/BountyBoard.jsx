@@ -22,8 +22,6 @@ export default function BountyBoard(props) {
 
     whoosh.play();
 
-    console.log(controls.getTarget())
-
     if (lookingAt == 'bounty') {
       setLookingAt('none')
 

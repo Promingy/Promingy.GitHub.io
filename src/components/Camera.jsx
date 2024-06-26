@@ -23,7 +23,7 @@ export default function Camera() {
         }
         function onDragEnd() {
             timeout = setTimeout(() => {
-                controls.setLookAt(-200, 175, 200, 0, 0, 0,true)
+                controls?.setLookAt(-200, 175, 200, 0, 0, 0,true)
             }, 10000)
         
             timeout2 = setTimeout(() => {
@@ -46,7 +46,8 @@ export default function Camera() {
         if (!initialCamera) {
             whoosh.play()
 
-            controls.setLookAt(250, 26, 49.75, 80, 25, 49.5, true)
+            // controls.setLookAt(250, 26, 49.75, 80, 25, 49.5, true)
+            controls.moveTo(250, 26, 49.75, true)
 
             setTimeout(() => {
                 setLookingAt('none')
