@@ -7,7 +7,7 @@ import './App.css'
 
 
 import Lights from './components/Lights'
-import Text1 from './components/Text'
+import MenuText from './components/Text'
 import SmallText from './components/SmallText'
 import LoadImage from './components/LoadImage'
 import Camera from './components/Camera'
@@ -42,18 +42,15 @@ const App = () => {
 
     return () => clearTimeout(panTimeout)
   }, [lookingAt])
-  
-  function handleAssetsLoaded() {
-    setAssetsLoaded(true)
-  }
 
 
    return (
     <>
       {assetsLoaded && <Clock /> }
-      {displayStart && <StartButton afterRender={handleAssetsLoaded}/> }
+      {displayStart && <StartButton afterRender={() => setAssetsLoaded(true)}/> }
 
-      <Canvas camera={{ position: [87.7, 26, 49.75]}} style={{ background: "#000000" }}>
+      <Canvas shadows camera={{ position: [87.7, 26, 49.75]}} style={{ background: "#000000" }}>
+        {/* <Perf openByDefault/> */}
         <Suspense fallback={<InitialLoad />}>
           <Camera />
           <BakeShadows />
@@ -88,6 +85,8 @@ const App = () => {
             <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
           </group>
 
+          {/* <ambientLight /> */}
+
           <LoadImage {...Data.images.resume}/>
           <LoadImage {...Data.images.aboutMe}/>
 
@@ -95,20 +94,22 @@ const App = () => {
             //! 40,000 
             */}
           <group>
-            <Text1 {...Data.menuText.resume}/>
-            <Text1 {...Data.menuText.skills}/>
-            <Text1 {...Data.menuText.experience}/>
-            <Text1 {...Data.menuText.aboutMe}/>
-            <Text1 {...Data.menuText.project1}/>
-            <Text1 {...Data.menuText.project2}/>
+            <MenuText {...Data.menuText.resume}/>
+            <MenuText {...Data.menuText.skills}/>
+            <MenuText {...Data.menuText.experience}/>
+            <MenuText {...Data.menuText.aboutMe}/>
+            <MenuText {...Data.menuText.project1}/>
+            <MenuText {...Data.menuText.project2}/>
           </group>
 
           <Flame />
-
-          <Sconce {...Data.sconces.backLeft}/>
-          <Sconce {...Data.sconces.backRight}/>
-          <Sconce {...Data.sconces.leftBack}/>
-          <Sconce {...Data.sconces.leftFront}/>
+          
+          <group>
+            <Sconce {...Data.sconces.backLeft}/>
+            <Sconce {...Data.sconces.backRight}/>
+            <Sconce {...Data.sconces.leftBack}/>
+            <Sconce {...Data.sconces.leftFront}/>
+          </group>
 
           { smallText &&
             <>
@@ -128,8 +129,8 @@ const App = () => {
           <ArcadeMachine {...Data.arcadeMachine2}/>
           <MedievalBookStack {...Data.medievalBookStack} />
           <LightPost {...Data.lightPost}/>
-
           <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()}/>
+          
         </Suspense>
         <AdaptiveDpr pixelated />
       </Canvas>

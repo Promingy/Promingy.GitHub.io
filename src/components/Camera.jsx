@@ -10,7 +10,6 @@ export function clearTimeouts() {
     clearTimeout(timeout2);
 }
 export default function Camera() {
-    
     const cameraRef = useRef();
     const { controls } = useThree();
     const { pan, setPan, initialCamera, transition, setTransition, whoosh, setLookingAt, setDefaultImage } = usePan()
@@ -70,12 +69,12 @@ export default function Camera() {
     }, [transition])
 
     useFrame(() => { 
-    if(cameraRef.current && pan){
+    if(!initialCamera && pan && cameraRef.current){
         const rotationSpeed = 0.001
     
         cameraRef.current.rotate(rotationSpeed, 0)
         }
-    }, [cameraRef])
+    }, [cameraRef, initialCamera])
 
     
     return <CameraControls 
