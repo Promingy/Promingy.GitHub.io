@@ -18,12 +18,24 @@ export const PanProvider = ({children}) => {
   const [displayStart, setDisplayStart] = useState(false);
   const [initialCamera, setInitialCamera] = useState(true)
   const [transition, setTransition] = useState(false)
+  const [defaultImage, setDefaultImage] = useState(false)
 
   const handlePointerIn = useCallback(() => setHovered(true), [hovered])
   const handlePointerOut = useCallback(() => setHovered(false), [hovered])
 
-  useCursor(hovered, 'pointer', 'default')
+  let timeout;
 
+  function toggleTransitionTimeout(toggle) {
+    clearTimeout(timeout);
+
+    if (toggle == true) {
+      timeout = setTimeout(() => {
+        setTransition(false)
+      }, 5000)
+    }
+  }
+
+  useCursor(hovered, 'pointer', 'default')
 
   const project1URL = 'https://project1.corbinainsworth.com'
   const project2URL = 'https://project2.corbinainsworth.com'
@@ -53,7 +65,10 @@ export const PanProvider = ({children}) => {
     initialCamera,
     setInitialCamera,
     transition,
-    setTransition
+    setTransition,
+    defaultImage,
+    setDefaultImage,
+    toggleTransitionTimeout
   }
 
   return (

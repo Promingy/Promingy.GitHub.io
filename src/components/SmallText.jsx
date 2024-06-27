@@ -1,4 +1,4 @@
-import { useCursor, Text, Bvh, meshBounds } from '@react-three/drei'
+import { useCursor, Text, Bvh } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { clearTimeouts } from './Camera'
 import { useCallback, useState } from 'react'
@@ -7,7 +7,7 @@ import { usePan } from '../main'
 export default function SmallText({text, size, position, rotation, moveTo, lookAt, hoverColor="#ff0000", baseColor='#ffffff', newLookingAt}) {
     const [color, setColor] = useState(baseColor)
     const {controls} = useThree()
-    const { setPan, setSmallText, click, whoosh, lookingAt, setLookingAt, setTransition, panTimeout } = usePan() 
+    const { setPan, setSmallText, click, whoosh, lookingAt, setLookingAt, setTransition, panTimeout, toggleTransitionTimeout } = usePan() 
     const [hovered, setHovered] = useState(false)
 
     useCursor(hovered, 'pointer', 'default')
@@ -16,6 +16,7 @@ export default function SmallText({text, size, position, rotation, moveTo, lookA
         e.stopPropagation()
         setPan(false)
         setTransition(true)
+        toggleTransitionTimeout(false)
         
         clearTimeouts();
         clearTimeout(panTimeout)
@@ -26,7 +27,8 @@ export default function SmallText({text, size, position, rotation, moveTo, lookA
         setSmallText(newLookingAt ? true : false);
         setLookingAt(newLookingAt ? newLookingAt : 'none');
 
-        controls?.setLookAt(...moveTo, ...lookAt, true).then(() => setTransition(false))
+        controls?.setLookAt(...moveTo, ...lookAt, true)
+        toggleTransitionTimeout(true)
 
     }, [controls, setPan, setSmallText, click, whoosh, lookingAt, setLookingAt, newLookingAt, moveTo, lookAt]);
 
@@ -36,7 +38,7 @@ export default function SmallText({text, size, position, rotation, moveTo, lookA
         <Bvh setBoundingBox splitStrategy="SAH">
             <Text
                 font='/Playball-Regular.ttf'
-                characters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789! "
+                characters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!é "
                 color={color}
                 position={position}
                 rotation={rotation}

@@ -1,13 +1,12 @@
 import { useThree } from '@react-three/fiber'
-import Playball from '../Playball_Regular.json'
-import { Bvh, Text3D, Text } from '@react-three/drei'
+import { Bvh, Text, meshBounds } from '@react-three/drei'
 import { clearTimeouts } from './Camera'
 import { useState } from 'react'
 import { usePan } from '../main'
 
 
 
-export default function Text1({text: words, size, position, rotation, moveTo, lookAt, hoverColor=0xff0000, baseColor=0xffffff, ...props}) {
+export default function MenuText({text: words, size, position, rotation, moveTo, lookAt, hoverColor=0xff0000, baseColor=0xffffff, ...props}) {
     const { setPan, setSmallText, whoosh, click, handlePointerIn, handlePointerOut, setLookingAt, setTransition } = usePan() 
     const { controls } = useThree()
     const [color, setColor] = useState(baseColor || 0xffffff)
@@ -17,10 +16,10 @@ export default function Text1({text: words, size, position, rotation, moveTo, lo
             <Text
                 position={position}
                 rotation={rotation}
-                // font={Playball}
-                characters='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789! '
+                characters='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!é '
                 font={'/Playball-Regular.ttf'}
                 scale={size}
+                raycast={meshBounds}
                 onPointerEnter={(e) => {
                     handlePointerIn(e);
                     setColor(hoverColor);
