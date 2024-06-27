@@ -2,51 +2,50 @@ import { useThree } from '@react-three/fiber'
 import { Bvh, Text, meshBounds } from '@react-three/drei'
 import { clearTimeouts } from './Camera'
 import { useState } from 'react'
-import { usePan } from '../main'
+import { useAppContext } from '../main'
 
 
-
-export default function MenuText({text: words, size, position, rotation, moveTo, lookAt, hoverColor=0xff0000, baseColor=0xffffff, ...props}) {
-    const { setPan, setSmallText, whoosh, click, handlePointerIn, handlePointerOut, setLookingAt, setTransition } = usePan() 
-    const { controls } = useThree()
-    const [color, setColor] = useState(baseColor || 0xffffff)
+export default function MenuText({ hoverColor=0xff0000, baseColor=0xffffff, ...props }) {
+    const context = useAppContext();
+    const { controls } = useThree();
+    const [color, setColor] = useState(baseColor || 0xffffff);
 
     return (
         <Bvh setBoundingBox splitStrategy="SAH">
             <Text
-                position={position}
-                rotation={rotation}
+                position={props.position}
+                rotation={props.rotation}
                 characters='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!é '
                 font={'/Playball-Regular.ttf'}
-                scale={size}
+                scale={props.size}
                 raycast={meshBounds}
                 onPointerEnter={(e) => {
-                    handlePointerIn(e);
+                    context.handlePointerIn(e);
                     setColor(hoverColor);
                 }}
                 onPointerOut={(e) => {
-                    handlePointerOut(e);
+                    context.handlePointerOut(e);
                     setColor(baseColor);
                 }}
                 onClick={(e) => {
                     e.stopPropagation();
                     
-                    setTransition(true);
-                    setPan(false);
+                    context.setTransition(true);
+                    context.setPan(false);
                     clearTimeouts();
-                    setLookingAt(props.lookingAt)
+                    context.setLookingAt(props.lookingAt)
                     
-                    click.play();
-                    whoosh.play();
+                    context.click.play();
+                    context.whoosh.play();
                     
                     setTimeout(() => {
-                        setSmallText(props.enableButtons || false);
+                        context.setSmallText(props.enableButtons || false);
                     }, 2000)
                     
-                    controls?.setLookAt(...moveTo, ...lookAt, true).then(() => setTransition(false))
+                    controls?.setLookAt(...props.moveTo, ...props.lookAt, true).then(() => context.setTransition(false))
                 }}
                 >
-                {words}
+                {props.text}
                 <meshLambertMaterial color={color} />
             </Text>
         </Bvh>

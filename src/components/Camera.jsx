@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { usePan } from '../main';
+import { useAppContext } from '../main';
 import { useFrame, useThree } from '@react-three/fiber';
 import { CameraControls } from '@react-three/drei';
 
@@ -12,13 +12,13 @@ export function clearTimeouts() {
 export default function Camera() {
     const cameraRef = useRef();
     const { controls } = useThree();
-    const { pan, setPan, initialCamera, transition, setTransition, whoosh, setLookingAt, setDefaultImage } = usePan()
+    const context = useAppContext()
 
     useEffect(() => {
-        if (initialCamera) controls?.setTarget(80, 25, 49.5)
+        if (context.initialCamera) controls?.setTarget(80, 25, 49.5)
 
         function onDragStart() {
-            setPan(false)
+            context.setPan(false)
             clearTimeouts()
         }
         function onDragEnd() {
@@ -27,7 +27,7 @@ export default function Camera() {
             }, 10000)
         
             timeout2 = setTimeout(() => {
-            setPan(true)
+            context.setPan(true)
             }
             , 15000)
         }
@@ -40,42 +40,42 @@ export default function Camera() {
         controls?.removeEventListener('controlend', onDragEnd)
     }
     
-    }, [controls, pan])
+    }, [controls, context.pan])
 
     useEffect(() => {
-        if (!initialCamera) {
-            whoosh.play()
+        if (!context.initialCamera) {
+            context.whoosh.play()
 
             // controls.setLookAt(250, 26, 49.75, 80, 25, 49.5, true)
             controls.moveTo(250, 26, 49.75, true)
 
             setTimeout(() => {
-                setLookingAt('none')
+                context.setLookingAt('none')
                 controls?.setLookAt(-200, 175, 200, 0, 0, 0,true)
-                .then(() => {setTransition(false); setDefaultImage(true)})
+                .then(() => {context.setTransition(false); context.setDefaultImage(true)})
             }, 450)
         }
-    }, [initialCamera])
+    }, [context.initialCamera])
 
     useEffect(() => {
         if (controls) {
             const { x, y, z } = controls.getTarget();
 
-            if (!transition && !x && !y && !z) {
+            if (!context.transition && !x && !y && !z) {
                 controls._addAllEventListeners(controls._domElement)
             } else {
                 controls._removeAllEventListeners()
             }
         }
-    }, [transition])
+    }, [context.transition])
 
     useFrame(() => { 
-    if(!initialCamera && pan && cameraRef.current){
+    if(!context.initialCamera && context.pan && cameraRef.current){
         const rotationSpeed = 0.001
     
         cameraRef.current.rotate(rotationSpeed, 0)
         }
-    }, [cameraRef, initialCamera])
+    }, [cameraRef, context.initialCamera])
 
     
     return <CameraControls 

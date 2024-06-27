@@ -3,12 +3,12 @@ import LoadProject from './LoadProject'
 import SmallText from './SmallText'
 import LoadImage from './LoadImage'
 import { useEffect, useState } from 'react'
-import { usePan } from '../main'
+import { useAppContext } from '../main'
 import Data from '../data.json'
 
 export default function ArcadeMachine(props) {
   const { nodes, materials } = useGLTF('models/arcade_machine.glb')
-  const { lookingAt, defaultImage } = usePan()
+  const { lookingAt, defaultImage } = useAppContext()
   const [ staticImage, setStaticImage] = useState({...Data.images.loadingImage})
 
   useEffect(() => {

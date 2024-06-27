@@ -1,11 +1,11 @@
 import { Html, useProgress } from "@react-three/drei"
-import { usePan } from "../main"
+import { useAppContext } from "../main"
 
 export default function InitialLoad() {
     const { active, progress, errors, item, loaded, total} = useProgress()
-    const {setDisplayStart} = usePan()
+    const { setDisplayStart } = useAppContext()
 
-    if (progress === 100) {setDisplayStart(true)}
+    if (progress === 100) setDisplayStart(true)
 
     return (
         <Html center>

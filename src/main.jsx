@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { useCursor } from '@react-three/drei';
 
-const PanContext = createContext()
+const context = createContext()
 
-export const usePan = () => {
-  return useContext(PanContext)
+export const useAppContext = () => {
+  return useContext(context)
 };
 
-export const PanProvider = ({children}) => {
+export const ContextProvider = ({children}) => {
   const [pan, setPan] = useState(false)
   const [smallText, setSmallText] = useState(false)
   const [lookingAt, setLookingAt] = useState('')
@@ -72,16 +72,16 @@ export const PanProvider = ({children}) => {
   }
 
   return (
-    <PanContext.Provider value={value}>
+    <context.Provider value={value}>
       {children}
-    </PanContext.Provider>
+    </context.Provider>
     )
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <PanProvider>
+    <ContextProvider>
       <App />
-    </PanProvider>
+    </ContextProvider>
   </React.StrictMode>
 )
