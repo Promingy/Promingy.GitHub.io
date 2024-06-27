@@ -1,6 +1,7 @@
-import { Canvas} from '@react-three/fiber'
 import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial, meshBounds } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
+import { Canvas} from '@react-three/fiber'
+import { useAppContext } from './context'
 import { Perf } from 'r3f-perf'
 import Data from './data.json'
 import './App.css'
@@ -12,7 +13,6 @@ import SmallText from './components/SmallText'
 import LoadImage from './components/LoadImage'
 import Camera from './components/Camera'
 import InitialLoad from './components/InitialLoad'
-import { useAppContext } from './main'
 
 
 import Flame from './components/Flame'

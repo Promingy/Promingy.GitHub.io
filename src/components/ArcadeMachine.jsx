@@ -3,7 +3,7 @@ import LoadProject from './LoadProject'
 import SmallText from './SmallText'
 import LoadImage from './LoadImage'
 import { useEffect, useState } from 'react'
-import { useAppContext } from '../main'
+import { useAppContext } from '../context'
 import Data from '../data.json'
 
 export default function ArcadeMachine(props) {

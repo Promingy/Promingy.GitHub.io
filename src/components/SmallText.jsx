@@ -2,7 +2,7 @@ import { useCursor, Text, Bvh } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { clearTimeouts } from './Camera'
 import { useCallback, useState } from 'react'
-import { useAppContext } from '../main'
+import { useAppContext } from '../context'
 
 export default function SmallText({hoverColor="#ff0000", baseColor='#ffffff', ...props}) {
     const [color, setColor] = useState(baseColor)

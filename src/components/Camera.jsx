@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { useAppContext } from '../main';
+import { useAppContext } from '../context';
 import { useFrame, useThree } from '@react-three/fiber';
 import { CameraControls } from '@react-three/drei';
 

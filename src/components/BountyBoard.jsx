@@ -1,7 +1,7 @@
 import { useGLTF, Detailed, meshBounds } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { useCallback} from 'react'
-import { useAppContext } from '../main'
+import { useAppContext } from '../context'
 import { clearTimeouts } from './Camera'
 
 export default function BountyBoard(props) {

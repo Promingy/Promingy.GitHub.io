@@ -2,7 +2,7 @@ import { useThree } from '@react-three/fiber'
 import { Bvh, Text, meshBounds } from '@react-three/drei'
 import { clearTimeouts } from './Camera'
 import { useState } from 'react'
-import { useAppContext } from '../main'
+import { useAppContext } from '../context'
 
 
 export default function MenuText({ hoverColor=0xff0000, baseColor=0xffffff, ...props }) {

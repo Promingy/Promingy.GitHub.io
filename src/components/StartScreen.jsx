@@ -1,4 +1,4 @@
-import { useAppContext } from "../main"
+import { useAppContext } from "../context"
 
 export default function StartButton({afterRender}) {
     const { setDisplayStart, setInitialCamera, setTransition } = useAppContext();
