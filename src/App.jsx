@@ -1,6 +1,7 @@
-import { Canvas} from '@react-three/fiber'
 import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial, meshBounds } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
+import { Canvas} from '@react-three/fiber'
+import { useAppContext } from './context'
 import { Perf } from 'r3f-perf'
 import Data from './data.json'
 import './App.css'
@@ -12,7 +13,6 @@ import SmallText from './components/SmallText'
 import LoadImage from './components/LoadImage'
 import Camera from './components/Camera'
 import InitialLoad from './components/InitialLoad'
-import { usePan } from './main'
 
 
 import Flame from './components/Flame'
@@ -28,26 +28,26 @@ import SkillBooks from './components/SkillBooks'
 import StartButton from './components/StartScreen'
 
 const App = () => {
-  const { smallText, setPan, lookingAt, pan, displayStart } = usePan()
+  const context = useAppContext();
   const [ assetsLoaded, setAssetsLoaded ] = useState(false)
   let panTimeout
 
   useEffect(() => {
     clearTimeout(panTimeout)
-    setPan(false)
+    context.setPan(false)
     
-    if (lookingAt == 'none' && !pan) {
-      panTimeout = setTimeout(() => setPan(true), 5000)
+    if (context.lookingAt == 'none' && !context.pan) {
+      panTimeout = setTimeout(() => context.setPan(true), 5000)
     }
 
     return () => clearTimeout(panTimeout)
-  }, [lookingAt])
+  }, [context.lookingAt])
 
 
    return (
     <>
       {assetsLoaded && <Clock /> }
-      {displayStart && <StartButton afterRender={() => setAssetsLoaded(true)}/> }
+      {context.displayStart && <StartButton afterRender={() => setAssetsLoaded(true)}/> }
 
       <Canvas shadows camera={{ position: [87.7, 26, 49.75]}} style={{ background: "#000000" }}>
         {/* <Perf openByDefault/> */}
@@ -111,7 +111,7 @@ const App = () => {
             <Sconce {...Data.sconces.leftFront}/>
           </group>
 
-          { smallText &&
+          { context.smallText &&
             <>
             <SmallText {...Data.smallText.experience}/>
             <SmallText {...Data.smallText.experience.backText}/>

@@ -1,7 +1,7 @@
-import { usePan } from "../main"
+import { useAppContext } from "../context"
 
 export default function StartButton({afterRender}) {
-    const { setDisplayStart, setInitialCamera, setTransition } = usePan();
+    const { setDisplayStart, setInitialCamera, setTransition } = useAppContext();
 
     function handleClick() {
         afterRender();

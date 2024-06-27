@@ -2,47 +2,46 @@ import { useCursor, Text, Bvh } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { clearTimeouts } from './Camera'
 import { useCallback, useState } from 'react'
-import { usePan } from '../main'
+import { useAppContext } from '../context'
 
-export default function SmallText({text, size, position, rotation, moveTo, lookAt, hoverColor="#ff0000", baseColor='#ffffff', newLookingAt}) {
+export default function SmallText({hoverColor="#ff0000", baseColor='#ffffff', ...props}) {
     const [color, setColor] = useState(baseColor)
     const {controls} = useThree()
-    const { setPan, setSmallText, click, whoosh, lookingAt, setLookingAt, setTransition, panTimeout, toggleTransitionTimeout } = usePan() 
+    const context = useAppContext()
     const [hovered, setHovered] = useState(false)
 
     useCursor(hovered, 'pointer', 'default')
 
     const handleClick = useCallback((e) => {
         e.stopPropagation()
-        setPan(false)
-        setTransition(true)
-        toggleTransitionTimeout(false)
+        context.setPan(false)
+        context.setTransition(true)
+        context.toggleTransitionTimeout(false)
         
         clearTimeouts();
-        clearTimeout(panTimeout)
+        clearTimeout(context.panTimeout)
 
-        click.play();
-        whoosh.play();
+        context.click.play();
+        context.whoosh.play();
         
-        setSmallText(newLookingAt ? true : false);
-        setLookingAt(newLookingAt ? newLookingAt : 'none');
+        context.setSmallText(props.newLookingAt ? true : false);
+        context.setLookingAt(props.newLookingAt ? props.newLookingAt : 'none');
 
-        controls?.setLookAt(...moveTo, ...lookAt, true)
-        toggleTransitionTimeout(true)
+        controls?.setLookAt(...props.moveTo, ...props.lookAt, true)
+        context.toggleTransitionTimeout(true)
 
-    }, [controls, setPan, setSmallText, click, whoosh, lookingAt, setLookingAt, newLookingAt, moveTo, lookAt]);
+    }, [controls, context.setPan, context.setSmallText, context.click, context.whoosh, context.lookingAt, context.setLookingAt, props.newLookingAt, props.moveTo, props.lookAt]);
 
 
-    /// This is what's causing the FOUC (flash of unstyled content)
     return (
         <Bvh setBoundingBox splitStrategy="SAH">
             <Text
                 font='/Playball-Regular.ttf'
                 characters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!é "
                 color={color}
-                position={position}
-                rotation={rotation}
-                scale={size || .33}
+                position={props.position}
+                rotation={props.rotation}
+                scale={props.size || .33}
                 onClick={handleClick}
                 onPointerOver={(e) => {
                     e.stopPropagation()
@@ -55,7 +54,7 @@ export default function SmallText({text, size, position, rotation, moveTo, lookA
                     setHovered(false)
                 }}
                 >
-                {text}
+                {props.text}
             </Text>
         </Bvh>
     )

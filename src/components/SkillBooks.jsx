@@ -1,42 +1,41 @@
-import { useGLTF, Detailed, useCursor, meshBounds } from '@react-three/drei'
-import { NearestFilter } from 'three'
+import { useGLTF, Detailed, meshBounds } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
-import { useCallback, useState } from 'react'
-import { usePan } from '../main'
+import { useCallback } from 'react'
+import { useAppContext } from '../context'
 import { clearTimeouts } from './Camera'
 
 export default function SkillBooks(props) {
   const { nodes, materials } = useGLTF(`models/low-res/skill_books.glb`)
   const { materials: midMats } = useGLTF(`models/mid-res/skill_books.glb`)
   const { materials: highMats } = useGLTF(`models/high-res/skill_books.glb`)
-  const { setPan, whoosh, lookingAt, setLookingAt, handlePointerIn, handlePointerOut, panTimeout, setTransition, toggleTransitionTimeout } = usePan();
+  const context = useAppContext()
   const { controls } = useThree();
 
   
   const handleClick = useCallback(() => {
-    setPan(false);
-    setTransition(true)
-    toggleTransitionTimeout(false)
+    context.setPan(false);
+    context.setTransition(true)
+    context.toggleTransitionTimeout(false)
 
     clearTimeouts();
-    clearTimeout(panTimeout);
+    clearTimeout(context.panTimeout);
 
-    whoosh.play();
+    context.whoosh.play();
 
-    if (lookingAt == 'skills') {
-      setLookingAt('none')
+    if (context.lookingAt == 'skills') {
+      context.setLookingAt('none')
       
       controls.setLookAt(-200, 175, 200, 0, 0, 0,true)
-      toggleTransitionTimeout(true)
+      context.toggleTransitionTimeout(true)
     }
     else {
-      setLookingAt('skills')
+      context.setLookingAt('skills')
       controls.setLookAt(44, 47, -15, 48, 47, -15, true)
     }
-}, [controls, setPan, whoosh])
+}, [controls, context.setPan, context.whoosh])
 
   return (
-    <Detailed raycast={meshBounds} {...props} distances={[0, 15, 80]} onPointerOver={handlePointerIn} onPointerOut={handlePointerOut} onClick={handleClick}>
+    <Detailed raycast={meshBounds} {...props} distances={[0, 15, 80]} onPointerOver={context.handlePointerIn} onPointerOut={context.handlePointerOut} onClick={handleClick}>
     <group dispose={null}>
       <mesh geometry={nodes.Box002_ORANGE_0.geometry} material={highMats.ORANGE} position={[-30.927, 3.112, -56.585]} rotation={[-Math.PI / 2, 0, 0]} scale={[26.586, 17.029, 5.141]} />
       <mesh geometry={nodes.Box003_RED_0.geometry} material={highMats.material} position={[-30.573, 14.017, -57.247]} rotation={[-Math.PI / 2, 0, -0.061]} scale={[26.586, 17.029, 5.141]} />
