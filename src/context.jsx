@@ -18,8 +18,8 @@ export const ContextProvider = ({children}) => {
   const [transition, setTransition] = useState(false)
   const [defaultImage, setDefaultImage] = useState(false)
 
-  const handlePointerIn = useCallback(() => setHovered(true), [hovered])
-  const handlePointerOut = useCallback(() => setHovered(false), [hovered])
+  const handlePointerIn = useCallback((e) => {e.stopPropagation(); setHovered(true)}, [hovered])
+  const handlePointerOut = useCallback((e) => {e.stopPropagation(); setHovered(false)}, [hovered])
 
   let timeout;
 

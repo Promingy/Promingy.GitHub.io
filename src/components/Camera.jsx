@@ -46,7 +46,6 @@ export default function Camera() {
         if (!context.initialCamera) {
             context.whoosh.play()
 
-            // controls.setLookAt(250, 26, 49.75, 80, 25, 49.5, true)
             controls.moveTo(250, 26, 49.75, true)
 
             setTimeout(() => {

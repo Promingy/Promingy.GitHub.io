@@ -1,15 +1,23 @@
-import { useGLTF, Detailed, meshBounds } from '@react-three/drei'
-import { useThree } from '@react-three/fiber'
-import { useCallback } from 'react'
+import { useGLTF, Detailed, meshBounds, Float, Clouds, Cloud } from '@react-three/drei'
+import { useThree, useFrame } from '@react-three/fiber'
+import { useCallback, useState } from 'react'
 import { useAppContext } from '../context'
 import { clearTimeouts } from './Camera'
+import { MeshBasicMaterial } from 'three'
 
 export default function SkillBooks(props) {
   const { nodes, materials } = useGLTF(`models/low-res/skill_books.glb`)
   const { materials: midMats } = useGLTF(`models/mid-res/skill_books.glb`)
   const { materials: highMats } = useGLTF(`models/high-res/skill_books.glb`)
+  const [opacity, setOpacity] = useState(0)
+  const [hovered, setHovered] = useState(false)
   const context = useAppContext()
   const { controls } = useThree();
+
+  useFrame(() => {
+    if (hovered && opacity < 1) setOpacity(opacity + 0.005)
+    else if (!hovered && opacity > 0) setOpacity(opacity - 0.0075);
+  })
 
   
   const handleClick = useCallback(() => {
@@ -35,7 +43,22 @@ export default function SkillBooks(props) {
 }, [controls, context.setPan, context.whoosh])
 
   return (
-    <Detailed raycast={meshBounds} {...props} distances={[0, 15, 80]} onPointerOver={context.handlePointerIn} onPointerOut={context.handlePointerOut} onClick={handleClick}>
+    <>
+    <Float floatingRange={[0, 1]} rotationIntensity={0} speed={5}>
+      <Clouds material={MeshBasicMaterial}>
+        <Cloud fade={0} opacity={opacity} seed={.24} color="papayawhip" speed={1} scale={1.25} position={[54, 42, -14]} rotation={[0, Math.PI / 2, 0]}/>
+      </Clouds>
+    </Float>
+    <Detailed raycast={meshBounds} {...props} distances={[0, 15, 80]} 
+    onPointerOver={(e) => {
+      context.handlePointerIn(e);
+      setHovered(true);
+    }} 
+    onPointerOut={(e) => {
+      context.handlePointerOut(e);
+      setHovered(false);
+    }} 
+    onClick={handleClick}>
     <group dispose={null}>
       <mesh geometry={nodes.Box002_ORANGE_0.geometry} material={highMats.ORANGE} position={[-30.927, 3.112, -56.585]} rotation={[-Math.PI / 2, 0, 0]} scale={[26.586, 17.029, 5.141]} />
       <mesh geometry={nodes.Box003_RED_0.geometry} material={highMats.material} position={[-30.573, 14.017, -57.247]} rotation={[-Math.PI / 2, 0, -0.061]} scale={[26.586, 17.029, 5.141]} />
@@ -91,6 +114,7 @@ export default function SkillBooks(props) {
       <mesh geometry={nodes.Box009_Cyan_0001.geometry} material={materials['Cyan.001']} position={[-29.086, 50.782, -59.329]} rotation={[-Math.PI / 2, 0, 0]} scale={[26.586, 17.029, 5.141]} />
     </group>
     </Detailed>
+    </>
   )
 }
 

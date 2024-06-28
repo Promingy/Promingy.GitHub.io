@@ -1,4 +1,4 @@
-import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial, meshBounds } from '@react-three/drei'
+import { AdaptiveDpr, BakeShadows, Cloud, Clouds, MeshReflectorMaterial, meshBounds } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
 import { Canvas} from '@react-three/fiber'
 import { useAppContext } from './context'
@@ -26,6 +26,7 @@ import Clock from './components/Clock'
 import BountyBoard from './components/BountyBoard'
 import SkillBooks from './components/SkillBooks'
 import StartButton from './components/StartScreen'
+import Swarm from './components/Swarm'
 
 const App = () => {
   const context = useAppContext();
@@ -50,10 +51,14 @@ const App = () => {
       {context.displayStart && <StartButton afterRender={() => setAssetsLoaded(true)}/> }
 
       <Canvas shadows camera={{ position: [87.7, 26, 49.75]}} style={{ background: "#000000" }}>
+        <fog attach="fog" args={['#000000', 400, 750]}/>
         {/* <Perf openByDefault/> */}
         <Suspense fallback={<InitialLoad />}>
           <Camera />
           <BakeShadows />
+
+          <Swarm count={525} color='grey'/>
+          <Swarm count={225} color='orange'/>
 
         {/* //! the refletor material jumps the triangles up about 100,000 */}
 
@@ -70,9 +75,9 @@ const App = () => {
           </mesh>
 
           <group>
-            <Lights  position={[44, 50, 80]} intensity={2000} />
-            <Lights  position={[44, 50, -30]} intensity={2000} />
-            <Lights  position={[-25, 50, -60]} intensity={2000} />
+            <Lights position={[44, 50, 80]} intensity={2000} />
+            <Lights position={[44, 50, -30]} intensity={2000} />
+            <Lights position={[-25, 50, -60]} intensity={2000} />
             <Lights position={[-33.3, 10, -65]} rotateX={3.14} color='orange' intensity={2500} decay={1.7} />
 
             <Lights shadow position={[70, 60, 120]} intensity={2000} decay={1.5}/>
