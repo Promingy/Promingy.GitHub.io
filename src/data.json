@@ -3,7 +3,7 @@
         "scale": [25, 25, 25]
     },
     "lightPost": {
-        "position": [-90, -5, 120],
+        "position": [-90, -7, 120],
         "scale": [4.5, 4.5, 4.5],
         "rotation": [0, 2.5, 0]
     },
@@ -17,6 +17,9 @@
         "scale":[25, 25, 25],
         "rotation":[0, 0, 0],
         "name": "arcadeMachine1",
+        "moveTo": [92, 27, -0.5],
+        "lookAt": [85.2, 26, -0.75],
+        "cloudPosition": [85, -2, 0],
         "loadProject": {
             "url": "https://project1.corbinainsworth.com",
             "position": [84, 25.5, 0],
@@ -28,7 +31,7 @@
             "position": [85.3, 20.75, 4],
             "rotation": [-1.509, 1.425, 1.488],
             "moveTo": [92, 27, 49.75],
-            "lookAt": [85, 26, 49.5],
+            "lookAt": [80, 26, 49.5],
             "hoverColor": "#F07F13",
             "newLookingAt": "arcadeMachine2"
         },
@@ -53,6 +56,9 @@
         "position":[80, 17, 50],
         "scale":[25, 25, 25],
         "rotation":[0, 0, 0],
+        "moveTo": [92, 27, 49.75],
+        "lookAt": [85, 26, 49.5],
+        "cloudPosition": [85, -2, 50],
         "name": "arcadeMachine2",
         "loadProject": {
             "url": "https://project2.corbinainsworth.com",

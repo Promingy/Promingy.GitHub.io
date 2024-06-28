@@ -18,7 +18,6 @@ export default function BountyBoard(props) {
     if (hovered && opacity < 1 && context.lookingAt == 'none') setOpacity(opacity + 0.0025)
     else if (!hovered && opacity > 0) setOpacity(opacity - 0.0075);
   })
-
   
   const handleClick = useCallback(() => {
     context.setTransition(true)
@@ -46,7 +45,7 @@ export default function BountyBoard(props) {
   return (
     <>
     {opacity &&
-    <Float floatingRange={[-3, -0]} rotationIntensity={0} speed={5}>
+    <Float floatingRange={[-2, 0]} rotationIntensity={0} speed={5}>
       <Clouds material={MeshBasicMaterial}>
         <Cloud fade={0.000000001} color='papayawhip' opacity={opacity} speed={1} scale={4} position={[52, -3, 152.5]} rotation={[0, Math.PI / 2, 0]} seed={.5} />
       </Clouds>

@@ -33,12 +33,12 @@ export default function MenuText({ hoverColor=0xff0000, baseColor=0xffffff, ...p
                     context.setTransition(true);
                     context.setPan(false);
                     clearTimeouts();
-                    context.setLookingAt(props.lookingAt)
                     
                     context.click.play();
                     context.whoosh.play();
                     
                     setTimeout(() => {
+                        context.setLookingAt(props.lookingAt)
                         context.setSmallText(props.enableButtons || false);
                     }, 2000)
                     

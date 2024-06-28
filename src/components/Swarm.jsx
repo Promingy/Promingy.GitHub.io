@@ -49,7 +49,7 @@ export default function Swarm({ count, color }) {
     return (
         <instancedMesh ref={mesh} args={[null, null, count]} position={[-40, 75, 20]} scale={[4, 2, 4]}>
             <planeGeometry />
-            <meshPhongMaterial side={DoubleSide} color={color} transparent opacity={0.75}/>
+            <meshLambertMaterial side={DoubleSide} color={color} transparent opacity={0.75}/>
         </instancedMesh>
     )
 }

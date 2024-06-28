@@ -1,4 +1,4 @@
-import { AdaptiveDpr, BakeShadows, Cloud, Clouds, MeshReflectorMaterial, meshBounds } from '@react-three/drei'
+import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial, meshBounds } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
 import { Canvas} from '@react-three/fiber'
 import { useAppContext } from './context'
@@ -31,6 +31,7 @@ import Swarm from './components/Swarm'
 const App = () => {
   const context = useAppContext();
   const [ assetsLoaded, setAssetsLoaded ] = useState(false)
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
   let panTimeout
 
   useEffect(() => {
@@ -44,15 +45,14 @@ const App = () => {
     return () => clearTimeout(panTimeout)
   }, [context.lookingAt])
 
-
    return (
     <>
       {assetsLoaded && <Clock /> }
       {context.displayStart && <StartButton afterRender={() => setAssetsLoaded(true)}/> }
 
-      <Canvas shadows camera={{ position: [87.7, 26, 49.75]}} style={{ background: "#000000" }}>
+      <Canvas shadows camera={{ position: [87.7, 26, 49.75], fov: isMobile ? 120 : 75}} style={{ background: "#000000" }}>
         <fog attach="fog" args={['#000000', 400, 750]}/>
-        {/* <Perf openByDefault/> */}
+        <Perf openByDefault/>
         <Suspense fallback={<InitialLoad />}>
           <Camera />
           <BakeShadows />
@@ -60,18 +60,19 @@ const App = () => {
           <Swarm count={525} color='grey'/>
           <Swarm count={225} color='orange'/>
 
-        {/* //! the refletor material jumps the triangles up about 100,000 */}
-
           <mesh receiveShadow rotation={[-Math.PI * 0.5, 0, 0]} position={[0, -7, 0]}>
-              <planeGeometry args={[1000, 1000]} />
-              {/* <meshLambertMaterial receiveShadow color='grey' /> */}
+              <planeGeometry args={[750, 750]} />
+              { !isMobile ?
+              <meshLambertMaterial receiveShadow color='grey' />
+              :
               <MeshReflectorMaterial
-                mixStrength={.1} // Strength of the reflections
-                resolution={256} // Off-buffer resolution, lower=faster, higher=better quality
-                args={[1000, 1000]} // PlaneBufferGeometry arguments
-                mirror={0.97} // Mirror environment, 0 = texture colors, 1 = pick up env colors
+                mixStrength={.1}
+                resolution={256}
+                args={[1000, 1000]}
+                mirror={0.97}
                 position={[0, -7, 0]}
                 />
+              }
           </mesh>
 
           <group>
@@ -81,8 +82,7 @@ const App = () => {
             <Lights position={[-33.3, 10, -65]} rotateX={3.14} color='orange' intensity={2500} decay={1.7} />
 
             <Lights shadow position={[70, 60, 120]} intensity={2000} decay={1.5}/>
-            <Lights position={[65, 63, -70]} intensity={2000} decay={1.5}/>
-            <Lights position={[53, 63, -83]} intensity={2000} decay={1.5}/>
+            <Lights position={[65, 63, -83]} intensity={2000} decay={1.6}/>
             <Lights shadow position={[-90, 63, -83]} intensity={2000} decay={1.5}/>
 
             <Lights shadow position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.8}/>
@@ -90,14 +90,10 @@ const App = () => {
             <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
           </group>
 
-          {/* <ambientLight /> */}
 
           <LoadImage {...Data.images.resume}/>
           <LoadImage {...Data.images.aboutMe}/>
 
-            {/* //! Using regular Text instead of Text 3D drops drawcalls by 80 and reduces triangles by 
-            //! 40,000 
-            */}
           <group>
             <MenuText {...Data.menuText.resume}/>
             <MenuText {...Data.menuText.skills}/>
@@ -108,7 +104,7 @@ const App = () => {
           </group>
 
           <Flame />
-          
+
           <group>
             <Sconce {...Data.sconces.backLeft}/>
             <Sconce {...Data.sconces.backRight}/>
@@ -135,7 +131,6 @@ const App = () => {
           <MedievalBookStack {...Data.medievalBookStack} />
           <LightPost {...Data.lightPost}/>
           <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()}/>
-          
         </Suspense>
         <AdaptiveDpr pixelated />
       </Canvas>

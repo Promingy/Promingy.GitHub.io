@@ -46,12 +46,14 @@ export default function Camera() {
         if (!context.initialCamera) {
             context.whoosh.play()
 
-            controls.moveTo(250, 26, 49.75, true)
+            controls?.moveTo(250, 26, 49.75, true)
+
+            context.toggleTransitionTimeout(true)
 
             setTimeout(() => {
                 context.setLookingAt('none')
                 controls?.setLookAt(-200, 175, 200, 0, 0, 0,true)
-                .then(() => {context.setTransition(false); context.setDefaultImage(true)})
+                .then(() => {context.setDefaultImage(true)})
             }, 450)
         }
     }, [context.initialCamera])

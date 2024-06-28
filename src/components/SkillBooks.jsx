@@ -15,7 +15,7 @@ export default function SkillBooks(props) {
   const { controls } = useThree();
 
   useFrame(() => {
-    if (hovered && opacity < 1) setOpacity(opacity + 0.005)
+    if (hovered && opacity < 1 && context.lookingAt == "none") setOpacity(opacity + 0.005)
     else if (!hovered && opacity > 0) setOpacity(opacity - 0.0075);
   })
 
