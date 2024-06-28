@@ -62,7 +62,7 @@ const App = () => {
 
           <mesh receiveShadow rotation={[-Math.PI * 0.5, 0, 0]} position={[0, -7, 0]}>
               <planeGeometry args={[750, 750]} />
-              { !isMobile ?
+              { isMobile ?
               <meshLambertMaterial receiveShadow color='grey' />
               :
               <MeshReflectorMaterial
