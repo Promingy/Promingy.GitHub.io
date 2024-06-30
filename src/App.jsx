@@ -57,11 +57,12 @@ const App = () => {
           <Camera />
           <BakeShadows />
 
-          <Swarm count={525} color='grey'/>
-          <Swarm count={225} color='orange'/>
+          <Swarm count={425} opacity={0.75} color='Gray'/>
+          <Swarm count={100} opacity={0.45} color='maroon'/>
+          <Swarm count={225} opacity={0.66} color='orange'/>
 
           <mesh receiveShadow rotation={[-Math.PI * 0.5, 0, 0]} position={[0, -7, 0]}>
-              <planeGeometry args={[750, 750]} />
+              <planeGeometry args={[1000, 1000]} />
               { isMobile ?
               <meshLambertMaterial receiveShadow color='grey' />
               :
@@ -130,7 +131,7 @@ const App = () => {
           <ArcadeMachine {...Data.arcadeMachine2}/>
           <MedievalBookStack {...Data.medievalBookStack} />
           <LightPost {...Data.lightPost}/>
-          <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()}/>
+          <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
         </Suspense>
         <AdaptiveDpr pixelated />
       </Canvas>

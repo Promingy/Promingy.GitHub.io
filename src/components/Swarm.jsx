@@ -2,7 +2,7 @@ import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import { DoubleSide, Object3D } from "three";
 
-export default function Swarm({ count, color }) {
+export default function Swarm({ count, color, opacity }) {
     const mesh = useRef();
 
     const dummy = useMemo(() => new Object3D(), []);
@@ -24,7 +24,7 @@ export default function Swarm({ count, color }) {
 
     useFrame(() => {
         particles.forEach((particle, i) => {
-            let { t, factor, speed, xFactor, yFactor, zFactor, scale, opacity } = particle;
+            let { t, factor, speed, xFactor, yFactor, zFactor, scale } = particle;
             t = particle.t += speed / 5;
             const a = Math.cos(t) + Math.sin(t * 1) / 10;
             const b = Math.sin(t) + Math.cos(t * 2) / 10;
@@ -49,7 +49,7 @@ export default function Swarm({ count, color }) {
     return (
         <instancedMesh ref={mesh} args={[null, null, count]} position={[-40, 75, 20]} scale={[4, 2, 4]}>
             <planeGeometry />
-            <meshLambertMaterial side={DoubleSide} color={color} transparent opacity={0.75}/>
+            <meshLambertMaterial side={DoubleSide} color={color} transparent opacity={opacity}/>
         </instancedMesh>
     )
 }

@@ -29,7 +29,9 @@ export default function ArcadeMachine(props) {
     else if (!hovered && opacity > 0) setOpacity(opacity - 0.0075);
   })
 
-  const handleClick = useCallback(() => {
+  const handleClick = useCallback((e) => {
+    e.stopPropagation()
+
     context.setTransition(true)
     context.toggleTransitionTimeout(false)
     context.setPan(false);
@@ -63,12 +65,12 @@ export default function ArcadeMachine(props) {
         </>
       }
 
-    <Float floatingRange={[-1, 1]} rotationIntensity={0} speed={5}>
+    {opacity && <Float floatingRange={[-1, 1]} rotationIntensity={0} speed={5}>
       <Clouds material={MeshBasicMaterial}>
         <Cloud fade={0.000000001} color='grey' opacity={opacity} speed={1} scale={[4, 2, 4]} position={Data[props.name].cloudPosition} rotation={[0, Math.PI / 2, 0]} seed={.52} />
         <Cloud fade={0.000000001} color='grey' opacity={opacity} speed={1} scale={[4, 2, 4]} position={[Data[props.name].cloudPosition[0] - 10, Data[props.name].cloudPosition[1], Data[props.name].cloudPosition[2]]} rotation={[0, Math.PI / 2, 0]} seed={.52} />
       </Clouds>
-    </Float>
+    </Float>}
     <group {...props} dispose={null} 
       onPointerOver={(e) => {
         context.handlePointerIn(e);
@@ -80,9 +82,9 @@ export default function ArcadeMachine(props) {
       }}
       onClick={handleClick}
     >
-      <mesh receiveShadow geometry={nodes.Cube001_10011_0.geometry} material={materials['10011']} position={[0, 0.015, 0]} scale={0.985} />
-      <mesh receiveShadow geometry={nodes.Cylinder001_1001_0.geometry} material={materials['1001']} position={[0.271, -0.165, 0.001]} scale={0.306} />
+      <mesh geometry={nodes.Cube001_10011_0.geometry} material={materials['Baked.001']} position={[0, 0.015, 0]} scale={0.985} />
     </group>
+  )
     </>
   )
 }
