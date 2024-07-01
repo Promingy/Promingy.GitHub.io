@@ -27,6 +27,7 @@ import BountyBoard from './components/BountyBoard'
 import SkillBooks from './components/SkillBooks'
 import StartButton from './components/StartScreen'
 import Swarm from './components/Swarm'
+import Test from './components/Test'
 
 const App = () => {
   const context = useAppContext();
@@ -52,7 +53,7 @@ const App = () => {
 
       <Canvas shadows camera={{ position: [87.7, 26, 49.75], fov: isMobile ? 120 : 75}} style={{ background: "#000000" }}>
         <fog attach="fog" args={['#000000', 400, 750]}/>
-        <Perf openByDefault/>
+        {/* <Perf openByDefault/> */}
         <Suspense fallback={<InitialLoad />}>
           <Camera />
           <BakeShadows />
@@ -131,7 +132,8 @@ const App = () => {
           <ArcadeMachine {...Data.arcadeMachine2}/>
           <MedievalBookStack {...Data.medievalBookStack} />
           <LightPost {...Data.lightPost}/>
-          <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
+          {/* <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/> */}
+          <Test {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
         </Suspense>
         <AdaptiveDpr pixelated />
       </Canvas>
