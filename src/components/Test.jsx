@@ -1,12 +1,12 @@
 import { useGLTF } from '@react-three/drei'
-import { LinearFilter } from 'three'
+import { NearestFilter } from 'three'
 
-export default function Model(props) {
+export default function Test(props) {
   const { nodes, materials } = useGLTF('models/high-res/test.glb')
-  for (const m in materials) materials[m].map.minFilter = LinearFilter
+  for (let m in materials) {materials[m].minFilter = NearestFilter; materials[m].magFilter = NearestFilter}
   return (
-    <group {...props} dispose={null}>
-      <mesh geometry={nodes.Box007_purple_0.geometry} material={materials['Material.001']} position={[-29.474, 42.98, -58.969]} rotation={[-Math.PI / 2, 0, 0]} scale={[219.325, 140.484, 42.414]} />
+    <group {...props} position={[0, 52, 180]} dispose={null}>
+      <mesh geometry={nodes.Box002_ORANGE_0.geometry} material={materials.Atlas} position={[2.367, 3.582, 122.974]} scale={[346.477, 207.364, 136.021]} />
     </group>
   )
 }

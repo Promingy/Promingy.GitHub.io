@@ -46,7 +46,7 @@ export default function MenuText({ hoverColor=0xff0000, baseColor=0xffffff, ...p
                 }}
                 >
                 {props.text}
-                <meshLambertMaterial color={color} />
+                <meshBasicMaterial color={color} />
             </Text>
         </Bvh>
     )
