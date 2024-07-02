@@ -23,7 +23,7 @@ import BountyBoard from './components/BountyBoard'
 import SkillBooks from './components/SkillBooks'
 import StartButton from './components/StartScreen'
 import Swarm from './components/Swarm'
-import Test from './components/Test'
+// import Test from './components/Test'
 
 const App = () => {
   const context = useAppContext();

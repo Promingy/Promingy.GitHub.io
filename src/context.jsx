@@ -23,12 +23,13 @@ export const ContextProvider = ({children}) => {
 
   let timeout;
 
-  function toggleTransitionTimeout(toggle) {
+  function toggleTransitionTimeout(toggle, defaultImage=false) {
     clearTimeout(timeout);
 
     if (toggle == true) {
       timeout = setTimeout(() => {
-        setTransition(false)
+        setTransition(false);
+        if (defaultImage) setDefaultImage(true);
       }, 5000)
     }
   }

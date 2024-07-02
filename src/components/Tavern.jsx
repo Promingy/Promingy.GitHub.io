@@ -5,10 +5,9 @@ export default function Tavern(props) {
   const { nodes, materials } = useGLTF('models/tavern.glb')
   
   materials["MasterAtlas.001"].roughness = 1
-  materials["MasterAtlas.001"].metalness = 0
   materials["MasterAtlas.001"].side = 0
-  const basicMaterial = new MeshBasicMaterial({map: materials["MasterAtlas.001"].map})
 
+  const basicMaterial = new MeshBasicMaterial({map: materials["MasterAtlas.001"].map})
 
   return (
     <group {...props} dispose={null}>
@@ -17,4 +16,4 @@ export default function Tavern(props) {
   )
 }
 
-useGLTF.preload('models/test.glb')
+useGLTF.preload('models/tavern.glb')

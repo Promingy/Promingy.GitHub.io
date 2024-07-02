@@ -1,9 +1,9 @@
-import { useGLTF, Detailed, meshBounds, Float, Clouds, Cloud, TransformControls } from '@react-three/drei'
+import { useGLTF, Detailed, meshBounds, Float, Clouds, Cloud } from '@react-three/drei'
 import { useThree, useFrame } from '@react-three/fiber'
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useAppContext } from '../context'
 import { clearTimeouts } from './Camera'
-import { MeshBasicMaterial, LinearFilter, NearestFilter } from 'three'
+import { MeshBasicMaterial, NearestFilter } from 'three'
 
 export default function SkillBooks(props) {
   const { nodes, materials: lowMats } = useGLTF(`models/low-res/skill_books.glb`)
@@ -14,9 +14,7 @@ export default function SkillBooks(props) {
   const context = useAppContext()
   const { controls } = useThree();
 
-  const ref = useRef();
-
-  for (let m in highMats) {highMats[m].minFilter = LinearFilter; highMats[m].magFilter = LinearFilter}
+  for (let m in highMats) {highMats[m].minFilter = NearestFilter; highMats[m].magFilter = NearestFilter}
 
   useFrame(() => {
     if (hovered && opacity < 1 && context.lookingAt == "none") setOpacity(opacity + 0.005)

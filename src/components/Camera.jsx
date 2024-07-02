@@ -48,12 +48,11 @@ export default function Camera() {
 
             controls?.moveTo(250, 26, 49.75, true)
 
-            context.toggleTransitionTimeout(true)
+            context.toggleTransitionTimeout(true, true)
 
             setTimeout(() => {
                 context.setLookingAt('none')
                 controls?.setLookAt(-200, 175, 200, 0, 0, 0,true)
-                .then(() => {context.setDefaultImage(true)})
             }, 450)
         }
     }, [context.initialCamera])
