@@ -10,7 +10,7 @@ export default function Model(props) {
   const { nodes, materials } = useGLTF('/test.glb')
   return (
     <group {...props} dispose={null}>
-      <mesh geometry={nodes.Box002_ORANGE_0.geometry} material={materials.Atlas} position={[-29.474, 42.98, -58.969]} rotation={[-Math.PI / 2, 0, 0]} scale={[219.325, 140.484, 42.414]} />
+      <mesh geometry={nodes.Box002_ORANGE_0.geometry} material={materials.Atlas} position={[2.367, 3.582, 122.974]} scale={[346.477, 207.364, 136.021]} />
     </group>
   )
 }
