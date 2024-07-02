@@ -16,12 +16,8 @@ import InitialLoad from './components/InitialLoad'
 
 
 import Flame from './components/Flame'
-import Sconce from './components/Sconce'
 import ArcadeMachine from './components/ArcadeMachine'
 import Tavern from './components/Tavern'
-import LightPost from './components/Lightpost'
-import MedievalBookStack from './components/MedievalBookStack'
-import ProjectSign from './components/ProjectSign'
 import Clock from './components/Clock'
 import BountyBoard from './components/BountyBoard'
 import SkillBooks from './components/SkillBooks'
@@ -53,7 +49,7 @@ const App = () => {
 
       <Canvas shadows camera={{ position: [87.7, 26, 49.75], fov: isMobile ? 120 : 75}} style={{ background: "#000000" }}>
         <fog attach="fog" args={['#000000', 400, 750]}/>
-        {/* <Perf openByDefault/> */}
+        <Perf openByDefault/>
         <Suspense fallback={<InitialLoad />}>
           <Camera />
           <BakeShadows />
@@ -87,11 +83,11 @@ const App = () => {
             <Lights position={[65, 63, -83]} intensity={2000} decay={1.6}/>
             <Lights shadow position={[-90, 63, -83]} intensity={2000} decay={1.5}/>
 
-            <Lights shadow position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.8}/>
+            <Lights position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.8}/>
 
             <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
+            <ambientLight intensity={.75} />
           </group>
-
 
           <LoadImage {...Data.images.resume}/>
           <LoadImage {...Data.images.aboutMe}/>
@@ -107,13 +103,6 @@ const App = () => {
 
           <Flame />
 
-          <group>
-            <Sconce {...Data.sconces.backLeft}/>
-            <Sconce {...Data.sconces.backRight}/>
-            <Sconce {...Data.sconces.leftBack}/>
-            <Sconce {...Data.sconces.leftFront}/>
-          </group>
-
           { context.smallText &&
             <>
             <SmallText {...Data.smallText.experience}/>
@@ -125,15 +114,12 @@ const App = () => {
           </>
           }
 
-          <ProjectSign {...Data.projectSign}/>
           <SkillBooks {...Data.skillBooks}/>
           <BountyBoard {...Data.bountyBoard}/>
           <ArcadeMachine {...Data.arcadeMachine1}/>
           <ArcadeMachine {...Data.arcadeMachine2}/>
-          <MedievalBookStack {...Data.medievalBookStack} />
-          <LightPost {...Data.lightPost}/>
-          {/* <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/> */}
-          <Test {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
+          <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
+          {/* <Test {...Data.skillBooks} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/> */}
         </Suspense>
         <AdaptiveDpr pixelated />
       </Canvas>
