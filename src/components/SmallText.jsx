@@ -14,9 +14,10 @@ export default function SmallText({hoverColor="#ff0000", baseColor='#ffffff', ..
 
     const handleClick = useCallback((e) => {
         e.stopPropagation()
-        context.setPan(false)
+
         context.setTransition(true)
         context.toggleTransitionTimeout(false)
+        context.setPan(false)
         
         clearTimeouts();
         clearTimeout(context.panTimeout)

@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useState} from 'react'
 import { useCursor } from '@react-three/drei';
+import { clearTimeouts } from './components/Camera'
 
 const context = createContext()
 
@@ -17,12 +18,37 @@ export const ContextProvider = ({children}) => {
   const [initialCamera, setInitialCamera] = useState(true)
   const [transition, setTransition] = useState(false)
   const [defaultImage, setDefaultImage] = useState(false)
-
-  const handlePointerIn = useCallback((e) => {e.stopPropagation(); setHovered(true)}, [hovered])
-  const handlePointerOut = useCallback((e) => {e.stopPropagation(); setHovered(false)}, [hovered])
-
+  
+  
   let timeout;
 
+  const handleClick = useCallback((e, controls, props) => {
+    e.stopPropagation()
+
+    setTransition(true)
+    toggleTransitionTimeout(false)
+    setPan(false);
+    
+    clearTimeouts();
+    clearTimeout(panTimeout);
+
+    whoosh.play();
+
+    if (lookingAt == props.name) {
+      setLookingAt('none')
+
+      controls.setLookAt(-200, 175, 200, 0, 0, 0, true)
+      toggleTransitionTimeout(true)
+    }
+    else {
+      setLookingAt(props.name)
+      controls.setLookAt(...props.moveTo, ...props.lookAt, true)
+    }
+    console.log('i worked')
+  })
+  
+  const handlePointerIn = useCallback((e) => {e.stopPropagation(); setHovered(true)}, [hovered])
+  const handlePointerOut = useCallback((e) => {e.stopPropagation(); setHovered(false)}, [hovered])
   function toggleTransitionTimeout(toggle, defaultImage=false) {
     clearTimeout(timeout);
 
@@ -53,6 +79,7 @@ export const ContextProvider = ({children}) => {
     setLookingAt,
     handlePointerIn,
     handlePointerOut,
+    handleClick,
     setPanTimeout,
     panTimeout,
     displayStart,

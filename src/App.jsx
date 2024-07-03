@@ -2,7 +2,7 @@ import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial, meshBounds } from '@re
 import { Suspense, useEffect, useState } from 'react'
 import { Canvas} from '@react-three/fiber'
 import { useAppContext } from './context'
-import { Perf } from 'r3f-perf'
+// import { Perf } from 'r3f-perf'
 import Data from './data.json'
 import './App.css'
 
@@ -47,9 +47,9 @@ const App = () => {
       {assetsLoaded && <Clock /> }
       {context.displayStart && <StartButton afterRender={() => setAssetsLoaded(true)}/> }
 
-      <Canvas shadows camera={{ position: [87.7, 26, 49.75], fov: isMobile ? 120 : 75}} style={{ background: "#000000" }}>
+      <Canvas shadows camera={{ position: [87.7, 26, 59.75], fov: isMobile ? 120 : 75}} style={{ background: "#000000" }}>
         <fog attach="fog" args={['#000000', 400, 750]}/>
-        <Perf openByDefault/>
+        {/* <Perf openByDefault/> */}
         <Suspense fallback={<InitialLoad />}>
           <Camera />
           <BakeShadows />
@@ -83,10 +83,10 @@ const App = () => {
             {/* <Lights position={[65, 63, -83]} intensity={2000} decay={1.6}/> */}
             <Lights shadow position={[-90, 63, -83]} intensity={2000} decay={1.5}/>
 
-            <Lights position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.8}/>
+            {/* <Lights position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.8}/> */}
 
             <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
-            <ambientLight intensity={.75} />
+            <ambientLight />
           </group>
 
           <LoadImage {...Data.images.resume}/>
@@ -118,6 +118,7 @@ const App = () => {
           <BountyBoard {...Data.bountyBoard}/>
           <ArcadeMachine {...Data.arcadeMachine1}/>
           <ArcadeMachine {...Data.arcadeMachine2}/>
+          <ArcadeMachine {...Data.arcadeMachine3}/>
           <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
           {/* <Test {...Data.skillBooks} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/> */}
         </Suspense>
