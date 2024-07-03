@@ -1,8 +1,7 @@
 import { useGLTF, Detailed, meshBounds, Cloud, Clouds, Float } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
-import { useCallback, useState} from 'react'
+import { useState} from 'react'
 import { useAppContext } from '../context'
-import { clearTimeouts } from './Camera'
 import { MeshBasicMaterial } from 'three'
 
 export default function BountyBoard(props) {

@@ -20,8 +20,8 @@
             "size": 0.5,
             "position": [85.3, 20.75, -6],
             "rotation": [-1.509, 1.425, 1.488],
-            "moveTo": [92, 27, 59.75],
-            "lookAt": [85, 26, 59.5],
+            "moveTo": [92, 27, 24.75],
+            "lookAt": [85, 26, 24.5],
             "hoverColor": "#F07F13",
             "newLookingAt": "arcadeMachine2"
         },
@@ -38,58 +38,18 @@
             "file": "images/arcadeMachine1.png",
             "position": [84, 25.5, -10],
             "rotation": [-1.516, 1.383, 1.514],
-            "scale": [0.115, 0.09, 1],
+            "scale": [0.135, 0.13, 1],
             "basic": true
         }
     },
     "arcadeMachine2": {
-        "position":[80, 17, 60],
-        "scale":[25, 25, 25],
-        "rotation":[0, 0, 0],
-        "moveTo": [92, 27, 59.75],
-        "lookAt": [85, 26, 59.5],
-        "cloudPosition": [85, -2, 60],
-        "name": "arcadeMachine2",
-        "loadProject": {
-            "url": "https://project2.corbinainsworth.com",
-            "position": [84, 25.5, 60],
-            "rotation": [0, 1.5708, 0]
-        },
-        "nextProject": {
-            "text": "Next Project",
-            "size": 0.5,
-            "position": [85.2, 20.55, 55.5],
-            "rotation": [-1.456, 1.388, 1.453],
-            "moveTo": [92, 27, -10.5],
-            "lookAt": [85.2, 26, -10.75],
-            "hoverColor": "#F07F13",
-            "newLookingAt": "arcadeMachine1"
-        },
-        "backText":{
-            "text": "Back",
-            "size": 0.5,
-            "position": [85.2, 20.75, 65],
-            "rotation": [-1.518, 1.426, 1.497],
-            "moveTo": [-200, 175, 200],
-            "lookAt": [0, 0, 0],
-            "color": "#F07F13"
-        },
-        "image": {
-            "file": "images/arcadeMachine2.png",
-            "position": [84, 25.5, 60],
-            "rotation": [-1.516, 1.383, 1.514],
-            "scale": [0.115, 0.09, 1],
-            "basic": true
-        }
-    },
-    "arcadeMachine3": {
         "position":[80, 17, 25],
         "scale":[25, 25, 25],
         "rotation":[0, 0, 0],
         "moveTo": [92, 27, 24.75],
         "lookAt": [85, 26, 24.5],
         "cloudPosition": [85, -2, 25],
-        "name": "arcadeMachine3",
+        "name": "arcadeMachine2",
         "loadProject": {
             "url": "https://project3.corbinainsworth.com",
             "position": [84, 25.5, 25],
@@ -114,7 +74,7 @@
             "lookAt": [85, 26, 59.5],
             "color": "#F07F13",
             "hoverColor": "#F07F13",
-            "newLookingAt": "arcadeMachine2"
+            "newLookingAt": "arcadeMachine3"
         },
         "backText": {
             "text": "Back",
@@ -126,10 +86,50 @@
             "color": "#F07F13"
         },
         "image": {
-            "file": "images/arcadeMachine3.png",
+            "file": "images/arcadeMachine2.png",
             "position": [84, 25.5, 25],
             "rotation": [-1.516, 1.383, 1.514],
-            "scale": [0.115, 0.09, 1],
+            "scale": [0.135, 0.13, 1],
+            "basic": true
+        }
+    },
+    "arcadeMachine3": {
+        "position":[80, 17, 60],
+        "scale":[25, 25, 25],
+        "rotation":[0, 0, 0],
+        "moveTo": [92, 27, 59.75],
+        "lookAt": [85, 26, 59.5],
+        "cloudPosition": [85, -2, 60],
+        "name": "arcadeMachine3",
+        "loadProject": {
+            "url": "https://project2.corbinainsworth.com",
+            "position": [84, 25.5, 60],
+            "rotation": [0, 1.5708, 0]
+        },
+        "nextProject": {
+            "text": "Next Project",
+            "size": 0.5,
+            "position": [85.2, 20.55, 55.5],
+            "rotation": [-1.456, 1.388, 1.453],
+            "moveTo": [92, 27, 24.75],
+            "lookAt": [85, 26, 24.5],
+            "hoverColor": "#F07F13",
+            "newLookingAt": "arcadeMachine2"
+        },
+        "backText":{
+            "text": "Back",
+            "size": 0.5,
+            "position": [85.2, 20.75, 65],
+            "rotation": [-1.518, 1.426, 1.497],
+            "moveTo": [-200, 175, 200],
+            "lookAt": [0, 0, 0],
+            "color": "#F07F13"
+        },
+        "image": {
+            "file": "images/arcadeMachine3.png",
+            "position": [84, 25.5, 60],
+            "rotation": [-1.516, 1.383, 1.514],
+            "scale": [0.135, 0.13, 1],
             "basic": true
         }
     },

@@ -18,7 +18,6 @@ export default function ArcadeMachine(props) {
 
   const cloudPosition = [...Data[props.name].cloudPosition]
 
-
   useEffect(() => {
     if(context.defaultImage) {
       setStaticImage({...Data[props.name].image})
