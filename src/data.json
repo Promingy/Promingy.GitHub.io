@@ -89,7 +89,7 @@
             "file": "images/arcadeMachine2.png",
             "position": [84, 25.5, 25],
             "rotation": [-1.516, 1.383, 1.514],
-            "scale": [0.135, 0.13, 1],
+            "scale": [0.115, 0.09, 1],
             "basic": true
         }
     },
