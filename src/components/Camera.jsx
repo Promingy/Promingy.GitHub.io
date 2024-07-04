@@ -24,6 +24,7 @@ export default function Camera() {
         function onDragEnd() {
             timeout = setTimeout(() => {
                 controls?.setLookAt(-200, 175, 200, 0, 0, 0,true)
+                context.setLookingAt("none")
             }, 10000)
         
             timeout2 = setTimeout(() => {
@@ -59,9 +60,10 @@ export default function Camera() {
 
     useEffect(() => {
         if (controls) {
-            const { x, y, z } = controls.getTarget();
+            // const { x, y, z } = controls.getTarget();
 
-            if (!context.transition && !x && !y && !z) {
+            // if (!context.transition && !x && !y && !z) {
+            if (!context.transition && context.lookingAt == "none" || context.lookingAt == 'projects' ) {
                 controls._addAllEventListeners(controls._domElement)
             } else {
                 controls._removeAllEventListeners()
@@ -71,7 +73,7 @@ export default function Camera() {
 
     useFrame(() => { 
     if(!context.initialCamera && context.pan && cameraRef.current){
-        const rotationSpeed = 0.001
+        const rotationSpeed = 0.0005
     
         cameraRef.current.rotate(rotationSpeed, 0)
         }

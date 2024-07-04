@@ -44,7 +44,6 @@ export const ContextProvider = ({children}) => {
       setLookingAt(props.name)
       controls.setLookAt(...props.moveTo, ...props.lookAt, true)
     }
-    console.log('i worked')
   })
   
   const handlePointerIn = useCallback((e) => {e.stopPropagation(); setHovered(true)}, [hovered])

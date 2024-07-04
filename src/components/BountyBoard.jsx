@@ -23,14 +23,14 @@ export default function BountyBoard(props) {
     {opacity &&
     <Float floatingRange={[-2, 0]} rotationIntensity={0} speed={5}>
       <Clouds material={MeshBasicMaterial}>
-        <Cloud 
-          color='papayawhip' 
-          opacity={opacity} 
-          speed={1} 
-          scale={4} 
-          position={[52, -3, 152.5]} 
-          rotation={[0, Math.PI / 2, 0]} 
-          seed={.5} 
+        <Cloud
+          color='papayawhip'
+          opacity={opacity}
+          speed={1}
+          scale={4}
+          position={[52, -3, 152.5]}
+          rotation={[0, Math.PI / 2, 0]}
+          seed={.5}
         />
       </Clouds>
     </Float>

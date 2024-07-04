@@ -16,23 +16,20 @@ export default function MenuText({ hoverColor=0xff0000, baseColor=0xffffff, ...p
                 position={props.position}
                 rotation={props.rotation}
                 characters='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!é '
+                text={props.text}
                 font={'/Playball-Regular.ttf'}
                 scale={props.size}
+                color={color}
                 raycast={meshBounds}
-                onPointerEnter={(e) => {
-                    context.handlePointerIn(e);
-                    setColor(hoverColor);
-                }}
-                onPointerOut={(e) => {
-                    context.handlePointerOut(e);
-                    setColor(baseColor);
-                }}
+                onPointerEnter={(e) => {context.handlePointerIn(e);setColor(hoverColor)}}
+                onPointerOut={(e) => {context.handlePointerOut(e); setColor(baseColor)}}
                 onClick={(e) => {
                     e.stopPropagation();
                     
                     context.setTransition(true);
                     context.setPan(false);
                     clearTimeouts();
+                    clearTimeout(context.panTimeout);
                     
                     context.click.play();
                     context.whoosh.play();
@@ -44,10 +41,7 @@ export default function MenuText({ hoverColor=0xff0000, baseColor=0xffffff, ...p
                     
                     controls?.setLookAt(...props.moveTo, ...props.lookAt, true).then(() => context.setTransition(false))
                 }}
-                >
-                {props.text}
-                <meshBasicMaterial color={color} />
-            </Text>
+            />
         </Bvh>
     )
 }

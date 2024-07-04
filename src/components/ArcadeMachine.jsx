@@ -71,7 +71,6 @@ export default function ArcadeMachine(props) {
         material={materials['Baked.001']} 
         position={[0, 0.015, 0]} 
         scale={0.985} {...props} 
-        dispose={null} 
         onPointerOver={(e) => {context.handlePointerIn(e); setHovered(true)}}
         onPointerOut={(e) => {context.handlePointerOut(e); setHovered(false)}}
         onClick={(e) => context.handleClick(e, controls, props)}

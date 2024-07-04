@@ -2,7 +2,7 @@ import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial, meshBounds } from '@re
 import { Suspense, useEffect, useState } from 'react'
 import { Canvas} from '@react-three/fiber'
 import { useAppContext } from './context'
-// import { Perf } from 'r3f-perf'
+import { Perf } from 'r3f-perf'
 import Data from './data.json'
 import './App.css'
 
@@ -21,9 +21,9 @@ import Tavern from './components/Tavern'
 import Clock from './components/Clock'
 import BountyBoard from './components/BountyBoard'
 import SkillBooks from './components/SkillBooks'
+import Contact from './components/ContactMe'
 import StartButton from './components/StartScreen'
 import Swarm from './components/Swarm'
-// import Test from './components/Test'
 
 const App = () => {
   const context = useAppContext();
@@ -46,21 +46,20 @@ const App = () => {
     <>
       {assetsLoaded && <Clock /> }
       {context.displayStart && <StartButton afterRender={() => setAssetsLoaded(true)}/> }
-
       <Canvas shadows camera={{ position: [87.7, 26, 59.75], fov: isMobile ? 120 : 75}} style={{ background: "#000000" }}>
+        {/* <Perf openByDefault /> */}
         <fog attach="fog" args={['#000000', 400, 750]}/>
-        {/* <Perf openByDefault/> */}
         <Suspense fallback={<InitialLoad />}>
           <Camera />
           <BakeShadows />
-
-          <Swarm count={425} opacity={0.75} color='Gray'/>
-          <Swarm count={100} opacity={0.45} color='maroon'/>
-          <Swarm count={225} opacity={0.66} color='orange'/>
-
+          <group> {/* 3000 / 6000 triangles */}
+            <Swarm count={425} opacity={0.75} color='Gray'/>
+            <Swarm count={100} opacity={0.45} color='maroon'/>
+            <Swarm count={225} opacity={0.66} color='orange'/>
+          </group>
           <mesh receiveShadow rotation={[-Math.PI * 0.5, 0, 0]} position={[0, -7, 0]}>
               <planeGeometry args={[1000, 1000]} />
-              { isMobile ?
+              {isMobile ?
               <meshLambertMaterial receiveShadow color='grey' />
               :
               <MeshReflectorMaterial
@@ -72,55 +71,39 @@ const App = () => {
                 />
               }
           </mesh>
-
           <group>
-            {/* <Lights position={[44, 50, 80]} intensity={2000} />
-            <Lights position={[44, 50, -30]} intensity={2000} />
-            <Lights position={[-25, 50, -60]} intensity={2000} />
-            <Lights position={[-33.3, 10, -65]} rotateX={3.14} color='orange' intensity={2500} decay={1.7} /> */}
-
             <Lights shadow position={[70, 60, 120]} intensity={2000} decay={1.5}/>
-            {/* <Lights position={[65, 63, -83]} intensity={2000} decay={1.6}/> */}
             <Lights shadow position={[-90, 63, -83]} intensity={2000} decay={1.5}/>
-
-            {/* <Lights position={[-82.5, 80, 127]} color={0xffd21c}  intensity={3500}  decay={1.8}/> */}
-
             <directionalLight position={[90, 300, -120]} intensity={2} color={0x7f7f7f}/>
             <ambientLight />
           </group>
-
           <LoadImage {...Data.images.resume}/>
           <LoadImage {...Data.images.aboutMe}/>
-
           <group>
             <MenuText {...Data.menuText.resume}/>
             <MenuText {...Data.menuText.skills}/>
             <MenuText {...Data.menuText.experience}/>
             <MenuText {...Data.menuText.aboutMe}/>
-            <MenuText {...Data.menuText.project1}/>
-            <MenuText {...Data.menuText.project2}/>
+            <MenuText {...Data.menuText.projects}/>
           </group>
-
-          <Flame />
-
-          { context.smallText &&
-            <>
+          <Flame /> {/* 1500 / 3000 triangles */}
+          {context.smallText &&
+          <>
             <SmallText {...Data.smallText.experience}/>
             <SmallText {...Data.smallText.experience.backText}/>
-
-
             <SmallText {...Data.smallText.aboutMe}/>
             <SmallText {...Data.smallText.aboutMe.backText}/>
           </>
           }
-
-          <SkillBooks {...Data.skillBooks}/>
-          <BountyBoard {...Data.bountyBoard}/>
-          <ArcadeMachine {...Data.arcadeMachine1}/>
-          <ArcadeMachine {...Data.arcadeMachine2}/>
-          <ArcadeMachine {...Data.arcadeMachine3}/>
-          <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
-          {/* <Test {...Data.skillBooks} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/> */}
+          <group> {/* 6000 / 12000 triangles - 2000/each */}
+            <ArcadeMachine {...Data.arcadeMachine1}/>
+            <ArcadeMachine {...Data.arcadeMachine2}/>
+            <ArcadeMachine {...Data.arcadeMachine3}/>
+          </group>
+          <Contact {...Data.contact} />
+          <BountyBoard {...Data.bountyBoard}/> {/* 2000 / 4000 triangles */}
+          <SkillBooks {...Data.skillBooks}/> {/* 2000 / 4000 triangles */}
+          <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/> {/* 38000 / 76000 triangles */}
         </Suspense>
         <AdaptiveDpr pixelated />
       </Canvas>

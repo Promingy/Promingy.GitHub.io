@@ -44,6 +44,7 @@ export default function SmallText({hoverColor="#ff0000", baseColor='#ffffff', ..
                 rotation={props.rotation}
                 scale={props.size || .33}
                 onClick={handleClick}
+                text={props.text}
                 onPointerOver={(e) => {
                     e.stopPropagation()
                     setColor(hoverColor)
@@ -54,9 +55,7 @@ export default function SmallText({hoverColor="#ff0000", baseColor='#ffffff', ..
                     setColor(baseColor)
                     setHovered(false)
                 }}
-                >
-                {props.text}
-            </Text>
+            />
         </Bvh>
     )
 }

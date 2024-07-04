@@ -3,10 +3,9 @@ import { useRef, useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function Flame() {
-    const { scene, animations } = useGLTF('models/animated_torch_flame1.glb');
+    const { scene } = useGLTF('models/animated_torch_flame1.glb');
     const ref = useRef();
     const [i, setI] = useState(0)
-    const [render, setRender] = useState(0)
     const geometry = scene.children[0].children[0].children[0].children[0].children[i].children[0].geometry
     const material = scene.children[0].children[0].children[0].children[0].children[i].children[0].material
 
