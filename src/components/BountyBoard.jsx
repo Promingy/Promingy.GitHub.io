@@ -5,7 +5,7 @@ import { useAppContext } from '../context'
 import { MeshBasicMaterial } from 'three'
 
 export default function BountyBoard(props) {
-  const { nodes, materials } = useGLTF(`models/${props.res || 'low-res'}/bounty_board.glb`)
+  const { nodes, materials } = useGLTF(`models/low-res/bounty_board.glb`)
   const { materials: midMats } = useGLTF(`models/mid-res/bounty_board.glb`)
   const { materials: highMats } = useGLTF(`models/high-res/bounty_board.glb`)
   const [ hovered, setHovered ] = useState(false)
@@ -19,7 +19,7 @@ export default function BountyBoard(props) {
   })
 
   return (
-    <>
+    <group>
     {opacity &&
     <Float floatingRange={[-2, 0]} rotationIntensity={0} speed={5}>
       <Clouds material={MeshBasicMaterial}>
@@ -47,7 +47,7 @@ export default function BountyBoard(props) {
         <mesh castShadow receiveShadow geometry={nodes.Object_4.geometry} material={midMats['default']} position={[0, 1.643, -0.056]} scale={1.919} />
         <mesh castShadow receiveShadow geometry={nodes.Object_4.geometry} material={materials['default']} position={[0, 1.643, -0.056]} scale={1.919} />
       </Detailed>
-    </>
+    </group>
   )
 }
 

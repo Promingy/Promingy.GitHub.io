@@ -3,9 +3,12 @@
         "scale": [25, 25, 25]
     },
     "contact": {
-        "position": [-90, -7, 120],
+        "position": [-90, -7, 140],
         "scale": [0.25, 0.25, 0.25],
-        "rotation": [0, 0.75, 0]
+        "rotation": [0, 0.75, 0],
+        "moveTo": [-107, 15, 156],
+        "lookAt": [-90, 6.5, 140],
+        "name": "contact"
     },
     "arcadeMachine1": {
         "position":[80, 17, -10],
@@ -196,6 +199,14 @@
             "lookAt": [0,0,25],
             "size": 15,
             "lookingAt": "projects"
+        },
+        "contact": {
+            "text": "Contact",
+            "position": [-140, -12, -72],
+            "moveTo": [-107, 15, 156],
+            "lookAt": [-90, 6.5, 140],
+            "size": 15,
+            "lookingAt": "contact"
         }
     },
     "smallText": {

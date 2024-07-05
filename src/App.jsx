@@ -52,7 +52,7 @@ const App = () => {
         <Suspense fallback={<InitialLoad />}>
           <Camera />
           <BakeShadows />
-          <group> {/* 3000 / 6000 triangles */}
+          <group>
             <Swarm count={425} opacity={0.75} color='Gray'/>
             <Swarm count={100} opacity={0.45} color='maroon'/>
             <Swarm count={225} opacity={0.66} color='orange'/>
@@ -85,8 +85,9 @@ const App = () => {
             <MenuText {...Data.menuText.experience}/>
             <MenuText {...Data.menuText.aboutMe}/>
             <MenuText {...Data.menuText.projects}/>
+            {/* <MenuText {...Data.menuText.contact}/> */}
           </group>
-          <Flame /> {/* 1500 / 3000 triangles */}
+          <Flame />
           {context.smallText &&
           <>
             <SmallText {...Data.smallText.experience}/>
@@ -95,15 +96,15 @@ const App = () => {
             <SmallText {...Data.smallText.aboutMe.backText}/>
           </>
           }
-          <group> {/* 6000 / 12000 triangles - 2000/each */}
+          <group>
             <ArcadeMachine {...Data.arcadeMachine1}/>
             <ArcadeMachine {...Data.arcadeMachine2}/>
             <ArcadeMachine {...Data.arcadeMachine3}/>
           </group>
-          <Contact {...Data.contact} />
-          <BountyBoard {...Data.bountyBoard}/> {/* 2000 / 4000 triangles */}
-          <SkillBooks {...Data.skillBooks}/> {/* 2000 / 4000 triangles */}
-          <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/> {/* 38000 / 76000 triangles */}
+          {/* <Contact {...Data.contact} /> */}
+          <BountyBoard {...Data.bountyBoard}/>
+          <SkillBooks {...Data.skillBooks}/>
+          <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
         </Suspense>
         <AdaptiveDpr pixelated />
       </Canvas>

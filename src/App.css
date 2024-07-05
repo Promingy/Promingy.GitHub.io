@@ -31,3 +31,16 @@ html, body, canvas{
   color: olivedrab;
   cursor: pointer;
 }
+
+@font-face {
+  font-family: "chawp";
+  src: url("assets/chawp.ttf");
+}
+
+.contact {
+  background: transparent;
+  color: white;
+  outline: none;
+  border: none;
+  font-family: "chawp";
+}
