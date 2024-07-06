@@ -3,11 +3,11 @@
         "scale": [25, 25, 25]
     },
     "contact": {
-        "position": [-90, -7, 140],
-        "scale": [0.25, 0.25, 0.25],
-        "rotation": [0, 0.75, 0],
-        "moveTo": [-107, 15, 156],
-        "lookAt": [-90, 6.5, 140],
+        "position": [-85, -7, 115],
+        "scale": [0.25, 0.254, 0.3],
+        "rotation": [0, -2.4, 0],
+        "moveTo": [-102, 15, 131],
+        "lookAt": [-85, 6.5, 115],
         "name": "contact"
     },
     "arcadeMachine1": {
@@ -203,8 +203,8 @@
         "contact": {
             "text": "Contact",
             "position": [-140, -12, -72],
-            "moveTo": [-107, 15, 156],
-            "lookAt": [-90, 6.5, 140],
+            "moveTo": [-102, 15, 131],
+            "lookAt": [-85, 6.5, 115],
             "size": 15,
             "lookingAt": "contact"
         }

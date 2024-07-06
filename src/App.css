@@ -37,10 +37,46 @@ html, body, canvas{
   src: url("assets/chawp.ttf");
 }
 
-.contact {
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  /* gap: 10px */
+}
+
+.nameWrapper,
+.emailWrapper,
+.messageWrapper{
+  display: flex;
+  gap: 5px;
+  width: 250px;
+  /* border: 1px solid white; */
+}
+
+.name-label,
+.email-label,
+.message-label {
+  position: relative;
+  font-family: "chawp";
+  color: white;
+  font-size: 12px;
+  margin: 0;
+  padding: 1px;
+  bottom: 5px;
+  align-content: flex-end;
+}
+
+.contact,
+.email, 
+.message{
   background: transparent;
   color: white;
   outline: none;
+  /* border: 1px solid white; */
   border: none;
+  width: 100%;
+  height: 27px;
   font-family: "chawp";
+  font-size: 12px;
+  margin: 0;
+  resize: none;
 }

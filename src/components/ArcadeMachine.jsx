@@ -25,7 +25,7 @@ export default function ArcadeMachine(props) {
   }, [context.defaultImage])
 
   useFrame(() => {
-    if (hovered && opacity < 1 && context.lookingAt == 'none') setOpacity(opacity + 0.0025)
+    if (hovered && opacity < 1 && (context.lookingAt == 'none' || context.lookingAt == 'projects')) setOpacity(opacity + 0.0025)
     else if (opacity > 0) setOpacity(opacity - 0.0075);
   })
 

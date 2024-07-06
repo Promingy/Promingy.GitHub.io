@@ -24,6 +24,7 @@ import SkillBooks from './components/SkillBooks'
 import Contact from './components/ContactMe'
 import StartButton from './components/StartScreen'
 import Swarm from './components/Swarm'
+import Model from './components/Tavern_no_light'
 
 const App = () => {
   const context = useAppContext();
@@ -85,7 +86,7 @@ const App = () => {
             <MenuText {...Data.menuText.experience}/>
             <MenuText {...Data.menuText.aboutMe}/>
             <MenuText {...Data.menuText.projects}/>
-            {/* <MenuText {...Data.menuText.contact}/> */}
+            <MenuText {...Data.menuText.contact}/>
           </group>
           <Flame />
           {context.smallText &&
@@ -101,10 +102,11 @@ const App = () => {
             <ArcadeMachine {...Data.arcadeMachine2}/>
             <ArcadeMachine {...Data.arcadeMachine3}/>
           </group>
-          {/* <Contact {...Data.contact} /> */}
+          <Contact {...Data.contact} />
           <BountyBoard {...Data.bountyBoard}/>
           <SkillBooks {...Data.skillBooks}/>
-          <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
+          {/* <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/> */}
+          <Model scale={[26.5, 26.5, 26.5]} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()} />
         </Suspense>
         <AdaptiveDpr pixelated />
       </Canvas>
