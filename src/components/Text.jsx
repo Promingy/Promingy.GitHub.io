@@ -21,11 +21,14 @@ export default function MenuText({ hoverColor=0xff0000, baseColor=0xffffff, ...p
                 scale={props.size}
                 color={color}
                 // raycast={meshBounds}
-                onPointerEnter={(e) => {e.stopPropagation();context.handlePointerIn(e);setColor(hoverColor)}}
+                onPointerEnter={(e) => {
+                    if (context.lookingAt == 'contact') return;
+                    context.handlePointerIn(e);
+                    setColor(hoverColor)}}
                 onPointerOut={(e) => {e.stopPropagation();context.handlePointerOut(e); setColor(baseColor)}}
                 onClick={(e) => {
                     e.stopPropagation();
-                    if (context.lookingAT == 'contact') console.log('test');
+                    if (context.lookingAt == 'contact') return;
                     
                     context.setTransition(true);
                     context.setPan(false);
