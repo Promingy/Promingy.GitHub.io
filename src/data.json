@@ -160,7 +160,7 @@
     "menuText": {
         "resume": {
             "text": "Résumé",
-            "position": [-140, 73, -72],
+            "position": [-140, 85, -72],
             "moveTo": [41, 16, 139],
             "lookAt": [52, 16, 139],
             "size": 15,
@@ -168,7 +168,7 @@
         },
         "skills": {
             "text": "Skills",
-            "position": [-148, 56, -72],
+            "position": [-148, 68, -72],
             "moveTo": [42, 47, -7],
             "lookAt": [48, 47, -7],
             "size": 15,
@@ -176,7 +176,7 @@
         },
         "experience": {
             "text": "Experience",
-            "position": [-135, 39, -72],
+            "position": [-135, 51, -72],
             "moveTo": [-11, 38.95, -64.5],
             "lookAt": [-11, 38.95, -75.5],
             "size": 15,
@@ -185,7 +185,7 @@
         },
         "aboutMe": {
             "text": "About Me",
-            "position": [-140, 22, -72],
+            "position": [-140, 34, -72],
             "moveTo": [-4, 36.5, -64.5],
             "lookAt": [-4, 36.5, -75.5],
             "size": 15,
@@ -194,7 +194,7 @@
         },
         "projects": {
             "text": "Projects",
-            "position": [-148, 5, -72],
+            "position": [-148, 17, -72],
             "moveTo": [150, 50, 25],
             "lookAt": [0,0,25],
             "size": 15,
@@ -202,7 +202,7 @@
         },
         "contact": {
             "text": "Contact",
-            "position": [-140, -12, -72],
+            "position": [-150, 0, -72],
             "moveTo": [-102, 15, 131],
             "lookAt": [-85, 6.5, 115],
             "size": 15,

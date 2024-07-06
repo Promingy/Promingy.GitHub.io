@@ -30,7 +30,7 @@ export default function Contact(props) {
 
   useFrame(() => {
     if (context.lookingAt == 'none' && hovered && opacity < 1) setOpacity(opacity + 0.0025)
-    else if (opacity > 0) setOpacity(opacity - 0.00075)
+    else if (opacity > 0) setOpacity(opacity - 0.0075)
   
   })
 
