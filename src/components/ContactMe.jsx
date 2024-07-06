@@ -16,13 +16,6 @@ export default function Contact(props) {
   const [ email, setEmail ] = useState('Enter Email Here');
   const [ message, setMessage ] = useState('Enter Message Here');
 
-  const [ messageLine1, setMessageLine1 ] = useState('');
-  const [ messageLine2, setMessageLine2 ] = useState('');
-  const [ messageLine3, setMessageLine3 ] = useState('');
-  const [ messageLine4, setMessageLine4 ] = useState('');
-  const [ messageLine5, setMessageLine5 ] = useState('');
-  const [ messageLine6, setMessageLine6 ] = useState('');
-
   const context = useAppContext();
   const { controls } = useThree();
 
@@ -39,16 +32,13 @@ export default function Contact(props) {
 
   return (
     <>
-    {context.lookingAt == "contact" && 
+    {context.lookingAt == 'contact' &&
     <>
-    {/* <TransformControls object={ref.current} ref={tref} mode='rotate' /> */}
-    {/* <group ref={ref} scale={[2.3, 2, 1]} position={[-87, 16.722, 116.5]} rotation={[-0.223, -0.706, -0.117]}> */}
-    <group ref={ref} scale={[1.9, 2, 1]} position={[-87, 15.1, 116.5]} rotation={[-0.225, -0.797, -0.152]}>
-      <mesh>
-        <Html transform occlude>
+    <group ref={ref} scale={[1.9, 2, 1]} position={[-87, 11.25, 116.5]} rotation={[-0.224, -0.796, -0.139]}>
+      <mesh onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}>
+        <Html transform>
           <form className='contactForm'>
             <div className="nameWrapper">
-              <label for="name" className="name-label">Name:</label>
               <input 
                 className="contact" 
                 value={name} 
@@ -60,7 +50,6 @@ export default function Contact(props) {
                 />
             </div>
             <div className="emailWrapper">
-              <label for="email" className="email-label">Email:</label>
               <input 
                 className="contact" 
                 type='email' 
@@ -72,9 +61,7 @@ export default function Contact(props) {
               />
             </div>
             <div className="messageWrapper">
-              <label for="message" className="message-label">Message:</label>
-              <input 
-                type='text' 
+              <textarea 
                 className="message" 
                 value={message}
                 onChange={e => setMessage(e.target.value)}
@@ -89,8 +76,8 @@ export default function Contact(props) {
     </group>
     </>
     }
-      <Detailed {...props} distances={[0, 50, 100]} onPointerOver={context.handlePointerIn} onPointerOut={context.handlePointerOut} >
-      {/* <Detailed {...props} distances={[0, 50, 100]} onPointerOver={context.handlePointerIn} onPointerOut={context.handlePointerOut} onClick={e => context.handleClick(e, controls, props)}> */}
+      {/* <Detailed {...props} distances={[0, 50, 100]} onPointerOver={context.handlePointerIn} onPointerOut={context.handlePointerOut} > */}
+      <Detailed {...props} distances={[0, 50, 100]} onPointerOver={context.handlePointerIn} onPointerOut={context.handlePointerOut} onClick={e => context.handleClick(e, controls, props)}>
           <mesh geometry={nodes.defaultMaterial.geometry} material={highBasic} position={[0, 56.743, 0.001]} rotation={[-Math.PI / 2, 0, 0]} scale={56.743} />
           <mesh geometry={nodes.defaultMaterial.geometry} material={midBasic} position={[0, 56.743, 0.001]} rotation={[-Math.PI / 2, 0, 0]} scale={56.743} />
           <mesh geometry={nodes.defaultMaterial.geometry} material={lowBasic} position={[0, 56.743, 0.001]} rotation={[-Math.PI / 2, 0, 0]} scale={56.743} />

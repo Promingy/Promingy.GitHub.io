@@ -11,8 +11,8 @@ export default function MenuText({ hoverColor=0xff0000, baseColor=0xffffff, ...p
     const [color, setColor] = useState(baseColor || 0xffffff);
 
     return (
-        <Bvh setBoundingBox splitStrategy="SAH">
-            <Text
+        <Text
+        // <Bvh setBoundingBox splitStrategy="SAH">
                 position={props.position}
                 rotation={props.rotation}
                 characters='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!é '
@@ -20,11 +20,12 @@ export default function MenuText({ hoverColor=0xff0000, baseColor=0xffffff, ...p
                 font={'/Playball-Regular.ttf'}
                 scale={props.size}
                 color={color}
-                raycast={meshBounds}
-                onPointerEnter={(e) => {context.handlePointerIn(e);setColor(hoverColor)}}
-                onPointerOut={(e) => {context.handlePointerOut(e); setColor(baseColor)}}
+                // raycast={meshBounds}
+                onPointerEnter={(e) => {e.stopPropagation();context.handlePointerIn(e);setColor(hoverColor)}}
+                onPointerOut={(e) => {e.stopPropagation();context.handlePointerOut(e); setColor(baseColor)}}
                 onClick={(e) => {
                     e.stopPropagation();
+                    if (context.lookingAT == 'contact') console.log('test');
                     
                     context.setTransition(true);
                     context.setPan(false);
@@ -42,6 +43,6 @@ export default function MenuText({ hoverColor=0xff0000, baseColor=0xffffff, ...p
                     controls?.setLookAt(...props.moveTo, ...props.lookAt, true).then(() => context.setTransition(false))
                 }}
             />
-        </Bvh>
+        // </Bvh>
     )
 }

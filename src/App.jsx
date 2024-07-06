@@ -102,7 +102,7 @@ const App = () => {
             <ArcadeMachine {...Data.arcadeMachine2}/>
             <ArcadeMachine {...Data.arcadeMachine3}/>
           </group>
-          <Contact {...Data.contact} />
+          <Contact {...Data.contact} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
           <BountyBoard {...Data.bountyBoard}/>
           <SkillBooks {...Data.skillBooks}/>
           {/* <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/> */}
