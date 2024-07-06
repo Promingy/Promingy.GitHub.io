@@ -37,6 +37,22 @@ html, body, canvas{
   src: url("assets/chawp.ttf");
 }
 
+.messageSent,
+.messageError {
+  color: #559853;
+  font-family: "chawp";
+  margin:0;
+  padding: 0;
+  position: absolute;
+  top: -15px;
+  right: 0px;
+  text-align: center;
+}
+
+.messageError {
+  color: #a8412f;
+}
+
 .contactForm {
   display: flex;
   flex-direction: column;
@@ -95,9 +111,58 @@ html, body, canvas{
   line-height: 2.6;
   resize: none;
   text-align: center;
+  margin-bottom: 100px;
 }
 
 textarea::-webkit-scrollbar{
   display: none;
- 
+}
+
+.submit,
+.backButton {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: transparent;
+  color: white;
+  font-family: "chawp";
+  font-size: 20px;
+  height: 50px;
+  width: 100px;
+  border: 2px solid white;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  border-bottom-right-radius: 255px 15px;
+  border-bottom-left-radius: 15px 225px;
+}
+
+.backButton{
+  left: 10px;
+  border-top-right-radius: 255px 15px;
+  border-top-left-radius: 15px 225px;
+  border-bottom-left-radius: 255px 15px;
+  border-bottom-right-radius: 15px 225px;
+}
+
+.backButton:hover {
+  border-color: #ee5b41;
+  color: #ee5b41;
+  cursor: pointer;
+}
+.backButton:active {
+  border-color: #a8412f;
+  color: #a8412f;
+  cursor: pointer;
+}
+
+.submit:hover {
+  border-color: #559853;
+  color: #559853;
+  cursor: pointer;
+}
+
+.submit:active {
+  border-color: #90AE70;
+  color: #90AE70;
+  cursor: pointer;
 }

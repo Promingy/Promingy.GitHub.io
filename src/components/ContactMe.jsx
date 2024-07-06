@@ -15,6 +15,8 @@ export default function Contact(props) {
   const [ name, setName ] = useState('Enter Name Here');
   const [ email, setEmail ] = useState('Enter Email Here');
   const [ message, setMessage ] = useState('Enter Message Here');
+  const [ success, setSuccess ] = useState("");
+  const [ error, setError ] = useState("");
 
   const context = useAppContext();
   const { controls } = useThree();
@@ -30,21 +32,58 @@ export default function Contact(props) {
   //   }  
   // })
 
+  function onSubmit(e){
+    e.preventDefault();
+    e.stopPropagation();
+
+    fetch("https://formcarry.com/s/pW8vrw_OPkn", {
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ name, email, message })
+    })
+    .then(response => response.json())
+    .then(response => {
+      if (response.code === 200) {
+        setSuccess("success")
+        setName("Enter Name Here")
+        setEmail("Enter Email Here")
+        setMessage("Enter Message Here")
+      }
+      else if(response.code === 422){
+        // Field validation failed
+        setError(response.message)
+      }
+      else {
+        // other error from formcarry
+        setError(response.message)
+      }
+    })
+    .catch(error => {
+      // request related error.
+      setError(error.message ? error.message : error);
+    });
+  }
+
   return (
     <>
     {context.lookingAt == 'contact' &&
     <>
-    <group ref={ref} scale={[1.9, 2, 1]} position={[-87, 11.25, 116.5]} rotation={[-0.224, -0.796, -0.139]}>
+    <group ref={ref} scale={[1.9, 2, 1]} position={[-87, 9, 116.5]} rotation={[-0.224, -0.796, -0.139]}>
       <mesh onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}>
         <Html transform>
-          <form className='contactForm'>
+          {success && <p className='messageSent'>Message Successfully Sent</p>}
+          {error && <p className='messageError'>{error}</p>}
+          <form className='contactForm' onSubmit={onSubmit}>
             <div className="nameWrapper">
               <input 
                 className="contact" 
                 value={name} 
                 type='text' 
                 onChange={e => setName(e.target.value)} 
-                onClick={() => setName(name == "Enter Name Here" ? "" : name)} 
+                onFocus={() => setName(name == "Enter Name Here" ? "" : name)} 
                 onBlur={() => setName(name || "Enter Name Here")}
                 required
                 />
@@ -55,7 +94,7 @@ export default function Contact(props) {
                 type='email' 
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                onClick={() => setEmail(email == "Enter Email Here" ? "" : email)}
+                onFocus={() => setEmail(email == "Enter Email Here" ? "" : email)}
                 onBlur={() => setEmail(email || "Enter Email Here")}
                 required
               />
@@ -65,11 +104,13 @@ export default function Contact(props) {
                 className="message" 
                 value={message}
                 onChange={e => setMessage(e.target.value)}
-                onClick={() => setMessage(message == "Enter Message Here" ? "" : message)}
+                onFocus={() => setMessage(message == "Enter Message Here" ? "" : message)}
                 onBlur={() => setMessage(message || "Enter Message Here")}
                 required
               />
             </div>
+            <button type="button" className='backButton' onClick={(e) => context.handleClick(e, controls, props)}>Back</button>
+            <button type='submit' className='submit'>Submit</button>
           </form>
         </Html>
       </mesh>
