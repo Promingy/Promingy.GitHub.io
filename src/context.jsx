@@ -23,15 +23,17 @@ export const ContextProvider = ({children}) => {
   let timeout;
 
   const handleClick = useCallback((e, controls, props) => {
-    e.stopPropagation()
+    e.stopPropagation();
 
-    setTransition(true)
-    toggleTransitionTimeout(false)
+    setTransition(true);
+    toggleTransitionTimeout(false);
     setPan(false);
+    setHovered(false);
     
     clearTimeouts();
     clearTimeout(panTimeout);
 
+    props.click && click.play();
     whoosh.play();
 
     if (lookingAt == props.name) {

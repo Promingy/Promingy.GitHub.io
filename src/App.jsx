@@ -2,29 +2,28 @@ import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial, meshBounds } from '@re
 import { Suspense, useEffect, useState } from 'react'
 import { Canvas} from '@react-three/fiber'
 import { useAppContext } from './context'
-import { Perf } from 'r3f-perf'
+// import { Perf } from 'r3f-perf'
 import Data from './data.json'
 import './App.css'
 
 
-import Lights from './components/Lights'
-import MenuText from './components/Text'
-import SmallText from './components/SmallText'
-import LoadImage from './components/LoadImage'
-import Camera from './components/Camera'
 import InitialLoad from './components/InitialLoad'
-
-
-import Flame from './components/Flame'
-import ArcadeMachine from './components/ArcadeMachine'
-import Tavern from './components/Tavern'
+import StartButton from './components/StartScreen'
+import LoadImage from './components/LoadImage'
+import SmallText from './components/SmallText'
+import MenuText from './components/Text'
+import Lights from './components/Lights'
+import Camera from './components/Camera'
 import Clock from './components/Clock'
+
+
+import ArcadeMachine from './components/ArcadeMachine'
 import BountyBoard from './components/BountyBoard'
 import SkillBooks from './components/SkillBooks'
 import Contact from './components/ContactMe'
-import StartButton from './components/StartScreen'
+import Tavern from './components/Tavern'
+import Flame from './components/Flame'
 import Swarm from './components/Swarm'
-import Model from './components/Tavern_no_light'
 
 const App = () => {
   const context = useAppContext();
@@ -83,18 +82,18 @@ const App = () => {
           <group>
             <MenuText {...Data.menuText.resume}/>
             <MenuText {...Data.menuText.skills}/>
-            <MenuText {...Data.menuText.experience}/>
+            {/* <MenuText {...Data.menuText.experience}/> */}
             <MenuText {...Data.menuText.aboutMe}/>
             <MenuText {...Data.menuText.projects}/>
             <MenuText {...Data.menuText.contact}/>
           </group>
           <Flame />
-          {context.smallText &&
+          {context.lookingAt == 'about' &&
           <>
-            <SmallText {...Data.smallText.experience}/>
-            <SmallText {...Data.smallText.experience.backText}/>
-            <SmallText {...Data.smallText.aboutMe}/>
-            <SmallText {...Data.smallText.aboutMe.backText}/>
+            {/* <SmallText {...Data.smallText.experience.backText}/> */}
+            {/* <SmallText {...Data.smallText.aboutMe}/> */}
+            {/* <SmallText {...Data.smallText.experience}/> */}
+            <MenuText {...Data.smallText.aboutBackText}/>
           </>
           }
           <group>
@@ -105,8 +104,7 @@ const App = () => {
           <Contact {...Data.contact} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
           <BountyBoard {...Data.bountyBoard}/>
           <SkillBooks {...Data.skillBooks}/>
-          {/* <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/> */}
-          <Model scale={[26.5, 26.5, 26.5]} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()} />
+          <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
         </Suspense>
         <AdaptiveDpr pixelated />
       </Canvas>

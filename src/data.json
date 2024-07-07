@@ -31,7 +31,7 @@
             "moveTo": [92, 27, 24.75],
             "lookAt": [85, 26, 24.5],
             "hoverColor": "#F07F13",
-            "newLookingAt": "arcadeMachine2"
+            "name": "arcadeMachine2"
         },
         "backText":{
             "text": "Back",
@@ -40,7 +40,8 @@
             "rotation": [-1.426, 1.400, 1.423],
             "moveTo": [-200, 175, 200],
             "lookAt": [0, 0, 0],
-            "color": "#F07F13"
+            "color": "#F07F13",
+            "name": "arcadeMachine1"
         },
         "image": {
             "file": "images/arcadeMachine1.png",
@@ -71,7 +72,7 @@
             "moveTo": [92, 27, -10.5],
             "lookAt": [85.2, 26, -10.75],
             "hoverColor": "#F07F13",
-            "newLookingAt": "arcadeMachine1"
+            "name": "arcadeMachine1"
         },
         "previousProject":{
             "text": "Previous Project",
@@ -82,7 +83,7 @@
             "lookAt": [85, 26, 59.5],
             "color": "#F07F13",
             "hoverColor": "#F07F13",
-            "newLookingAt": "arcadeMachine3"
+            "name": "arcadeMachine3"
         },
         "backText": {
             "text": "Back",
@@ -91,7 +92,8 @@
             "rotation": [-1.518, 1.426, 1.497],
             "moveTo": [-200, 175, 200],
             "lookAt": [0, 0, 0],
-            "color": "#F07F13"
+            "color": "#F07F13",
+            "name": "arcadeMachine2"
         },
         "image": {
             "file": "images/arcadeMachine2.png",
@@ -122,7 +124,7 @@
             "moveTo": [92, 27, 24.75],
             "lookAt": [85, 26, 24.5],
             "hoverColor": "#F07F13",
-            "newLookingAt": "arcadeMachine2"
+            "name": "arcadeMachine2"
         },
         "backText":{
             "text": "Back",
@@ -131,7 +133,8 @@
             "rotation": [-1.518, 1.426, 1.497],
             "moveTo": [-200, 175, 200],
             "lookAt": [0, 0, 0],
-            "color": "#F07F13"
+            "color": "#F07F13",
+            "name": "arcadeMachine3"
         },
         "image": {
             "file": "images/arcadeMachine3.png",
@@ -160,19 +163,21 @@
     "menuText": {
         "resume": {
             "text": "Résumé",
-            "position": [-140, 85, -72],
+            "position": [-140, 68, -72],
             "moveTo": [41, 16, 139],
             "lookAt": [52, 16, 139],
             "size": 15,
-            "lookingAt": "bounty"
+            "name": "bounty",
+            "click": true
         },
         "skills": {
             "text": "Skills",
-            "position": [-148, 68, -72],
+            "position": [-148, 51, -72],
             "moveTo": [42, 47, -7],
             "lookAt": [48, 47, -7],
             "size": 15,
-            "lookingAt": "skills"
+            "name": "skills",
+            "click": true
         },
         "experience": {
             "text": "Experience",
@@ -181,7 +186,8 @@
             "lookAt": [-11, 38.95, -75.5],
             "size": 15,
             "enableButtons": true,
-            "lookingAt": "experience"
+            "name": "experience",
+            "click": true
         },
         "aboutMe": {
             "text": "About Me",
@@ -190,7 +196,8 @@
             "lookAt": [-4, 36.5, -75.5],
             "size": 15,
             "enableButtons": true,
-            "lookingAt": "about"
+            "name": "about",
+            "click": true
         },
         "projects": {
             "text": "Projects",
@@ -198,7 +205,7 @@
             "moveTo": [150, 50, 25],
             "lookAt": [0,0,25],
             "size": 15,
-            "lookingAt": "projects"
+            "name": "projects"
         },
         "contact": {
             "text": "Contact",
@@ -206,7 +213,8 @@
             "moveTo": [-102, 15, 131],
             "lookAt": [-85, 6.5, 115],
             "size": 15,
-            "lookingAt": "contact"
+            "name": "contact",
+            "click": true
         }
     },
     "smallText": {
@@ -216,13 +224,18 @@
             "moveTo": [-11, 38.95, -64.5],
             "lookAt": [-11, 38.95, -75.5],
             "hoverColor": "#ff0000",
-            "newLookingAt": "experience",
+            "name": "experience",
+            "click": true,
+            "size": 0.33,
             "backText": {
                 "text": "Back",
                 "position": [-9, 35.5, -69.94],
                 "moveTo": [-200, 175, 200],
                 "lookAt": [0, 0, 0],
-                "color": "#ff0000"
+                "color": "#ff0000",
+                "name": "none",
+                "click": true,
+                "size": 0.33
             }
         },
         "aboutMe": {
@@ -231,14 +244,19 @@
             "moveTo": [-4, 36.5, -64.5],
             "lookAt": [-4, 36.5, -75.5],
             "hoverColor": "#ff0000",
-            "newLookingAt": "about",
-            "backText": {
-                "text": "Back",
-                "position": [-2.5, 33, -69.94],
-                "moveTo": [-200, 175, 200],
-                "lookAt": [0, 0, 0],
-                "color": "#ff0000"
-            }
+            "name": "about",
+            "click": true,
+            "size": 0.33
+        },
+        "aboutBackText": {
+            "text": "Back",
+            "position": [-2.5, 33, -69.94],
+            "moveTo": [-200, 175, 200],
+            "lookAt": [0, 0, 0],
+            "color": "#ff0000",
+            "name": "about",
+            "click": true,
+            "size": 0.33
         }
     },
     "images": {
