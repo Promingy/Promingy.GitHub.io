@@ -31,7 +31,8 @@
             "moveTo": [92, 27, 24.75],
             "lookAt": [85, 26, 24.5],
             "hoverColor": "#F07F13",
-            "name": "arcadeMachine2"
+            "name": "arcadeMachine2",
+            "click": true
         },
         "backText":{
             "text": "Back",
@@ -41,7 +42,8 @@
             "moveTo": [-200, 175, 200],
             "lookAt": [0, 0, 0],
             "color": "#F07F13",
-            "name": "arcadeMachine1"
+            "name": "arcadeMachine1",
+            "click": true
         },
         "image": {
             "file": "images/arcadeMachine1.png",
@@ -72,7 +74,8 @@
             "moveTo": [92, 27, -10.5],
             "lookAt": [85.2, 26, -10.75],
             "hoverColor": "#F07F13",
-            "name": "arcadeMachine1"
+            "name": "arcadeMachine1",
+            "click": true
         },
         "previousProject":{
             "text": "Previous Project",
@@ -83,7 +86,8 @@
             "lookAt": [85, 26, 59.5],
             "color": "#F07F13",
             "hoverColor": "#F07F13",
-            "name": "arcadeMachine3"
+            "name": "arcadeMachine3",
+            "click": true
         },
         "backText": {
             "text": "Back",
@@ -93,7 +97,8 @@
             "moveTo": [-200, 175, 200],
             "lookAt": [0, 0, 0],
             "color": "#F07F13",
-            "name": "arcadeMachine2"
+            "name": "arcadeMachine2",
+            "click": true
         },
         "image": {
             "file": "images/arcadeMachine2.png",
@@ -124,7 +129,8 @@
             "moveTo": [92, 27, 24.75],
             "lookAt": [85, 26, 24.5],
             "hoverColor": "#F07F13",
-            "name": "arcadeMachine2"
+            "name": "arcadeMachine2",
+            "click": true
         },
         "backText":{
             "text": "Back",
@@ -134,7 +140,8 @@
             "moveTo": [-200, 175, 200],
             "lookAt": [0, 0, 0],
             "color": "#F07F13",
-            "name": "arcadeMachine3"
+            "name": "arcadeMachine3",
+            "click": true
         },
         "image": {
             "file": "images/arcadeMachine3.png",
@@ -205,7 +212,8 @@
             "moveTo": [150, 50, 25],
             "lookAt": [0,0,25],
             "size": 15,
-            "name": "projects"
+            "name": "projects",
+            "click": true
         },
         "contact": {
             "text": "Contact",

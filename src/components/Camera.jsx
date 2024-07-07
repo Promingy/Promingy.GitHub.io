@@ -60,9 +60,6 @@ export default function Camera() {
 
     useEffect(() => {
         if (controls) {
-            // const { x, y, z } = controls.getTarget();
-
-            // if (!context.transition && !x && !y && !z) {
             if (!context.transition && context.lookingAt == "none" || context.lookingAt == 'projects' ) {
                 controls._addAllEventListeners(controls._domElement)
             } else {

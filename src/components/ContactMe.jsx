@@ -1,4 +1,4 @@
-import { Cloud, Clouds, Detailed, Float, Html, TransformControls, useGLTF } from '@react-three/drei'
+import { Cloud, Clouds, Detailed, Float, Html, useGLTF } from '@react-three/drei'
 import { MeshBasicMaterial } from 'three'
 import { useAppContext } from '../context'
 import { useFrame, useThree } from '@react-three/fiber'
@@ -9,8 +9,6 @@ export default function Contact(props) {
   const { materials: midMats } = useGLTF('models/mid-res/contact_sign.glb')
   const { nodes, materials: highMats } = useGLTF('models/high-res/contact_sign.glb')
 
-  const ref = useRef()
-  const tref = useRef();
 
   const [ name, setName ] = useState('Enter Name Here');
   const [ email, setEmail ] = useState('Enter Email Here');
@@ -72,17 +70,18 @@ export default function Contact(props) {
   return (
     <>
     {opacity && 
+    <Float floatingRange={[-2, 0]} rotationIntensity={0} speed={3}>
       <Clouds material={MeshBasicMaterial}>
         <Cloud opacity={opacity} speed={1} seed={.26} scale={2} position={[-92, -5, 115]} rotation={[0.75, 0, 0]}/>
         <Cloud opacity={opacity} speed={1} seed={.26} scale={2} position={[-80, -5, 110]} rotation={[0.75, 0, 0]}/>
         <Cloud opacity={opacity} speed={1} seed={.26} scale={2} position={[-80, -5, 120]} rotation={[0.75, 0, 0]}/>
         <Cloud opacity={opacity} speed={1} seed={.26} scale={2} position={[-87, -5, 123]} rotation={[0.75, 0, .75]}/>
       </Clouds>
+    </Float>
     }
     {context.lookingAt == 'contact' &&
     <>
-    <group ref={ref} scale={[1.9, 2, 1]} position={[-87, 9, 116.5]} rotation={[-0.224, -0.796, -0.139]}>
-      <mesh onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}>
+    <mesh scale={[1.9, 2, 1]} position={[-87, 9, 116.5]} rotation={[-0.224, -0.796, -0.139]}>
         <Html transform>
           {success && <p className='messageSent'>Message Successfully Sent</p>}
           {error && <p className='messageError'>{error}</p>}
@@ -123,15 +122,14 @@ export default function Contact(props) {
             <button type='submit' className='submit'>Submit</button>
           </form>
         </Html>
-      </mesh>
-    </group>
+    </mesh>
     </>
     }
       <Detailed {...props} 
         distances={[0, 50, 100]} 
-        onPointerOver={(e) => {context.handlePointerIn(e); setHovered(true)}} 
-        onPointerOut={(e) => {context.handlePointerOut(e); setHovered(false)}} 
-        onClick={e => context.handleClick(e, controls, props)}>
+        onPointerOver={(e) => {context.lookingAt !== 'contact' && context.handlePointerIn(e); setHovered(true)}} 
+        onPointerOut={(e) => {context.lookingAt !== 'contact' && context.handlePointerOut(e); setHovered(false)}} 
+        onClick={e => context.lookingAt !== 'contact' &&  context.handleClick(e, controls, props)}>
           <mesh geometry={nodes.defaultMaterial.geometry} material={highBasic} position={[0, 56.743, 0.001]} rotation={[-Math.PI / 2, 0, 0]} scale={56.743} />
           <mesh geometry={nodes.defaultMaterial.geometry} material={midBasic} position={[0, 56.743, 0.001]} rotation={[-Math.PI / 2, 0, 0]} scale={56.743} />
           <mesh geometry={nodes.defaultMaterial.geometry} material={lowBasic} position={[0, 56.743, 0.001]} rotation={[-Math.PI / 2, 0, 0]} scale={56.743} />

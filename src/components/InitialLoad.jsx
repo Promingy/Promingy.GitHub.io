@@ -9,11 +9,7 @@ export default function InitialLoad() {
 
     return (
         <Html center>
-            <p style={{color: "white"}}>Loading {Math.trunc(progress)}%</p>
-            <p style={{color: "white"}}>active{active}</p>
-            <p style={{color: "white"}}>item {item}</p>
-            <p style={{color: "white"}}>loaded {loaded}</p>
-            <p style={{color: "white"}}>total {total}</p>
+            <p style={{color: "white"}}>Slaying Dragons {Math.trunc(progress)}%</p>
             <p style={{color: "white"}}>Please wait...</p>
         </Html>
     )

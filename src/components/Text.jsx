@@ -20,11 +20,22 @@ export default function NavText({ hoverColor=0xff0000, baseColor=0xffffff, ...pr
                 scale={props.size}
                 text={props.text}
                 onPointerEnter={(e) => {
-                    if (context.lookingAt == 'contact') return;
-                    context.handlePointerIn(e);
-                    setColor(hoverColor)}}
-                onPointerOut={(e) => {context.handlePointerOut(e); setColor(baseColor)}}
-                onClick={(e) => {context.lookingAt == 'contact' ? null : context.handleClick(e, controls, props)}}
+                    if (context.lookingAt !== 'contact') {
+                        context.handlePointerIn(e); 
+                        setColor(hoverColor)
+                    }
+                }}
+                onPointerOut={(e) => {
+                    if (context.lookingAt !== 'contact'){
+                        context.handlePointerOut(e); setColor(baseColor)
+                    }
+                }}
+                onClick={(e) => {
+                    if (context.lookingAt !== 'contact'){
+                        context.handleClick(e, controls, props)
+                        setColor(baseColor)
+                    }
+                }}
             />
         </Bvh>
     )

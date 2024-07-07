@@ -71,9 +71,24 @@ export default function ArcadeMachine(props) {
         material={materials['Baked.001']} 
         position={[0, 0.015, 0]} 
         scale={0.985} {...props} 
-        onPointerOver={(e) => {context.handlePointerIn(e); setHovered(true)}}
-        onPointerOut={(e) => {context.handlePointerOut(e); setHovered(false)}}
-        onClick={(e) => context.handleClick(e, controls, props)}
+        onPointerOver={(e) => {
+          if (context.lookingAt == "none" || context.lookingAt == 'projects'){
+            setHovered(true)
+            context.handlePointerIn(e); 
+          }
+        }}
+        onPointerOut={(e) => {
+          if (context.lookingAt == "none" || context.lookingAt == 'projects'){
+            setHovered(false)
+            context.handlePointerOut(e); 
+          }
+        }}
+        onClick={(e) => {
+          if (context.lookingAt == "none" || context.lookingAt == 'projects'){
+            setHovered(false)
+            context.handleClick(e, controls, props)
+          }
+        }}
       />
     </>
   )
