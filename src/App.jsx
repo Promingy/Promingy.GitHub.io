@@ -10,8 +10,7 @@ import './App.css'
 import InitialLoad from './components/InitialLoad'
 import StartButton from './components/StartScreen'
 import LoadImage from './components/LoadImage'
-import SmallText from './components/SmallText'
-import MenuText from './components/Text'
+import NavText from './components/Text'
 import Lights from './components/Lights'
 import Camera from './components/Camera'
 import Clock from './components/Clock'
@@ -80,20 +79,20 @@ const App = () => {
           <LoadImage {...Data.images.resume}/>
           <LoadImage {...Data.images.aboutMe}/>
           <group>
-            <MenuText {...Data.menuText.resume}/>
-            <MenuText {...Data.menuText.skills}/>
-            {/* <MenuText {...Data.menuText.experience}/> */}
-            <MenuText {...Data.menuText.aboutMe}/>
-            <MenuText {...Data.menuText.projects}/>
-            <MenuText {...Data.menuText.contact}/>
+            <NavText {...Data.menuText.resume}/>
+            <NavText {...Data.menuText.skills}/>
+            {/* <NavText {...Data.menuText.experience}/> */}
+            <NavText {...Data.menuText.aboutMe}/>
+            <NavText {...Data.menuText.projects}/>
+            <NavText {...Data.menuText.contact}/>
           </group>
           <Flame />
           {context.lookingAt == 'about' &&
           <>
-            {/* <SmallText {...Data.smallText.experience.backText}/> */}
-            {/* <SmallText {...Data.smallText.aboutMe}/> */}
-            {/* <SmallText {...Data.smallText.experience}/> */}
-            <MenuText {...Data.smallText.aboutBackText}/>
+            {/* <NavText {...Data.smallText.experience.backText}/> */}
+            {/* <NavText {...Data.smallText.aboutMe}/> */}
+            {/* <NavText {...Data.smallText.experience}/> */}
+            <NavText {...Data.smallText.aboutBackText}/>
           </>
           }
           <group>

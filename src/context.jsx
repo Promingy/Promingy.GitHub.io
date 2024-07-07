@@ -10,7 +10,6 @@ export const useAppContext = () => {
 
 export const ContextProvider = ({children}) => {
   const [pan, setPan] = useState(false)
-  const [smallText, setSmallText] = useState(false)
   const [lookingAt, setLookingAt] = useState('')
   const [hovered, setHovered] = useState(false)
   const [panTimeout, setPanTimeout] = useState(null)
@@ -74,8 +73,6 @@ export const ContextProvider = ({children}) => {
     setPan,
     whoosh,
     click,
-    smallText,
-    setSmallText,
     lookingAt,
     setLookingAt,
     handlePointerIn,

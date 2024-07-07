@@ -1,7 +1,6 @@
 import { Cloud, Clouds, Float, useGLTF } from '@react-three/drei'
 import LoadProject from './LoadProject'
-import SmallText from './SmallText'
-import MenuText from './Text'
+import NavText from './Text'
 import LoadImage from './LoadImage'
 import { useEffect, useState } from 'react'
 import { useAppContext } from '../context'
@@ -37,9 +36,9 @@ export default function ArcadeMachine(props) {
           :
           <>
             <LoadProject  {...Data[props.name].loadProject}/>
-            {Data[props.name].nextProject && <MenuText {...Data[props.name].nextProject}/>}
-            {Data[props.name].previousProject && <MenuText {...Data[props.name].previousProject}/>}
-            <MenuText {...Data[props.name].backText}/>
+            {Data[props.name].nextProject && <NavText {...Data[props.name].nextProject}/>}
+            {Data[props.name].previousProject && <NavText {...Data[props.name].previousProject}/>}
+            <NavText {...Data[props.name].backText}/>
           </>
         }
       {opacity && 

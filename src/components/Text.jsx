@@ -1,10 +1,10 @@
 import { useThree } from '@react-three/fiber'
-import { Bvh, Text, meshBounds } from '@react-three/drei'
+import { Bvh, Text } from '@react-three/drei'
 import { useState } from 'react'
 import { useAppContext } from '../context'
 
 
-export default function MenuText({ hoverColor=0xff0000, baseColor=0xffffff, ...props }) {
+export default function NavText({ hoverColor=0xff0000, baseColor=0xffffff, ...props }) {
     const context = useAppContext();
     const { controls } = useThree();
     const [color, setColor] = useState(baseColor || 0xffffff);
@@ -19,17 +19,12 @@ export default function MenuText({ hoverColor=0xff0000, baseColor=0xffffff, ...p
                 rotation={props.rotation}
                 scale={props.size}
                 text={props.text}
-                // raycast={meshBounds}
                 onPointerEnter={(e) => {
                     if (context.lookingAt == 'contact') return;
                     context.handlePointerIn(e);
                     setColor(hoverColor)}}
                 onPointerOut={(e) => {context.handlePointerOut(e); setColor(baseColor)}}
-                onClick={(e) => {
-                    // context.lookingAt == 'contact' ? null : context.handleClick(e, controls, props)
-                    if (context.lookingAt == 'contact') return;
-                    context.handleClick(e, controls, props)
-                }}
+                onClick={(e) => {context.lookingAt == 'contact' ? null : context.handleClick(e, controls, props)}}
             />
         </Bvh>
     )
