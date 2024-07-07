@@ -2,7 +2,7 @@ import { Cloud, Clouds, Detailed, Float, Html, useGLTF } from '@react-three/drei
 import { MeshBasicMaterial } from 'three'
 import { useAppContext } from '../context'
 import { useFrame, useThree } from '@react-three/fiber'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 
 export default function Contact(props) {
   const { materials: lowMats } = useGLTF('models/low-res/contact_sign.glb')

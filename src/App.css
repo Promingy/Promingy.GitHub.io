@@ -6,6 +6,25 @@ html, body, canvas{
   overflow: hidden;
 }
 
+.fa-solid:hover {
+  color: #ee5b41;
+  cursor: pointer;
+}
+
+.fa-solid:active {
+  color: #a8412f;
+}
+
+.timeWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.time {
+  margin: 0;
+}
+
 .start-button-container {
   background-color: black;
   height: 100vh;

@@ -1,4 +1,4 @@
-import { useGLTF, Detailed, meshBounds, Cloud, Clouds, Float } from '@react-three/drei'
+import { useGLTF, Detailed, meshBounds, Cloud, Clouds, Float, PositionalAudio } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useState} from 'react'
 import { useAppContext } from '../context'
@@ -19,7 +19,7 @@ export default function BountyBoard(props) {
   })
 
   return (
-    <group>
+    <>
     {opacity &&
     <Float floatingRange={[-2, 0]} rotationIntensity={0} speed={5}>
       <Clouds material={MeshBasicMaterial}>
@@ -47,7 +47,7 @@ export default function BountyBoard(props) {
         <mesh castShadow receiveShadow geometry={nodes.Object_4.geometry} material={midMats['default']} position={[0, 1.643, -0.056]} scale={1.919} />
         <mesh castShadow receiveShadow geometry={nodes.Object_4.geometry} material={materials['default']} position={[0, 1.643, -0.056]} scale={1.919} />
       </Detailed>
-    </group>
+    </>
   )
 }
 

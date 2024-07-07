@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useState} from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState} from 'react'
 import { useCursor } from '@react-three/drei';
 import { clearTimeouts } from './components/Camera'
 
@@ -17,6 +17,7 @@ export const ContextProvider = ({children}) => {
   const [initialCamera, setInitialCamera] = useState(true)
   const [transition, setTransition] = useState(false)
   const [defaultImage, setDefaultImage] = useState(false)
+  const [mute, setMute] = useState(false)
   
   
   let timeout;
@@ -32,8 +33,10 @@ export const ContextProvider = ({children}) => {
     clearTimeouts();
     clearTimeout(panTimeout);
 
-    props.click && click.play();
-    whoosh.play();
+    if (!mute) {
+      props.click && click.play();
+      whoosh.play();
+    }
 
     if (lookingAt == props.name) {
       setLookingAt('none')
@@ -64,15 +67,34 @@ export const ContextProvider = ({children}) => {
 
   const whooshURL = 'sounds/whoosh.mp3'
   const clickURL = 'sounds/click.mp3'
+  const fireURL = 'sounds/fire.mp3'
 
-  const whoosh = new Audio(whooshURL)
-  const click = new Audio(clickURL)
+  const whoosh = useRef(new Audio(whooshURL)).current
+  const click = useRef(new Audio(clickURL)).current
+  const fire = useRef(new Audio(fireURL)).current
+
+  fire.loop = true;
+
+  useEffect(() => {
+    if (mute) {
+      fire.pause();
+    }
+    else {
+      fire.play()
+    }
+
+    return () => {
+      fire.pause()
+      fire.currentTime = 0
+    }
+  }, [mute])
 
   const value = {
     pan, 
     setPan,
     whoosh,
     click,
+    fire,
     lookingAt,
     setLookingAt,
     handlePointerIn,
@@ -88,7 +110,9 @@ export const ContextProvider = ({children}) => {
     setTransition,
     defaultImage,
     setDefaultImage,
-    toggleTransitionTimeout
+    toggleTransitionTimeout,
+    mute,
+    setMute
   }
 
   return (

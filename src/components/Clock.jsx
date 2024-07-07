@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import MyInfo from "../myInfo.json";
+import { useAppContext } from "../context";
 
 export default function Clock() {
     const [time, setTime] = useState(new Date());
     const [name, setName] = useState("")
     const [jobTitle, setJobTitle] = useState("")
+    const {mute, setMute} = useAppContext()
     const typingSound = new Audio('sounds/typing.mp3')
 
     const hours = time.getHours().toString().padStart(2, '0')
@@ -52,7 +54,10 @@ export default function Clock() {
         <div style={{color: "white", position: "absolute", zIndex: 1, left: 20}}>
           <h2 style={{marginBottom: 5,}}>{name}</h2>
           <h3 style={{marginTop: 5, marginBottom: 5}}>{jobTitle}</h3>
-          <h3 style={{marginTop: 0}}>{hours}:{minutes}:{seconds}</h3>
+          <h3 className="timeWrapper" style={{marginTop: 0}}>
+            <p className="time">{hours}:{minutes}:{seconds}</p>
+            <i className={`fa-solid fa-volume-${mute ? 'xmark' : 'high'}`} onClick={() => setMute(!mute)}/>
+          </h3>
         </div>
     )
   }
