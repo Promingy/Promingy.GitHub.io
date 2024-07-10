@@ -19,7 +19,7 @@
         "lookAt": [85.2, 26, -10.75],
         "cloudPosition": [85, -2, -10],
         "loadProject": {
-            "url": "https://project1.corbinainsworth.com",
+            "url": "https://recipes.corbinainsworth.com",
             "position": [84, 25.5, -10],
             "rotation": [0, 1.5708, 0]
         },
@@ -62,7 +62,7 @@
         "cloudPosition": [85, -2, 25],
         "name": "arcadeMachine2",
         "loadProject": {
-            "url": "https://project3.corbinainsworth.com",
+            "url": "https://pixelchat.corbinainsworth.com",
             "position": [84, 25.5, 25],
             "rotation": [0, 1.5708, 0]
         },

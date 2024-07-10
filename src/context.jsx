@@ -76,12 +76,7 @@ export const ContextProvider = ({children}) => {
   fire.loop = true;
 
   useEffect(() => {
-    if (mute) {
-      fire.pause();
-    }
-    else {
-      fire.play()
-    }
+    mute ? fire.pause() : fire.play()
 
     return () => {
       fire.pause()
