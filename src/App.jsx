@@ -47,8 +47,9 @@ const App = () => {
       {context.displayStart && <StartButton afterRender={() => setAssetsLoaded(true)}/> }
       <Canvas shadows camera={{ position: [87.7, 26, 59.75], fov: isMobile ? 120 : 75}} style={{ background: "#000000" }}>
         {/* <Perf openByDefault /> */}
-        <fog attach="fog" args={['#000000', 400, 750]}/>
         <Suspense fallback={<InitialLoad />}>
+          <fog attach="fog" args={['#000000', 400, 750]}/>
+          <AdaptiveDpr pixelated />
           <Camera />
           <BakeShadows />
           <group>
@@ -105,7 +106,6 @@ const App = () => {
           <SkillBooks {...Data.skillBooks}/>
           <Tavern {...Data.tavern} raycast={meshBounds} onPointerOver={e => e.stopPropagation()} onClick={e => e.stopPropagation()}/>
         </Suspense>
-        <AdaptiveDpr pixelated />
       </Canvas>
     </>
   )

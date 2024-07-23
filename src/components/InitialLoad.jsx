@@ -2,10 +2,14 @@ import { Html, useProgress } from "@react-three/drei"
 import { useAppContext } from "../context"
 
 export default function InitialLoad() {
-    const { active, progress, errors, item, loaded, total} = useProgress()
+    const { progress } = useProgress()
     const { setDisplayStart } = useAppContext()
+    const [viewed, setViewed] = useState(false)
 
-    if (progress === 100) setDisplayStart(true)
+    if (progress === 100 && !viewed) {
+        setDisplayStart(true)
+        setViewed(true)
+    }
 
     return (
         <Html center>
