@@ -1,5 +1,6 @@
 import { Html, useProgress } from "@react-three/drei"
 import { useAppContext } from "../context"
+import { useState } from "react"
 
 export default function InitialLoad() {
     const { progress } = useProgress()
