@@ -8,7 +8,7 @@ import './App.css'
 
 
 import InitialLoad from './components/InitialLoad'
-import StartButton from './components/StartScreen'
+// import StartButton from './components/StartScreen'
 import LoadImage from './components/LoadImage'
 import NavText from './components/Text'
 import Lights from './components/Lights'
@@ -16,13 +16,18 @@ import Camera from './components/Camera'
 import Clock from './components/Clock'
 
 
-import ArcadeMachine from './components/ArcadeMachine'
+// import ArcadeMachine from './components/ArcadeMachine'
 import BountyBoard from './components/BountyBoard'
 import SkillBooks from './components/SkillBooks'
 import Contact from './components/ContactMe'
-import Tavern from './components/Tavern'
+// import Tavern from './components/Tavern'
 import Flame from './components/Flame'
 import Swarm from './components/Swarm'
+
+import StartButton from './tsx_components/StartButton'
+
+import Tavern from './tsx_components/Tavern'
+import ArcadeMachine from './tsx_components/ArcadeMachine'
 
 const App = () => {
   const context = useAppContext();

@@ -70,7 +70,8 @@ export default function ArcadeMachine(props) {
         geometry={nodes.Cube001_10011_0.geometry} 
         material={materials['Baked.001']} 
         position={[0, 0.015, 0]} 
-        scale={0.985} {...props} 
+        scale={0.985} 
+        {...props} 
         onPointerOver={(e) => {
           if (context.lookingAt == "none" || context.lookingAt == 'projects'){
             setHovered(true)

@@ -12,7 +12,11 @@ type GLTFResult = GLTF & {
   }
 }
 
-export function Model(props: JSX.IntrinsicElements['group']) {
+type Props = {
+  
+}
+
+export default function Model(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('models/tavern.glb') as GLTFResult
   return (
     <group {...props} dispose={null}>
