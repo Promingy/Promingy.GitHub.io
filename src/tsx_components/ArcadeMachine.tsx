@@ -1,4 +1,4 @@
-import { Mesh, MeshBasicMaterial } from 'three'
+import { Mesh, MeshBasicMaterial, Vector3 } from 'three'
 import React, { useEffect, useState } from 'react'
 import { useGLTF, Cloud, Clouds, Float } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
@@ -18,11 +18,17 @@ type GLTFResult = GLTF & {
   }
 }
 
-type ContextType = Record<string, React.ForwardRefExoticComponent<JSX.IntrinsicElements['mesh']>>
+type StaticImage = {
+  file: string,
+  position: number[],
+  rotation: number[],
+  scale: number[],
+  basic: boolean
+}
 
 export default function Model(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('models/arcade_machine.glb') as GLTFResult;
-  const [ staticImage, setStaticImage ] = useState<object>({ ...Data.images.loadingImage });
+  const [ staticImage, setStaticImage ] = useState<StaticImage>({ ...Data.images.loadingImage });
   const [ hovered, setHovered ] = useState<boolean>(false);
   const [ opacity, setOpacity ] = useState<number>(0);
   const { controls } = useThree();
@@ -30,7 +36,11 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
   const lookingAt = context.lookingAt == "none" || context.lookingAt == "projects";
   const dataName: string = props.name ?? "arcadeMachine1";
 
-  const cloudPosition = [ ...Data[dataName].cloudPosition ];
+  const cloudPositionArr = Data[dataName].cloudPosition as [number, number, number];
+
+  const cloudPosition = cloudPositionArr ? new Vector3(...cloudPositionArr) : undefined;
+  const cloud2Position = cloudPositionArr ? new Vector3(cloudPositionArr[0] - 10, ...cloudPositionArr.slice(1)) : undefined;
+
 
   useEffect(() => {
     if (context.defaultImage) {
@@ -75,7 +85,7 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
             opacity={opacity}
             speed={1}
             scale={[4, 2, 4]}
-            position={[cloudPosition[0] - 10, ...cloudPosition.slice(1)]}
+            position={cloud2Position}
             rotation={[0, Math.PI / 2, 0]}
             seed={.52}
           />
