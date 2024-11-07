@@ -41,11 +41,11 @@ export default function Camera() {
         controls?.removeEventListener('controlend', onDragEnd)
     }
     
-    }, [controls, context.pan])
+    }, [controls, context.pan, context.initialCamera])
 
     useEffect(() => {
         if (!context.initialCamera) {
-            context.whoosh.play()
+            context.audio.whoosh.play()
 
             controls?.moveTo(250, 26, 59.75, true)
 

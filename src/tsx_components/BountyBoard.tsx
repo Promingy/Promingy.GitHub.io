@@ -1,8 +1,9 @@
 import { useGLTF, Detailed, meshBounds, Cloud, Clouds, Float, PositionalAudio } from '@react-three/drei';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useThree } from '@react-three/fiber';
 import React, { useState } from 'react';
 import { useAppContext } from '../context';
 import { Euler, MeshBasicMaterial, Vector3 } from 'three';
+import { useOpacityAnimation } from '../hooks/useOpacityAnimation';
 
 interface BountyBoardProps {
   // Add any props you want to pass to the BountyBoard component
@@ -41,23 +42,12 @@ export default function BountyBoard(props: BountyBoardProps) {
     const { materials: highResMaterials } = useGLTF('models/high-res/bounty_board.glb') as GLTFResult;
 
     //State variables to keep track of the component's hover state and the opacity of the cloud effect.
-    const [isHovered, setIsHovered] = useState(false);
-    const [cloudOpacity, setCloudOpacity] = useState(0);
+    const { cloudOpacity, setIsHovered } = useOpacityAnimation();
 
 
     // Get the context and the controls of the scene.    
     const context = useAppContext();
     const { controls } = useThree();
-
-
-    //An effect that updates the cloud opacity based on the hover state.
-    useFrame(() => {
-        if (isHovered && cloudOpacity < 1 && context.lookingAt === 'none') {
-            setCloudOpacity(cloudOpacity + 0.0025);
-        } else if (cloudOpacity > 0) {
-            setCloudOpacity(cloudOpacity - 0.0075);
-        }
-    });
 
 
    //The JSX that is returned by the component.

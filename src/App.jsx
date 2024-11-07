@@ -6,28 +6,17 @@ import { useAppContext } from './context'
 import Data from './data.json'
 import './App.css'
 
-
-import InitialLoad from './components/InitialLoad'
-// import StartButton from './components/StartScreen'
-import LoadImage from './components/LoadImage'
-import NavText from './components/Text'
-import Lights from './components/Lights'
-import Camera from './components/Camera'
-import Clock from './components/Clock'
-
-
-// import ArcadeMachine from './components/ArcadeMachine'
-// import BountyBoard from './components/BountyBoard'
-import SkillBooks from './components/SkillBooks'
-// import Contact from './components/ContactMe'
-// import Tavern from './components/Tavern'
-// import Flame from './components/Flame'
-// import Swarm from './components/Swarm'
-
-import StartButton from './tsx_components/StartButton'
+import InitialLoad from './tsx_components/InitialLoad'
+import StartButton from './tsx_components/StartScreen'
+import LoadImage from './tsx_components/LoadImage'
+import Lights from './tsx_components/Lights'
+import NavText from './tsx_components/Text'
+import Camera from './tsx_components/Camera'
+import Clock from './tsx_components/Clock'
 
 import ArcadeMachine from './tsx_components/ArcadeMachine'
 import BountyBoard from './tsx_components/BountyBoard'
+import SkillBooks from './tsx_components/SkillBooks'
 import Contact from './tsx_components/ContactMe'
 import Tavern from './tsx_components/Tavern'
 import Flame from './tsx_components/Flame'
@@ -44,7 +33,9 @@ const App = () => {
     context.setPan(false)
     
     if (context.lookingAt == 'none' && !context.pan) {
-      panTimeout = setTimeout(() => context.setPan(true), 5000)
+      panTimeout = setTimeout(() => {
+        context.setPan(true)
+      }, 5000)
     }
 
     return () => clearTimeout(panTimeout)
@@ -53,10 +44,10 @@ const App = () => {
     return (
     <>
       {assetsLoaded && <Clock /> }
-      {context.displayStart && <StartButton afterRender={() => setAssetsLoaded(true)}/> }
-      <Canvas shadows camera={{ position: [87.7, 26, 59.75], fov: isMobile ? 120 : 75}} style={{ background: "#000000" }}>
+      {context.displayStart && <StartButton onStart={() => setAssetsLoaded(true)}/> }
+      <Canvas id='canvas' shadows camera={{ position: [87.7, 26, 59.75], fov: isMobile ? 120 : 75}} style={{ background: "#000000" }}>
         {/* <Perf openByDefault /> */}
-        <Suspense fallback={<InitialLoad />}>
+        <Suspense fallback={<InitialLoad />}> // this fall back is why the start button shows a second time after loading
           <fog attach="fog" args={['#000000', 400, 750]}/>
           <AdaptiveDpr pixelated />
           <Preload all />

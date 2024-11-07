@@ -4,39 +4,46 @@ import { useState } from 'react'
 import { useAppContext } from '../context'
 
 
-export default function NavText({ hoverColor=0xff0000, baseColor=0xffffff, ...props }) {
+export default function NavText({ hoverColor = 0xff0000, baseColor = 0xffffff, ...props }) {
     const context = useAppContext();
     const { controls } = useThree();
-    const [color, setColor] = useState(baseColor || 0xffffff);
+    const [color, setColor] = useState(baseColor);
+
+    const handlePointerEnter = (e) => {
+        if (context.lookingAt !== 'contact') {
+            context.handlePointerIn(e);
+            setColor(hoverColor);
+        }
+    };
+
+    const handlePointerOut = (e) => {
+        if (context.lookingAt !== 'contact') {
+            context.handlePointerOut(e);
+            setColor(baseColor);
+        }
+    };
+
+    const handleClick = (e) => {
+        if (context.lookingAt !== 'contact') {
+            context.handleClick(e, controls, props);
+            setColor(baseColor);
+        }
+    };
 
     return (
         <Bvh setBoundingBox splitStrategy="SAH">
             <Text
-                font={'/Playball-Regular.ttf'}
+                font='/Playball-Regular.ttf'
                 characters='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!é '
                 color={color}
                 position={props.position}
                 rotation={props.rotation}
                 scale={props.size}
                 text={props.text}
-                onPointerEnter={(e) => {
-                    if (context.lookingAt !== 'contact') {
-                        context.handlePointerIn(e); 
-                        setColor(hoverColor)
-                    }
-                }}
-                onPointerOut={(e) => {
-                    if (context.lookingAt !== 'contact'){
-                        context.handlePointerOut(e); setColor(baseColor)
-                    }
-                }}
-                onClick={(e) => {
-                    if (context.lookingAt !== 'contact'){
-                        context.handleClick(e, controls, props)
-                        setColor(baseColor)
-                    }
-                }}
+                onPointerEnter={handlePointerEnter}
+                onPointerOut={handlePointerOut}
+                onClick={handleClick}
             />
         </Bvh>
-    )
+    );
 }

@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState} from 'react'
 import { useCursor } from '@react-three/drei';
-import { clearTimeouts } from './components/Camera'
+import { clearTimeouts } from './tsx_components/Camera'
 
 const context = createContext()
 
@@ -18,6 +18,7 @@ export const ContextProvider = ({children}) => {
   const [transition, setTransition] = useState(false)
   const [defaultImage, setDefaultImage] = useState(false)
   const [mute, setMute] = useState(false)
+  const [viewed, setViewed] = useState(false)
   
   
   let timeout;
@@ -33,6 +34,8 @@ export const ContextProvider = ({children}) => {
     clearTimeouts();
     clearTimeout(panTimeout);
 
+    console.log(props, lookingAt)
+
     if (!mute) {
       props.click && click.play();
       whoosh.play();
@@ -46,6 +49,7 @@ export const ContextProvider = ({children}) => {
     }
     else {
       setLookingAt(props.name)
+      clearTimeouts();
       controls.setLookAt(...props.moveTo, ...props.lookAt, true)
     }
   })
@@ -87,9 +91,11 @@ export const ContextProvider = ({children}) => {
   const value = {
     pan, 
     setPan,
-    whoosh,
-    click,
-    fire,
+    audio: {
+      whoosh,
+      click,
+      fire,
+    },
     lookingAt,
     setLookingAt,
     handlePointerIn,
@@ -107,7 +113,9 @@ export const ContextProvider = ({children}) => {
     setDefaultImage,
     toggleTransitionTimeout,
     mute,
-    setMute
+    setMute,
+    viewed,
+    setViewed
   }
 
   return (

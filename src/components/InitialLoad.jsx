@@ -4,8 +4,7 @@ import { useEffect, useState } from "react"
 
 export default function InitialLoad() {
     const { progress } = useProgress()
-    const { setDisplayStart, setInitialCamera, setTransition, initialCamera } = useAppContext()
-    const [viewed, setViewed] = useState(false)
+    const { setDisplayStart, setInitialCamera, setTransition, initialCamera, viewed, setViewed } = useAppContext()
 
     useEffect(() => {
         if (progress === 100){

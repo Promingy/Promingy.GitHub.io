@@ -1,22 +1,98 @@
 import { Cloud, Clouds, Float, useGLTF } from '@react-three/drei';
-import LoadProject from '../components/LoadProject';
-import NavText from '../components/Text';
-import LoadImage from '../components/LoadImage';
+import LoadProject from './LoadProject';
+import NavText from './Text';
+import LoadImage from './LoadImage';
 import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../context';
 import Data from '../data.json';
-import { useThree, useFrame } from '@react-three/fiber';
-import { Mesh, MeshBasicMaterial } from 'three';
+import { useThree } from '@react-three/fiber';
+import { Euler, Mesh, MeshBasicMaterial, Vector3 } from 'three';
+import { useOpacityAnimation } from '../hooks/useOpacityAnimation';
 
-interface Props {
-  name: string;
+
+interface LoadProject {
+    url: string;
+    position: Vector3;
+    rotation: Euler;
 }
 
-const ArcadeMachine: React.FC<Props> = (props) => {
+interface NextProject {
+    text: string;
+    size: number;
+    position: Vector3;
+    rotation: Euler;
+    moveTo: Vector3;
+    lookAt: {
+      (vector: Vector3): void;
+      (x: number, y: number, z: number): void;
+    };
+    hoverColor: string;
+    name: string;
+    click: boolean;
+}
+
+interface BackText {
+    text: string;
+    size: number;
+    position: Vector3;
+    rotation: Euler;
+    moveTo: Vector3;
+    lookAt: {
+      (vector: Vector3): void;
+      (x: number, y: number, z: number): void;
+    };
+    color: string;
+    name: string;
+    click: boolean;
+}
+
+interface ImageProps {
+    file: string;
+    position: Vector3;
+    rotation: Euler;
+    scale: Vector3;
+    basic: boolean;
+}
+
+interface ArcadeMachineProps {
+    position: Vector3;
+    scale: Vector3;
+    rotation: Euler;
+    moveTo: Vector3;
+    lookAt: {
+      (vector: Vector3): void;
+      (x: number, y: number, z: number): void;
+    };
+    cloudPosition: Vector3;
+    name: string;
+    loadProject: LoadProject;
+    nextProject: NextProject;
+    backText: BackText;
+    image: ImageProps;
+}
+
+interface StaticImage {
+  file: string;
+  position: Vector3;
+  scale: Vector3;
+  rotation: Euler;
+  basic: boolean;
+}
+
+const loadingImagePosition = new Vector3(...Data.images.loadingImage.position);
+const loadingImageRotation = new Euler(...Data.images.loadingImage.rotation);
+const loadingImageScale = new Vector3(...Data.images.loadingImage.scale);
+
+const ArcadeMachine: React.FC<ArcadeMachineProps> = (props) => {
   const { nodes, materials } = useGLTF('models/arcade_machine.glb');
-  const [staticImage, setStaticImage] = useState(Data.images.loadingImage);
-  const [isHovered, setIsHovered] = useState(false);
-  const [cloudOpacity, setCloudOpacity] = useState(0);
+  const [staticImage, setStaticImage] = useState<StaticImage>({
+    file: Data.images.loadingImage.file,
+    position: loadingImagePosition,
+    rotation: loadingImageRotation,
+    scale: loadingImageScale,
+    basic: Data.images.loadingImage.basic,
+  });
+  const { cloudOpacity, setIsHovered } = useOpacityAnimation();
   const { controls } = useThree();
   const context = useAppContext();
 
@@ -29,14 +105,6 @@ const ArcadeMachine: React.FC<Props> = (props) => {
       setStaticImage(projectData.image);
     }
   }, [context.defaultImage]);
-
-  useFrame(() => {
-    if (isHovered && cloudOpacity < 1 && (context.lookingAt === 'none' || context.lookingAt === 'projects')) {
-      setCloudOpacity(prevOpacity => prevOpacity + 0.0025);
-    } else if (cloudOpacity > 0) {
-      setCloudOpacity(prevOpacity => prevOpacity - 0.0075);
-    }
-  });
 
 
   return (
@@ -80,10 +148,13 @@ const ArcadeMachine: React.FC<Props> = (props) => {
       <mesh
         geometry={(nodes.Cube001_10011_0 as Mesh).geometry}
         material={materials['Baked.001']}
-        position={[0, 0.015, 0]}
-        scale={0.985}
         {...props}
-        onPointerOver={(e) => {context.handlePointerIn(e); setIsHovered(true)}}
+        onPointerOver={(e) => {
+          if (context.lookingAt == 'none'){
+            context.handlePointerIn(e);
+            setIsHovered(true)}
+          }
+        }
         onPointerOut={(e) => {context.handlePointerOut(e); setIsHovered(false)}}
         onClick={(e) => context.handleClick(e, controls, props)}
       />
