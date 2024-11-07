@@ -1,4 +1,4 @@
-import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial, meshBounds } from '@react-three/drei'
+import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial, Preload, meshBounds } from '@react-three/drei'
 import { Suspense, useEffect, useState } from 'react'
 import { Canvas} from '@react-three/fiber'
 import { useAppContext } from './context'
@@ -21,13 +21,14 @@ import BountyBoard from './components/BountyBoard'
 import SkillBooks from './components/SkillBooks'
 import Contact from './components/ContactMe'
 // import Tavern from './components/Tavern'
-import Flame from './components/Flame'
+// import Flame from './components/Flame'
 import Swarm from './components/Swarm'
 
 import StartButton from './tsx_components/StartButton'
 
 import Tavern from './tsx_components/Tavern'
 import ArcadeMachine from './tsx_components/ArcadeMachine'
+import Flame from './tsx_components/Flame'
 
 const App = () => {
   const context = useAppContext();
@@ -55,6 +56,7 @@ const App = () => {
         <Suspense fallback={<InitialLoad />}>
           <fog attach="fog" args={['#000000', 400, 750]}/>
           <AdaptiveDpr pixelated />
+          <Preload all />
           <Camera />
           <BakeShadows />
           <group>
@@ -85,12 +87,12 @@ const App = () => {
           <LoadImage {...Data.images.resume}/>
           <LoadImage {...Data.images.aboutMe}/>
           <group>
-            <NavText {...Data.menuText.resume}/>
-            <NavText {...Data.menuText.skills}/>
-            {/* <NavText {...Data.menuText.experience}/> */}
-            <NavText {...Data.menuText.aboutMe}/>
-            <NavText {...Data.menuText.projects}/>
-            <NavText {...Data.menuText.contact}/>
+              <NavText {...Data.menuText.resume}/>
+              <NavText {...Data.menuText.skills}/>
+              {/* <NavText {...Data.menuText.experience}/> */}
+              <NavText {...Data.menuText.aboutMe}/>
+              <NavText {...Data.menuText.projects}/>
+              <NavText {...Data.menuText.contact}/>
           </group>
           <Flame />
           {context.lookingAt == 'about' &&
