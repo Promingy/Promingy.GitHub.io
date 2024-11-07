@@ -2,11 +2,11 @@ import { Cloud, Clouds, Float, useGLTF } from '@react-three/drei';
 import LoadProject from '../components/LoadProject';
 import NavText from '../components/Text';
 import LoadImage from '../components/LoadImage';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../context';
 import Data from '../data.json';
 import { useThree, useFrame } from '@react-three/fiber';
-import { MeshBasicMaterial } from 'three';
+import { Mesh, MeshBasicMaterial } from 'three';
 
 interface Props {
   name: string;
@@ -15,13 +15,14 @@ interface Props {
 const ArcadeMachine: React.FC<Props> = (props) => {
   const { nodes, materials } = useGLTF('models/arcade_machine.glb');
   const [staticImage, setStaticImage] = useState(Data.images.loadingImage);
-  const [hovered, setHovered] = useState(false);
-  const [opacity, setOpacity] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [cloudOpacity, setCloudOpacity] = useState(0);
   const { controls } = useThree();
   const context = useAppContext();
 
   const projectData = Data[props.name];
   const cloudPosition = projectData.cloudPosition;
+  const [ x, y, z ] = cloudPosition;
 
   useEffect(() => {
     if (context.defaultImage) {
@@ -30,18 +31,13 @@ const ArcadeMachine: React.FC<Props> = (props) => {
   }, [context.defaultImage]);
 
   useFrame(() => {
-    if (hovered && opacity < 1 && (context.lookingAt === 'none' || context.lookingAt === 'projects')) {
-      setOpacity(opacity + 0.0025);
-    } else if (opacity > 0) {
-      setOpacity(opacity - 0.0075);
+    if (isHovered && cloudOpacity < 1 && (context.lookingAt === 'none' || context.lookingAt === 'projects')) {
+      setCloudOpacity(prevOpacity => prevOpacity + 0.0025);
+    } else if (cloudOpacity > 0) {
+      setCloudOpacity(prevOpacity => prevOpacity - 0.0075);
     }
   });
 
-  const handlePointerEvent = (event: any, handler: (event: any) => void) => {
-    if (context.lookingAt === 'none' || context.lookingAt === 'projects') {
-      handler(event);
-    }
-  };
 
   return (
     <>
@@ -55,13 +51,13 @@ const ArcadeMachine: React.FC<Props> = (props) => {
           <NavText {...projectData.backText} />
         </>
       )}
-      {opacity && (
+      {cloudOpacity && (
         <Float floatingRange={[-1, 1]} rotationIntensity={0} speed={5}>
           <Clouds material={MeshBasicMaterial}>
             <Cloud
               fade={10}
               color="grey"
-              opacity={opacity}
+              opacity={cloudOpacity}
               speed={1}
               scale={[4, 2, 4]}
               position={cloudPosition}
@@ -71,10 +67,10 @@ const ArcadeMachine: React.FC<Props> = (props) => {
             <Cloud
               fade={10}
               color="grey"
-              opacity={opacity}
+              opacity={cloudOpacity}
               speed={1}
               scale={[4, 2, 4]}
-              position={[cloudPosition[0] - 10, ...cloudPosition.slice(1)]}
+              position={[x - 10, y, z]}
               rotation={[0, Math.PI / 2, 0]}
               seed={0.52}
             />
@@ -82,14 +78,14 @@ const ArcadeMachine: React.FC<Props> = (props) => {
         </Float>
       )}
       <mesh
-        geometry={nodes.Cube001_10011_0.geometry}
+        geometry={(nodes.Cube001_10011_0 as Mesh).geometry}
         material={materials['Baked.001']}
         position={[0, 0.015, 0]}
         scale={0.985}
         {...props}
-        onPointerOver={(e) => handlePointerEvent(e, () => {context.handlePointerIn(e); setHovered(true)})}
-        onPointerOut={(e) => handlePointerEvent(e, () => {context.handlePointerOut(e); setHovered(false)})}
-        onClick={(e) => handlePointerEvent(e, () => context.handleClick(e, controls, props))}
+        onPointerOver={(e) => {context.handlePointerIn(e); setIsHovered(true)}}
+        onPointerOut={(e) => {context.handlePointerOut(e); setIsHovered(false)}}
+        onClick={(e) => context.handleClick(e, controls, props)}
       />
     </>
   );

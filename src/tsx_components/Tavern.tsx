@@ -1,26 +1,24 @@
-import { Mesh, MeshBasicMaterial } from 'three'
-import React from 'react'
 import { useGLTF } from '@react-three/drei'
-import { GLTF } from 'three-stdlib'
+import { MeshBasicMaterial, Vector3 } from 'three'
+import React from 'react'
 
-type GLTFResult = GLTF & {
-  nodes: {
-    ['Piso_Surface_-_Matte_0001']: Mesh
-  }
-  materials: {
-    MasterAtlas: MeshBasicMaterial
-  }
+interface ModelProps {
+  scale?: Vector3
 }
 
-type Props = {
-  
-}
-
-export default function Model(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('models/tavern.glb') as GLTFResult
+export default function Model(props: ModelProps) {
+  const { nodes, materials } = useGLTF('models/tavern.glb')
+const basicMaterial = new MeshBasicMaterial({ map: (materials.MasterAtlas as MeshBasicMaterial).map })
   return (
     <group {...props} dispose={null}>
-      <mesh castShadow geometry={nodes['Piso_Surface_-_Matte_0001'].geometry} material={materials.MasterAtlas} position={[-0.353, 1.531, 0.611]} rotation={[-Math.PI, 0, -Math.PI]} scale={4.426} />
+      <mesh
+        castShadow
+        geometry={(nodes['Piso_Surface_-_Matte_0001'] as any).geometry}
+        material={basicMaterial}
+        position={[-0.353, 1.531, 0.611]}
+        rotation={[-Math.PI, 0, -Math.PI]}
+        scale={4.426}
+      />
     </group>
   )
 }

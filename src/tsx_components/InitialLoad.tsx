@@ -4,12 +4,18 @@ import React, { useEffect, useState } from "react"
 
 const InitialLoad: React.FC = () => {
     const { progress } = useProgress()
-    const { setDisplayStart } = useAppContext()
+    const { setDisplayStart, setInitialCamera, setTransition } = useAppContext()
     const [viewed, setViewed] = useState<boolean>(false)
     useEffect(() => {
-        if (progress === 100 && !viewed) {
-            setDisplayStart(true)
-            setViewed(true)
+        if (progress === 100) {
+            if (!viewed) {
+                setDisplayStart(true)
+                setViewed(true)
+            }
+            else {
+                setInitialCamera(false);
+                setTransition(true);
+            }
         }
     }, [progress, setDisplayStart, viewed]);
 

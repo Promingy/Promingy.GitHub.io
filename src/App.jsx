@@ -17,18 +17,21 @@ import Clock from './components/Clock'
 
 
 // import ArcadeMachine from './components/ArcadeMachine'
-import BountyBoard from './components/BountyBoard'
+// import BountyBoard from './components/BountyBoard'
 import SkillBooks from './components/SkillBooks'
-import Contact from './components/ContactMe'
+// import Contact from './components/ContactMe'
 // import Tavern from './components/Tavern'
 // import Flame from './components/Flame'
-import Swarm from './components/Swarm'
+// import Swarm from './components/Swarm'
 
 import StartButton from './tsx_components/StartButton'
 
-import Tavern from './tsx_components/Tavern'
 import ArcadeMachine from './tsx_components/ArcadeMachine'
+import BountyBoard from './tsx_components/BountyBoard'
+import Contact from './tsx_components/ContactMe'
+import Tavern from './tsx_components/Tavern'
 import Flame from './tsx_components/Flame'
+import Swarm from './tsx_components/Swarm'
 
 const App = () => {
   const context = useAppContext();
@@ -47,7 +50,7 @@ const App = () => {
     return () => clearTimeout(panTimeout)
   }, [context.lookingAt])
 
-   return (
+    return (
     <>
       {assetsLoaded && <Clock /> }
       {context.displayStart && <StartButton afterRender={() => setAssetsLoaded(true)}/> }

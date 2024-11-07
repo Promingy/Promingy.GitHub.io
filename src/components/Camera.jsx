@@ -60,7 +60,7 @@ export default function Camera() {
 
     useEffect(() => {
         if (controls) {
-            if (!context.transition && context.lookingAt == "none" || context.lookingAt == 'projects' ) {
+            if (!context.transition && (context.lookingAt == "none" || context.lookingAt == 'projects')) {
                 controls._addAllEventListeners(controls._domElement)
             } else {
                 controls._removeAllEventListeners()

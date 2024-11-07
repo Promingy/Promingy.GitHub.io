@@ -1,16 +1,23 @@
 import { Html, useProgress } from "@react-three/drei"
 import { useAppContext } from "../context"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function InitialLoad() {
     const { progress } = useProgress()
-    const { setDisplayStart } = useAppContext()
+    const { setDisplayStart, setInitialCamera, setTransition, initialCamera } = useAppContext()
     const [viewed, setViewed] = useState(false)
 
-    if (progress === 100 && !viewed) {
-        setDisplayStart(true)
-        setViewed(true)
-    }
+    useEffect(() => {
+        if (progress === 100){
+            if (!viewed) {
+                setDisplayStart(true)
+                setViewed(true)
+            } else {
+                setInitialCamera(false)
+                setTransition(true)
+            }
+        }
+    }, [progress, initialCamera])
 
     return (
         <Html center>
