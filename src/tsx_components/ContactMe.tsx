@@ -25,9 +25,9 @@ interface ContactProps {
 
 export default function Contact(props: ContactProps) {
     const { cloudOpacity, setIsHovered } = useOpacityAnimation();
-    const { materials: lowMats } = useGLTF('models/low-res/contact_sign.glb') as GLTFResult;
-    const { materials: midMats } = useGLTF('models/mid-res/contact_sign.glb') as GLTFResult;
-    const { nodes, materials: highMats } = useGLTF('models/high-res/contact_sign.glb') as GLTFResult;
+    const { materials: lowMats } = useGLTF('src/assets/models/low-res/contact_sign.glb') as GLTFResult;
+    const { materials: midMats } = useGLTF('src/assets/models/mid-res/contact_sign.glb') as GLTFResult;
+    const { nodes, materials: highMats } = useGLTF('src/assets/models/high-res/contact_sign.glb') as GLTFResult;
 
     const [name, setName] = useState<string>('Enter Name Here');
     const [email, setEmail] = useState<string>('Enter Email Here');
@@ -164,6 +164,6 @@ export default function Contact(props: ContactProps) {
     );
 }
 
-useGLTF.preload('models/low-res/contact_sign.glb');
-useGLTF.preload('models/mid-res/contact_sign.glb');
-useGLTF.preload('models/high-res/contact_sign.glb');
+useGLTF.preload('src/assets/models/low-res/contact_sign.glb');
+useGLTF.preload('src/assets/models/mid-res/contact_sign.glb');
+useGLTF.preload('src/assets/models/high-res/contact_sign.glb');

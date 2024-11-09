@@ -10,7 +10,7 @@ interface ModelProps {
 }
 
 export default function Model(props: ModelProps) {
-  const { nodes, materials } = useGLTF('models/tavern.glb')
+  const { nodes, materials } = useGLTF('src/assets/models/tavern.glb')
 const basicMaterial = new MeshBasicMaterial({ map: (materials.MasterAtlas as MeshBasicMaterial).map })
   return (
     <group {...props} dispose={null}>
@@ -26,4 +26,4 @@ const basicMaterial = new MeshBasicMaterial({ map: (materials.MasterAtlas as Mes
   )
 }
 
-useGLTF.preload('models/tavern.glb')
+useGLTF.preload('src/assets/models/tavern.glb')

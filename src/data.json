@@ -46,7 +46,7 @@
             "click": true
         },
         "image": {
-            "file": "images/arcadeMachine1.png",
+            "file": "src/assets/images/arcadeMachine1.png",
             "position": [84, 25.5, -10],
             "rotation": [-1.516, 1.383, 1.514],
             "scale": [0.115, 0.09, 1],
@@ -101,7 +101,7 @@
             "click": true
         },
         "image": {
-            "file": "images/arcadeMachine2.png",
+            "file": "src/assets/images/arcadeMachine2.png",
             "position": [84, 25.5, 25],
             "rotation": [-1.516, 1.383, 1.514],
             "scale": [0.115, 0.09, 1],
@@ -144,7 +144,7 @@
             "click": true
         },
         "image": {
-            "file": "images/arcadeMachine3.png",
+            "file": "src/assets/images/arcadeMachine3.png",
             "position": [83, 25.5, 60],
             "rotation": [-1.516, 1.283, 1.514],
             "scale": [0.115, 0.09, 1],
@@ -269,20 +269,20 @@
     },
     "images": {
         "resume": {
-            "file": "images/ainsworth_corbin_resume.png",
+            "file": "src/assets/images/ainsworth_corbin_resume.png",
             "position": [50.4, 15.75, 140.9],
             "rotation": [0.075, -1.5708, 0],
             "scale": [0.113, 0.14, 0.1],
             "basic": false
         },
         "aboutMe": {
-            "file": "images/about_me.png",
+            "file": "src/assets/images/about_me.png",
             "position": [-3.91, 36.5, -69.95],
             "scale": [0.0475, 0.085, 0.1],
             "basic": false
         },
         "loadingImage": {
-            "file": "images/loading.png",
+            "file": "src/assets/images/loading.png",
             "position": [84, 25.5, 60],
             "rotation": [-1.516, 1.383, 1.514],
             "scale": [0.115, 0.09, 1],

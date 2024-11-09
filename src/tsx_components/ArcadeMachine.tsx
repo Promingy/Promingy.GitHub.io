@@ -84,7 +84,7 @@ const loadingImageRotation = new Euler(...Data.images.loadingImage.rotation);
 const loadingImageScale = new Vector3(...Data.images.loadingImage.scale);
 
 const ArcadeMachine: React.FC<ArcadeMachineProps> = (props) => {
-  const { nodes, materials } = useGLTF('models/arcade_machine.glb');
+  const { nodes, materials } = useGLTF('src/assets/models/arcade_machine.glb');
   const [staticImage, setStaticImage] = useState<StaticImage>({
     file: Data.images.loadingImage.file,
     position: loadingImagePosition,
@@ -166,6 +166,6 @@ const ArcadeMachine: React.FC<ArcadeMachineProps> = (props) => {
   );
 };
 
-useGLTF.preload('models/arcade_machine.glb');
+useGLTF.preload('src/assets/models/arcade_machine.glb');
 
 export default ArcadeMachine;
