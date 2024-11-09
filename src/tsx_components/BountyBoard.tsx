@@ -43,9 +43,9 @@ interface GLTFResult {
  */
 export default function BountyBoard(props: BountyBoardProps) {
     // Load GLTF models with different resolutions
-    const { nodes, materials: lowResMaterials } = useGLTF('src/assets/models/low-res/bounty_board.glb') as GLTFResult;
-    const { materials: midResMaterials } = useGLTF('src/assets/models/mid-res/bounty_board.glb') as GLTFResult;
-    const { materials: highResMaterials } = useGLTF('src/assets/models/high-res/bounty_board.glb') as GLTFResult;
+    const { nodes, materials: lowResMaterials } = useGLTF('/models/low-res/bounty_board.glb') as GLTFResult;
+    const { materials: midResMaterials } = useGLTF('/models/mid-res/bounty_board.glb') as GLTFResult;
+    const { materials: highResMaterials } = useGLTF('/models/high-res/bounty_board.glb') as GLTFResult;
 
     // State hooks for opacity and hover status
     const { cloudOpacity, setIsHovered } = useOpacityAnimation();
@@ -126,6 +126,6 @@ export default function BountyBoard(props: BountyBoardProps) {
     );
 }
 
-useGLTF.preload('src/assets/models/low-res/bounty_board.glb');
-useGLTF.preload('src/assets/models/mid-res/bounty_board.glb');
-useGLTF.preload('src/assets/models/high-res/bounty_board.glb');
+useGLTF.preload('/models/low-res/bounty_board.glb');
+useGLTF.preload('/models/mid-res/bounty_board.glb');
+useGLTF.preload('/models/high-res/bounty_board.glb');

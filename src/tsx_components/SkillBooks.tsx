@@ -45,9 +45,9 @@ interface SkillBooksProps {
  */
 export default function SkillBooks(props: SkillBooksProps) {
     // Load GLTF models with different resolutions
-    const { nodes: lowNodes, materials: lowMats } = useGLTF(`src/assets/models/low-res/skill_books.glb`);
-    const { nodes: midNodes, materials: midMats } = useGLTF(`src/assets/models/mid-res/skill_books.glb`);
-    const { nodes: highNodes, materials: highMats } = useGLTF(`src/assets/models/high-res/skill_books.glb`);
+    const { nodes: lowNodes, materials: lowMats } = useGLTF(`/models/low-res/skill_books.glb`);
+    const { nodes: midNodes, materials: midMats } = useGLTF(`/models/mid-res/skill_books.glb`);
+    const { nodes: highNodes, materials: highMats } = useGLTF(`/models/high-res/skill_books.glb`);
     
     // State hooks for opacity and hover status
     const { cloudOpacity, setIsHovered } = useOpacityAnimation();
@@ -114,6 +114,6 @@ export default function SkillBooks(props: SkillBooksProps) {
     );
 }
 
-useGLTF.preload('src/assets/models/low-res/skill_books.glb');
-useGLTF.preload('src/assets/models/mid-res/skill_books.glb');
-useGLTF.preload('src/assets/models/high-res/skill_books.glb');
+useGLTF.preload('/models/low-res/skill_books.glb');
+useGLTF.preload('/models/mid-res/skill_books.glb');
+useGLTF.preload('/models/high-res/skill_books.glb');
