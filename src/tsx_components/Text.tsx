@@ -73,7 +73,7 @@ export default function NavText({ hoverColor = "#ff0000", baseColor = "#ffffff",
     return (
         <Bvh setBoundingBox>
             <Text
-                font={'/Playball-Regular.ttf'}
+                font={'src/assets/Playball-Regular.ttf'}
                 characters='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!é '
                 color={color}
                 position={props.position}
