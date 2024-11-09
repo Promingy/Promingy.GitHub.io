@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 
 const Flame: React.FC = () => {
-  const { scene } = useGLTF('src/assets/models/animated_torch_flame1.glb');
+  const { scene } = useGLTF('/models/animated_torch_flame1.glb');
   const instancedMeshRef = useRef<InstancedMesh>(null);
   const flamePositionsRef = useRef<Matrix4[]>([]); // Store matrix calculations
   const [frameIndex, setFrameIndex] = useState(0);
@@ -57,6 +57,6 @@ const Flame: React.FC = () => {
   );
 };
 
-useGLTF.preload("src/assets/models/animated_torch_flame1.glb");
+useGLTF.preload("/models/animated_torch_flame1.glb");
 
 export default Flame;

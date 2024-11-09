@@ -114,9 +114,9 @@ export const ContextProvider = ({ children }) => {
   useCursor(hovered, 'pointer', 'default');
 
   // Audio file URLs
-  const whooshURL = 'src/assets/sounds/whoosh.mp3';
-  const clickURL = 'src/assets/sounds/click.mp3';
-  const fireURL = 'src/assets/sounds/fire.mp3';
+  const whooshURL = '/sounds/whoosh.mp3';
+  const clickURL = '/sounds/click.mp3';
+  const fireURL = '/sounds/fire.mp3';
 
   // Audio elements
   const whoosh = useRef(new Audio(whooshURL)).current;

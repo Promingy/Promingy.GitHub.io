@@ -3,6 +3,7 @@ import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial, Preload, meshBounds } 
 import { Canvas } from '@react-three/fiber';
 import { useAppContext } from './context';
 import { Vector3, Euler } from 'three';
+// import { Perf } from 'r3f-perf';
 import Data from './data.json';
 import './App.css';
 
@@ -21,7 +22,6 @@ import Contact from './tsx_components/ContactMe';
 import Tavern from './tsx_components/Tavern';
 import Flame from './tsx_components/Flame';
 import Swarm from './tsx_components/Swarm';
-import { Perf } from 'r3f-perf';
 
 function transformData(data: any) {
   return {
@@ -63,7 +63,7 @@ const App: React.FC = () => {
         camera={{ position: [87.7, 26, 59.75], fov: isMobile ? 120 : 75 }}
         style={{ background: '#000000' }}
         >
-        <Perf openByDefault />
+        {/* <Perf openByDefault /> */}
         <Suspense fallback={<InitialLoad />}>
           <fog attach="fog" args={['#000000', 400, 750]} />
           <AdaptiveDpr pixelated />
