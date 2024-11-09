@@ -1,6 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { AdaptiveDpr, BakeShadows, MeshReflectorMaterial, Preload, meshBounds } from '@react-three/drei';
-import { CameraControlsProvider } from './hooks/CameraControlsProvider';
 import { Canvas } from '@react-three/fiber';
 import { useAppContext } from './context';
 import { Vector3, Euler } from 'three';
@@ -57,6 +56,7 @@ const App: React.FC = () => {
       {assetsLoaded && <Clock />}
       {context.displayStart && <StartButton onStart={() => setAssetsLoaded(true)} />}
       <Canvas
+        onPointerMove={undefined}
         id="canvas"
         shadows
         camera={{ position: [87.7, 26, 59.75], fov: isMobile ? 120 : 75 }}
@@ -75,7 +75,7 @@ const App: React.FC = () => {
           <group>
             <Swarm count={425} opacity={0.75} color="Gray" />
             <Swarm count={100} opacity={0.45} color="maroon" />
-            <Swarm count={225} opacity={0.66} color="orange" />
+            <Swarm count={225} opacity={0.66} color="darkorange" />
           </group>
 
           {/* Ground Plane */}

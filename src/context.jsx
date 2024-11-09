@@ -127,13 +127,15 @@ export const ContextProvider = ({ children }) => {
 
   // Effect to handle fire audio play/pause based on mute state
   useEffect(() => {
-    mute ? fire.pause() : fire.play();
-
-    return () => {
-      fire.pause();
-      fire.currentTime = 0;
-    };
-  }, [mute]);
+    if (viewed) {
+      mute ? fire.pause() : fire.play();
+      
+      return () => {
+        fire.pause();
+        fire.currentTime = 0;
+      };
+    }
+  }, [mute, viewed]);
 
   // Context value object
   const value = {

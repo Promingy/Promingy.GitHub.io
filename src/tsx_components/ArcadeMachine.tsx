@@ -119,7 +119,7 @@ const ArcadeMachine: React.FC<ArcadeMachineProps> = (props) => {
           <NavText {...projectData.backText} />
         </>
       )}
-      {cloudOpacity && (
+      {cloudOpacity > 0 && (
         <Float floatingRange={[-1, 1]} rotationIntensity={0} speed={5}>
           <Clouds material={MeshBasicMaterial}>
             <Cloud
@@ -152,9 +152,9 @@ const ArcadeMachine: React.FC<ArcadeMachineProps> = (props) => {
         onPointerOver={(e) => {
           if (context.lookingAt == 'none' || context.lookingAt == 'projects') {
             context.handlePointerIn(e);
-            setIsHovered(true)}
+            setIsHovered(true);
           }
-        }
+        }}
         onPointerOut={(e) => {context.handlePointerOut(e); setIsHovered(false)}}
         onClick={(e) => {
           if (context.lookingAt == 'none' || context.lookingAt == 'projects'){

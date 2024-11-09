@@ -67,7 +67,7 @@ export default function SkillBooks(props: SkillBooksProps) {
     return (
         <>
             {/* Render floating clouds with varying opacity when hovered */}
-            {cloudOpacity && (
+            {cloudOpacity > 0 && (
                 <Float floatingRange={[0, 1]} rotationIntensity={0} speed={5}>
                     <Clouds material={MeshBasicMaterial}>
                         <Cloud

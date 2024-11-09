@@ -16,15 +16,9 @@ const InitialLoad: React.FC = () => {
     useEffect(() => {
         // When the progress reaches 100%, trigger the onStart callback and set the displayStart, initialCamera and transition states to the correct values.
         if (progress === 100) {
-            // setDisplayStart(true)
-            // setTimeout(() => {
-            //     setInitialCamera(false)
-            //     setTransition(true)
-            // }, 500)
 
             if (!viewed) {
                 setDisplayStart(true)
-                setViewed(true)
             } else {
                 setInitialCamera(false)
                 setTransition(true)
