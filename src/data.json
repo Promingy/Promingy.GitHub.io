@@ -2,159 +2,227 @@
     "tavern": {
         "scale": [25, 25, 25]
     },
-    "lightPost": {
-        "position": [-90, -5, 120],
-        "scale": [4.5, 4.5, 4.5],
-        "rotation": [0, 2.5, 0]
-    },
-    "medievalBookStack": {
-        "position": [22, 23.6, 70],
-        "scale": [0.33, 0.33, 0.33],
-        "rotation": [0, -2.5, 0]
+    "contact": {
+        "position": [-85, -7, 115],
+        "scale": [0.25, 0.254, 0.3],
+        "rotation": [0, -2.4, 0],
+        "moveTo": [-102, 15, 131],
+        "lookAt": [-85, 6.5, 115],
+        "name": "contact"
     },
     "arcadeMachine1": {
-        "position":[80, 17, 0],
+        "position":[80, 17, -10],
         "scale":[25, 25, 25],
         "rotation":[0, 0, 0],
         "name": "arcadeMachine1",
+        "moveTo": [92, 27, -10.5],
+        "lookAt": [85.2, 26, -10.75],
+        "cloudPosition": [85, -2, -10],
         "loadProject": {
-            "url": "https://project1.corbinainsworth.com",
-            "position": [84, 25.5, 0],
+            "url": "https://recipes.corbinainsworth.com",
+            "position": [82.15, 24.9, -10],
             "rotation": [0, 1.5708, 0]
         },
-        "switchProject": {
+        "previousProject": {
             "text": "Previous Project",
             "size": 0.5,
-            "position": [85.3, 20.75, 4],
+            "position": [85.3, 20.75, -6],
             "rotation": [-1.509, 1.425, 1.488],
-            "moveTo": [92, 27, 49.75],
-            "lookAt": [85, 26, 49.5],
+            "moveTo": [92, 27, 24.75],
+            "lookAt": [85, 26, 24.5],
             "hoverColor": "#F07F13",
-            "newLookingAt": "arcadeMachine2"
+            "name": "arcadeMachine2",
+            "click": true
         },
         "backText":{
             "text": "Back",
             "size": 0.5,
-            "position": [85.2, 20.55, -5],
+            "position": [85.2, 20.55, -15],
             "rotation": [-1.426, 1.400, 1.423],
             "moveTo": [-200, 175, 200],
             "lookAt": [0, 0, 0],
-            "color": "#F07F13"
+            "color": "#F07F13",
+            "name": "arcadeMachine1",
+            "click": true
         },
         "image": {
             "file": "images/arcadeMachine1.png",
-            "position": [84, 25.5, 0],
+            "position": [84, 25.5, -10],
             "rotation": [-1.516, 1.383, 1.514],
             "scale": [0.115, 0.09, 1],
             "basic": true
         }
     },
     "arcadeMachine2": {
-        "position":[80, 17, 50],
+        "position":[80, 17, 25],
         "scale":[25, 25, 25],
         "rotation":[0, 0, 0],
+        "moveTo": [92, 27, 24.75],
+        "lookAt": [85, 26, 24.5],
+        "cloudPosition": [85, -2, 25],
         "name": "arcadeMachine2",
         "loadProject": {
-            "url": "https://project2.corbinainsworth.com",
-            "position": [84, 25.5, 50],
+            "url": "https://pixelchat.corbinainsworth.com",
+            "position": [82.15, 24.9, 25],
             "rotation": [0, 1.5708, 0]
         },
-        "switchProject": {
+        "nextProject": {
             "text": "Next Project",
             "size": 0.5,
-            "position": [85.2, 20.55, 45.5],
+            "position": [85.5, 20.55, 20.5],
             "rotation": [-1.456, 1.388, 1.453],
-            "moveTo": [92, 27, -0.5],
-            "lookAt": [85.2, 26, -0.75],
+            "moveTo": [92, 27, -10.5],
+            "lookAt": [85.2, 26, -10.75],
             "hoverColor": "#F07F13",
-            "newLookingAt": "arcadeMachine1"
+            "name": "arcadeMachine1",
+            "click": true
         },
-        "backText":{
+        "previousProject":{
+            "text": "Previous Project",
+            "size": 0.5,
+            "position": [85.2, 20.75, 30],
+            "rotation": [-1.518, 1.426, 1.497],
+            "moveTo": [92, 27, 59.75],
+            "lookAt": [85, 26, 59.5],
+            "color": "#F07F13",
+            "hoverColor": "#F07F13",
+            "name": "arcadeMachine3",
+            "click": true
+        },
+        "backText": {
             "text": "Back",
             "size": 0.5,
-            "position": [85.2, 20.75, 55],
+            "position": [85.2, 20.55, 25],
             "rotation": [-1.518, 1.426, 1.497],
             "moveTo": [-200, 175, 200],
             "lookAt": [0, 0, 0],
-            "color": "#F07F13"
+            "color": "#F07F13",
+            "name": "arcadeMachine2",
+            "click": true
         },
         "image": {
             "file": "images/arcadeMachine2.png",
-            "position": [84, 25.5, 50],
+            "position": [84, 25.5, 25],
             "rotation": [-1.516, 1.383, 1.514],
             "scale": [0.115, 0.09, 1],
             "basic": true
         }
     },
+    "arcadeMachine3": {
+        "position":[80, 17, 60],
+        "scale":[25, 25, 25],
+        "rotation":[0, 0, 0],
+        "moveTo": [92, 27, 59.75],
+        "lookAt": [85, 26, 59.5],
+        "cloudPosition": [85, -2, 60],
+        "name": "arcadeMachine3",
+        "loadProject": {
+            "url": "https://project2.corbinainsworth.com",
+            "position": [82.15, 24.9, 60],
+            "rotation": [0, 1.5708, 0]
+        },
+        "nextProject": {
+            "text": "Next Project",
+            "size": 0.5,
+            "position": [85.2, 20.55, 55.5],
+            "rotation": [-1.456, 1.388, 1.453],
+            "moveTo": [92, 27, 24.75],
+            "lookAt": [85, 26, 24.5],
+            "hoverColor": "#F07F13",
+            "name": "arcadeMachine2",
+            "click": true
+        },
+        "backText":{
+            "text": "Back",
+            "size": 0.5,
+            "position": [85.2, 20.75, 65],
+            "rotation": [-1.518, 1.426, 1.497],
+            "moveTo": [-200, 175, 200],
+            "lookAt": [0, 0, 0],
+            "color": "#F07F13",
+            "name": "arcadeMachine3",
+            "click": true
+        },
+        "image": {
+            "file": "images/arcadeMachine3.png",
+            "position": [83, 25.5, 60],
+            "rotation": [-1.516, 1.283, 1.514],
+            "scale": [0.115, 0.09, 1],
+            "basic": true
+        }
+    },
     "bountyBoard": {
-      "position": [52, -6, 150],
-      "rotation": [0, -1.5708, 0],
-      "scale": [10, 10, 10],
-      "moveTo": [41, 16, 139],
-      "lookAt": [52, 16, 139]
+        "position": [52, -6, 150],
+        "rotation": [0, -1.5708, 0],
+        "scale": [10, 10, 10],
+        "moveTo": [41, 16, 139],
+        "lookAt": [52, 16, 139],
+        "name": "bounty"
     },
     "skillBooks": {
-        "position": [48, 51.75, -8],
-        "scale": [0.15, 0.15, 0.15],
-        "rotation": [-1.6, -1.5, 0],
-        "moveTo": [44, 47, -15],
-        "lookAt": [48, 47, -15]
-    },
-    "projectSign": {
-        "position": [75, 70, 22],
-        "rotation": [0, 1.5708, 0],
-        "scale": [0.25, 0.25, 0.25]
+        "position": [57.287, 47.653, -8.062],
+        "scale": [40, 29, 12],
+        "rotation": [3.14, 0, -1.575],
+        "moveTo": [42, 47, -7],
+        "lookAt": [48, 47, -7],
+        "name": "skills"
     },
     "menuText": {
         "resume": {
             "text": "Résumé",
-            "position": [-140, 66, -72],
+            "position": [-140, 68, -72],
             "moveTo": [41, 16, 139],
             "lookAt": [52, 16, 139],
             "size": 15,
-            "lookingAt": "bounty"
+            "name": "bounty",
+            "click": true
         },
         "skills": {
             "text": "Skills",
-            "position": [-148, 44, -72],
-            "moveTo": [44, 47, -15],
-            "lookAt": [48, 47, -15],
+            "position": [-148, 51, -72],
+            "moveTo": [42, 47, -7],
+            "lookAt": [48, 47, -7],
             "size": 15,
-            "lookingAt": "skills"
+            "name": "skills",
+            "click": true
         },
         "experience": {
             "text": "Experience",
-            "position": [-135, 22, -72],
+            "position": [-135, 51, -72],
             "moveTo": [-11, 38.95, -64.5],
             "lookAt": [-11, 38.95, -75.5],
             "size": 15,
             "enableButtons": true,
-            "lookingAt": "experience"
+            "name": "experience",
+            "click": true
         },
         "aboutMe": {
             "text": "About Me",
-            "position": [-140, 0, -72],
+            "position": [-140, 34, -72],
             "moveTo": [-4, 36.5, -64.5],
             "lookAt": [-4, 36.5, -75.5],
             "size": 15,
             "enableButtons": true,
-            "lookingAt": "about"
+            "name": "about",
+            "click": true
         },
-        "project1": {
-            "text": "Project 1",
-            "position": [-210, 21, -72],
-            "moveTo": [92, 27, -0.5],
-            "lookAt": [85.2, 26, -0.75],
+        "projects": {
+            "text": "Projects",
+            "position": [-148, 17, -72],
+            "moveTo": [150, 50, 25],
+            "lookAt": [0,0,25],
             "size": 15,
-            "lookingAt": "arcadeMachine1"
+            "name": "projects",
+            "click": true
         },
-        "project2": {
-            "text": "Project 2",
-            "position": [-210, 0, -72],
-            "moveTo": [92, 27, 49.75],
-            "lookAt": [85, 26, 49.5],
+        "contact": {
+            "text": "Contact",
+            "position": [-150, 0, -72],
+            "moveTo": [-102, 15, 131],
+            "lookAt": [-85, 6.5, 115],
             "size": 15,
-            "lookingAt": "arcadeMachine2"
+            "name": "contact",
+            "click": true
         }
     },
     "smallText": {
@@ -164,13 +232,18 @@
             "moveTo": [-11, 38.95, -64.5],
             "lookAt": [-11, 38.95, -75.5],
             "hoverColor": "#ff0000",
-            "newLookingAt": "experience",
+            "name": "experience",
+            "click": true,
+            "size": 0.33,
             "backText": {
                 "text": "Back",
                 "position": [-9, 35.5, -69.94],
                 "moveTo": [-200, 175, 200],
                 "lookAt": [0, 0, 0],
-                "color": "#ff0000"
+                "color": "#ff0000",
+                "name": "none",
+                "click": true,
+                "size": 0.33
             }
         },
         "aboutMe": {
@@ -179,36 +252,19 @@
             "moveTo": [-4, 36.5, -64.5],
             "lookAt": [-4, 36.5, -75.5],
             "hoverColor": "#ff0000",
-            "newLookingAt": "about",
-            "backText": {
-                "text": "Back",
-                "position": [-2.5, 33, -69.94],
-                "moveTo": [-200, 175, 200],
-                "lookAt": [0, 0, 0],
-                "color": "#ff0000"
-            }
-        }
-    },
-    "sconces": {
-        "backLeft": {
-            "position": [75, 60, 105],
-            "rotation": [0, 3.1415, 0],
-            "scale": [5, 5, 5]
+            "name": "about",
+            "click": true,
+            "size": 0.33
         },
-        "backRight": {
-            "position": [75, 60, -85],
-            "rotation": [0, 3.1415, 0],
-            "scale": [5, 5, 5]
-        },
-        "leftFront": {
-            "position": [40, 60, -92.75],
-            "rotation": [0, -1.508, 0],
-            "scale": [5, 5, 5]
-        },
-        "leftBack": {
-            "position": [-105, 60, -92.75],
-            "rotation": [0, -1.508, 0],
-            "scale": [5, 5, 5]
+        "aboutBackText": {
+            "text": "Back",
+            "position": [-2.5, 33, -69.94],
+            "moveTo": [-200, 175, 200],
+            "lookAt": [0, 0, 0],
+            "color": "#ff0000",
+            "name": "about",
+            "click": true,
+            "size": 0.33
         }
     },
     "images": {
@@ -216,16 +272,18 @@
             "file": "images/ainsworth_corbin_resume.png",
             "position": [50.4, 15.75, 140.9],
             "rotation": [0.075, -1.5708, 0],
-            "scale": [0.113, 0.14, 0.1]
+            "scale": [0.113, 0.14, 0.1],
+            "basic": false
         },
         "aboutMe": {
             "file": "images/about_me.png",
             "position": [-3.91, 36.5, -69.95],
-            "scale": [0.0475, 0.085, 0.1]
+            "scale": [0.0475, 0.085, 0.1],
+            "basic": false
         },
         "loadingImage": {
             "file": "images/loading.png",
-            "position": [84, 25.5, 50],
+            "position": [84, 25.5, 60],
             "rotation": [-1.516, 1.383, 1.514],
             "scale": [0.115, 0.09, 1],
             "basic": true

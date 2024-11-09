@@ -15,7 +15,7 @@ export default function Camera() {
     const context = useAppContext()
 
     useEffect(() => {
-        if (context.initialCamera) controls?.setTarget(80, 25, 49.5)
+        if (context.initialCamera) controls?.setTarget(80, 25, 59.5)
 
         function onDragStart() {
             context.setPan(false)
@@ -24,6 +24,7 @@ export default function Camera() {
         function onDragEnd() {
             timeout = setTimeout(() => {
                 controls?.setLookAt(-200, 175, 200, 0, 0, 0,true)
+                context.setLookingAt("none")
             }, 10000)
         
             timeout2 = setTimeout(() => {
@@ -40,28 +41,26 @@ export default function Camera() {
         controls?.removeEventListener('controlend', onDragEnd)
     }
     
-    }, [controls, context.pan])
+    }, [controls, context.pan, context.initialCamera])
 
     useEffect(() => {
         if (!context.initialCamera) {
-            context.whoosh.play()
+            context.audio.whoosh.play()
 
-            // controls.setLookAt(250, 26, 49.75, 80, 25, 49.5, true)
-            controls.moveTo(250, 26, 49.75, true)
+            controls?.moveTo(250, 26, 59.75, true)
+
+            context.toggleTransitionTimeout(true, true)
 
             setTimeout(() => {
                 context.setLookingAt('none')
                 controls?.setLookAt(-200, 175, 200, 0, 0, 0,true)
-                .then(() => {context.setTransition(false); context.setDefaultImage(true)})
             }, 450)
         }
     }, [context.initialCamera])
 
     useEffect(() => {
         if (controls) {
-            const { x, y, z } = controls.getTarget();
-
-            if (!context.transition && !x && !y && !z) {
+            if (!context.transition && (context.lookingAt == "none" || context.lookingAt == 'projects')) {
                 controls._addAllEventListeners(controls._domElement)
             } else {
                 controls._removeAllEventListeners()
@@ -71,7 +70,7 @@ export default function Camera() {
 
     useFrame(() => { 
     if(!context.initialCamera && context.pan && cameraRef.current){
-        const rotationSpeed = 0.001
+        const rotationSpeed = 0.0005
     
         cameraRef.current.rotate(rotationSpeed, 0)
         }

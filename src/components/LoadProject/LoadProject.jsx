@@ -6,12 +6,12 @@ export default function LoadProject({ url, position, rotation }) {
         <group position={position} rotation={rotation}>
             <mesh rotation={[-0.25,-0.019,-0.002]} scale={[.36, .52, .09]}>
                 <Html
-                    wrapperClass="project"
+                    wrapperClass="projectWrapper"
                     transform
                     occlude
                     >
-                        <p/>
-                        <object data={url} />
+                        <p className="staticOverlay"/>
+                        <object className="project" data={url} />
                 </Html>
             </mesh>
         </group>

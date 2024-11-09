@@ -1,9 +1,11 @@
 import { useAppContext } from "../context"
 
 export default function StartButton({afterRender}) {
-    const { setDisplayStart, setInitialCamera, setTransition } = useAppContext();
+    const { setDisplayStart, setInitialCamera, setTransition, click, fire } = useAppContext();
 
     function handleClick() {
+        click.play()
+        fire.play()
         afterRender();
         setDisplayStart(false);
         setInitialCamera(false);
