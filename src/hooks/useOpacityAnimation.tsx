@@ -8,7 +8,7 @@ export const useOpacityAnimation = (initialOpacity: number = 0) => {
     const [isHovered, setIsHovered] = useState(false);
 
     useFrame(() => {
-        if (context.lookingAt === 'none' && isHovered && cloudOpacity < 1) {
+        if ((context.lookingAt === 'none' || context.lookingAt === 'projects') && isHovered && cloudOpacity < 1) {
             setCloudOpacity(prevOpacity => Math.min(prevOpacity + 0.0025, 1));  // Prevent over-incrementing
         } else if (cloudOpacity > 0) {
             setCloudOpacity(prevOpacity => Math.max(prevOpacity - 0.0075, 0));  // Prevent going below 0

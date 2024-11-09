@@ -13,8 +13,8 @@ export default React.memo(function LoadProject({ url, position, rotation }: Load
         <group position={position} rotation={rotation}>
             <mesh ref={(mesh) => {
                 if (mesh) {
-                    mesh.rotation.set(-0.25, -0.019, -0.002);
-                    mesh.scale.set(0.36, 0.52, 0.09);
+                    mesh.rotation.set(-0.26, -0.0, -0.001);
+                    mesh.scale.set(.378, .4575, .0000001);
                 }
             }}>
                 <Html

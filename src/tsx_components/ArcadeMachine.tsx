@@ -150,13 +150,17 @@ const ArcadeMachine: React.FC<ArcadeMachineProps> = (props) => {
         material={materials['Baked.001']}
         {...props}
         onPointerOver={(e) => {
-          if (context.lookingAt == 'none'){
+          if (context.lookingAt == 'none' || context.lookingAt == 'projects') {
             context.handlePointerIn(e);
             setIsHovered(true)}
           }
         }
         onPointerOut={(e) => {context.handlePointerOut(e); setIsHovered(false)}}
-        onClick={(e) => context.handleClick(e, controls, props)}
+        onClick={(e) => {
+          if (context.lookingAt == 'none' || context.lookingAt == 'projects'){
+            context.handleClick(e, controls, props)
+          }
+        }}
       />
     </>
   );

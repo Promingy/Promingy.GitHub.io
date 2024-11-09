@@ -1,9 +1,12 @@
 import { useGLTF } from '@react-three/drei'
-import { MeshBasicMaterial, Vector3 } from 'three'
+import { MeshBasicMaterial, Raycaster, Vector3 } from 'three'
 import React from 'react'
 
 interface ModelProps {
-  scale?: Vector3
+  scale?: Vector3;
+  raycast: (raycaster: Raycaster, intersects: any) => void;
+  onPointerOver: (e: any) => void;
+  onClick: (e: any) => void;
 }
 
 export default function Model(props: ModelProps) {

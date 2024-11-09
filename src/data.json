@@ -20,7 +20,7 @@
         "cloudPosition": [85, -2, -10],
         "loadProject": {
             "url": "https://recipes.corbinainsworth.com",
-            "position": [84, 25.5, -10],
+            "position": [82.15, 24.9, -10],
             "rotation": [0, 1.5708, 0]
         },
         "previousProject": {
@@ -49,7 +49,7 @@
             "file": "images/arcadeMachine1.png",
             "position": [84, 25.5, -10],
             "rotation": [-1.516, 1.383, 1.514],
-            "scale": [0.135, 0.13, 1],
+            "scale": [0.115, 0.09, 1],
             "basic": true
         }
     },
@@ -63,13 +63,13 @@
         "name": "arcadeMachine2",
         "loadProject": {
             "url": "https://pixelchat.corbinainsworth.com",
-            "position": [84, 25.5, 25],
+            "position": [82.15, 24.9, 25],
             "rotation": [0, 1.5708, 0]
         },
         "nextProject": {
             "text": "Next Project",
             "size": 0.5,
-            "position": [85.2, 20.55, 20.5],
+            "position": [85.5, 20.55, 20.5],
             "rotation": [-1.456, 1.388, 1.453],
             "moveTo": [92, 27, -10.5],
             "lookAt": [85.2, 26, -10.75],
@@ -118,7 +118,7 @@
         "name": "arcadeMachine3",
         "loadProject": {
             "url": "https://project2.corbinainsworth.com",
-            "position": [84, 25.5, 60],
+            "position": [82.15, 24.9, 60],
             "rotation": [0, 1.5708, 0]
         },
         "nextProject": {
@@ -145,19 +145,19 @@
         },
         "image": {
             "file": "images/arcadeMachine3.png",
-            "position": [84, 25.5, 60],
-            "rotation": [-1.516, 1.383, 1.514],
-            "scale": [0.135, 0.13, 1],
+            "position": [83, 25.5, 60],
+            "rotation": [-1.516, 1.283, 1.514],
+            "scale": [0.115, 0.09, 1],
             "basic": true
         }
     },
     "bountyBoard": {
-      "position": [52, -6, 150],
-      "rotation": [0, -1.5708, 0],
-      "scale": [10, 10, 10],
-      "moveTo": [41, 16, 139],
-      "lookAt": [52, 16, 139],
-      "name": "bounty"
+        "position": [52, -6, 150],
+        "rotation": [0, -1.5708, 0],
+        "scale": [10, 10, 10],
+        "moveTo": [41, 16, 139],
+        "lookAt": [52, 16, 139],
+        "name": "bounty"
     },
     "skillBooks": {
         "position": [57.287, 47.653, -8.062],
@@ -272,12 +272,14 @@
             "file": "images/ainsworth_corbin_resume.png",
             "position": [50.4, 15.75, 140.9],
             "rotation": [0.075, -1.5708, 0],
-            "scale": [0.113, 0.14, 0.1]
+            "scale": [0.113, 0.14, 0.1],
+            "basic": false
         },
         "aboutMe": {
             "file": "images/about_me.png",
             "position": [-3.91, 36.5, -69.95],
-            "scale": [0.0475, 0.085, 0.1]
+            "scale": [0.0475, 0.085, 0.1],
+            "basic": false
         },
         "loadingImage": {
             "file": "images/loading.png",

@@ -46,7 +46,6 @@ export default function NavText({ hoverColor = "#ff0000", baseColor = "#ffffff",
     const handlePointerEnter = (e: ThreeEvent<PointerEvent>) => {
         if (context.lookingAt !== 'contact') {
             context.handlePointerIn(e);
-            console.log('test', hoverColor);
             setColor(hoverColor);
         }
     };
