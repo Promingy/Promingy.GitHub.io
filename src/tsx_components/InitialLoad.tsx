@@ -1,6 +1,6 @@
 import { Html, useProgress } from "@react-three/drei"
 import { useAppContext } from "../context"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 
 /**
  * InitialLoad component

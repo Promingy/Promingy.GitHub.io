@@ -71,46 +71,22 @@ interface ArcadeMachineProps {
     image: ImageProps;
 }
 
-interface StaticImage {
-  file: string;
-  position: Vector3;
-  scale: Vector3;
-  rotation: Euler;
-  basic: boolean;
-}
-
-const loadingImagePosition = new Vector3(...Data.images.loadingImage.position);
-const loadingImageRotation = new Euler(...Data.images.loadingImage.rotation);
-const loadingImageScale = new Vector3(...Data.images.loadingImage.scale);
-
 const ArcadeMachine: React.FC<ArcadeMachineProps> = (props) => {
   const { nodes, materials } = useGLTF('/models/arcade_machine.glb');
-  const [staticImage, setStaticImage] = useState<StaticImage>({
-    file: Data.images.loadingImage.file,
-    position: loadingImagePosition,
-    rotation: loadingImageRotation,
-    scale: loadingImageScale,
-    basic: Data.images.loadingImage.basic,
-  });
+  const projectData = Data[props.name];
   const { cloudOpacity, setIsHovered } = useOpacityAnimation();
   const { controls } = useThree();
   const context = useAppContext();
 
-  const projectData = Data[props.name];
   const cloudPosition = projectData.cloudPosition;
   const [ x, y, z ] = cloudPosition;
 
-  useEffect(() => {
-    if (context.defaultImage) {
-      setStaticImage(projectData.image);
-    }
-  }, [context.defaultImage]);
-
+  console.log(props)
 
   return (
     <>
       {context.lookingAt !== props.name ? (
-        <LoadImage {...staticImage} />
+        <LoadImage {...props.image} />
       ) : (
         <>
           <LoadProject {...projectData.loadProject} />

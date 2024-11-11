@@ -37,6 +37,8 @@ const App: React.FC = () => {
   const [assetsLoaded, setAssetsLoaded] = useState(false);
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   let panTimeout: ReturnType<typeof setTimeout>;
+  const loadingImage = context.defaultImage ? Data.arcadeMachine3.image : Data.images.loadingImage;
+  console.log(loadingImage)
 
   useEffect(() => {
     clearTimeout(panTimeout);
@@ -131,7 +133,7 @@ const App: React.FC = () => {
           <group>
             <ArcadeMachine {...transformData(Data.arcadeMachine1)} />
             <ArcadeMachine {...transformData(Data.arcadeMachine2)} />
-            <ArcadeMachine {...transformData(Data.arcadeMachine3)} />
+            <ArcadeMachine {...transformData(Data.arcadeMachine3)} image={loadingImage} />
           </group>
 
           {/* Contact, Bounty Board, Skill Books, and Tavern Components */}
