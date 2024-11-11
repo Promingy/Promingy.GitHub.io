@@ -65,14 +65,16 @@ export default function Camera() {
         }
 
         function onDragEnd() {
-            timeout = setTimeout(() => {
-                controls?.setLookAt(-200, 175, 200, 0, 0, 0, true);
-                context.setLookingAt("none");
-            }, 10000);
-        
-            timeout2 = setTimeout(() => {
-                context.setPan(true);
-            }, 15000);
+            if (context.lookingAt == "none" || context.lookingAt == "projects"){
+                timeout = setTimeout(() => {
+                    controls?.setLookAt(-200, 175, 200, 0, 0, 0, true);
+                    context.setLookingAt("none");
+                }, 10000);
+            
+                timeout2 = setTimeout(() => {
+                    context.setPan(true);
+                }, 15000);
+            }
         }
 
         controls?.addEventListener('controlstart', onDragStart);
@@ -82,7 +84,7 @@ export default function Camera() {
             controls?.removeEventListener('controlstart', onDragStart);
             controls?.removeEventListener('controlend', onDragEnd);
         };
-    }, [controls, context.pan, context.initialCamera]);
+    }, [controls, context.pan, context.initialCamera, context.lookingAt]);
 
     // Effect to manage audio and camera movements when the initial camera is disabled
     useEffect(() => {

@@ -1,9 +1,6 @@
 import { useAppContext } from "../context";
 import React, { useCallback } from 'react'
 
-interface StartButtonProps {
-    afterRender: () => void;
-}
 
 /**
  * StartScreenButton component
