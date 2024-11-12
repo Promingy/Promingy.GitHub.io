@@ -1,6 +1,6 @@
 import { useGLTF, Detailed, meshBounds, Cloud, Clouds, Float } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
-import React, { useCallback, useMemo } from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAppContext } from '../context';
 import { Euler, MeshBasicMaterial, Vector3 } from 'three';
 import { useOpacityAnimation } from '../hooks/useOpacityAnimation';
@@ -48,9 +48,23 @@ export default function BountyBoard(props: BountyBoardProps) {
     const { materials: highResMaterials } = useGLTF('/models/high-res/bounty_board.glb') as GLTFResult;
 
     // State hooks for opacity and hover status
-    const { cloudOpacity, setIsHovered } = useOpacityAnimation();
+    // const { cloudOpacity, setIsHovered } = useOpacityAnimation();
+    const [cloudOpacity, setCloudOpacity] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
     const context = useAppContext();
     const { controls } = useThree();
+
+    useFrame(() => {
+        if (!context.transition) {
+            useOpacityAnimation(cloudOpacity, setCloudOpacity, isHovered, context.lookingAt);
+        }
+    })
+
+    useEffect(() => {
+        if (context.transition) {
+            setCloudOpacity(0);
+        }
+    }, [context.transition])
 
     // Event handlers for pointer interactions
     const handlePointerOver = useCallback((e: any) => {

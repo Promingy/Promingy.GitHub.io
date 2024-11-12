@@ -1,6 +1,6 @@
 import { useGLTF, Detailed, meshBounds, Float, Clouds, Cloud } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
-import React from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
+import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../context';
 import { MeshBasicMaterial, NearestFilter, Mesh, Material, Vector3, Euler } from 'three';
 import { useOpacityAnimation } from '../hooks/useOpacityAnimation';
@@ -48,11 +48,25 @@ export default function SkillBooks(props: SkillBooksProps) {
     const { nodes: lowNodes, materials: lowMats } = useGLTF(`/models/low-res/skill_books.glb`);
     const { nodes: midNodes, materials: midMats } = useGLTF(`/models/mid-res/skill_books.glb`);
     const { nodes: highNodes, materials: highMats } = useGLTF(`/models/high-res/skill_books.glb`);
-    
+    const [cloudOpacity, setCloudOpacity] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
     // State hooks for opacity and hover status
-    const { cloudOpacity, setIsHovered } = useOpacityAnimation();
+    // const { cloudOpacity, setIsHovered } = useOpacityAnimation();
     const context = useAppContext();
     const { controls } = useThree();
+
+    useFrame(() => {
+        if (!context.transition) {
+            useOpacityAnimation(cloudOpacity, setCloudOpacity, isHovered, context.lookingAt);
+        }
+    })
+
+    useEffect(() => {
+        if (context.transition) {
+            setCloudOpacity(0);
+        }
+    }, [context.transition])
+
 
     // Apply NearestFilter to texture maps for the high-res materials
     for (let m in highMats) {

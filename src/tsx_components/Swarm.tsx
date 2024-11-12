@@ -74,7 +74,7 @@ export default function Swarm({ count, color, opacity }: SwarmProps) {
     }, []);
 
     return (
-        <instancedMesh ref={mesh} args={[undefined, undefined, count]} position={[-40, 75, 20]} scale={[5, 2, 5]}>
+        <instancedMesh ref={mesh} args={[undefined, undefined, count]} position={[-40, 75, 20]} scale={[10, 4, 10]}>
             <planeGeometry />
             <meshLambertMaterial side={FrontSide} color={color} transparent opacity={opacity} />
         </instancedMesh>
