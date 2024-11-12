@@ -5,7 +5,7 @@ import LoadImage from './LoadImage';
 import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../context';
 import Data from '../data.json';
-import { useThree } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Euler, Mesh, MeshBasicMaterial, Vector3 } from 'three';
 import { useOpacityAnimation } from '../hooks/useOpacityAnimation';
 
@@ -74,14 +74,27 @@ interface ArcadeMachineProps {
 const ArcadeMachine: React.FC<ArcadeMachineProps> = (props) => {
   const { nodes, materials } = useGLTF('/models/arcade_machine.glb');
   const projectData = Data[props.name];
-  const { cloudOpacity, setIsHovered } = useOpacityAnimation();
+  // const { cloudOpacity, setIsHovered } = useOpacityAnimation();
+  const [cloudOpacity, setCloudOpacity] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
   const { controls } = useThree();
   const context = useAppContext();
 
   const cloudPosition = projectData.cloudPosition;
   const [ x, y, z ] = cloudPosition;
 
-  console.log(props)
+  useFrame(() => {
+    if (!context.transition) {
+      useOpacityAnimation(cloudOpacity, setCloudOpacity, isHovered, context.lookingAt);
+    }
+  })
+
+  useEffect(() => {
+    if (context.transition) {
+      setCloudOpacity(0);
+    }
+  }, [context.transition])
+
 
   return (
     <>
@@ -95,7 +108,7 @@ const ArcadeMachine: React.FC<ArcadeMachineProps> = (props) => {
           <NavText {...projectData.backText} />
         </>
       )}
-      {cloudOpacity > 0 && (
+      {cloudOpacity > 0 &&(
         <Float floatingRange={[-1, 1]} rotationIntensity={0} speed={5}>
           <Clouds material={MeshBasicMaterial}>
             <Cloud

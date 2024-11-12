@@ -63,11 +63,11 @@ const App: React.FC = () => {
         id="canvas"
         shadows
         camera={{ position: [87.7, 26, 59.75], fov: isMobile ? 120 : 75 }}
-        style={{ background: '#000000' }}
+        style={{ background: '#1C1C1C' }}
         >
         {/* <Perf openByDefault /> */}
         <Suspense fallback={<InitialLoad />}>
-          <fog attach="fog" args={['#000000', 400, 750]} />
+          <fog attach="fog" args={['#1C1C1C', 400, 750]} />
           <AdaptiveDpr pixelated />
           <Preload all />
           <Camera />
@@ -82,7 +82,7 @@ const App: React.FC = () => {
 
           {/* Ground Plane */}
           <mesh receiveShadow rotation={[-Math.PI * 0.5, 0, 0]} position={[0, -7, 0]}>
-            <planeGeometry args={[1000, 1000]} />
+            <planeGeometry args={[2000, 2000]} />
             {isMobile ? (
               <meshLambertMaterial color="grey" />
             ) : (

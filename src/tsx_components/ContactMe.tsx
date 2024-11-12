@@ -1,8 +1,8 @@
 import { Cloud, Clouds, Detailed, Float, Html, useGLTF } from '@react-three/drei';
 import { MeshBasicMaterial, Vector3 } from 'three';
 import { useAppContext } from '../context';
-import { useThree } from '@react-three/fiber';
-import React, { useState, FormEvent, useMemo } from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
+import React, { useState, FormEvent, useMemo, useEffect } from 'react';
 import { useOpacityAnimation } from '../hooks/useOpacityAnimation';
 
 type GLTFResult = {
@@ -24,11 +24,12 @@ interface ContactProps {
 }
 
 export default function Contact(props: ContactProps) {
-    const { cloudOpacity, setIsHovered } = useOpacityAnimation();
+    // const { cloudOpacity, setIsHovered } = useOpacityAnimation();
     const { materials: lowMats } = useGLTF('/models/low-res/contact_sign.glb') as GLTFResult;
     const { materials: midMats } = useGLTF('/models/mid-res/contact_sign.glb') as GLTFResult;
     const { nodes, materials: highMats } = useGLTF('/models/high-res/contact_sign.glb') as GLTFResult;
-
+    const [isHovered, setIsHovered] = useState(false);
+    const [cloudOpacity, setCloudOpacity] = useState(0);
     const [name, setName] = useState<string>('Enter Name Here');
     const [email, setEmail] = useState<string>('Enter Email Here');
     const [message, setMessage] = useState<string>('Enter Message Here');
@@ -37,6 +38,18 @@ export default function Contact(props: ContactProps) {
 
     const context = useAppContext();
     const { controls } = useThree();
+
+    useFrame(() => {
+        if (!context.transition) {
+            useOpacityAnimation(cloudOpacity, setCloudOpacity, isHovered, context.lookingAt);
+        }
+    })
+
+    useEffect(() => {
+        if (context.transition) {
+            setCloudOpacity(0);
+        }
+    }, [context.transition])
 
     const basicMaterials = useMemo(() => {
         return {
